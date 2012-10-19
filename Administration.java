@@ -263,6 +263,11 @@ public class Administration {
 		return budget;
 	}
 	
+	/**
+	 * Methode liefert alle Transaktionen zurŸck die einen Wert ungleich 0 besitzen
+	 * @return
+	 */
+	
 	public ArrayList<Transaction> getTransactions() {
 		
 		ArrayList<Transaction> output = new ArrayList<Transaction>();
