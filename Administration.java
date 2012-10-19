@@ -35,7 +35,8 @@ public class Administration {
 	}
 	
 	/**
-	 * 
+	 * Fügt einen Auftritt zur Datenbank hinzu. Dabei wird die dazugehörige Transaktion zu der Liste aller
+	 * Transaktionen hinzugefügt.
 	 * @param g : der Auftritt der hinzugefügt werden soll
 	 */
 
@@ -46,6 +47,11 @@ public class Administration {
 		g.getCorrespondingTransaction().setDate(g.getDate());
 		transactions.add(g.getCorrespondingTransaction());
 	}
+	
+	/**
+	 * Methode zum Hinzufügen einer Transaktion
+	 * @param t
+	 */
 	
 	public void addTransaction(Transaction t) {
 		transactions.add(t);
