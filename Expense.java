@@ -1,3 +1,4 @@
+import java.text.DecimalFormat;
 import java.util.Date;
 public class Expense extends Transaction {
 	
@@ -11,6 +12,10 @@ public class Expense extends Transaction {
 	
 	public double getValue() {
 		return -this.value;
+	}
+	
+	public String toString() {
+		return "-" + new DecimalFormat("#.##").format(value);
 	}
 
 }

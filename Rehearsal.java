@@ -5,13 +5,10 @@
 import java.util.Date;
 
 public class Rehearsal extends Event {
-
-	private int rent;
 	
-	public Rehearsal( String place, Date date, int duration, int rent ){
+	public Rehearsal( String place, Date date, int duration, Transaction rent){
 
-		super(place, date, duration);
-		this.rent = rent;
+		super(place, date, duration, rent);
 	}
 	
 	/**
@@ -19,11 +16,11 @@ public class Rehearsal extends Event {
 	 */
 	public int getFinances() {
 		
-		return -rent;
+		return -(int)ta.getValue();
 	}
 	
 	public String toString() {
 		
-		return super.toString() + ", Rent: " + rent + "€";
+		return super.toString() + ", Rent: " + ta + "Û";
 	}
 }

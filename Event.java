@@ -9,11 +9,13 @@ public abstract class Event implements Comparable<Event> {
 	private String place;
 	private Date date;
 	private int duration; //in Minuten
+	protected Transaction ta;
 
-	public Event(String place, Date date, int duration) {
+	public Event(String place, Date date, int duration, Transaction ta) {
 		this.place = place;
 		this.date = date;
 		this.duration = duration;
+		this.ta = ta;
 	}
 	
 	/**
@@ -23,6 +25,10 @@ public abstract class Event implements Comparable<Event> {
 	 * @return (vorzeichenbehafteter) Kostenfaktor  
 	 */
 	public abstract int getFinances();
+	
+	public Transaction getCorrespondingTransaction() {
+		return ta;
+	}
 
 	public Date getDate() {
 		

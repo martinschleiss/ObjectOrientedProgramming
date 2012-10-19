@@ -1,3 +1,4 @@
+import java.text.DecimalFormat;
 import java.util.Date;
 public class Income extends Transaction {
 
@@ -11,5 +12,9 @@ public class Income extends Transaction {
 	
 	public double getValue() {
 		return this.value;
+	}
+	
+	public String toString() {
+		return "+" + new DecimalFormat("#.##").format(value);
 	}
 }

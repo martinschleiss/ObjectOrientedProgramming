@@ -6,12 +6,9 @@ import java.util.Date;
 
 public class Gig extends Event {
 
-	private int gage;
-	
-	public Gig( String place, Date date, int duration, int gage ) {
+	public Gig( String place, Date date, int duration, Transaction ta) {
 
-		super(place, date, duration);
-		this.gage = gage;
+		super(place, date, duration, ta);
 	}
 	
 	/**
@@ -19,11 +16,11 @@ public class Gig extends Event {
 	 */
 	public int getFinances() {
 		
-		return gage;
+		return (int)ta.getValue();
 	}
 	
 	public String toString() {
 		
-		return super.toString() + ", Gage: " + gage + "€";
+		return super.toString() + ", Gage: " + ta + "Û";
 	}
 }

@@ -10,22 +10,34 @@ public class Administration {
 	ArrayList<Event> events;
 	ArrayList<Member> members;
 	ArrayList<Song> songs;
+	ArrayList<Transaction> transactions;
 
 	public Administration() {
 
 		events = new ArrayList<Event>();
 		members = new ArrayList<Member>();
 		songs= new ArrayList<Song>();
+		transactions = new ArrayList<Transaction>();
 	}
 
 	public void addRehearsal(Rehearsal r) {
 
 		events.add(r);
+		r.getCorrespondingTransaction().setCorrespondingEvent(r);
+		r.getCorrespondingTransaction().setDate(r.getDate());
+		transactions.add(r.getCorrespondingTransaction());
 	}
 
 	public void addGig(Gig g) {
 
 		events.add(g);
+		g.getCorrespondingTransaction().setCorrespondingEvent(g);
+		g.getCorrespondingTransaction().setDate(g.getDate());
+		transactions.add(g.getCorrespondingTransaction());
+	}
+	
+	public void addTransaction(Transaction t) {
+		transactions.add(t);
 	}
 
 	public void addSong(Song s){
@@ -198,6 +210,16 @@ public class Administration {
 		}
 		return output;
 	}
+	
+	public float getBalance() {
+		float balance = 0;
+		
+		for(Transaction t :transactions) {
+			balance += t.getValue();
+		}
+		
+		return balance;		
+	}
 
 	/**
 	 *
@@ -239,6 +261,19 @@ public class Administration {
 		}
 
 		return budget;
+	}
+	
+	public ArrayList<Transaction> getTransactions() {
+		
+		ArrayList<Transaction> output = new ArrayList<Transaction>();
+		
+		for(Transaction t :transactions) {
+			if(t.getValue() != 0) {
+				output.add(t);
+			}
+		}
+		
+		return output;
 	}
 
 	/**

@@ -4,6 +4,7 @@
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
 
@@ -37,16 +38,16 @@ public class Test {
 				
 		System.out.println("\nFüge Proben und Auftritte hinzu...");
 		
-		a.addRehearsal( new Rehearsal("a", StringToDate("10.10.2012 um 19:00"), 180, 20) );
-		a.addRehearsal(new Rehearsal("b", StringToDate("12.10.2012 um 19:00"), 180, 20) );
-		a.addRehearsal(new Rehearsal("c", StringToDate("15.10.2012 um 19:00"), 180, 20) );
-		a.addRehearsal(new Rehearsal("d", StringToDate("1.11.2012 um 19:00"), 180, 20) );
+		a.addRehearsal( new Rehearsal("a", StringToDate("10.10.2012 um 19:00"), 180, new Expense(20)) );
+		a.addRehearsal(new Rehearsal("b", StringToDate("12.10.2012 um 19:00"), 180, new Expense(20)) );
+		a.addRehearsal(new Rehearsal("c", StringToDate("15.10.2012 um 19:00"), 180, new Expense(20)) );
+		a.addRehearsal(new Rehearsal("d", StringToDate("1.11.2012 um 19:00"), 180, new Expense(20)) );
 		
-		a.addGig(new Gig("e", StringToDate("13.10.2012 um 19:00"), 180, 120) );
-		a.addGig(new Gig("f", StringToDate("14.10.2012 um 19:00"), 60, 200) );
-		a.addGig(new Gig("g", StringToDate("14.11.2012 um 18:00"), 180, 120) );
-		a.addGig(new Gig("h", StringToDate("14.11.2012 um 20:00"), 60, 0) );
-		a.addGig(new Gig("i", StringToDate("17.11.2012 um 19:00"), 60, 120) );
+		a.addGig(new Gig("e", StringToDate("13.10.2012 um 19:00"), 180, new Income(120)) );
+		a.addGig(new Gig("f", StringToDate("14.10.2012 um 19:00"), 60, new Income(200)) );
+		a.addGig(new Gig("g", StringToDate("14.11.2012 um 18:00"), 180, new Income(120)) );
+		a.addGig(new Gig("h", StringToDate("14.11.2012 um 20:00"), 60, new Income(0)) );
+		a.addGig(new Gig("i", StringToDate("17.11.2012 um 19:00"), 60, new Income(120)) );
 		
 		System.out.println("\nProben im Zeitfenster zwischen 11.10.2012 und 15.10.2012:\n");
 		
@@ -59,6 +60,9 @@ public class Test {
 		
 		System.out.println("\nAuftritte im Zeitfenster zwischen 14.10.2012 und 14.11.2012 bis 19:00:\n");
 		
+		a.addTransaction(new Expense(34.89));
+		a.addTransaction(new Income(23.90));
+		
 		events = a.getEvents(StringToDate("14.10.2012 um 18:00"),  StringToDate("14.11.2012 um 19:00"), "Gig");
 
 		for (Event e : events) {
@@ -66,7 +70,15 @@ public class Test {
 			System.out.println(e);
 		}
 		
-		System.out.printf("\nMonatsbilanz zwischen 15.10.2012 und 15.11.2012: %d €\n", a.financials(StringToDate("15.10.2012 um 18:00"), StringToDate("15.11.2012 um 20:00")));
+		System.out.printf("\nMonatsbilanz zwischen 15.10.2012 und 15.11.2012: %d Û\n", a.financials(StringToDate("15.10.2012 um 18:00"), StringToDate("15.11.2012 um 20:00")));
+		
+		System.out.printf("---------------------------------------------------\nGesamter Kontoauszug:\n");
+		
+		for(Transaction t :a.getTransactions()) {
+			System.out.println(t);
+		}
+		
+		System.out.printf("= %sÛ\n---------------------------------------------------\n", new DecimalFormat("#.##").format(a.getBalance()));
 		
 		System.out.println("\nEntferne Mitglied Gretchen...");
 		
