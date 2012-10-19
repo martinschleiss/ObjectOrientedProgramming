@@ -19,6 +19,12 @@ public class Administration {
 		songs= new ArrayList<Song>();
 		transactions = new ArrayList<Transaction>();
 	}
+	
+	/**
+	 * Fügt eine Probe zur Datenbank hinzu. Dabei wird die dazugehörige Transaktion zu der Liste aller
+	 * Transaktionen hinzugefügt.
+	 * @param r : die Probe die hinzugefügt werden soll
+	 */
 
 	public void addRehearsal(Rehearsal r) {
 
@@ -27,6 +33,11 @@ public class Administration {
 		r.getCorrespondingTransaction().setDate(r.getDate());
 		transactions.add(r.getCorrespondingTransaction());
 	}
+	
+	/**
+	 * 
+	 * @param g : der Auftritt der hinzugefügt werden soll
+	 */
 
 	public void addGig(Gig g) {
 
@@ -210,6 +221,12 @@ public class Administration {
 		}
 		return output;
 	}
+	
+	/**
+	 * Diese Methode gibt den aktuellen Kontostand zurück.
+	 * Zur Auswertung werden alle Transaktionen verwendet.
+	 * @return
+	 */
 	
 	public float getBalance() {
 		float balance = 0;
