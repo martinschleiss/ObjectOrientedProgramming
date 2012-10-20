@@ -49,6 +49,9 @@ public class Test {
 		a.addGig(new Gig("h", StringToDate("14.11.2012 um 20:00"), 60, new Income(0)) );
 		a.addGig(new Gig("i", StringToDate("17.11.2012 um 19:00"), 60, new Income(120)) );
 		
+		a.updateEvent("b", StringToDate("12.10.2012 um 19:00"), "B wie Butter");
+		a.resetEventPlace("B wie Butter", StringToDate("12.10.2012 um 19:00"));
+		
 		System.out.println("\nProben im Zeitfenster zwischen 11.10.2012 und 15.10.2012:\n");
 		
 		events = a.getEvents(StringToDate("11.10.2012 um 18:00"),  StringToDate("15.10.2012 um 20:00"), "Rehearsal");

@@ -16,11 +16,11 @@ public class Rehearsal extends Event {
 	 */
 	public int getFinances() {
 		
-		return -(int)ta.getValue();
+		return -(int)ta.get(ta.size()-1).getValue();
 	}
 	
 	public String toString() {
 		
-		return super.toString() + ", Rent: " + ta + "Û";
+		return super.toString() + ", Rent: " + ta.get(ta.size()-1) + "Euro";
 	}
 }

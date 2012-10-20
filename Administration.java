@@ -4,6 +4,7 @@
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 
 public class Administration {
 
@@ -19,11 +20,11 @@ public class Administration {
 		songs= new ArrayList<Song>();
 		transactions = new ArrayList<Transaction>();
 	}
-	
+
 	/**
-	 * Fügt eine Probe zur Datenbank hinzu. Dabei wird die dazugehörige Transaktion zu der Liste aller
-	 * Transaktionen hinzugefügt.
-	 * @param r : die Probe die hinzugefügt werden soll
+	 * Fuegt eine Probe zur Datenbank hinzu. Dabei wird die dazugehoerige Transaktion zu der Liste aller
+	 * Transaktionen hinzugefuegt.
+	 * @param r : die Probe die hinzugefuegt werden soll
 	 */
 
 	public void addRehearsal(Rehearsal r) {
@@ -33,11 +34,11 @@ public class Administration {
 		r.getCorrespondingTransaction().setDate(r.getDate());
 		transactions.add(r.getCorrespondingTransaction());
 	}
-	
+
 	/**
-	 * Fügt einen Auftritt zur Datenbank hinzu. Dabei wird die dazugehörige Transaktion zu der Liste aller
-	 * Transaktionen hinzugefügt.
-	 * @param g : der Auftritt der hinzugefügt werden soll
+	 * Fuegt einen Auftritt zur Datenbank hinzu. Dabei wird die dazugehoerige Transaktion zu der Liste aller
+	 * Transaktionen hinzugefuegt.
+	 * @param g : der Auftritt der hinzugefuegt werden soll
 	 */
 
 	public void addGig(Gig g) {
@@ -48,11 +49,100 @@ public class Administration {
 		transactions.add(g.getCorrespondingTransaction());
 	}
 	
+	public boolean updateEvent(String place, Date date, String newPlace) {
+
+		Event tmp = getEvent(place, date);
+
+		if (tmp != null) {
+
+			tmp.update(newPlace);
+			return true;
+
+		} else {
+
+			return false;
+		}
+	}
+	
+	public boolean updateEvent(String place, Date date, Date newDate) {
+
+		Event tmp = getEvent(place, date);
+
+		if (tmp != null) {
+
+			tmp.update(newDate);
+			return true;
+
+		} else {
+
+			return false;
+		}
+	}
+
+
+	public boolean updateEvent(String place, Date date, int newDuration) {
+
+		Event tmp = getEvent(place, date);
+
+		if (tmp != null) {
+
+			tmp.update(newDuration);
+			return true;
+
+		} else {
+
+			return false;
+		}
+	}
+
+	public boolean resetEventPlace(String place, Date date) {
+
+		Event tmp = getEvent(place, date);
+
+		if (tmp != null) {
+
+			return tmp.resetPlace();
+
+		} else {
+
+			return false;
+		}
+	}
+	
+	public boolean resetEventDate(String place, Date date) {
+
+		Event tmp = getEvent(place, date);
+
+		if (tmp != null) {
+
+			return tmp.resetDate();
+
+		} else {
+
+			return false;
+		}
+	}
+	
+	public boolean resetEventDuration(String place, Date date) {
+
+		Event tmp = getEvent(place, date);
+
+		if (tmp != null) {
+
+			return tmp.resetDate();
+
+		} else {
+
+			return false;
+		}
+	}
+
+
 	/**
-	 * Methode zum Hinzufügen einer Transaktion
+	 * Methode zum Hinzufuegen einer Transaktion
 	 * @param t
 	 */
-	
+
 	public void addTransaction(Transaction t) {
 		transactions.add(t);
 	}
@@ -181,10 +271,10 @@ public class Administration {
 	 * @return
 	 */
 	public ArrayList<Event> getEvents(Date from, Date until) {
-		
+
 		return getEvents(from, until, "Both");	
 	}
-	
+
 	/**
 	 * Ueberladene Methode
 	 * Liefert alle Events im Zeitfenster zwischen from und until
@@ -201,7 +291,7 @@ public class Administration {
 	public ArrayList<Event> getEvents(Date from, Date until, String type) {
 
 		assert type.equals("Rehearsal") || type.equals("Gig") || type.equals("Both") : "String type nicht \"Rehearsal\", \"Gig\" oder \"Both\"";
-		
+
 		ArrayList<Event> tmpList;
 		ArrayList<Event> output = new ArrayList<Event>();
 
@@ -227,20 +317,20 @@ public class Administration {
 		}
 		return output;
 	}
-	
+
 	/**
 	 * Diese Methode gibt den aktuellen Kontostand zurück.
 	 * Zur Auswertung werden alle Transaktionen verwendet.
 	 * @return
 	 */
-	
+
 	public float getBalance() {
 		float balance = 0;
-		
+
 		for(Transaction t :transactions) {
 			balance += t.getValue();
 		}
-		
+
 		return balance;		
 	}
 
@@ -253,25 +343,25 @@ public class Administration {
 	 * @return
 	 */
 	public int financials(Date from, Date until) {
-		
+
 		return financials(from, until, "Both");
 	}
-	
-/**
- * Ueberladene Methode
- * Liefert eine Bilanz im Zeitfenster zwischen from und until, wobei zwischen Proben, Auftritten und beidem gewaehlt werden kann.
- * Der String type muss entweder den Wert "Rehearsal", den Wert "Gig", oder den Wert "Both" haben.
- * "Both" kann auch von der ueberladenen Methode ohne String type uebergeben werden.
- * Das aussortieren ¸bernimmt die Methode getEvents(from, until, type)
- * @param from
- * @param until
- * @param type
- * @return
- */
+
+	/**
+	 * Ueberladene Methode
+	 * Liefert eine Bilanz im Zeitfenster zwischen from und until, wobei zwischen Proben, Auftritten und beidem gewaehlt werden kann.
+	 * Der String type muss entweder den Wert "Rehearsal", den Wert "Gig", oder den Wert "Both" haben.
+	 * "Both" kann auch von der ueberladenen Methode ohne String type uebergeben werden.
+	 * Das aussortieren ¸bernimmt die Methode getEvents(from, until, type)
+	 * @param from
+	 * @param until
+	 * @param type
+	 * @return
+	 */
 	public int financials(Date from, Date until, String type) {
 
 		assert type.equals("Rehearsal") || type.equals("Gig") || type.equals("Both") : "String type nicht \"Rehearsal\", \"Gig\" oder \"Both\"";
-		
+
 		ArrayList<Event> tmpList = getEvents(from, until, type);
 		int budget = 0;
 
@@ -285,22 +375,22 @@ public class Administration {
 
 		return budget;
 	}
-	
+
 	/**
 	 * Methode liefert alle Transaktionen zurück die einen Wert ungleich 0 besitzen
 	 * @return
 	 */
-	
+
 	public ArrayList<Transaction> getTransactions() {
-		
+
 		ArrayList<Transaction> output = new ArrayList<Transaction>();
-		
+
 		for(Transaction t :transactions) {
 			if(t.getValue() != 0) {
 				output.add(t);
 			}
 		}
-		
+
 		return output;
 	}
 
@@ -324,4 +414,25 @@ public class Administration {
 		}
 		return output;
 	}
+	
+
+	private Event getEvent(String place, Date date) {
+
+		Iterator<Event> iterator = events.iterator();
+		Event output = null;
+		boolean found = false;
+
+		while (iterator.hasNext() && !found ) {
+
+			output = iterator.next();
+
+			if (output.isEqual(place, date)) {
+
+				found = true;
+			}
+		}
+
+		return output;
+	}
+
 }
