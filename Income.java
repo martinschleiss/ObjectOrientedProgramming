@@ -1,3 +1,7 @@
+/**
+ * @author Martin
+ */
+
 import java.text.DecimalFormat;
 import java.util.Date;
 public class Income extends Transaction {

@@ -21,6 +21,6 @@ public class Gig extends Event {
 	
 	public String toString() {
 		
-		return super.toString() + ", Gage: " + ta.get(ta.size()-1) + "Euro";
+		return "Gig: " + super.toString() + ", Gage: " + ta.get(ta.size()-1) + "Euro";
 	}
 }

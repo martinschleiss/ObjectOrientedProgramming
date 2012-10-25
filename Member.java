@@ -2,6 +2,7 @@
  * @version 1.1
  */
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Member {
@@ -9,34 +10,52 @@ public class Member {
 	private String name;
 	private String tel;
 	private String instrument;
-	private Date memberFrom;
-	private Date memberUntil;
+	private ArrayList<Song> songs;
+	private ArrayList<Request> informedAbout;
 	
 	public Member (String name, String tel, String instrument, Date memberFrom){
 		this.name = name;
 		this.tel = tel;
 		this.instrument = instrument;
-		this.memberFrom = memberFrom;
-		this.memberUntil = null; //wird zu diesem Zeitpunkt noch nicht festgelegt
+		songs = new ArrayList<Song>();
+		informedAbout = new ArrayList<Request>();
 	}
 
-	public Date getMemberFrom() {
+	public ArrayList<Song> getSongs(){
+		return songs;
 		
-		return memberFrom;
 	}
 	
-	public Date getMemberUntil() {
-		
-		return memberUntil;
+	public void setSong(Song s){
+		songs.add(s);
 	}
 	
-	public void setMemberUntil(Date d) {
+    public void removeSong(Song s){
+    	
+    	songs.remove(s);
+    	
+    }
+	
+	public void inform(Request r, String furtherInfo) {
 		
-		memberUntil = d;
+	//hier koennte code fuer das versenden einer mail mit dem Text furtherInfo stehen.
+	informedAbout.add(r);
+	}
+	
+	public boolean respond(Request r, boolean b, String s) {
+		
+		if (informedAbout.contains(r)) {
+			
+			r.respond(this, b, s);
+			return true;
+		}
+		r.respond(this,b,s);
+		return false;
+		
 	}
 	
 	public String toString() {
 		
-		return "Name: " + name + ", Instrument: " + instrument + ", Telephone-Number: "+tel;
+		return name;
 	}
 }

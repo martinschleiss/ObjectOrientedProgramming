@@ -21,6 +21,6 @@ public class Rehearsal extends Event {
 	
 	public String toString() {
 		
-		return super.toString() + ", Rent: " + ta.get(ta.size()-1) + "Euro";
+		return "Probe: " + super.toString() + ", Rent: " + ta.get(ta.size()-1) + "Euro";
 	}
 }

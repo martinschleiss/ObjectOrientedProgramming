@@ -5,7 +5,7 @@
 import java.util.ArrayList;
 import java.util.Date;
 
-public abstract class Event implements Comparable<Event> {
+public abstract class Event {
 
 	private ArrayList<String> place;
 	private ArrayList<Date> date;
@@ -25,9 +25,9 @@ public abstract class Event implements Comparable<Event> {
 	}
 	
 	/**
-	 * Abstrakte Methode zur Rückgabe der Kosten/Einnahmen.
+	 * Abstrakte Methode zur Rueckgabe der Kosten/Einnahmen.
 	 * Mieten und Gagen werden als positive Zahl gespeichert. getFinance() retourniert Ausgaben (z.B. Mieten) mit negativem Vorzeichen,
-	 * und Einnahmen (z.B. Gagen) mit positivem Vorzeichen, um in einer umfassenden Addition alle Werte leicht zusammenrechnen zu können.
+	 * und Einnahmen (z.B. Gagen) mit positivem Vorzeichen, um in einer umfassenden Addition alle Werte leicht zusammenrechnen zu koennen.
 	 * @return (vorzeichenbehafteter) Kostenfaktor  
 	 */
 	public abstract int getFinances();
@@ -41,27 +41,10 @@ public abstract class Event implements Comparable<Event> {
 		return date.get(date.size()-1);
 	}
 	
-	/**
-	 * Vergleichbar anhand des Datums. Späteres Datum bedeutet größere Ordnung, früheres Datum bedeutet kleinere Ordnung.
-	 */
-	public int compareTo(Event that) {
+	public String getPlace() {
 		
-		int compare = 0;
-		
-		if ( this.date.get(date.size()-1).after(that.getDate()) ) {
-			
-			compare = 1;
-			
-		} else {
-			
-			if (this.date.get(date.size()-1).before(that.getDate()) ) {
-				
-				compare = -1;
-			}
-		}
-		return compare;
+		return place.get(place.size()-1);
 	}
-
 	
 	public void update(String place) {
 		
@@ -78,6 +61,10 @@ public abstract class Event implements Comparable<Event> {
 		this.duration.add(duration);
 	}
 	
+	/**
+	 * erlaubt zuruecksetzen des Orts auf den alten Wert, sofern einer vorhanden ist.
+	 * @return
+	 */
 	public boolean resetPlace() {
 		
 		if ( place.size() > 1 ) {
@@ -91,6 +78,11 @@ public abstract class Event implements Comparable<Event> {
 		}
 
 	}
+	
+	/**
+	 * erlaubt zuruecksetzen des Datums auf den alten Wert, sofern einer vorhanden ist.
+	 * @return
+	 */
 	public boolean resetDate() {
 		
 		if ( date.size() > 1 ) {
@@ -104,6 +96,11 @@ public abstract class Event implements Comparable<Event> {
 		}
 
 	}
+	
+	/**
+	 * erlaubt zuruecksetzen der Dauer auf den alten Wert, sofern einer vorhanden ist.
+	 * @return
+	 */
 	public boolean resetDuration() {
 		
 		if ( duration.size() > 1 ) {
@@ -118,14 +115,20 @@ public abstract class Event implements Comparable<Event> {
 
 	}
 
-	public boolean isEqual(String place, Date date) {
+	/**
+	 * Vergleichsmethode fuer Events (ich weiss schon: besser equals ueberschreiben :-))
+	 * @param place
+	 * @param date
+	 * @return
+	 */
+	public boolean isEqualEvent(String place, Date date) {
 		
 		return this.place.get(this.place.size()-1).equals(place) && this.date.get(this.date.size()-1).equals(date);
 	}
 
 	public String toString() {
 		
-		return "Place: " + place.get(place.size()-1) + ", Date: " + date.get(date.size()-1) + ", Duration: " + duration.get(duration.size()-1) + " min";
+		return "Ort: " + place.get(place.size()-1) + ", Datum: " + date.get(date.size()-1) + ", Dauer: " + duration.get(duration.size()-1) + " min";
 	}
 	
 }

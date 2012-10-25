@@ -1,5 +1,9 @@
 import java.text.DecimalFormat;
 import java.util.Date;
+
+/**
+ * @author Martin
+ */
 abstract public class Transaction {
 	
 	protected double value;

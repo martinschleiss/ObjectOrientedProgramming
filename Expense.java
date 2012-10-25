@@ -1,5 +1,9 @@
 import java.text.DecimalFormat;
 import java.util.Date;
+
+/**
+ * @author Martin
+ */
 public class Expense extends Transaction {
 	
 	public Expense (double value) {

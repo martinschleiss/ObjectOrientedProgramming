@@ -4,21 +4,50 @@
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 public class Administration {
 
+	Band band;
 	ArrayList<Event> events;
+	ArrayList<Event> deletedEvents;
 	ArrayList<Member> members;
 	ArrayList<Song> songs;
 	ArrayList<Transaction> transactions;
+	ArrayList<Request> requests;
+	ArrayList<GigLocation> gigLocations;
+	ArrayList<RehearsalLocation> rehearsalLocations;
 
 	public Administration() {
 
+		band = new Band();
 		events = new ArrayList<Event>();
+		deletedEvents = new ArrayList<Event>();
 		members = new ArrayList<Member>();
 		songs= new ArrayList<Song>();
 		transactions = new ArrayList<Transaction>();
+		requests = new ArrayList<Request>();
+		gigLocations =new ArrayList<GigLocation>();
+		rehearsalLocations =new ArrayList<RehearsalLocation>();
+	}
+
+	public void addRequest(Request r, String furtherInfo) {
+
+		requests.add(r);
+		r.broadcast(furtherInfo);
+	}
+
+	public boolean executeRequest(Request r) {
+
+		boolean executed = false;
+		
+		executed = r.execute();
+		requests.remove(r);
+		
+		return executed;
+		
 	}
 
 	/**
@@ -26,73 +55,63 @@ public class Administration {
 	 * Transaktionen hinzugefuegt.
 	 * @param r : die Probe die hinzugefuegt werden soll
 	 */
+	public void addEvent(Event e) {
 
-	public void addRehearsal(Rehearsal r) {
+		events.add(e);
+		e.getCorrespondingTransaction().setCorrespondingEvent(e);
+		e.getCorrespondingTransaction().setDate(e.getDate());
+		transactions.add(e.getCorrespondingTransaction());
+	}
+/**
+ * Methode loescht Events nicht permanent. Geloeschte Events werden in einer eigenen
+ * ArrayList gespeichert.
+ * @param e
+ * @return
+ */
+	public boolean deleteEvent(Event e) {
 
-		events.add(r);
-		r.getCorrespondingTransaction().setCorrespondingEvent(r);
-		r.getCorrespondingTransaction().setDate(r.getDate());
-		transactions.add(r.getCorrespondingTransaction());
+			boolean removed;
+			
+			removed = events.remove(e);
+			
+			if (removed) {
+				deletedEvents.add(e);
+			}
+			return removed;
 	}
 
 	/**
-	 * Fuegt einen Auftritt zur Datenbank hinzu. Dabei wird die dazugehoerige Transaktion zu der Liste aller
-	 * Transaktionen hinzugefuegt.
-	 * @param g : der Auftritt der hinzugefuegt werden soll
+	 * Events, die durch deleteEvent() geloescht wurden, koennen so wiederhergestellt werden.
+	 * @param e
+	 * @return
 	 */
+	public boolean restoreEvent(Event e) {
 
-	public void addGig(Gig g) {
-
-		events.add(g);
-		g.getCorrespondingTransaction().setCorrespondingEvent(g);
-		g.getCorrespondingTransaction().setDate(g.getDate());
-		transactions.add(g.getCorrespondingTransaction());
-	}
-	
-	public boolean updateEvent(String place, Date date, String newPlace) {
-
-		Event tmp = getEvent(place, date);
-
-		if (tmp != null) {
-
-			tmp.update(newPlace);
+		if (deletedEvents.contains(e)) {
+			
+			events.add(e);
+			deletedEvents.remove(e);
 			return true;
-
+			
 		} else {
-
-			return false;
-		}
-	}
-	
-	public boolean updateEvent(String place, Date date, Date newDate) {
-
-		Event tmp = getEvent(place, date);
-
-		if (tmp != null) {
-
-			tmp.update(newDate);
-			return true;
-
-		} else {
-
 			return false;
 		}
 	}
 
+	public void updateEvent(Event e, String newPlace) {
 
-	public boolean updateEvent(String place, Date date, int newDuration) {
+		e.update(newPlace);
+	}
 
-		Event tmp = getEvent(place, date);
 
-		if (tmp != null) {
+	public void updateEvent(Event e, int newDuration) {
 
-			tmp.update(newDuration);
-			return true;
+		e.update(newDuration);
+	}
 
-		} else {
+	public void postponeEvent(Event e, Date newDate) {
 
-			return false;
-		}
+			e.update(newDate);
 	}
 
 	public boolean resetEventPlace(String place, Date date) {
@@ -108,7 +127,7 @@ public class Administration {
 			return false;
 		}
 	}
-	
+
 	public boolean resetEventDate(String place, Date date) {
 
 		Event tmp = getEvent(place, date);
@@ -122,7 +141,7 @@ public class Administration {
 			return false;
 		}
 	}
-	
+
 	public boolean resetEventDuration(String place, Date date) {
 
 		Event tmp = getEvent(place, date);
@@ -149,7 +168,13 @@ public class Administration {
 
 	public void addSong(Song s){
 
-		songs.add(s);
+		band.setReleaseSongDateList(s, new Date());
+		ArrayList<Member> am=new ArrayList<Member>();
+		am=getCurrentMembers();
+
+		for(Member m:am){
+			m.setSong(s);
+		}
 	}
 
 	/**
@@ -159,12 +184,18 @@ public class Administration {
 	 */
 	public void removeSong(Song s) {
 
-		s.setEndDate(new Date());
+		band.setEndDateSongList(s, new Date());
+		ArrayList<Member> am=new ArrayList<Member>();
+		am=getCurrentMembers();
+
+		for(Member m:am){
+			m.removeSong(s);
+		}
 	}
 
 	public void addMember(Member m) {
 
-		members.add(m);
+		band.setJoinMemberList(m, new Date());
 	}
 
 	/**
@@ -174,7 +205,7 @@ public class Administration {
 	 */
 	public void removeMember(Member m) {
 
-		m.setMemberUntil(new Date());
+		band.setLeaveMemberList(m, new Date());
 	}
 
 	/**
@@ -183,15 +214,21 @@ public class Administration {
 	 */
 	public ArrayList<Member> getCurrentMembers() {
 
-		ArrayList<Member> output = new ArrayList<Member>(members);
-
-		for (Member m : members) {
-
-			if ( m.getMemberUntil() != null ) {
-
-				output.remove(m);
-			}
-		}
+		HashMap<Member,Date> memberList=new HashMap<Member,Date>();
+		
+		memberList=band.getLeaveMemberList();
+		
+		ArrayList<Member> output = new ArrayList<Member>();
+		
+		for(Map.Entry<Member, Date> e : memberList.entrySet()){
+			
+				  Member m = e.getKey();
+				  Date d = e.getValue();
+				  if(d==null){
+					  output.add(m);
+				  }
+				}
+		
 		return output;
 	}
 
@@ -203,20 +240,24 @@ public class Administration {
 	 */
 	public ArrayList<Member> getMembers(Date d) {
 
-		ArrayList<Member> output = new ArrayList<Member>(members);
-
-		for (Member m : members) {
-
-			if ( m.getMemberFrom().after(d) ) {
-
-				output.remove(m);
+		ArrayList<Member> output = new ArrayList<Member>();
+		
+		HashMap<Member,Date> memberListFrom=new HashMap<Member,Date>();
+		HashMap<Member,Date> memberListUntil=new HashMap<Member,Date>();
+		memberListFrom=band.getJoinMemberList();
+		memberListUntil=band.getLeaveMemberList();
+		
+		for(Map.Entry<Member, Date> e : memberListFrom.entrySet()){
+			  Member m = e.getKey();
+			  Date da = e.getValue();
+			  
+			  if(da.before(d) && memberListUntil.get(m) ==null){
+				  output.add(m);
+			  }else if(da.before(d) && memberListUntil.get(m).after(d)){
+				  output.add(m);
+			  }
+			  
 			}
-
-			if ( m.getMemberUntil() != null && m.getMemberUntil().before(d) ) {
-
-				output.remove(m);
-			}
-		}
 		return output;
 	}
 
@@ -226,14 +267,36 @@ public class Administration {
 	 */
 	public ArrayList<Song> getCurrentSongs() {
 
-		ArrayList<Song> output = new ArrayList<Song>(songs);
+		ArrayList<Member> am=new ArrayList<Member>();
+		am=getCurrentMembers();
+		
+		Member first=am.get(0);
 
-		for (Song s : songs) {
+		ArrayList<Song> firstSongs = new ArrayList<Song>();
+		firstSongs=first.getSongs();
+		ArrayList<Song> output = new ArrayList<Song>();
+		Boolean check=false;
+		int counter=0;
+		for(Song s: firstSongs){
+			for(Member m: am){
 
-			if ( s.getEndDate()!=null ) {
+				ArrayList<Song> nSongs = new ArrayList<Song>();
+				nSongs=m.getSongs();
 
-				output.remove(s);
+				for(Song sn: nSongs){
+					if(sn==s){
+						check=true;
+					}
+				}
+				if(check==true){
+					check=false;
+					counter++;
+				}
 			}
+			if(counter==am.size()){
+				output.add(s);
+			}
+			counter=0;
 		}
 		return output;
 	}
@@ -246,40 +309,68 @@ public class Administration {
 	 */
 	public ArrayList<Song> getSongs(Date d) {
 
-		ArrayList<Song> output = new ArrayList<Song>(songs);
-
-		for (Song s : songs) {
-
-			if ( s.getReleaseDate().after(d) ) {
-
-				output.remove(s);
+		ArrayList<Song> output = new ArrayList<Song>();
+		HashMap<Song,Date> songListRelease=new HashMap<Song,Date>();
+		HashMap<Song,Date> songListEnd=new HashMap<Song,Date>();
+		songListRelease=band.getReleaseSongDateList();
+		songListEnd=band.getEndDateSongList();
+		
+		for(Map.Entry<Song, Date> e : songListRelease.entrySet()){
+			  Song s = e.getKey();
+			  Date da = e.getValue();
+			  
+			  if(da.before(d) && songListEnd.get(s) ==null){
+				  output.add(s);
+			  }else if(da.before(d) && songListEnd.get(s).after(d)){
+				  output.add(s);
+			  }
+			  
 			}
-
-			if ( s.getEndDate() != null && s.getEndDate().before(d) ) {
-
-				output.remove(s);
-			}
-		}
 		return output;
 	}
 
 	/**
 	 * Liefert alle Events im Zeitfenster zwischen from und until
-	 * Uebergibt an die ueberladene Methode zusaetzlich den String "Both", was bedeutet, dass beides, Proben und Auftritte ausgewaehlt werden.
 	 * @param from
 	 * @param until
 	 * @return
 	 */
-	public ArrayList<Event> getEvents(Date from, Date until) {
+	public ArrayList<Event> getRehearsals(Date from, Date until) {
 
-		return getEvents(from, until, "Both");	
+		ArrayList<Event> tmpList = extractSpecialEvents(events, Rehearsal.class);
+		ArrayList<Event> output = new ArrayList<Event>(); 
+
+
+		for (Event e : tmpList) {
+
+			if (e.getDate().after(from) && e.getDate().before(until) ) {
+
+				output.add(e);
+			}
+		}
+		return output;
 	}
+
+
+	public ArrayList<Event> getGigs(Date from, Date until) {
+
+		ArrayList<Event> tmpList = extractSpecialEvents(events, Gig.class);
+		ArrayList<Event> output = new ArrayList<Event>();
+
+		for (Event e : tmpList) {
+
+			if (e.getDate().after(from) && e.getDate().before(until) ) {
+
+				output.add(e);
+			}
+		}
+		return output;
+	}
+
 
 	/**
 	 * Ueberladene Methode
 	 * Liefert alle Events im Zeitfenster zwischen from und until
-	 * Der String type muss entweder den Wert "Rehearsal", den Wert "Gig", oder den Wert "Both" haben.
-	 * "Both" kann auch von der ueberladenen Methode ohne String type übergeben werden.
 	 * @param from
 	 * 			Datum, Anfang des Zeitfensters
 	 * @param until
@@ -288,25 +379,10 @@ public class Administration {
 	 * 			bestimmt, ob sich die Abfrage nur auf Proben, nur auf Auftritte, oder auf beides bezieht.
 	 * @return
 	 */
-	public ArrayList<Event> getEvents(Date from, Date until, String type) {
+	public ArrayList<Event> getEvents(Date from, Date until) {
 
-		assert type.equals("Rehearsal") || type.equals("Gig") || type.equals("Both") : "String type nicht \"Rehearsal\", \"Gig\" oder \"Both\"";
-
-		ArrayList<Event> tmpList;
+		ArrayList<Event> tmpList = new ArrayList<Event>(events);
 		ArrayList<Event> output = new ArrayList<Event>();
-
-		if (type.equals("Rehearsal")) {
-
-			tmpList = extractSpecialEvents(events, Rehearsal.class);
-
-		} else if (type.equals("Gig")) {
-
-			tmpList = extractSpecialEvents(events, Gig.class);
-
-		} else { //type ist "Both"
-
-			tmpList = new ArrayList<Event>(events);
-		}
 
 		for (Event e : tmpList) {
 
@@ -319,7 +395,7 @@ public class Administration {
 	}
 
 	/**
-	 * Diese Methode gibt den aktuellen Kontostand zurŸck.
+	 * Diese Methode gibt den aktuellen Kontostand zurueck.
 	 * Zur Auswertung werden alle Transaktionen verwendet.
 	 * @return
 	 */
@@ -342,27 +418,48 @@ public class Administration {
 	 * @param until
 	 * @return
 	 */
-	public int financials(Date from, Date until) {
+	public int rehearsalFinancials(Date from, Date until) {
 
-		return financials(from, until, "Both");
+		ArrayList<Event> tmpList = getRehearsals(from, until);
+		int budget = 0;
+
+		for (Event e : tmpList) {
+
+			if (e.getDate().after(from) && e.getDate().before(until) ) {
+
+				budget += e.getFinances();
+			}
+		}
+		return budget;
+	}
+	
+	
+	public int gigFinancials(Date from, Date until) {
+		
+		ArrayList<Event> tmpList = getGigs(from, until);
+		int budget = 0;
+
+		for (Event e : tmpList) {
+
+			if (e.getDate().after(from) && e.getDate().before(until) ) {
+
+				budget += e.getFinances();
+			}
+		}
+		return budget;
 	}
 
 	/**
 	 * Ueberladene Methode
-	 * Liefert eine Bilanz im Zeitfenster zwischen from und until, wobei zwischen Proben, Auftritten und beidem gewaehlt werden kann.
-	 * Der String type muss entweder den Wert "Rehearsal", den Wert "Gig", oder den Wert "Both" haben.
-	 * "Both" kann auch von der ueberladenen Methode ohne String type uebergeben werden.
-	 * Das aussortieren übernimmt die Methode getEvents(from, until, type)
+	 * Liefert eine Bilanz im Zeitfenster zwischen from und untilaben.
+	 * Das aussortieren uebernimmt die Methode getEvents(from, until, type)
 	 * @param from
 	 * @param until
-	 * @param type
 	 * @return
 	 */
-	public int financials(Date from, Date until, String type) {
+	public int financials(Date from, Date until) {
 
-		assert type.equals("Rehearsal") || type.equals("Gig") || type.equals("Both") : "String type nicht \"Rehearsal\", \"Gig\" oder \"Both\"";
-
-		ArrayList<Event> tmpList = getEvents(from, until, type);
+		ArrayList<Event> tmpList = getEvents(from, until);
 		int budget = 0;
 
 		for (Event e : tmpList) {
@@ -377,7 +474,7 @@ public class Administration {
 	}
 
 	/**
-	 * Methode liefert alle Transaktionen zurŸck die einen Wert ungleich 0 besitzen
+	 * Methode liefert alle Transaktionen zurueck die einen Wert ungleich 0 besitzen
 	 * @return
 	 */
 
@@ -414,9 +511,8 @@ public class Administration {
 		}
 		return output;
 	}
-	
 
-	private Event getEvent(String place, Date date) {
+	public Event getEvent(String place, Date date) {
 
 		Iterator<Event> iterator = events.iterator();
 		Event output = null;
@@ -426,12 +522,58 @@ public class Administration {
 
 			output = iterator.next();
 
-			if (output.isEqual(place, date)) {
+			if (output.isEqualEvent(place, date)) {
 
 				found = true;
 			}
 		}
 
+		if (!found) {
+
+			output = null;
+		}
+
+		return output;
+	}
+	public void addGigLocation(GigLocation g){
+		gigLocations.add(g);
+
+	}
+
+	public void addRehearsalLocation(RehearsalLocation r){
+		rehearsalLocations.add(r);
+
+	}
+	public ArrayList<RehearsalLocation> getRehearsalLocation(){
+		return rehearsalLocations;
+	}
+
+	public ArrayList<RehearsalLocation> getRehearsalLocation(int district ,int size, int stageSize, int distanceToCenter, String wallColor){
+
+		ArrayList<RehearsalLocation> output = new ArrayList<RehearsalLocation>();
+
+		for (RehearsalLocation l : rehearsalLocations) {
+
+			if(district==l.getDistrict()&&size==l.getSize()&&stageSize==l.getStageSize()&&distanceToCenter==l.getDistanceToCenter()&&wallColor.equals(l.getWallColor())){
+				output.add(l);
+			}
+		}
+		return output;
+	}
+	public ArrayList<GigLocation> getGigLocation(){
+		
+		return gigLocations;
+	}
+	public ArrayList<GigLocation> getGigLocation(int district ,int size, int stageSize, int seatings){
+
+		ArrayList<GigLocation> output = new ArrayList<GigLocation>();
+
+		for (GigLocation l : gigLocations) {
+
+			if(district==l.getDistrict()&&size==l.getSize()&&stageSize==l.getStageSize()&&seatings==l.getSeatings()){
+				output.add(l);
+			}
+		}
 		return output;
 	}
 
