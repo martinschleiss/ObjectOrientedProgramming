@@ -10,6 +10,10 @@ import java.util.Map;
 
 public class Administration {
 
+	/**
+	 * SCHLECHT: (Klassenzusammenhalt) Klassenvariablen sind ohne Modifier definiert. Dadurch verlieren die setter und getter
+	 * an Bedeutung da auch von anderen Klassen im selben Package die Variablen veraendern koennen 
+	 */	
 	Band band;
 	ArrayList<Event> events;
 	ArrayList<Event> deletedEvents;
@@ -19,7 +23,10 @@ public class Administration {
 	ArrayList<Request> requests;
 	ArrayList<GigLocation> gigLocations;
 	ArrayList<RehearsalLocation> rehearsalLocations;
-
+	
+	/**
+	 * Nachbedingung: alle Klassenvariablen muessen erfolgreich initialisiert sein
+	 */
 	public Administration() {
 
 		band = new Band();
@@ -32,13 +39,27 @@ public class Administration {
 		gigLocations =new ArrayList<GigLocation>();
 		rehearsalLocations =new ArrayList<RehearsalLocation>();
 	}
-
+	
+	/**
+	 * Vorbedingung: der Wert r darf nicht NULL sein. Eventuelle Vorbedingungen in Request von der Methode
+	 * broadcast()
+	 * Nachbedingung: r muss in der Arraylist requests enthalten sein
+	 * @param r
+	 * @param furtherInfo
+	 */
 	public void addRequest(Request r, String furtherInfo) {
 
 		requests.add(r);
 		r.broadcast(furtherInfo);
 	}
-
+	
+	/**
+	 * Vorbedingung: der Wert r darf nicht NULL sein. Eventuelle Vorbedingungen von execute in Request
+	 * muessen erfuellt sein.
+	 * Nachbedingung: falls r in requests enhalten war, muss es aus requests entfernt worden sein
+	 * @param r
+	 * @return
+	 */
 	public boolean executeRequest(Request r) {
 
 		boolean executed = false;
@@ -51,6 +72,8 @@ public class Administration {
 	}
 
 	/**
+	 * Vorbedingung: der Wert e darf nicht NULL sein
+	 * Nachbedingung: das Event muss in der Liste events enthalten sein. 
 	 * Fuegt eine Probe zur Datenbank hinzu. Dabei wird die dazugehoerige Transaktion zu der Liste aller
 	 * Transaktionen hinzugefuegt.
 	 * @param r : die Probe die hinzugefuegt werden soll
@@ -98,22 +121,44 @@ public class Administration {
 		}
 	}
 
+	/**
+	 * Vorbedingung: eventuelle Vorbedinungen in Event von der Methode update(String) muessen erfuellt sein
+	 * @param e
+	 * @param newPlace
+	 */
 	public void updateEvent(Event e, String newPlace) {
 
 		e.update(newPlace);
 	}
 
-
+	/**
+	 * Vorbedingung: eventuelle Vorbedinungen in Event von der Methode update(int) muessen erfuellt sein
+	 * @param e
+	 * @param newDuration
+	 */
 	public void updateEvent(Event e, int newDuration) {
 
 		e.update(newDuration);
 	}
-
+	
+	/**
+	 * Vorbedingung: eventuelle Vorbedinungen in Event von der Methode update(Date) muessen erfuellt sein
+	 * @param e
+	 * @param newDate
+	 */
 	public void postponeEvent(Event e, Date newDate) {
 
 			e.update(newDate);
 	}
-
+	
+	/**
+	 * Vorbedingung: eventuelle Vorbedinungen in Event von der Methode resetPlace() muessen erfuellt sein
+	 * Nachbedingung: der Ort des Events muss nicht unbedingt zurueckgesetzt worden sein, falls das Event
+	 * nicht in events enthalten ist
+	 * @param place
+	 * @param date
+	 * @return
+	 */
 	public boolean resetEventPlace(String place, Date date) {
 
 		Event tmp = getEvent(place, date);
@@ -127,7 +172,15 @@ public class Administration {
 			return false;
 		}
 	}
-
+	
+	/**
+	 * Vorbedingung: eventuelle Vorbedinungen in Event von der Methode resetDate() muessen erfuellt sein
+	 * Nachbedingung: das Datum des Events muss nicht unbedingt zurueckgesetzt worden sein, falls das Event
+	 * nicht in events enthalten ist
+	 * @param place
+	 * @param date
+	 * @return
+	 */
 	public boolean resetEventDate(String place, Date date) {
 
 		Event tmp = getEvent(place, date);
@@ -142,6 +195,15 @@ public class Administration {
 		}
 	}
 
+	/**
+	 * FEHLER: Datum wird zurueckgesetzt und nicht die Dauer, wie es der Methodenkopf versprechen wuerde
+	 * Vorbedingung: eventuelle Vorbedinungen in Event von der Methode resetDate() muessen erfuellt sein
+	 * Nachbedingung: die Dauer des Events muss nicht unbedingt zurueckgesetzt worden sein, falls das Event
+	 * nicht in events enthalten ist
+	 * @param place
+	 * @param date
+	 * @return
+	 */
 	public boolean resetEventDuration(String place, Date date) {
 
 		Event tmp = getEvent(place, date);
@@ -158,14 +220,21 @@ public class Administration {
 
 
 	/**
+	 * Vorbedingung: der Wert t darf nicht NULL sein
+	 * Nachbedingung: t muss in transaction enthalten sein
 	 * Methode zum Hinzufuegen einer Transaktion
 	 * @param t
 	 */
-
 	public void addTransaction(Transaction t) {
 		transactions.add(t);
 	}
 
+	/**
+	 * Vorbedingung: Vorbedingungen von Band setReleaseSongDateList(Song, Date) und Member setSong(Song)
+	 * muessen eventuell erfuellt sein
+	 * Nachbedingung: jedes aktive Bandmitglied muss mit dem Song s in Verbindung stehen
+	 * @param s
+	 */
 	public void addSong(Song s){
 
 		band.setReleaseSongDateList(s, new Date());
@@ -178,6 +247,9 @@ public class Administration {
 	}
 
 	/**
+	 * Vorbedingung: Vorbedingungen von Band setEndDateSongList(Song, Date) und Member removeSong(Song)
+	 * muessen eventuell erfuellt sein
+	 * Nachbedingung: alle aktiven Bandmitglieder haben den Song aus ihrem Repoitoire gestrichen
 	 * Methdode zum Entfernen eines Songs. Der Song wird dabei nicht tatsaechlich entfernt, sondern nur das Enddatum festgelegt.
 	 * Das Enddatum wird auf den Zeitpunkt des Methodenaufrufes gesetzt.
 	 * @param m
@@ -209,6 +281,7 @@ public class Administration {
 	}
 
 	/**
+	 * Nachbedingung: Liefert eine Liste aller aktiven Bandmitglieder, kann auch eine leere Liste sein
 	 * Liefert alle derzeit in der Band befindlichen Mitglieder
 	 * null-Wert sagt aus, das das Mitglied noch kein Austrittsdatum hat, es ist also noch in der Band.
 	 */
@@ -233,6 +306,8 @@ public class Administration {
 	}
 
 	/**
+	 * Nachbedingung: Liefert eine Liste aller Bandmitglierder zu einem gewissen Zeitpunkt. Kann auch
+	 * eine Liste ohne Eintraege sein
 	 * Liefert alle zum uebergebenen Zeitpunkt aktiven Mitglieder der Band
 	 * @param d
 	 * 		frueherer Zeitpunkt
@@ -474,6 +549,8 @@ public class Administration {
 	}
 
 	/**
+	 * GUT: Auf Grund von dynamischem Binden ist das ausgeben von Transaktionen, die vom Typ Income oder Expense
+	 * sind, sehr leicht mit einer ArrayList zu bewerkstelligen
 	 * Methode liefert alle Transaktionen zurueck die einen Wert ungleich 0 besitzen
 	 * @return
 	 */
