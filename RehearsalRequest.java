@@ -15,6 +15,11 @@ public class RehearsalRequest extends Request {
 		this.rehearsal = rehearsal;
 	}
 
+	/**
+	 * Vorbedingungen: 	@see Request#execute()
+	 * Nachbedingungen:	@see Request#execute(), zusaetzlich speichert im Fall true 
+	 * die Administration admin die angefragte Probe, bei false passierte nichts zusaetzlich.
+	 */
 	public boolean execute() {
 
 		if (super.checkConfirmations()) {

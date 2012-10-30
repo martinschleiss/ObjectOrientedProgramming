@@ -14,7 +14,12 @@ public class CancelEventRequest extends Request{
 		super(admin, "Absage von: " + event + " wegen Terminkollision");
 		this.event = event;
 	}
-
+	
+	/**
+	 * Vorbedingungen: 	@see Request#execute()
+	 * Nachbedingungen:	@see Request#execute(), zusaetzlich entfernt im Fall true 
+	 * die Administration admin den angefragten Gig, bei false passierte nichts zusaetzlich.
+	 */
 	public boolean execute() {
 
 		if (super.checkConfirmations()) {

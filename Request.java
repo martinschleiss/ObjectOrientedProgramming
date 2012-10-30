@@ -2,11 +2,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * Abstrakte Basisklasse bildet einen Grundrequest: Bietet Methode zum Versenden der Requestinformationen (z.B. Terminverschiebung)
- * an alle Mitglieder. Diese Mitglieder koennen dem Request mit einer Zu- oder Absage gemeinsam mit einer Textnachricht antworten. 
- * Die Zu- und Absagen werden ueberprueft. Haben alle Mitglieder zugestimmt, wird der Request ausgefuehrt. Fehlen Zusagen von Mitgliedern
- * oder haben diese negativ geantwortet, wird der Request nicht ausgefuehrt.
- * 
  * @author Rafael
  * @version 1.1
  */
@@ -18,6 +13,12 @@ import java.util.HashMap;
 	private ArrayList<Member> members;
 	private String information;
 	
+	/**
+	 * Vorbedingungen:
+	 * @param admin				Administration, die dieses Objekt erstellt hat
+	 * @param information		wird von der Unterklasse praezisiert
+	 * Nachbedingungen:			Alles notwendige initialisiert.
+	 */
 	public Request(Administration admin, String information) {
 
 		this.admin = admin;
@@ -28,8 +29,10 @@ import java.util.HashMap;
 	}
 
 	/**
-	 * zum Versenden von textueller Information an Bandmitglieder.
-	 * @param furtherInfo	Textnachricht
+	 * Vorbedingungen: 		ArrayList members im Objekt admin enthaelt alle Members, die man informieren moechte.
+	 * @param furtherInfo	beinhaltet nur zusaetzliche Information, keine Basisinformation wie z.B. das neue Datum des verschobenen Termins
+	 *
+	 * Nachbedingungen: 	Derzeitige Mitglieder von admin wurden informiert und ihnen wurde die Zusatzinformation uebergeben.
 	 */
 	public void broadcast(String furtherInfo) {
 
@@ -42,10 +45,12 @@ import java.util.HashMap;
 	}
 
 	/**
-	 * Mitglieder antworten nach Erhalt einer Request-Nachricht durch die Methode broadcast() asynchron mit dem Aufruf dieser Methode
-	 * @param m		zeigt, welches Mitglied geantwortet hat
+	 * Vorbedingungen: 
+	 * @param m		Mitglied das geantwortet hat
 	 * @param b		Zusage: true, Absage: false
 	 * @param answer	Textnachricht
+	 * 
+	 * Nachbedingungen: Zu- oder Absage des Mitglieds und seine Antwort sind gespeichert
 	 */
 	public void respond(Member m,  boolean b, String answer) {
 		
@@ -56,10 +61,21 @@ import java.util.HashMap;
 	
 	/**
 	 * zu implementieren: Ausfuehren der Methode bewirkt z.B. Anlegen, Loeschen oder Verschieben von Events.
-	 * @return	true wenn Request ausgefuehrt wurde und false wenn nicht.
+	 * Vorbedingungen:	Die Methode broadcast(String furtherinfo) wurde bereits aufgerufen.
+	 * 					Zwischen informieren der Mitglieder mit der Methode broadcast(String furtherinfo) und Aufruf von execute()
+	 * 					ist genug Zeit vergangen, in der die Mitglieder abstimmen konnten.
+	 * 
+	 * @return	true wenn alle Mitglieder positiv abgestimmt haben und daher der Request ausgefuehrt wurde und false wenn nicht.
 	 */
 	public abstract boolean execute();
 
+	/**
+	 * Vorbedingungen: 	Die Methode broadcast(String furtherinfo) wurde bereits aufgerufen.
+	 * 					Zwischen informieren der Mitglieder mit der Methode broadcast(String furtherinfo) und Aufruf von execute()
+	 * 					ist genug Zeit vergangen, in der die Mitglieder abstimmen konnten.
+	 * @return	true wenn alle Mitglieder einstimmig positiv abgestimmt haben 
+	 * 			und false sobald mindestens 1 Mitglied nicht oder dagegen abgestimmt hat.
+	 */
 	protected boolean checkConfirmations() {		
 
 		boolean output = true;

@@ -14,6 +14,11 @@ public class GigRequest extends Request {
 		this.gig = gig;
 	}
 
+	/**
+	 * Vorbedingungen: 	@see Request#execute()
+	 * Nachbedingungen:	@see Request#execute(), zusaetzlich speichert im Fall true 
+	 * die Administration admin den angefragten Gig, bei false passierte nichts zusaetzlich.
+	 */
 	public boolean execute() {
 
 		if (super.checkConfirmations()) {
