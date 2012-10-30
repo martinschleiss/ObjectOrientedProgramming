@@ -1,7 +1,7 @@
 /** 
  * @version 1.0
  */
-
+//Testkommentar
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -547,7 +547,7 @@ public class Administration {
 	public ArrayList<RehearsalLocation> getRehearsalLocation(){
 		return rehearsalLocations;
 	}
-
+	//0<district<24  size>0   stageSize>0  distanceToCenter>0
 	public ArrayList<RehearsalLocation> getRehearsalLocation(int district ,int size, int stageSize, int distanceToCenter, String wallColor){
 
 		ArrayList<RehearsalLocation> output = new ArrayList<RehearsalLocation>();
@@ -564,6 +564,7 @@ public class Administration {
 		
 		return gigLocations;
 	}
+	//0<district<24  size>0   stageSize>0  distanceToCenter>0
 	public ArrayList<GigLocation> getGigLocation(int district ,int size, int stageSize, int seatings){
 
 		ArrayList<GigLocation> output = new ArrayList<GigLocation>();
