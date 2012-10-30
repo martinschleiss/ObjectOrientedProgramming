@@ -18,16 +18,17 @@ public class Song {
 		this.endDate = null; //wird zu diesem Zeitpunkt noch nicht festgelegt
 	}
 
+	// releaseDate muss vor endDate sein
 	public Date getReleaseDate() {
 		
 		return releaseDate;
 	}
-
+	// endDate muss nach releaseDate sein
 	public Date getEndDate() {
 		
 		return endDate;
 	}
-
+	
 	public void setEndDate(Date endDate) {
 		
 		this.endDate = endDate;

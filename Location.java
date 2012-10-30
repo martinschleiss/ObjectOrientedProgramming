@@ -19,7 +19,7 @@ public abstract class Location  implements Comparable<Location>{
 	public int getDistrict() {
 		return district;
 	}
-
+	// 0<district<24
 	public void setDistrict(int district) {
 		this.district = district;
 	}
@@ -27,11 +27,11 @@ public abstract class Location  implements Comparable<Location>{
 	public int getSize() {
 		return size;
 	}
-
+	//Size>0 
 	public void setSize(int size) {
 		this.size = size;
 	}
-
+	//stageSize>0 
 	public int getStageSize() {
 		return stageSize;
 	}
