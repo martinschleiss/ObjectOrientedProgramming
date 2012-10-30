@@ -470,6 +470,7 @@ public class Administration {
 	}
 
 	/**
+	 * Nachbedingung: liefet den aktuellen Kontostand
 	 * Diese Methode gibt den aktuellen Kontostand zurueck.
 	 * Zur Auswertung werden alle Transaktionen verwendet.
 	 * @return
@@ -486,7 +487,7 @@ public class Administration {
 	}
 
 	/**
-	 *
+	 * Vorbedingung: Vorbedingung von getRehearsal(Date, Date) muessen gegeben sein
 	 * Liefert eine Bilanz aus Summe der Einnahmen und  Ausgaben im Zeitfenster zwischen from und until
 	 * Uebergibt an die ueberladene Methode zusaetzlich den String "Both", was bedeutet, dass beides, Proben und Auftritte ausgewaehlt werden. 
 	 * @param from
@@ -508,7 +509,12 @@ public class Administration {
 		return budget;
 	}
 	
-	
+	/**
+	 * Vorbedingungen von getGigs(Date, Date) muessen gegeben sein
+	 * @param from
+	 * @param until
+	 * @return
+	 */
 	public int gigFinancials(Date from, Date until) {
 		
 		ArrayList<Event> tmpList = getGigs(from, until);
@@ -525,6 +531,7 @@ public class Administration {
 	}
 
 	/**
+	 * Vorbedingung: eventuelle Vorbedingungen von getEvents(Date, Date) muessen geben sein
 	 * Ueberladene Methode
 	 * Liefert eine Bilanz im Zeitfenster zwischen from und untilaben.
 	 * Das aussortieren uebernimmt die Methode getEvents(from, until, type)
