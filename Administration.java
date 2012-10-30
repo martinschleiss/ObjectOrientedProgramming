@@ -1,7 +1,7 @@
 /** 
  * @version 1.0
  */
-//Testkommentar
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
