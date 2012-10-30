@@ -21,7 +21,7 @@
 		public int getDistanceToCenter() {
 			return distanceToCenter;
 		}
-
+		//distanceToCenter>=0
 		public void setDistanceToCenter(int distanceToCenter) {
 			this.distanceToCenter = distanceToCenter;
 		}

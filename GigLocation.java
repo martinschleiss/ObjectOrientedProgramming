@@ -21,6 +21,7 @@ public class GigLocation extends Location{
 	public int undefined(){
 		return 0;
 	}
+	//seatings>0
 	public void setSeatings(int seatings) {
 		this.seatings = seatings;
 	}
