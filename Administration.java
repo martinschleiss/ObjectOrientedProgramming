@@ -14,6 +14,7 @@ public class Administration {
 	 * SCHLECHT: (Klassenzusammenhalt) Klassenvariablen sind ohne Modifier definiert. Dadurch verlieren die setter und getter
 	 * an Bedeutung da auch von anderen Klassen im selben Package die Variablen veraendern koennen 
 	 */	
+
 	Band band;
 	ArrayList<Event> events;
 	ArrayList<Event> deletedEvents;
@@ -23,7 +24,7 @@ public class Administration {
 	ArrayList<Request> requests;
 	ArrayList<GigLocation> gigLocations;
 	ArrayList<RehearsalLocation> rehearsalLocations;
-	
+
 	/**
 	 * Nachbedingung: alle Klassenvariablen muessen erfolgreich initialisiert sein
 	 */
@@ -39,7 +40,7 @@ public class Administration {
 		gigLocations =new ArrayList<GigLocation>();
 		rehearsalLocations =new ArrayList<RehearsalLocation>();
 	}
-	
+
 	/**
 	 * Vorbedingung: der Wert r darf nicht NULL sein. Eventuelle Vorbedingungen in Request von der Methode
 	 * broadcast()
@@ -47,12 +48,15 @@ public class Administration {
 	 * @param r
 	 * @param furtherInfo
 	 */
+	
+	//GUT: 	Die Klassen Administration und Request arbeiten weitgehend unabhängig voneinander, die Objektkopplung ist sehr gering
+	//		durch dynamisches Binden ist der Code sehr kompakt und es ist einfach, neue Requests hinzuzufuegen. 
 	public void addRequest(Request r, String furtherInfo) {
 
 		requests.add(r);
 		r.broadcast(furtherInfo);
 	}
-	
+
 	/**
 	 * Vorbedingung: der Wert r darf nicht NULL sein. Eventuelle Vorbedingungen von execute in Request
 	 * muessen erfuellt sein.
@@ -63,12 +67,12 @@ public class Administration {
 	public boolean executeRequest(Request r) {
 
 		boolean executed = false;
-		
+
 		executed = r.execute();
 		requests.remove(r);
-		
+
 		return executed;
-		
+
 	}
 
 	/**
@@ -85,37 +89,42 @@ public class Administration {
 		e.getCorrespondingTransaction().setDate(e.getDate());
 		transactions.add(e.getCorrespondingTransaction());
 	}
-/**
- * Methode loescht Events nicht permanent. Geloeschte Events werden in einer eigenen
- * ArrayList gespeichert.
- * @param e
- * @return
- */
+	
+	/**
+	 * Vorbedingungen: 
+	 * @param e		Event, das geloescht werden soll
+	 * Nachbedingungen:
+	 * @return		true, wenn Element gefunden wurde, Element wird geloescht
+	 * 				false, wenn Element nicht gefunden wurde	
+	 * Methode loescht Events nicht permanent. Geloeschte Events werden in einer eigenen ArrayList gespeichert
+	 * und koennen wiederhergestellt werden
+	 */
 	public boolean deleteEvent(Event e) {
 
-			boolean removed;
-			
-			removed = events.remove(e);
-			
-			if (removed) {
-				deletedEvents.add(e);
-			}
-			return removed;
-	}
+		boolean removed;
 
+		removed = events.remove(e);
+
+		if (removed) {
+			deletedEvents.add(e);
+		}
+		return removed;
+	}
+	
 	/**
-	 * Events, die durch deleteEvent() geloescht wurden, koennen so wiederhergestellt werden.
-	 * @param e
-	 * @return
+	 * @param e		Event, das wiederhergestellt werden soll
+	 * Nachbedingungen:
+	 * @return		true, wenn Element gefunden wurde, Element wird wiederhergestellt und ist wieder in events gespeichert
+	 * 				false, wenn Element nicht gefunden wurde
 	 */
 	public boolean restoreEvent(Event e) {
 
 		if (deletedEvents.contains(e)) {
-			
+
 			events.add(e);
 			deletedEvents.remove(e);
 			return true;
-			
+
 		} else {
 			return false;
 		}
@@ -140,7 +149,7 @@ public class Administration {
 
 		e.update(newDuration);
 	}
-	
+
 	/**
 	 * Vorbedingung: eventuelle Vorbedinungen in Event von der Methode update(Date) muessen erfuellt sein
 	 * @param e
@@ -148,10 +157,11 @@ public class Administration {
 	 */
 	public void postponeEvent(Event e, Date newDate) {
 
-			e.update(newDate);
+		e.update(newDate);
 	}
-	
+
 	/**
+	 * SCHLECHT: Uebergabe von place und date anstatt eines Events
 	 * Vorbedingung: eventuelle Vorbedinungen in Event von der Methode resetPlace() muessen erfuellt sein
 	 * Nachbedingung: der Ort des Events muss nicht unbedingt zurueckgesetzt worden sein, falls das Event
 	 * nicht in events enthalten ist
@@ -172,8 +182,9 @@ public class Administration {
 			return false;
 		}
 	}
-	
+
 	/**
+	 * SCHLECHT: Uebergabe von place und date anstatt eines Events
 	 * Vorbedingung: eventuelle Vorbedinungen in Event von der Methode resetDate() muessen erfuellt sein
 	 * Nachbedingung: das Datum des Events muss nicht unbedingt zurueckgesetzt worden sein, falls das Event
 	 * nicht in events enthalten ist
@@ -196,6 +207,7 @@ public class Administration {
 	}
 
 	/**
+	 * SCHLECHT: Uebergabe von place und date anstatt eines Events
 	 * FEHLER: Datum wird zurueckgesetzt und nicht die Dauer, wie es der Methodenkopf versprechen wuerde
 	 * Vorbedingung: eventuelle Vorbedinungen in Event von der Methode resetDate() muessen erfuellt sein
 	 * Nachbedingung: die Dauer des Events muss nicht unbedingt zurueckgesetzt worden sein, falls das Event
@@ -288,20 +300,20 @@ public class Administration {
 	public ArrayList<Member> getCurrentMembers() {
 
 		HashMap<Member,Date> memberList=new HashMap<Member,Date>();
-		
+
 		memberList=band.getLeaveMemberList();
-		
+
 		ArrayList<Member> output = new ArrayList<Member>();
-		
+
 		for(Map.Entry<Member, Date> e : memberList.entrySet()){
-			
-				  Member m = e.getKey();
-				  Date d = e.getValue();
-				  if(d==null){
-					  output.add(m);
-				  }
-				}
-		
+
+			Member m = e.getKey();
+			Date d = e.getValue();
+			if(d==null){
+				output.add(m);
+			}
+		}
+
 		return output;
 	}
 
@@ -316,23 +328,23 @@ public class Administration {
 	public ArrayList<Member> getMembers(Date d) {
 
 		ArrayList<Member> output = new ArrayList<Member>();
-		
+
 		HashMap<Member,Date> memberListFrom=new HashMap<Member,Date>();
 		HashMap<Member,Date> memberListUntil=new HashMap<Member,Date>();
 		memberListFrom=band.getJoinMemberList();
 		memberListUntil=band.getLeaveMemberList();
-		
+
 		for(Map.Entry<Member, Date> e : memberListFrom.entrySet()){
-			  Member m = e.getKey();
-			  Date da = e.getValue();
-			  
-			  if(da.before(d) && memberListUntil.get(m) ==null){
-				  output.add(m);
-			  }else if(da.before(d) && memberListUntil.get(m).after(d)){
-				  output.add(m);
-			  }
-			  
+			Member m = e.getKey();
+			Date da = e.getValue();
+
+			if(da.before(d) && memberListUntil.get(m) ==null){
+				output.add(m);
+			}else if(da.before(d) && memberListUntil.get(m).after(d)){
+				output.add(m);
 			}
+
+		}
 		return output;
 	}
 
@@ -344,7 +356,7 @@ public class Administration {
 
 		ArrayList<Member> am=new ArrayList<Member>();
 		am=getCurrentMembers();
-		
+
 		Member first=am.get(0);
 
 		ArrayList<Song> firstSongs = new ArrayList<Song>();
@@ -389,18 +401,18 @@ public class Administration {
 		HashMap<Song,Date> songListEnd=new HashMap<Song,Date>();
 		songListRelease=band.getReleaseSongDateList();
 		songListEnd=band.getEndDateSongList();
-		
+
 		for(Map.Entry<Song, Date> e : songListRelease.entrySet()){
-			  Song s = e.getKey();
-			  Date da = e.getValue();
-			  
-			  if(da.before(d) && songListEnd.get(s) ==null){
-				  output.add(s);
-			  }else if(da.before(d) && songListEnd.get(s).after(d)){
-				  output.add(s);
-			  }
-			  
+			Song s = e.getKey();
+			Date da = e.getValue();
+
+			if(da.before(d) && songListEnd.get(s) ==null){
+				output.add(s);
+			}else if(da.before(d) && songListEnd.get(s).after(d)){
+				output.add(s);
 			}
+
+		}
 		return output;
 	}
 
@@ -508,7 +520,7 @@ public class Administration {
 		}
 		return budget;
 	}
-	
+
 	/**
 	 * Vorbedingungen von getGigs(Date, Date) muessen gegeben sein
 	 * @param from
@@ -516,7 +528,7 @@ public class Administration {
 	 * @return
 	 */
 	public int gigFinancials(Date from, Date until) {
-		
+
 		ArrayList<Event> tmpList = getGigs(from, until);
 		int budget = 0;
 
@@ -575,13 +587,6 @@ public class Administration {
 		return output;
 	}
 
-	/**
-	 * Methode zum Extrahieren der Auftritte/Proben aus der Eventliste.
-	 * @param events
-	 * @param c
-	 * 		ist entweder die Klasse Rehearal oder die Klasse Gig
-	 * @return
-	 */
 	private ArrayList<Event> extractSpecialEvents(ArrayList<Event> events, Class<? extends Event> c) {
 
 		ArrayList<Event> output = new ArrayList<Event>();
@@ -645,7 +650,7 @@ public class Administration {
 		return output;
 	}
 	public ArrayList<GigLocation> getGigLocation(){
-		
+
 		return gigLocations;
 	}
 	//0<district<24  size>0   stageSize>0  distanceToCenter>0

@@ -11,11 +11,16 @@ public class Song {
 	private Date releaseDate;
 	private Date endDate;
 	
+	/**
+	 * Vorbedingungen:
+	 * @param duration	> 0 in sec
+	 * @param releaseDate darf nicht in der Zukunft liegen
+	 */
 	public Song(String name, int duration, Date releaseDate){
 		this.name = name;
 		this.duration = duration;
 		this.releaseDate = releaseDate;
-		this.endDate = null; //wird zu diesem Zeitpunkt noch nicht festgelegt
+		this.endDate = null;
 	}
 
 	// releaseDate muss vor endDate sein
@@ -23,12 +28,18 @@ public class Song {
 		
 		return releaseDate;
 	}
-	// endDate muss nach releaseDate sein
+	//Nachbedingung: liefert End-Datum, falls Song nicht mehr gespielt wird, ansonsten null
 	public Date getEndDate() {
 		
 		return endDate;
 	}
 	
+	/**
+	 * Vorbedingung:
+	 * @param endDate 	> releaseDate
+	 * Nachbedingung: endDate wird gespeichert
+	 * ANMERKUNG: enddate > releaseDate koennte hier tatsaechlich ueberprueft werden.
+	 */
 	public void setEndDate(Date endDate) {
 		
 		this.endDate = endDate;

@@ -16,7 +16,7 @@ public abstract class Event {
 	 * Vorbedingungen:
 	 * @param place			Ort an dem Event stattfindet, not null
 	 * @param date			Datum an dem Event stattfindet, not null
-	 * @param duration		Dauer des Events
+	 * @param duration		Dauer des Events, > 0
 	 * @param ta			an das Event gekoppelte Transaktion, not null
 	 * Nachbedingung: die Klasse Event ist erfolgreich initialisiert
 	 */

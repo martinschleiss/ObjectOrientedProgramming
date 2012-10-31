@@ -241,10 +241,11 @@ public class Test {
 	}
 
 	/**
-	 * Methode zum Erstellen eines gueSltigen Datums aus einem String
-	 * @param input
-	 * 			String input muss mit dem SimpleDateFormat kompatibel sein
-	 * @return
+	 * Vorbedingung: 
+	 * @param	input entspricht dem Format "dd.MM.yyyy 'um' HH:mm"
+	 * 
+	 * Nachbedingung:
+	 * @return gueltig erstelltes Date
 	 */
 	public static Date StringToDate(String input) {
 
