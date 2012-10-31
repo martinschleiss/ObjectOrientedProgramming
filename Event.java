@@ -11,6 +11,14 @@ public abstract class Event {
 	private ArrayList<Date> date;
 	private ArrayList<Integer> duration; //in Minuten
 	protected ArrayList<Transaction> ta;
+	
+	/**
+	 * Vorbedingungen:
+	 * @param place			Ort an dem Event stattfindet
+	 * @param date			Datum an dem Event stattfindet
+	 * @param duration		Dauer des Events
+	 * @param ta			an das Event gekoppelte Transaktion
+	 */
 
 	public Event(String place, Date date, int duration, Transaction ta) {
 		
@@ -36,35 +44,65 @@ public abstract class Event {
 		return ta.get(ta.size()-1);
 	}
 	
+	/**
+	 * Nachbedingungen:
+	 * @return	das aktuell gesetzte Datum (kann durch Update oder Reset veraendert werden)
+	 */
 	public Date getDate() {
 		
 		return date.get(date.size()-1);
 	}
 	
+	/**
+	 * Nachbedingungen:
+	 * @return	den aktuell gesetzten Ort (kann durch Update oder Reset veraendert werden)
+	 */
 	public String getPlace() {
 		
 		return place.get(place.size()-1);
 	}
 	
+	/**
+	 * Vorbedingungen:
+	 * @param place		Ort, an dem das Event anstatt des alten stattfinden soll. (place != null)
+	 * Nachbedingungen:
+	 * 					der neue Ort place wird gespeichert und ist als aktueller Ort ueber getPlace() aufrufbar
+	 */
 	public void update(String place) {
 		
 		this.place.add(place);
 	}
 	
+	/**
+	 * Vorbedingungen:
+	 * @param date		Datum, an dem das Event anstatt des alten stattfinden soll. (date != null)
+	 * Nachbedingungen:
+	 * 					das neue Datum date wird gespeichert und ist als aktuelles Datum ueber getDate() aufrufbar
+	 */
 	public void update(Date date) {
 		
 		this.date.add(date);
 	}
 	
+	/**
+	 * Vorbedingungen:
+	 * @param duration		Dauer, die Event anstatt der alten dauern soll. (duration != null)
+	 * Nachbedingungen:	
+	 * 						di neue Dauer duration wird gespeichert und ist als aktuelle Dauer ueber getDuration() aufrufbar
+	 */	
 	public void update(int duration) {
 		
 		this.duration.add(duration);
 	}
 	
 	/**
-	 * erlaubt zuruecksetzen des Orts auf den alten Wert, sofern einer vorhanden ist.
-	 * @return
-	 */
+	 * Nachbedingungen:	
+	 * @return		true, wenn Ort erfolgreich zurueckgesetzt werden konnte, also wenn zuvor schon ein Wert gespeichert war 
+	 * 				(Der Wert, der vor dem Reset aktuell war, geht dabei verloren)
+	 * 				false, wenn es keinen frueheren Eintrag gibt (dann passiert auch nichts)
+	 * Invariante:
+	 * 				es bleibt mindestens ein Ort immer gespeichert
+	 */	
 	public boolean resetPlace() {
 		
 		if ( place.size() > 1 ) {
@@ -80,9 +118,13 @@ public abstract class Event {
 	}
 	
 	/**
-	 * erlaubt zuruecksetzen des Datums auf den alten Wert, sofern einer vorhanden ist.
-	 * @return
-	 */
+	 * Nachbedingungen:	
+	 * @return		true, wenn Datum erfolgreich zurueckgesetzt werden konnte, also wenn zuvor schon ein Wert gespeichert war 
+	 * 				(Der Wert, der vor dem Reset aktuell war, geht dabei verloren)
+	 * 				false, wenn es keinen frueheren Eintrag gibt (dann passiert auch nichts)
+	 * Invariante:
+	 * 				es bleibt mindestens ein Datum immer gespeichert
+	 */	
 	public boolean resetDate() {
 		
 		if ( date.size() > 1 ) {
@@ -98,9 +140,13 @@ public abstract class Event {
 	}
 	
 	/**
-	 * erlaubt zuruecksetzen der Dauer auf den alten Wert, sofern einer vorhanden ist.
-	 * @return
-	 */
+	 * Nachbedingungen:	
+	 * @return		true, wenn Dauer erfolgreich zurueckgesetzt werden konnte, also wenn zuvor schon ein Wert gespeichert war 
+	 * 				(Der Wert, der vor dem Reset aktuell war, geht dabei verloren)
+	 * 				false, wenn es keinen frueheren Eintrag gibt (dann passiert auch nichts)
+	 * Invariante:
+	 * 				es bleibt mindestens eine Dauer immer gespeichert
+	 */	
 	public boolean resetDuration() {
 		
 		if ( duration.size() > 1 ) {
@@ -116,10 +162,7 @@ public abstract class Event {
 	}
 
 	/**
-	 * Vergleichsmethode fuer Events (ich weiss schon: besser equals ueberschreiben :-))
-	 * @param place
-	 * @param date
-	 * @return
+	 * SCHLECHT: equals ueberschreiben
 	 */
 	public boolean isEqualEvent(String place, Date date) {
 		
