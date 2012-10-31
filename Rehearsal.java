@@ -6,13 +6,20 @@ import java.util.Date;
 
 public class Rehearsal extends Event {
 	
+	/**
+	 * Vorbedingungen:
+	 * @see Event#Event(String, Date, int, Transaction)
+	 * @param rent not null
+	 */
 	public Rehearsal( String place, Date date, int duration, Transaction rent){
 
 		super(place, date, duration, rent);
 	}
 	
 	/**
-	 * Einnahmen werden als positive Zahl ausgegeben, Ausgaben als negative.
+	 * Nachbedingung: 
+	 * 			Liefert die aktuellst gesetzte Miete als negativen Wert
+	 *SCHLECHT: Cast auf int statt double als Rueckgabewert
 	 */
 	public int getFinances() {
 		

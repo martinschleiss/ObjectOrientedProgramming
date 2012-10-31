@@ -6,13 +6,20 @@ import java.util.Date;
 
 public class Gig extends Event {
 
+	/**
+	 * Vorbedingungen:
+	 * @see Event#Event(String, Date, int, Transaction)
+	 * @param ta not null
+	 */
 	public Gig( String place, Date date, int duration, Transaction ta) {
 
 		super(place, date, duration, ta);
 	}
 	
 	/**
-	 * Einnahmen werden als positive Zahl ausgegeben, Ausgaben als negative.
+	 * Nachbedingung: 
+	 * 			Liefert die aktuellst gesetzte Gage als positiven Wert
+	 *SCHLECHT: Cast auf int statt double als Rueckgabewert
 	 */
 	public int getFinances() {
 		

@@ -33,7 +33,8 @@ abstract public class Transaction {
 	abstract public double getValue();
 	
 	/**
-	 * Nachbedingung: Liefert das Event mit dem die Transaktion assoziiert ist.
+	 * Nachbedingung: Liefert das Event mit dem die Transaktion assoziiert ist. Es kann sein, dass die Transaktion
+	 * kein korrespondiertes Event besitzt. In diesem Fall wird NULL zurueckgegeben.
 	 * @return
 	 */
 	public Event getCorrespondingEvent() {

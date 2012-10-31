@@ -14,10 +14,11 @@ public abstract class Event {
 	
 	/**
 	 * Vorbedingungen:
-	 * @param place			Ort an dem Event stattfindet
-	 * @param date			Datum an dem Event stattfindet
+	 * @param place			Ort an dem Event stattfindet, not null
+	 * @param date			Datum an dem Event stattfindet, not null
 	 * @param duration		Dauer des Events
-	 * @param ta			an das Event gekoppelte Transaktion
+	 * @param ta			an das Event gekoppelte Transaktion, not null
+	 * Nachbedingung: die Klasse Event ist erfolgreich initialisiert
 	 */
 
 	public Event(String place, Date date, int duration, Transaction ta) {
@@ -40,6 +41,10 @@ public abstract class Event {
 	 */
 	public abstract int getFinances();
 	
+	/**
+	 * Vorbedingung: es muss bisher mindestens eine Transaktion mit dem Event in Verbindung gestanden sein
+	 * @return
+	 */
 	public Transaction getCorrespondingTransaction() {
 		return ta.get(ta.size()-1);
 	}
