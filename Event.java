@@ -11,7 +11,15 @@ public abstract class Event {
 	private ArrayList<Date> date;
 	private ArrayList<Integer> duration; //in Minuten
 	protected ArrayList<Transaction> ta;
-
+	
+	/**
+	 * Vorbedingung: der Wert ta, date und place duerfen nicht null sein
+	 * Nachbedingung: die Klasse Event muss erfolgreich initialisiert sein
+	 * @param place
+	 * @param date
+	 * @param duration
+	 * @param ta
+	 */
 	public Event(String place, Date date, int duration, Transaction ta) {
 		
 		this.place = new ArrayList<String>();
@@ -32,6 +40,10 @@ public abstract class Event {
 	 */
 	public abstract int getFinances();
 	
+	/**
+	 * Vorbedingung: es muss bisher mindestens eine Transaktion mit dem Event in Verbindung gestanden sein
+	 * @return
+	 */
 	public Transaction getCorrespondingTransaction() {
 		return ta.get(ta.size()-1);
 	}
