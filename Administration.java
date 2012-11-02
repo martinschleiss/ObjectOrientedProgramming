@@ -15,15 +15,15 @@ public class Administration {
 	 * an Bedeutung da auch von anderen Klassen im selben Package die Variablen veraendern koennen 
 	 */	
 
-	Band band;
-	ArrayList<Event> events;
-	ArrayList<Event> deletedEvents;
-	ArrayList<Member> members;
-	ArrayList<Song> songs;
-	ArrayList<Transaction> transactions;
-	ArrayList<Request> requests;
-	ArrayList<GigLocation> gigLocations;
-	ArrayList<RehearsalLocation> rehearsalLocations;
+	private Band band;
+	private ArrayList<Event> events;
+	private ArrayList<Event> deletedEvents;
+	private ArrayList<Member> members;
+	private ArrayList<Song> songs;
+	private ArrayList<Transaction> transactions;
+	private ArrayList<Request> requests;
+	private ArrayList<GigLocation> gigLocations;
+	private ArrayList<RehearsalLocation> rehearsalLocations;
 
 	/**
 	 * Nachbedingung: alle Klassenvariablen muessen erfolgreich initialisiert sein

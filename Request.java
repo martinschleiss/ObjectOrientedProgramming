@@ -7,7 +7,7 @@ import java.util.HashMap;
  */
  abstract class Request {
 
-	protected Administration admin;
+	private Administration admin;
 	private HashMap<Member,Boolean> currentConfirmations;
 	private HashMap<Member, String> messages;
 	private ArrayList<Member> members;
@@ -93,6 +93,10 @@ import java.util.HashMap;
 
 			return false;
 		}	
+	}
+	
+	protected Administration getAdministration() {
+		return admin;
 	}
 	
 	public String toString() {

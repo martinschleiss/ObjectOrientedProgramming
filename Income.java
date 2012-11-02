@@ -27,10 +27,10 @@ public class Income extends Transaction {
 	}
 	
 	public double getValue() {
-		return this.value;
+		return super.getValue();
 	}
 	
 	public String toString() {
-		return "+" + new DecimalFormat("#.##").format(value);
+		return "+" + new DecimalFormat("#.##").format(this.getValue());
 	}
 }

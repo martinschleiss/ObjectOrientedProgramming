@@ -23,11 +23,11 @@ public class Gig extends Event {
 	 */
 	public int getFinances() {
 		
-		return (int)ta.get(ta.size()-1).getValue();
+		return (int) getCorrespondingTransaction().getValue();
 	}
 	
 	public String toString() {
 		
-		return "Gig: " + super.toString() + ", Gage: " + ta.get(ta.size()-1) + "Euro";
+		return "Gig: " + super.toString() + ", Gage: " + getCorrespondingTransaction() + "Euro";
 	}
 }

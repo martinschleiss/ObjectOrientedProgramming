@@ -10,7 +10,7 @@ public abstract class Event {
 	private ArrayList<String> place;
 	private ArrayList<Date> date;
 	private ArrayList<Integer> duration; //in Minuten
-	protected ArrayList<Transaction> ta;
+	private ArrayList<Transaction> ta;
 	
 	/**
 	 * Vorbedingungen:

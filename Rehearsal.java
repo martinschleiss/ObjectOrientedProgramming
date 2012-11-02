@@ -23,11 +23,11 @@ public class Rehearsal extends Event {
 	 */
 	public int getFinances() {
 		
-		return -(int)ta.get(ta.size()-1).getValue();
+		return -(int)getCorrespondingTransaction().getValue();
 	}
 	
 	public String toString() {
 		
-		return "Probe: " + super.toString() + ", Rent: " + ta.get(ta.size()-1) + "Euro";
+		return "Probe: " + super.toString() + ", Rent: " + getCorrespondingTransaction() + "Euro";
 	}
 }

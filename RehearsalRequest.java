@@ -7,7 +7,7 @@
 
 public class RehearsalRequest extends Request {
 	
-	Rehearsal rehearsal;
+	private Rehearsal rehearsal;
 
 	public RehearsalRequest(Administration admin, Rehearsal rehearsal) {
 		
@@ -24,7 +24,7 @@ public class RehearsalRequest extends Request {
 
 		if (super.checkConfirmations()) {
 
-			admin.addEvent(rehearsal);
+			super.getAdministration().addEvent(rehearsal);
 			return true;
 			
 		} else {
