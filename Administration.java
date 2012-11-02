@@ -497,6 +497,27 @@ public class Administration {
 
 		return balance;		
 	}
+	
+	/**
+	 * Hilfmethode fuer rehearsalFinancials(Date, Date), gigFinancials(Date, Date) und financials(Date, Date)
+	 * @param from
+	 * @param until
+	 * @param events
+	 * @return
+	 */
+	
+	private int eventFinancials(Date from, Date until, ArrayList<Event> events) {
+		int budget = 0;
+
+		for (Event e : events) {
+
+			if (e.getDate().after(from) && e.getDate().before(until) ) {
+
+				budget += e.getFinances();
+			}
+		}
+		return budget;
+	}
 
 	/**
 	 * Vorbedingung: Vorbedingung von getRehearsal(Date, Date) muessen gegeben sein
@@ -509,16 +530,8 @@ public class Administration {
 	public int rehearsalFinancials(Date from, Date until) {
 
 		ArrayList<Event> tmpList = getRehearsals(from, until);
-		int budget = 0;
-
-		for (Event e : tmpList) {
-
-			if (e.getDate().after(from) && e.getDate().before(until) ) {
-
-				budget += e.getFinances();
-			}
-		}
-		return budget;
+		
+		return eventFinancials(from, until, tmpList);
 	}
 
 	/**
@@ -530,16 +543,8 @@ public class Administration {
 	public int gigFinancials(Date from, Date until) {
 
 		ArrayList<Event> tmpList = getGigs(from, until);
-		int budget = 0;
-
-		for (Event e : tmpList) {
-
-			if (e.getDate().after(from) && e.getDate().before(until) ) {
-
-				budget += e.getFinances();
-			}
-		}
-		return budget;
+		
+		return eventFinancials(from, until, tmpList);
 	}
 
 	/**
@@ -554,17 +559,8 @@ public class Administration {
 	public int financials(Date from, Date until) {
 
 		ArrayList<Event> tmpList = getEvents(from, until);
-		int budget = 0;
 
-		for (Event e : tmpList) {
-
-			if (e.getDate().after(from) && e.getDate().before(until) ) {
-
-				budget += e.getFinances();
-			}
-		}
-
-		return budget;
+		return eventFinancials(from, until, tmpList);
 	}
 
 	/**
