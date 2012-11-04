@@ -8,8 +8,6 @@ import java.util.Date;
 public class Member {
 	
 	private String name;
-	private String tel;
-	private String instrument;
 	private ArrayList<Song> songs;
 	private ArrayList<Request> informedAbout;
 	
@@ -19,10 +17,8 @@ public class Member {
 	 * @param memberFrom	darf nicht in der Zukunft liegen.
 	 */
 	
-	public Member (String name, String tel, String instrument, Date memberFrom){
+	public Member (String name, Date memberFrom){
 		this.name = name;
-		this.tel = tel;
-		this.instrument = instrument;
 		songs = new ArrayList<Song>();
 		informedAbout = new ArrayList<Request>();
 	}

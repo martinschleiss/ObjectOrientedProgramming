@@ -245,7 +245,7 @@ public class Administration {
 	 */
 	public void addSong(Song s){
 
-		band.setReleaseSongDateList(s, s.getReleaseDate());
+		band.setSong(s, s.getReleaseDate());
 		ArrayList<Member> am=new ArrayList<Member>();
 		am=getCurrentMembers();
 
@@ -275,7 +275,7 @@ public class Administration {
 
 	public void addMember(Member m, Date d) {
 
-		band.setJoinMemberList(m, d);
+		band.addMember(m, d);
 	}
 
 	/**
@@ -285,7 +285,7 @@ public class Administration {
 	 */
 	public void removeMember(Member m) {
 
-		band.setLeaveMemberList(m, new Date());
+		band.retireMember(m, new Date());
 	}
 
 	/**

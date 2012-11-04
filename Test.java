@@ -16,16 +16,16 @@ public class Test {
 
 		ArrayList<Event> events;
 		ArrayList<Member> members;
-		ArrayList<Song> songs;
+	
 		ArrayList<RehearsalLocation> rehearsalLocations;
 		ArrayList<GigLocation> gigLocations;
 		Administration a = new Administration();
 
 		System.out.println("Erstelle Mitglieder...");
 
-		Member fred = new Member("Duke Silver", "001983", "Guitar", StringToDate("13.11.2011 um 19:00"));
-		Member earl = new Member("Ron Burgundy", "0011323", "Drums", StringToDate("13.11.2011 um 19:00"));
-		Member gretchen = new Member("Gretchen S.", "023983", "Bass",StringToDate("13.11.2011 um 19:00"));
+		Member fred = new Member("Duke Silver", StringToDate("13.11.2011 um 19:00"));
+		Member earl = new Member("Ron Burgundy",StringToDate("13.11.2011 um 19:00"));
+		Member gretchen = new Member("Gretchen S.",StringToDate("13.11.2011 um 19:00"));
 
 		a.addMember(fred,StringToDate("13.11.2011 um 19:00"));
 		a.addMember(earl,StringToDate("13.11.2011 um 19:00"));
@@ -47,14 +47,12 @@ public class Test {
 		Rehearsal r1 = new Rehearsal("Proberaum", StringToDate("10.10.2012 um 19:00"), 180, new Expense(20) );
 		Rehearsal r2 = new Rehearsal("Proberaum", StringToDate("12.10.2012 um 19:00"), 180, new Expense(20) );
 		Rehearsal r3 = new Rehearsal("Proberaum", StringToDate("15.10.2012 um 19:00"), 180, new Expense(20) );
-		Rehearsal r4 = new Rehearsal("Proberaum", StringToDate("01.11.2012 um 19:00"), 180, new Expense(20) );
-
+		
 		Gig g1 = new Gig("Reigen", StringToDate("13.10.2012 um 19:00"), 180, new Income(120) );
 		Gig g2 = new Gig("Porgy", StringToDate("14.10.2012 um 19:00"), 60, new Income(200) );
 		Gig g3 = new Gig("Reigen", StringToDate("14.11.2012 um 18:00"), 180, new Income(120) );
 		Gig g4 = new Gig("Soulveranda", StringToDate("14.11.2012 um 20:00"), 60, new Income(0) );
-		Gig g5 = new Gig("Soulveranda", StringToDate("17.11.2012 um 20:00"), 60, new Income(120) );
-
+		
 		a.addEvent(r1);
 		a.addEvent(r2);
 		a.addEvent(r3);

@@ -5,26 +5,33 @@
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 
 
 public class Band {
 
-	private HashMap<Member,Date> joinMemberList; //Mitglieder und ihr Eintrittsdatum
-	private HashMap<Member,Date> leaveMemberList; //Mitglieder und ihr Austrittsdatum
-	private HashMap<Song,Date> releaseSongDateList; //Songs und ihr Eintrittsdatum
-	private HashMap<Song,Date> endDateSongList;  //Songs und ihr Austrittsdatum
 	
-	
+	private HashMap<Member,Date[]> memberList;
+	private HashMap<Song,Date[]> songList; 
+
 	public Band(){
 
-		joinMemberList=new HashMap<Member,Date>();
-		leaveMemberList=new HashMap<Member,Date>();
-		releaseSongDateList=new HashMap<Song,Date>();
-		endDateSongList=new HashMap<Song,Date>();
-		
-	}
+		memberList=new HashMap<Member,Date[]>();
+		songList=new HashMap<Song,Date[]>();
 
+	}
+	
 	public HashMap<Member,Date> getJoinMemberList() {
+		HashMap<Member,Date> joinMemberList=new HashMap<Member,Date>();
+		for(Map.Entry<Member, Date[]> e : memberList.entrySet()){
+
+			Member m = e.getKey();
+			Date[] da = e.getValue();
+
+			joinMemberList.put(m, da[0]);
+
+		}
+
 		return joinMemberList;
 	}
 
@@ -34,16 +41,24 @@ public class Band {
 	 * 
 	 * Nachbedingungen:
 	 * 		Mitglied wird mit Datum in Liste der aktiven Mitglieder aufgenommen
-	 * ANMERKUNG 1: Ich glaube, dass es fuer den Client nicht wichtig ist zu wissen, dass er auch in setLeaveMemberList aufgenommen wurde
-	 * ANMERKUNG 2: ein besserer Methodenname waere addMember, das entspraeche genau der Funktion und waere eine bessere Zusicherung fuer den Client
 	 */
-	public void setJoinMemberList(Member m, Date d) {
-		joinMemberList.put(m,d);
-		setLeaveMemberList(m,null);
-		
+	public void addMember(Member m, Date d) {
+
+		Date[] ar=new Date[2];
+		ar[0]=d;
+		ar[1]=null;
+
+		memberList.put(m,ar);
 	}
 
 	public HashMap<Member,Date> getLeaveMemberList() {
+		HashMap<Member,Date> leaveMemberList=new HashMap<Member,Date>();
+		for(Map.Entry<Member, Date[]> e : memberList.entrySet()){
+
+			Member m = e.getKey();
+			Date[] da = e.getValue();
+			leaveMemberList.put(m, da[1]);
+		}
 		return leaveMemberList;
 	}
 
@@ -54,27 +69,55 @@ public class Band {
 	 * 		Mitglied wird mit Datum in Liste der aktiven Mitglieder aufgenommen
 	 * ANMERKUNG: ein besserer Methodenname waere retireMember, das entspraeche genau der Funktion und waere eine bessere Zusicherung fuer den Client
 	 */
-	public void setLeaveMemberList(Member m, Date d) {
-		leaveMemberList.put(m, d);
+	public void retireMember(Member m, Date d) {
+		Date[] ar=new Date[2];
+
+		ar= memberList.get(m);
+		ar[1]=d;
+		memberList.put(m, ar);
 	}
 
 	public HashMap<Song,Date> getReleaseSongDateList() {
-		return releaseSongDateList;
+		HashMap<Song,Date> endDateSong=new HashMap<Song,Date>();
+		for(Map.Entry<Song, Date[]> e : songList.entrySet()){
+
+			Song s = e.getKey();
+			Date[] da = e.getValue();
+
+			endDateSong.put(s, da[0]);
+			
+		}
+
+		return endDateSong;
 	}
-	
+
 	/**
 	 * Vorbedingungen:
 	 * @param s not null
 	 * Nachbedingungen:
 	 * 		Song wird in die Songliste aufgenommen
 	 */
-	public void setReleaseSongDateList(Song s, Date d) {
-		releaseSongDateList.put(s, d);
-		setEndDateSongList(s, null);
+	public void setSong(Song s, Date d) {
+		Date[] ar=new Date[2];
+		ar[0]=d;
+		ar[1]=null;
+
+		songList.put(s,ar);
+		
 	}
 
 	public HashMap<Song,Date> getEndDateSongList() {
-		return endDateSongList;
+		HashMap<Song,Date> endDateSong=new HashMap<Song,Date>();
+		for(Map.Entry<Song, Date[]> e : songList.entrySet()){
+
+			Song s = e.getKey();
+			Date[] da = e.getValue();
+
+			endDateSong.put(s, da[1]);
+			
+		}
+
+		return endDateSong;
 	}
 
 	/**
@@ -85,7 +128,11 @@ public class Band {
 	 * 		Song wird mit Enddatum versehen
 	 */
 	public void setEndDateSongList(Song s, Date d) {
-		endDateSongList.put(s,d);
-		
+		Date[] ar=new Date[2];
+
+		ar= songList.get(s);
+		ar[1]=d;
+		songList.put(s, ar);
+
 	}
 }
