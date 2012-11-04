@@ -18,8 +18,6 @@ public class Administration {
 	private Band band;
 	private ArrayList<Event> events;
 	private ArrayList<Event> deletedEvents;
-	private ArrayList<Member> members;
-	private ArrayList<Song> songs;
 	private ArrayList<Transaction> transactions;
 	private ArrayList<Request> requests;
 	private ArrayList<GigLocation> gigLocations;
@@ -33,8 +31,6 @@ public class Administration {
 		band = new Band();
 		events = new ArrayList<Event>();
 		deletedEvents = new ArrayList<Event>();
-		members = new ArrayList<Member>();
-		songs= new ArrayList<Song>();
 		transactions = new ArrayList<Transaction>();
 		requests = new ArrayList<Request>();
 		gigLocations =new ArrayList<GigLocation>();
@@ -48,7 +44,7 @@ public class Administration {
 	 * @param r
 	 * @param furtherInfo
 	 */
-	
+
 	//GUT: 	Die Klassen Administration und Request arbeiten weitgehend unabhaengig voneinander, die Objektkopplung ist sehr gering
 	//		durch dynamisches Binden ist der Code sehr kompakt und es ist einfach, neue Requests hinzuzufuegen. 
 	public void addRequest(Request r, String furtherInfo) {
@@ -89,7 +85,7 @@ public class Administration {
 		e.getCorrespondingTransaction().setDate(e.getDate());
 		transactions.add(e.getCorrespondingTransaction());
 	}
-	
+
 	/**
 	 * Vorbedingungen: 
 	 * @param e		Event, das geloescht werden soll
@@ -110,7 +106,7 @@ public class Administration {
 		}
 		return removed;
 	}
-	
+
 	/**
 	 * @param e		Event, das wiederhergestellt werden soll
 	 * Nachbedingungen:
@@ -249,7 +245,7 @@ public class Administration {
 	 */
 	public void addSong(Song s){
 
-		band.setReleaseSongDateList(s, new Date());
+		band.setReleaseSongDateList(s, s.getReleaseDate());
 		ArrayList<Member> am=new ArrayList<Member>();
 		am=getCurrentMembers();
 
@@ -277,9 +273,9 @@ public class Administration {
 		}
 	}
 
-	public void addMember(Member m) {
+	public void addMember(Member m, Date d) {
 
-		band.setJoinMemberList(m, new Date());
+		band.setJoinMemberList(m, d);
 	}
 
 	/**
@@ -337,11 +333,13 @@ public class Administration {
 		for(Map.Entry<Member, Date> e : memberListFrom.entrySet()){
 			Member m = e.getKey();
 			Date da = e.getValue();
-
+			
 			if(da.before(d) && memberListUntil.get(m) ==null){
 				output.add(m);
+				
 			}else if(da.before(d) && memberListUntil.get(m).after(d)){
 				output.add(m);
+			
 			}
 
 		}
@@ -394,6 +392,49 @@ public class Administration {
 	 * 		frueherer Zeitpunkt
 	 * @return
 	 */
+
+
+	public ArrayList<Song> getSongs(Date d) {
+
+		ArrayList<Member> memberList=new ArrayList<Member>();
+
+		memberList=getMembers(d);
+		
+		Member first=memberList.get(0);
+
+		ArrayList<Song> firstSongs = new ArrayList<Song>();
+		firstSongs=first.getSongs();
+		ArrayList<Song> output = new ArrayList<Song>();
+		Boolean check=false;
+		int counter=0;
+		
+		for(Song s: firstSongs){
+			if(s.getReleaseDate().before(d) && (s.getEndDate()==null ||s.getEndDate().after(d))){
+				for(Member m: memberList){
+					ArrayList<Song> nSongs = new ArrayList<Song>();
+					nSongs=m.getSongs();
+
+					for(Song sn: nSongs){
+						if(sn==s){
+							check=true;
+						}
+					}
+					if(check==true){
+						check=false;
+						counter++;
+					}
+				}
+			}
+			if(counter==memberList.size()){
+				output.add(s);
+			}
+			counter=0;
+		}
+		return output;
+	}
+
+/* geaenderte Methode Repertoires wird nur anhand von Member berechnet (siehe oben)  
+ * 
 	public ArrayList<Song> getSongs(Date d) {
 
 		ArrayList<Song> output = new ArrayList<Song>();
@@ -415,6 +456,7 @@ public class Administration {
 		}
 		return output;
 	}
+	*/
 
 	/**
 	 * Liefert alle Events im Zeitfenster zwischen from und until
@@ -497,7 +539,7 @@ public class Administration {
 
 		return balance;		
 	}
-	
+
 	/**
 	 * Hilfmethode fuer rehearsalFinancials(Date, Date), gigFinancials(Date, Date) und financials(Date, Date)
 	 * @param from
@@ -505,7 +547,7 @@ public class Administration {
 	 * @param events
 	 * @return
 	 */
-	
+
 	private int eventFinancials(Date from, Date until, ArrayList<Event> events) {
 		int budget = 0;
 
@@ -530,7 +572,7 @@ public class Administration {
 	public int rehearsalFinancials(Date from, Date until) {
 
 		ArrayList<Event> tmpList = getRehearsals(from, until);
-		
+
 		return eventFinancials(from, until, tmpList);
 	}
 
@@ -543,7 +585,7 @@ public class Administration {
 	public int gigFinancials(Date from, Date until) {
 
 		ArrayList<Event> tmpList = getGigs(from, until);
-		
+
 		return eventFinancials(from, until, tmpList);
 	}
 

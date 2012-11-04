@@ -23,13 +23,13 @@ public class Test {
 
 		System.out.println("Erstelle Mitglieder...");
 
-		Member fred = new Member("Duke Silver", "001983", "Guitar", new Date());
-		Member earl = new Member("Ron Burgundy", "0011323", "Drums", new Date());
-		Member gretchen = new Member("Gretchen S.", "023983", "Bass", new Date());
+		Member fred = new Member("Duke Silver", "001983", "Guitar", StringToDate("13.11.2011 um 19:00"));
+		Member earl = new Member("Ron Burgundy", "0011323", "Drums", StringToDate("13.11.2011 um 19:00"));
+		Member gretchen = new Member("Gretchen S.", "023983", "Bass",StringToDate("13.11.2011 um 19:00"));
 
-		a.addMember(fred);
-		a.addMember(earl);
-		a.addMember(gretchen);
+		a.addMember(fred,StringToDate("13.11.2011 um 19:00"));
+		a.addMember(earl,StringToDate("13.11.2011 um 19:00"));
+		a.addMember(gretchen,StringToDate("13.11.2011 um 19:00"));
 
 		System.out.println("Es wurden 3 Mitglieder hinzugefuegt.");
 		System.out.println("\n#######################################\n");
@@ -238,7 +238,48 @@ public class Test {
 			System.out.println(l);
 		}
 		System.out.println("\n############# Ende Test2 --> positives Ergebniss!! #############\n");
+		
+		System.out.println("\n############# Test9: 6 Songs esrtellen und ausgeben aktueller Songs, und Songs zu einem bestimmten Zeipunkt #############\n");
+	
+		Song s1=new Song("Song1", 240, StringToDate("03.11.2012 um 19:00"));
+		Song s2=new Song("Song2", 160, StringToDate("14.10.2012 um 19:00"));
+		Song s3=new Song("Song3", 150,StringToDate("13.09.2012 um 19:00"));
+		Song s4=new Song("Song4", 300, StringToDate("03.08.2012 um 19:00"));
+		Song s5=new Song("Song5", 260,StringToDate("15.08.2012 um 19:00"));
+		Song s6=new Song("Song6", 210, StringToDate("23.07.2012 um 19:00"));
+		
+		a.addSong(s1);
+		a.addSong(s2);
+		a.addSong(s3);
+		a.addSong(s4);
+		a.addSong(s5);
+		a.addSong(s6);
+		
+		ArrayList<Song> sl1=new ArrayList<Song>();
+		sl1=a.getCurrentSongs();
+		System.out.println("Ausgabe CurrentSongs");
+		for (Song s : sl1) {
+			System.out.println(s);
+		}
+		
+		
+		ArrayList<Song> sl=new ArrayList<Song>();
+		sl=a.getSongs(StringToDate("16.08.2012 um 19:00"));
+		System.out.println("\nAusgabe Songs am 16.08.2012 um 19:00 -> erwartet: s4,s5,s6\n");
+		for (Song s : sl) {
+			System.out.println(s);
+		}
+	
+	
 	}
+	
+	
+	
+	
+	
+	
+	
+	
 
 	/**
 	 * Vorbedingung: 

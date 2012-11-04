@@ -6,6 +6,7 @@
 import java.util.Date;
 import java.util.HashMap;
 
+
 public class Band {
 
 	private HashMap<Member,Date> joinMemberList; //Mitglieder und ihr Eintrittsdatum
