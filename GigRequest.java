@@ -23,7 +23,7 @@ public class GigRequest extends Request {
 
 		if (super.checkConfirmations()) {
 
-			admin.addEvent(gig);
+			super.getAdmin().addEvent(gig);
 			return true;
 			
 		} else {

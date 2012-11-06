@@ -23,9 +23,9 @@ public class Test {
 
 		System.out.println("Erstelle Mitglieder...");
 
-		Member fred = new Member("Duke Silver", "001983", "Guitar", new Date());
-		Member earl = new Member("Ron Burgundy", "0011323", "Drums", new Date());
-		Member gretchen = new Member("Gretchen S.", "023983", "Bass", new Date());
+		Member fred = new Member("Duke Silver", new Date());
+		Member earl = new Member("Ron Burgundy", new Date());
+		Member gretchen = new Member("Gretchen S.", new Date());
 
 		a.addMember(fred);
 		a.addMember(earl);

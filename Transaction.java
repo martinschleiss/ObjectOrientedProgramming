@@ -4,7 +4,7 @@ import java.util.Date;
 /**
  * @author Martin
  */
-abstract public class Transaction {
+public abstract class Transaction {
 	
 	protected double value;
 	protected Event ev;

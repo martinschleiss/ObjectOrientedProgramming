@@ -3,7 +3,7 @@
  * @author Anil
  *
  */
-public abstract class Location  implements Comparable<Location>{
+public abstract class Location {
 	
 	//FEHLER in der Implementierung von Comparable<Location>, siehe Subklassen.
 	
@@ -23,9 +23,6 @@ public abstract class Location  implements Comparable<Location>{
 		this.setSize(size);
 		this.setStageSize(stageSize);
 	}
-	
-	//SCHLECHT: Siehe Subklassen: Methode koennte in diese Klasse aufgenommen werden, da beide Subklassen sie gleich implementieren. (oder einfach weglassen)
-	public abstract int undefined();
 
 	public int getDistrict() {
 		return district;

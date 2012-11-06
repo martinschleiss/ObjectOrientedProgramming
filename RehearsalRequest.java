@@ -24,7 +24,7 @@ public class RehearsalRequest extends Request {
 
 		if (super.checkConfirmations()) {
 
-			admin.addEvent(rehearsal);
+			super.getAdmin().addEvent(rehearsal);
 			return true;
 			
 		} else {

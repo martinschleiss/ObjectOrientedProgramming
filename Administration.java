@@ -11,19 +11,18 @@ import java.util.Map;
 public class Administration {
 
 	/**
-	 * SCHLECHT: (Klassenzusammenhalt) Klassenvariablen sind ohne Modifier definiert. Dadurch verlieren die setter und getter
+	 * SCHLECHT (AUSGEBESSERT): (Klassenzusammenhalt) Klassenvariablen sind ohne Modifier definiert. Dadurch verlieren die setter und getter
 	 * an Bedeutung da auch von anderen Klassen im selben Package die Variablen veraendern koennen 
-	 */	
-
-	Band band;
-	ArrayList<Event> events;
-	ArrayList<Event> deletedEvents;
-	ArrayList<Member> members;
-	ArrayList<Song> songs;
-	ArrayList<Transaction> transactions;
-	ArrayList<Request> requests;
-	ArrayList<GigLocation> gigLocations;
-	ArrayList<RehearsalLocation> rehearsalLocations;
+	 */
+	private Band band;
+	private ArrayList<Event> events;
+	private ArrayList<Event> deletedEvents;
+	private ArrayList<Member> members;
+	private ArrayList<Song> songs;
+	private ArrayList<Transaction> transactions;
+	private ArrayList<Request> requests;
+	private ArrayList<GigLocation> gigLocations;
+	private ArrayList<RehearsalLocation> rehearsalLocations;
 
 	/**
 	 * Nachbedingung: alle Klassenvariablen muessen erfolgreich initialisiert sein
@@ -45,12 +44,9 @@ public class Administration {
 	 * Vorbedingung: der Wert r darf nicht NULL sein. Eventuelle Vorbedingungen in Request von der Methode
 	 * broadcast()
 	 * Nachbedingung: r muss in der Arraylist requests enthalten sein
-	 * @param r
-	 * @param furtherInfo
+	 * GUT: Die Klassen Administration und Request arbeiten weitgehend unabhängig voneinander, die Objektkopplung ist sehr gering
+	 * durch dynamisches Binden ist der Code sehr kompakt und es ist einfach, neue Requests hinzuzufuegen. 
 	 */
-	
-	//GUT: 	Die Klassen Administration und Request arbeiten weitgehend unabhängig voneinander, die Objektkopplung ist sehr gering
-	//		durch dynamisches Binden ist der Code sehr kompakt und es ist einfach, neue Requests hinzuzufuegen. 
 	public void addRequest(Request r, String furtherInfo) {
 
 		requests.add(r);
@@ -61,8 +57,7 @@ public class Administration {
 	 * Vorbedingung: der Wert r darf nicht NULL sein. Eventuelle Vorbedingungen von execute in Request
 	 * muessen erfuellt sein.
 	 * Nachbedingung: falls r in requests enhalten war, muss es aus requests entfernt worden sein
-	 * @param r
-	 * @return
+	 * GUT: Auch hier wird dynamisches Binden eingesezt.
 	 */
 	public boolean executeRequest(Request r) {
 
@@ -76,11 +71,9 @@ public class Administration {
 	}
 
 	/**
-	 * Vorbedingung: der Wert e darf nicht NULL sein
-	 * Nachbedingung: das Event muss in der Liste events enthalten sein. 
-	 * Fuegt eine Probe zur Datenbank hinzu. Dabei wird die dazugehoerige Transaktion zu der Liste aller
-	 * Transaktionen hinzugefuegt.
-	 * @param r : die Probe die hinzugefuegt werden soll
+	 * Vorbedingungen:	der Wert e darf nicht NULL sein
+	 * Nachbedingungen:	das Event ist in der Liste events enthalten,
+	 * 				  	die dazugehoerige Transaktion ist zur Liste aller Transaktionen hinzugefuegt.
 	 */
 	public void addEvent(Event e) {
 
@@ -192,18 +185,9 @@ public class Administration {
 	 * @param date
 	 * @return
 	 */
-	public boolean resetEventDate(String place, Date date) {
+	public boolean resetEventDate(Event e) {
 
-		Event tmp = getEvent(place, date);
-
-		if (tmp != null) {
-
-			return tmp.resetDate();
-
-		} else {
-
-			return false;
-		}
+			return e.resetDate();
 	}
 
 	/**
@@ -216,18 +200,9 @@ public class Administration {
 	 * @param date
 	 * @return
 	 */
-	public boolean resetEventDuration(String place, Date date) {
+	public boolean resetEventDuration(Event e) {
 
-		Event tmp = getEvent(place, date);
-
-		if (tmp != null) {
-
-			return tmp.resetDate();
-
-		} else {
-
-			return false;
-		}
+			return e.resetDuration();
 	}
 
 

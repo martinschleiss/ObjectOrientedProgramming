@@ -24,7 +24,7 @@ public class CancelEventRequest extends Request{
 
 		if (super.checkConfirmations()) {
 
-			admin.deleteEvent(event);
+			super.getAdmin().deleteEvent(event);
 			return true;
 			
 		} else {
