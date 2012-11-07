@@ -42,7 +42,7 @@ public class Administration {
 	 * 
 	 * Nachbedingung: r muss in der Arraylist requests enthalten sein
 	 * 
-	 * GUT: Die Klassen Administration und Request arbeiten weitgehend unabhängig voneinander, die Objektkopplung ist sehr gering
+	 * GUT: Die Klassen Administration und Request arbeiten weitgehend unabhaengig voneinander, die Objektkopplung ist sehr gering
 	 * durch dynamisches Binden ist der Code sehr kompakt und es ist einfach, neue Requests hinzuzufuegen. 
 	 */
 	public void addRequest(Request r, String furtherInfo) {
