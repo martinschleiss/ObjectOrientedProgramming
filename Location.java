@@ -5,8 +5,9 @@
  */
 public abstract class Location {
 	
-	//FEHLER in der Implementierung von Comparable<Location>, siehe Subklassen.
-	
+	/**
+	 * FEHLER  (AUSGEBESSERT) in der Implementierung von Comparable<Location>, siehe Subklassen.
+	 */
 	
 	private int district;
 	private int size;
@@ -14,9 +15,12 @@ public abstract class Location {
 	
 	/**
 	 * Vorbedingungen:
-	 * @param district		muss dem jeweiligen Bezirk der Stadt entsprechen, muss daher auch im Berech 1 bis #Bezirke der Stadt sein
-	 * @param size			> 0, entspricht Groesse der Location
-	 * @param stageSize		> 0, entspricht Groesse der Buehne
+	 * @param district		im Berech 1 bis #Bezirke der Stadt
+	 * @param size			> 0
+	 * @param stageSize		> 0
+	 * 
+	 * Nachbedingung:
+	 * Objekt wurde initialisiert
 	 */
 	public Location(int district, int size, int stageSize){
 		this.setDistrict(district);
@@ -24,6 +28,15 @@ public abstract class Location {
 		this.setStageSize(stageSize);
 	}
 
+	/**
+	 * SCHLECHT: (AUSGEBESSERT) Siehe Subklassen: Methode koennte in diese Klasse aufgenommen werden, da beide Subklassen sie gleich implementieren. (oder einfach weglassen)
+	 * public abstract int undefined();
+	 */
+
+	/**
+	 * Nachbedingung:
+	 * @return gespeicherten Bezirk der Location
+	 */
 	public int getDistrict() {
 		return district;
 	}

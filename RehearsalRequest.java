@@ -7,8 +7,16 @@
 
 public class RehearsalRequest extends Request {
 	
-	Rehearsal rehearsal;
+	private Rehearsal rehearsal;
 
+	/**
+	 * Vorbedingungen:
+	 * @param admin			not null
+	 * @param rehearsal		not null
+	 * 
+	 * Nachbedingungen:
+	 * Instanz wurde korrekt initialisiert
+	 */
 	public RehearsalRequest(Administration admin, Rehearsal rehearsal) {
 		
 		super(admin, "Probeanfrage am: " + rehearsal.getDate());
@@ -24,7 +32,8 @@ public class RehearsalRequest extends Request {
 
 		if (super.checkConfirmations()) {
 
-			super.getAdmin().addEvent(rehearsal);
+			super.getAdministration().addEvent(rehearsal);
+
 			return true;
 			
 		} else {

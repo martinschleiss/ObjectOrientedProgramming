@@ -9,15 +9,19 @@ public abstract class Event {
 
 	private ArrayList<String> place;
 	private ArrayList<Date> date;
-	private ArrayList<Integer> duration; //in Minuten
-	protected ArrayList<Transaction> ta;
+	
+	/**
+	 * Invariante: duration ist immer > 0
+	 */
+	private ArrayList<Integer> duration;
+	private ArrayList<Transaction> ta;
 	
 	/**
 	 * Vorbedingungen:
-	 * @param place			Ort an dem Event stattfindet, not null
-	 * @param date			Datum an dem Event stattfindet, not null
-	 * @param duration		Dauer des Events, > 0
-	 * @param ta			an das Event gekoppelte Transaktion, not null
+	 * @param place			not null
+	 * @param date			not null
+	 * @param duration		> 0
+	 * @param ta			not null
 	 * Nachbedingung: die Klasse Event ist erfolgreich initialisiert
 	 */
 
@@ -43,7 +47,8 @@ public abstract class Event {
 	
 	/**
 	 * Vorbedingung: es muss bisher mindestens eine Transaktion mit dem Event in Verbindung gestanden sein
-	 * @return
+	 * Nachbedingung:
+	 * @return die aktuell gesetzte Transaktion (kann durch Update oder Reset veraendert werden)
 	 */
 	public Transaction getCorrespondingTransaction() {
 		return ta.get(ta.size()-1);
@@ -69,7 +74,7 @@ public abstract class Event {
 	
 	/**
 	 * Vorbedingungen:
-	 * @param place		Ort, an dem das Event anstatt des alten stattfinden soll. (place != null)
+	 * @param place		not null
 	 * Nachbedingungen:
 	 * 					der neue Ort place wird gespeichert und ist als aktueller Ort ueber getPlace() aufrufbar
 	 */
@@ -80,7 +85,7 @@ public abstract class Event {
 	
 	/**
 	 * Vorbedingungen:
-	 * @param date		Datum, an dem das Event anstatt des alten stattfinden soll. (date != null)
+	 * @param date		not null
 	 * Nachbedingungen:
 	 * 					das neue Datum date wird gespeichert und ist als aktuelles Datum ueber getDate() aufrufbar
 	 */
@@ -91,7 +96,7 @@ public abstract class Event {
 	
 	/**
 	 * Vorbedingungen:
-	 * @param duration		Dauer, die Event anstatt der alten dauern soll. (duration != null)
+	 * @param duration		not null
 	 * Nachbedingungen:	
 	 * 						di neue Dauer duration wird gespeichert und ist als aktuelle Dauer ueber getDuration() aufrufbar
 	 */	
@@ -167,13 +172,17 @@ public abstract class Event {
 	}
 
 	/**
-	 * SCHLECHT: equals ueberschreiben
+	 * SCHLECHT: besser equals ueberschreiben
 	 */
 	public boolean isEqualEvent(String place, Date date) {
 		
 		return this.place.get(this.place.size()-1).equals(place) && this.date.get(this.date.size()-1).equals(date);
 	}
 
+	/**
+	 * Nachbedingung:
+	 * 		Liefert eine String-Repraesentation der Instanz
+	 */
 	public String toString() {
 		
 		return "Ort: " + place.get(place.size()-1) + ", Datum: " + date.get(date.size()-1) + ", Dauer: " + duration.get(duration.size()-1) + " min";

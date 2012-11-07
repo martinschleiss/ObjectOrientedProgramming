@@ -9,7 +9,7 @@ public class Gig extends Event {
 	/**
 	 * Vorbedingungen:
 	 * @see Event#Event(String, Date, int, Transaction)
-	 * @param ta not null
+	 * @param ta 	not null
 	 */
 	public Gig( String place, Date date, int duration, Transaction ta) {
 
@@ -19,15 +19,19 @@ public class Gig extends Event {
 	/**
 	 * Nachbedingung: 
 	 * 			Liefert die aktuellst gesetzte Gage als positiven Wert
-	 *SCHLECHT: Cast auf int statt double als Rueckgabewert
+	 *SCHLECHT: Cast auf int statt Waehrungseinheit als Rueckgabewert
 	 */
 	public int getFinances() {
 		
-		return (int)ta.get(ta.size()-1).getValue();
+		return (int) getCorrespondingTransaction().getValue();
 	}
 	
+	/**
+	 * Nachbedingung:
+	 * 		Liefert eine String-Repraesentation der Instanz
+	 */
 	public String toString() {
 		
-		return "Gig: " + super.toString() + ", Gage: " + ta.get(ta.size()-1) + "Euro";
+		return "Gig: " + super.toString() + ", Gage: " + getCorrespondingTransaction() + "Euro";
 	}
 }

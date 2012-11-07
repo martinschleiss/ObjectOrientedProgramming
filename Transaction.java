@@ -6,9 +6,9 @@ import java.util.Date;
  */
 public abstract class Transaction {
 	
-	protected double value;
-	protected Event ev;
-	protected Date date;
+	private double value;
+	private Event ev;
+	private Date date;
 	
 	/**
 	 * Vorbedingung: value muss ein positiver Wert sein
@@ -30,7 +30,9 @@ public abstract class Transaction {
 		this.date = date;
 	}
 	
-	abstract public double getValue();
+	public double getValue() {
+		return this.value;
+	}
 	
 	/**
 	 * Nachbedingung: Liefert das Event mit dem die Transaktion assoziiert ist. Es kann sein, dass die Transaktion

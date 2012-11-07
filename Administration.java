@@ -5,7 +5,6 @@
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 public class Administration {
@@ -17,8 +16,6 @@ public class Administration {
 	private Band band;
 	private ArrayList<Event> events;
 	private ArrayList<Event> deletedEvents;
-	private ArrayList<Member> members;
-	private ArrayList<Song> songs;
 	private ArrayList<Transaction> transactions;
 	private ArrayList<Request> requests;
 	private ArrayList<GigLocation> gigLocations;
@@ -32,8 +29,6 @@ public class Administration {
 		band = new Band();
 		events = new ArrayList<Event>();
 		deletedEvents = new ArrayList<Event>();
-		members = new ArrayList<Member>();
-		songs= new ArrayList<Song>();
 		transactions = new ArrayList<Transaction>();
 		requests = new ArrayList<Request>();
 		gigLocations =new ArrayList<GigLocation>();
@@ -41,9 +36,12 @@ public class Administration {
 	}
 
 	/**
-	 * Vorbedingung: der Wert r darf nicht NULL sein. Eventuelle Vorbedingungen in Request von der Methode
-	 * broadcast()
+	 * Vorbedingung:
+	 * @param r		not null,
+	 * eventuelle Vorbedingungen von broadcast() in Request
+	 * 
 	 * Nachbedingung: r muss in der Arraylist requests enthalten sein
+	 * 
 	 * GUT: Die Klassen Administration und Request arbeiten weitgehend unabhängig voneinander, die Objektkopplung ist sehr gering
 	 * durch dynamisches Binden ist der Code sehr kompakt und es ist einfach, neue Requests hinzuzufuegen. 
 	 */
@@ -54,9 +52,12 @@ public class Administration {
 	}
 
 	/**
-	 * Vorbedingung: der Wert r darf nicht NULL sein. Eventuelle Vorbedingungen von execute in Request
-	 * muessen erfuellt sein.
+	 * Vorbedingung:
+	 * @param r		not null,
+	 * eventuelle Vorbedingungen von execute() in Request
+	 * 
 	 * Nachbedingung: falls r in requests enhalten war, muss es aus requests entfernt worden sein
+	 * 
 	 * GUT: Auch hier wird dynamisches Binden eingesezt.
 	 */
 	public boolean executeRequest(Request r) {
@@ -71,7 +72,10 @@ public class Administration {
 	}
 
 	/**
-	 * Vorbedingungen:	der Wert e darf nicht NULL sein
+	 * GUT: Dynamisches Binden erleichtert das Initialisieren der Transaktion
+	 * Vorbedingungen:
+	 * @param e		not null
+	 * 
 	 * Nachbedingungen:	das Event ist in der Liste events enthalten,
 	 * 				  	die dazugehoerige Transaktion ist zur Liste aller Transaktionen hinzugefuegt.
 	 */
@@ -82,15 +86,12 @@ public class Administration {
 		e.getCorrespondingTransaction().setDate(e.getDate());
 		transactions.add(e.getCorrespondingTransaction());
 	}
-	
+
 	/**
-	 * Vorbedingungen: 
-	 * @param e		Event, das geloescht werden soll
 	 * Nachbedingungen:
 	 * @return		true, wenn Element gefunden wurde, Element wird geloescht
 	 * 				false, wenn Element nicht gefunden wurde	
-	 * Methode loescht Events nicht permanent. Geloeschte Events werden in einer eigenen ArrayList gespeichert
-	 * und koennen wiederhergestellt werden
+	 * Methode loescht Events nicht permanent: Geloeschte Events koennen mit restoreEvent(Event e) wiederhergestellt werden.
 	 */
 	public boolean deleteEvent(Event e) {
 
@@ -103,9 +104,8 @@ public class Administration {
 		}
 		return removed;
 	}
-	
+
 	/**
-	 * @param e		Event, das wiederhergestellt werden soll
 	 * Nachbedingungen:
 	 * @return		true, wenn Element gefunden wurde, Element wird wiederhergestellt und ist wieder in events gespeichert
 	 * 				false, wenn Element nicht gefunden wurde
@@ -124,9 +124,12 @@ public class Administration {
 	}
 
 	/**
-	 * Vorbedingung: eventuelle Vorbedinungen in Event von der Methode update(String) muessen erfuellt sein
-	 * @param e
-	 * @param newPlace
+	 * Vorbedingung:
+	 * @param e		not null,
+	 * Vorbedingungen der Methode update(String) aus Event
+	 * 
+	 * Nachbedingung: Die Location von Event e wurde auf die neue Location newPlace gesetzt.
+	 * Diese Aktion kann mit resetEventPlace(Event) rueckgaengig gemacht werden
 	 */
 	public void updateEvent(Event e, String newPlace) {
 
@@ -134,9 +137,13 @@ public class Administration {
 	}
 
 	/**
-	 * Vorbedingung: eventuelle Vorbedinungen in Event von der Methode update(int) muessen erfuellt sein
-	 * @param e
-	 * @param newDuration
+	 * Vorbedingung:
+	 * @param e				not null,
+	 * @param newDuration	not null und > 0
+	 * Vorbedingungen der Methode update(int) aus Event
+	 * 
+	 * Nachbedingung: Die Dauer von Event e wurde auf die neue Dauer newDuration gesetzt.
+	 * Diese Aktion kann mit resetEventDuration(Event) rueckgaengig gemacht werden
 	 */
 	public void updateEvent(Event e, int newDuration) {
 
@@ -144,9 +151,13 @@ public class Administration {
 	}
 
 	/**
-	 * Vorbedingung: eventuelle Vorbedinungen in Event von der Methode update(Date) muessen erfuellt sein
-	 * @param e
-	 * @param newDate
+	 * Vorbedingung:
+	 * @param e			not null
+	 * @param newDate	not null, Datum in der Zukunft
+	 * Vorbedinungen der Methode update(Date) aus Event
+	 * 
+	 * Nachbedingung: Das Datum von Event e wurde auf das neue Datum newDate gesetzt.
+	 * Diese Aktion kann mit resetEventDate(Event) rueckgaengig gemacht werden
 	 */
 	public void postponeEvent(Event e, Date newDate) {
 
@@ -154,36 +165,29 @@ public class Administration {
 	}
 
 	/**
-	 * SCHLECHT: Uebergabe von place und date anstatt eines Events
-	 * Vorbedingung: eventuelle Vorbedinungen in Event von der Methode resetPlace() muessen erfuellt sein
-	 * Nachbedingung: der Ort des Events muss nicht unbedingt zurueckgesetzt worden sein, falls das Event
-	 * nicht in events enthalten ist
-	 * @param place
-	 * @param date
-	 * @return
+	 * SCHLECHT: (AUSGEBESSERT) Uebergabe von place und date anstatt eines Events
+	 * Vorbedingung: 
+	 * @param e		not null
+	 * Vorbedingungen der Methode resetPlace() aus Event
+	 * 
+	 * Nachbedingung: 
+	 * true: der Ort des Events wurde zurueckgesetzt
+	 * false:der Ort wurde nicht zurueckgesetzt, da es keinen Vorgaenger mehr gibt.
 	 */
-	public boolean resetEventPlace(String place, Date date) {
+	public boolean resetEventPlace(Event e) {
 
-		Event tmp = getEvent(place, date);
-
-		if (tmp != null) {
-
-			return tmp.resetPlace();
-
-		} else {
-
-			return false;
-		}
+			return e.resetPlace();
 	}
 
 	/**
-	 * SCHLECHT: Uebergabe von place und date anstatt eines Events
-	 * Vorbedingung: eventuelle Vorbedinungen in Event von der Methode resetDate() muessen erfuellt sein
-	 * Nachbedingung: das Datum des Events muss nicht unbedingt zurueckgesetzt worden sein, falls das Event
-	 * nicht in events enthalten ist
-	 * @param place
-	 * @param date
-	 * @return
+	 * SCHLECHT: (AUSGEBESSERT) Uebergabe von place und date anstatt eines Events
+	 * Vorbedingung: 
+	 * @param e		not null
+	 * Vorbedingungen der Methode resetDate() aus Event
+	 * 
+	 * Nachbedingung: 
+	 * true: das Datum des Events wurde zurueckgesetzt
+	 * false:das Datum wurde nicht zurueckgesetzt, da es keinen Vorgaenger mehr gibt.
 	 */
 	public boolean resetEventDate(Event e) {
 
@@ -191,20 +195,21 @@ public class Administration {
 	}
 
 	/**
-	 * SCHLECHT: Uebergabe von place und date anstatt eines Events
-	 * FEHLER: Datum wird zurueckgesetzt und nicht die Dauer, wie es der Methodenkopf versprechen wuerde
-	 * Vorbedingung: eventuelle Vorbedinungen in Event von der Methode resetDate() muessen erfuellt sein
-	 * Nachbedingung: die Dauer des Events muss nicht unbedingt zurueckgesetzt worden sein, falls das Event
-	 * nicht in events enthalten ist
-	 * @param place
-	 * @param date
-	 * @return
+	 * SCHLECHT:(AUSGEBESSERT) Uebergabe von place und date anstatt eines Events
+	 * FEHLER:(AUSGEBESSERT) Datum wird zurueckgesetzt und nicht die Dauer, wie es der Methodenkopf versprechen wuerde
+	 * 
+	 * Vorbedingungen:
+	 * @param e		not null
+	 * Vorbedingungen der Methode resetDuration() aus Event
+	 * 
+	 * Nachbedingung: 
+	 * true: die Dauer des Events wurde zurueckgesetzt
+	 * false:die Dauer wurde nicht zurueckgesetzt, da es keinen Vorgaenger mehr gibt.
 	 */
 	public boolean resetEventDuration(Event e) {
 
 			return e.resetDuration();
 	}
-
 
 	/**
 	 * Vorbedingung: der Wert t darf nicht NULL sein
@@ -224,7 +229,7 @@ public class Administration {
 	 */
 	public void addSong(Song s){
 
-		band.setReleaseSongDateList(s, new Date());
+		band.setSong(s, s.getReleaseDate());
 		ArrayList<Member> am=new ArrayList<Member>();
 		am=getCurrentMembers();
 
@@ -252,9 +257,9 @@ public class Administration {
 		}
 	}
 
-	public void addMember(Member m) {
+	public void addMember(Member m, Date d) {
 
-		band.setJoinMemberList(m, new Date());
+		band.addMember(m, d);
 	}
 
 	/**
@@ -264,7 +269,7 @@ public class Administration {
 	 */
 	public void removeMember(Member m) {
 
-		band.setLeaveMemberList(m, new Date());
+		band.retireMember(m, new Date());
 	}
 
 	/**
@@ -312,11 +317,13 @@ public class Administration {
 		for(Map.Entry<Member, Date> e : memberListFrom.entrySet()){
 			Member m = e.getKey();
 			Date da = e.getValue();
-
+			
 			if(da.before(d) && memberListUntil.get(m) ==null){
 				output.add(m);
+				
 			}else if(da.before(d) && memberListUntil.get(m).after(d)){
 				output.add(m);
+			
 			}
 
 		}
@@ -369,6 +376,49 @@ public class Administration {
 	 * 		frueherer Zeitpunkt
 	 * @return
 	 */
+
+
+	public ArrayList<Song> getSongs(Date d) {
+
+		ArrayList<Member> memberList=new ArrayList<Member>();
+
+		memberList=getMembers(d);
+		
+		Member first=memberList.get(0);
+
+		ArrayList<Song> firstSongs = new ArrayList<Song>();
+		firstSongs=first.getSongs();
+		ArrayList<Song> output = new ArrayList<Song>();
+		Boolean check=false;
+		int counter=0;
+		
+		for(Song s: firstSongs){
+			if(s.getReleaseDate().before(d) && (s.getEndDate()==null ||s.getEndDate().after(d))){
+				for(Member m: memberList){
+					ArrayList<Song> nSongs = new ArrayList<Song>();
+					nSongs=m.getSongs();
+
+					for(Song sn: nSongs){
+						if(sn==s){
+							check=true;
+						}
+					}
+					if(check==true){
+						check=false;
+						counter++;
+					}
+				}
+			}
+			if(counter==memberList.size()){
+				output.add(s);
+			}
+			counter=0;
+		}
+		return output;
+	}
+
+/* geaenderte Methode Repertoires wird nur anhand von Member berechnet (siehe oben)  
+ * 
 	public ArrayList<Song> getSongs(Date d) {
 
 		ArrayList<Song> output = new ArrayList<Song>();
@@ -390,6 +440,7 @@ public class Administration {
 		}
 		return output;
 	}
+	*/
 
 	/**
 	 * Liefert alle Events im Zeitfenster zwischen from und until
@@ -433,13 +484,12 @@ public class Administration {
 	/**
 	 * Ueberladene Methode
 	 * Liefert alle Events im Zeitfenster zwischen from und until
-	 * @param from
-	 * 			Datum, Anfang des Zeitfensters
-	 * @param until
-	 * 			Datum, Ende des Zeitfensters
-	 * @param type
-	 * 			bestimmt, ob sich die Abfrage nur auf Proben, nur auf Auftritte, oder auf beides bezieht.
-	 * @return
+	 * Vorbedingungen:
+	 * @param from		not null
+	 * @param until		not null
+	 * 
+	 * Nachbedingungen:
+	 * @return alle gespeicherten Events im Zeitraum von from bis until
 	 */
 	public ArrayList<Event> getEvents(Date from, Date until) {
 
@@ -458,7 +508,6 @@ public class Administration {
 
 	/**
 	 * Nachbedingung: liefet den aktuellen Kontostand
-	 * Diese Methode gibt den aktuellen Kontostand zurueck.
 	 * Zur Auswertung werden alle Transaktionen verwendet.
 	 * @return
 	 */
@@ -474,6 +523,23 @@ public class Administration {
 	}
 
 	/**
+	 * Private Hilfmethode fuer rehearsalFinancials(Date, Date), gigFinancials(Date, Date) und financials(Date, Date)
+	 */
+
+	private int eventFinancials(Date from, Date until, ArrayList<Event> events) {
+		int budget = 0;
+
+		for (Event e : events) {
+
+			if (e.getDate().after(from) && e.getDate().before(until) ) {
+
+				budget += e.getFinances();
+			}
+		}
+		return budget;
+	}
+
+	/**
 	 * Vorbedingung: Vorbedingung von getRehearsal(Date, Date) muessen gegeben sein
 	 * Liefert eine Bilanz aus Summe der Einnahmen und  Ausgaben im Zeitfenster zwischen from und until
 	 * Uebergibt an die ueberladene Methode zusaetzlich den String "Both", was bedeutet, dass beides, Proben und Auftritte ausgewaehlt werden. 
@@ -484,16 +550,8 @@ public class Administration {
 	public int rehearsalFinancials(Date from, Date until) {
 
 		ArrayList<Event> tmpList = getRehearsals(from, until);
-		int budget = 0;
 
-		for (Event e : tmpList) {
-
-			if (e.getDate().after(from) && e.getDate().before(until) ) {
-
-				budget += e.getFinances();
-			}
-		}
-		return budget;
+		return eventFinancials(from, until, tmpList);
 	}
 
 	/**
@@ -505,19 +563,12 @@ public class Administration {
 	public int gigFinancials(Date from, Date until) {
 
 		ArrayList<Event> tmpList = getGigs(from, until);
-		int budget = 0;
 
-		for (Event e : tmpList) {
-
-			if (e.getDate().after(from) && e.getDate().before(until) ) {
-
-				budget += e.getFinances();
-			}
-		}
-		return budget;
+		return eventFinancials(from, until, tmpList);
 	}
 
 	/**
+	 * GUT: Hier wird dynamisches Binden zum berechnen der Finanzen verwendet.
 	 * Vorbedingung: eventuelle Vorbedingungen von getEvents(Date, Date) muessen geben sein
 	 * Ueberladene Methode
 	 * Liefert eine Bilanz im Zeitfenster zwischen from und untilaben.
@@ -529,17 +580,8 @@ public class Administration {
 	public int financials(Date from, Date until) {
 
 		ArrayList<Event> tmpList = getEvents(from, until);
-		int budget = 0;
 
-		for (Event e : tmpList) {
-
-			if (e.getDate().after(from) && e.getDate().before(until) ) {
-
-				budget += e.getFinances();
-			}
-		}
-
-		return budget;
+		return eventFinancials(from, until, tmpList);
 	}
 
 	/**
@@ -548,7 +590,6 @@ public class Administration {
 	 * Methode liefert alle Transaktionen zurueck die einen Wert ungleich 0 besitzen
 	 * @return
 	 */
-
 	public ArrayList<Transaction> getTransactions() {
 
 		ArrayList<Transaction> output = new ArrayList<Transaction>();
@@ -561,7 +602,7 @@ public class Administration {
 
 		return output;
 	}
-
+	
 	private ArrayList<Event> extractSpecialEvents(ArrayList<Event> events, Class<? extends Event> c) {
 
 		ArrayList<Event> output = new ArrayList<Event>();
@@ -575,43 +616,49 @@ public class Administration {
 		}
 		return output;
 	}
-
-	public Event getEvent(String place, Date date) {
-
-		Iterator<Event> iterator = events.iterator();
-		Event output = null;
-		boolean found = false;
-
-		while (iterator.hasNext() && !found ) {
-
-			output = iterator.next();
-
-			if (output.isEqualEvent(place, date)) {
-
-				found = true;
-			}
-		}
-
-		if (!found) {
-
-			output = null;
-		}
-
-		return output;
-	}
+	
+	/**
+	 * Vorbedingung:
+	 * @param g		not null
+	 * 
+	 * Nachbedingung:
+	 * g wurde gespeichert
+	 */
 	public void addGigLocation(GigLocation g){
+		
 		gigLocations.add(g);
-
 	}
 
+	/**
+	 * Vorbedingung:
+	 * @param r		not null
+	 * 
+	 * Nachbedingung:
+	 * r wurde gespeichert
+	 */
 	public void addRehearsalLocation(RehearsalLocation r){
+		
 		rehearsalLocations.add(r);
-
 	}
+	
+	/**
+	 * Nachbedingung:
+	 * @return alle gespeicherten RehearsalLocations
+	 */
 	public ArrayList<RehearsalLocation> getRehearsalLocation(){
+		
 		return rehearsalLocations;
 	}
-	//0<district<24  size>0   stageSize>0  distanceToCenter>0
+	
+	/**
+	 * Vorbedingungen:
+	 * @param district			0 < district < 24
+	 * @param size				0 < stageSize < size
+	 * @param stageSize			0 < stageSize < size
+	 * @param distanceToCenter	> 0
+	 * Nachbedingung:
+	 * @return alle gespeicherten RehearsalLocations die in ihren Werten mit den Eingabeparametern uebereinstimmen
+	 */
 	public ArrayList<RehearsalLocation> getRehearsalLocation(int district ,int size, int stageSize, int distanceToCenter, String wallColor){
 
 		ArrayList<RehearsalLocation> output = new ArrayList<RehearsalLocation>();
@@ -624,11 +671,25 @@ public class Administration {
 		}
 		return output;
 	}
+	
+	/**
+	 * Nachbedingung:
+	 * @return alle gespeicherten GigLocations
+	 */
 	public ArrayList<GigLocation> getGigLocation(){
 
 		return gigLocations;
 	}
-	//0<district<24  size>0   stageSize>0  distanceToCenter>0
+	
+	/**
+	 * Vorbedingungen:
+	 * @param district			0 < district < 24
+	 * @param size				0 < stageSize < size
+	 * @param stageSize			0 < stageSize < size
+	 * @param seatings			> 0
+	 * Nachbedingung:
+	 * @return alle gespeicherten GigLocations die in ihren Werten mit den Eingabeparametern uebereinstimmen
+	 */
 	public ArrayList<GigLocation> getGigLocation(int district ,int size, int stageSize, int seatings){
 
 		ArrayList<GigLocation> output = new ArrayList<GigLocation>();

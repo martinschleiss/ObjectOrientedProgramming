@@ -10,12 +10,20 @@ import java.util.Date;
 public class PostponeEventRequest extends Request{
 
 	private Event event;
+	
+	/**
+	 * Invariante: newDate ist ein Datum in der Zukunft, der Termin kann nicht in die Vergangenheit verschoben werden.
+	 */
 	private Date newDate;
 
 	/**
-	 * Invariante:
-	 * @param newDate	ist ein Datum in der Zukunft
-	 * ANMERKUNG: sonst wuerde ein Event an einen Zeitpunkt in der Vergangenheit verschoben
+	 * Vorbedingungen:
+	 * @param admin		not null
+	 * @param event		not null
+	 * @param newDate	not null, muss Datum in der Zukunft sein
+	 * 
+	 * Nachbedingungen:
+	 * Instanz wurde korrekt initialisiert
 	 */
 	public PostponeEventRequest(Administration admin, Event event, Date newDate) {
 		

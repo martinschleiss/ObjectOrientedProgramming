@@ -12,18 +12,13 @@ public class GigLocation extends Location{
 		super(district, size, stageSize);
 		this.setSeatings(seatings);
 	}
-
 	public int getSeatings() {
 		return seatings;
-	}
-	public int undefined(){
-		return 0;
 	}
 	//seatings>0
 	public void setSeatings(int seatings) {
 		this.seatings = seatings;
 	}
-	
 	public String toString() {
 		
 		return super.toString() + ", Seatings: " + seatings;

@@ -7,8 +7,16 @@
 
 public class CancelEventRequest extends Request{
 
-	Event event;
+	private Event event;
 
+	/**
+	 * Vorbedingungen:
+	 * @param admin		not null
+	 * @param event		not null
+	 *
+	 * Nachbedingungen:
+	 * Instanz wurde korrekt initialisiert
+	 */
 	public CancelEventRequest(Administration admin, Event event) {
 		
 		super(admin, "Absage von: " + event + " wegen Terminkollision");
@@ -23,8 +31,9 @@ public class CancelEventRequest extends Request{
 	public boolean execute() {
 
 		if (super.checkConfirmations()) {
+			
+			super.getAdministration().deleteEvent(event);
 
-			super.getAdmin().deleteEvent(event);
 			return true;
 			
 		} else {

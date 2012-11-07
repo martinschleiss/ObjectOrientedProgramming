@@ -3,7 +3,7 @@ import java.util.HashMap;
 
 /**
  * @author Rafael
- * @version 1.1
+ * @version 1.2
  */
 public abstract class Request {
 
@@ -13,8 +13,7 @@ public abstract class Request {
 
 	/**
 	 * Vorbedingungen:
-	 * @param admin				Administration, die dieses Objekt erstellt hat
-	 * @param information		wird von der Unterklasse praezisiert
+	 * @param admin				not null
 	 * Nachbedingungen:			Alles notwendige initialisiert.
 	 */
 	public Request(Administration admin, String information) {
@@ -24,29 +23,59 @@ public abstract class Request {
 		members = new HashMap<Member,Data>();
 	}
 
+	/**
+	 * #############################################################################################
+	 * Innere Klasse zur gekapselten Speicherung von Zusage und Nachricht eines Mitglieds zu einem Request
+	 */
 	private class Data {
-		
-		private Boolean confirmation;
+
+		private boolean confirmation;
 		private String message;
-		
+
+		/**
+		 * Nachbedingung: confirmation ist false
+		 */
+		public Data() {
+
+			confirmation = false;
+		}
+
+		/**
+		 * Vorbedingung: b ist true wenn Zusage und false wenn Absage
+		 * Nachbedingung: b ist gespeichert
+		 */
 		public void setConfirmation(Boolean b) {
-			
+
 			this.confirmation = b;
 		}
-		
+
+		/**
+		 * Nachbedingung: s ist gespeichert
+		 */
 		public void setMessage(String s) {
-			
+
 			this.message = s;
 		}
+		
+		/**
+		 * Nachbedingung: Rueckgabe entspricht gespeichertem Wert in confirmation
+		 */
 		public Boolean getConfirmation() {
-			
+
 			return confirmation;
 		}
+		
+		/**
+		 * Nachbedingung: Rueckgabe entspricht gespeichertem Wert in message
+		 */
 		public String getMessage() {
-			
+
 			return message;
 		}
 	}
+	/**
+	 * #############################################################################################
+	 */
 
 	/**
 	 * Vorbedingungen: 		ArrayList members im Objekt admin enthaelt alle Members, die man informieren moechte.
@@ -67,9 +96,8 @@ public abstract class Request {
 
 	/**
 	 * Vorbedingungen: 
-	 * @param m		Mitglied das geantwortet hat
+	 * @param m		not null
 	 * @param b		Zusage: true, Absage: false
-	 * @param answer	Textnachricht
 	 * 
 	 * Nachbedingungen: Zu- oder Absage des Mitglieds und seine Antwort sind gespeichert
 	 */
@@ -81,11 +109,12 @@ public abstract class Request {
 
 	/**
 	 * zu implementieren: Ausfuehren der Methode bewirkt z.B. Anlegen, Loeschen oder Verschieben von Events.
+	 * 
 	 * Vorbedingungen:	Die Methode broadcast(String furtherinfo) wurde bereits aufgerufen.
 	 * 					Zwischen informieren der Mitglieder mit der Methode broadcast(String furtherinfo) und Aufruf von execute()
 	 * 					ist genug Zeit vergangen, in der die Mitglieder abstimmen konnten.
-	 * 
-	 * @return	true wenn alle Mitglieder positiv abgestimmt haben und daher der Request ausgefuehrt wurde und false wenn nicht.
+	 * Nachbedingungen: retouriert true wenn alle Mitglieder positiv abgestimmt haben 
+	 * 					und daher der Request ausgefuehrt wurde und false wenn nicht.
 	 */
 	public abstract boolean execute();
 
@@ -100,25 +129,25 @@ public abstract class Request {
 
 		boolean output = true;
 
-		if ( currentConfirmations.size() == members.size() ) {
+		for (Member m : members.keySet()) {
 
-			for (Member m : currentConfirmations.keySet()) {
+			output = output && members.get(m).getConfirmation();
+		} 
 
-				output = output && currentConfirmations.get(m);
-			}
-
-			return output;
-
-		} else {
-
-			return false;
-		}	
+		return output;
 	}
-	protected Administration getAdmin() {
+	
+	/**
+	 * Nachbedingung: Retourniert gespeicherte Administration in Instanzvariable admin
+	 */
+	protected Administration getAdministration() {
 
 		return admin;
 	}
 
+	/**
+	 * Nachbedingung: Retourniert String-Repraesentation des Objekts
+	 */
 	public String toString() {
 
 		String output = information + "\n";

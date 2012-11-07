@@ -8,6 +8,14 @@ public class GigRequest extends Request {
 
 	private Gig gig;
 
+	/**
+	 * Vorbedingungen:
+	 * @param admin		not null
+	 * @param gig		not null
+	 * 
+	 * Nachbedingungen:
+	 * Instanz wurde korrekt initialisiert
+	 */
 	public GigRequest(Administration admin, Gig gig) {
 		
 		super(admin, "Auftrittsanfrage am: " + gig.getDate());
@@ -22,8 +30,9 @@ public class GigRequest extends Request {
 	public boolean execute() {
 
 		if (super.checkConfirmations()) {
-
-			super.getAdmin().addEvent(gig);
+			
+			super.getAdministration().addEvent(gig);
+			
 			return true;
 			
 		} else {

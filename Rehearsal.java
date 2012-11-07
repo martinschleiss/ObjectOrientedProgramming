@@ -19,15 +19,19 @@ public class Rehearsal extends Event {
 	/**
 	 * Nachbedingung: 
 	 * 			Liefert die aktuellst gesetzte Miete als negativen Wert
-	 *SCHLECHT: Cast auf int statt double als Rueckgabewert
+	 *SCHLECHT: Cast auf int statt Waehrungseinheit als Rueckgabewert
 	 */
 	public int getFinances() {
 		
-		return -(int)ta.get(ta.size()-1).getValue();
+		return -(int)getCorrespondingTransaction().getValue();
 	}
 	
+	/**
+	 * Nachbedingung:
+	 * 		Liefert eine String-Repraesentation der Instanz
+	 */
 	public String toString() {
 		
-		return "Probe: " + super.toString() + ", Rent: " + ta.get(ta.size()-1) + "Euro";
+		return "Probe: " + super.toString() + ", Rent: " + getCorrespondingTransaction() + "Euro";
 	}
 }

@@ -16,7 +16,7 @@ public class Test {
 
 		ArrayList<Event> events;
 		ArrayList<Member> members;
-		ArrayList<Song> songs;
+	
 		ArrayList<RehearsalLocation> rehearsalLocations;
 		ArrayList<GigLocation> gigLocations;
 		Administration a = new Administration();
@@ -27,9 +27,9 @@ public class Test {
 		Member earl = new Member("Ron Burgundy", new Date());
 		Member gretchen = new Member("Gretchen S.", new Date());
 
-		a.addMember(fred);
-		a.addMember(earl);
-		a.addMember(gretchen);
+		a.addMember(fred,StringToDate("13.11.2011 um 19:00"));
+		a.addMember(earl,StringToDate("13.11.2011 um 19:00"));
+		a.addMember(gretchen,StringToDate("13.11.2011 um 19:00"));
 
 		System.out.println("Es wurden 3 Mitglieder hinzugefuegt.");
 		System.out.println("\n#######################################\n");
@@ -47,14 +47,12 @@ public class Test {
 		Rehearsal r1 = new Rehearsal("Proberaum", StringToDate("10.10.2012 um 19:00"), 180, new Expense(20) );
 		Rehearsal r2 = new Rehearsal("Proberaum", StringToDate("12.10.2012 um 19:00"), 180, new Expense(20) );
 		Rehearsal r3 = new Rehearsal("Proberaum", StringToDate("15.10.2012 um 19:00"), 180, new Expense(20) );
-		Rehearsal r4 = new Rehearsal("Proberaum", StringToDate("01.11.2012 um 19:00"), 180, new Expense(20) );
-
+		
 		Gig g1 = new Gig("Reigen", StringToDate("13.10.2012 um 19:00"), 180, new Income(120) );
 		Gig g2 = new Gig("Porgy", StringToDate("14.10.2012 um 19:00"), 60, new Income(200) );
 		Gig g3 = new Gig("Reigen", StringToDate("14.11.2012 um 18:00"), 180, new Income(120) );
 		Gig g4 = new Gig("Soulveranda", StringToDate("14.11.2012 um 20:00"), 60, new Income(0) );
-		Gig g5 = new Gig("Soulveranda", StringToDate("17.11.2012 um 20:00"), 60, new Income(120) );
-
+		
 		a.addEvent(r1);
 		a.addEvent(r2);
 		a.addEvent(r3);
@@ -238,7 +236,48 @@ public class Test {
 			System.out.println(l);
 		}
 		System.out.println("\n############# Ende Test2 --> positives Ergebniss!! #############\n");
+		
+		System.out.println("\n############# Test9: 6 Songs esrtellen und ausgeben aktueller Songs, und Songs zu einem bestimmten Zeipunkt #############\n");
+	
+		Song s1=new Song("Song1", 240, StringToDate("03.11.2012 um 19:00"));
+		Song s2=new Song("Song2", 160, StringToDate("14.10.2012 um 19:00"));
+		Song s3=new Song("Song3", 150,StringToDate("13.09.2012 um 19:00"));
+		Song s4=new Song("Song4", 300, StringToDate("03.08.2012 um 19:00"));
+		Song s5=new Song("Song5", 260,StringToDate("15.08.2012 um 19:00"));
+		Song s6=new Song("Song6", 210, StringToDate("23.07.2012 um 19:00"));
+		
+		a.addSong(s1);
+		a.addSong(s2);
+		a.addSong(s3);
+		a.addSong(s4);
+		a.addSong(s5);
+		a.addSong(s6);
+		
+		ArrayList<Song> sl1=new ArrayList<Song>();
+		sl1=a.getCurrentSongs();
+		System.out.println("Ausgabe CurrentSongs");
+		for (Song s : sl1) {
+			System.out.println(s);
+		}
+		
+		
+		ArrayList<Song> sl=new ArrayList<Song>();
+		sl=a.getSongs(StringToDate("16.08.2012 um 19:00"));
+		System.out.println("\nAusgabe Songs am 16.08.2012 um 19:00 -> erwartet: s4,s5,s6\n");
+		for (Song s : sl) {
+			System.out.println(s);
+		}
+	
+	
 	}
+	
+	
+	
+	
+	
+	
+	
+	
 
 	/**
 	 * Vorbedingung: 
