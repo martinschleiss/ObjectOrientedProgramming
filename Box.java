@@ -56,7 +56,9 @@ public class Box implements Pict {
 					
 					output += new String(contentLine);
 				}
-			output += "\n";
+			if(h < printHeight - 1) {
+				output += "\n";
+			}
 		}		
 		return output;
 	}
