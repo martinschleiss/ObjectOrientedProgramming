@@ -32,29 +32,17 @@ public class Test {
 		boxbox.add(d1);
 		boxbox.add(d2);
 		
-		FreeBox f1 = new FreeBox("apfel\nkuche\nnschm\nechtf\nantas\ntisch");
-		Repeated<Character> f2 = new FreeBox("abcd\nefgh\nijkm\nlnop\nqrst\nuvwx");		//FreeBox ist Untertyp von Repeated<Character>
-		
 		Repeated<Box> r = new Repeated<Box>(boxbox, 3, 2);
+		Scaled<Box> s = new Scaled<Box>(b1);
 		
-	
-			
-			/**
-			Box b12= new Box(6,6, '.','�');
-			Box b22= new Box(6,6, '.','�');
-			Box b32= new Box(4,4, '.','�');
-			ArrayList<Box> box=new ArrayList<Box>();
-			box.add(b12);
-			box.add(b22);
-			box.add(b32);
-			box.add(b12);
-			box.add(b22);
-			box.add(b32);
-			
+		Repeated<Character> f1 = new FreeBox("apfel\nkuche\nnschm\nechtf\nantas\ntisch");	//FreeBox ist Untertyp von Repeated<Character>
+		Repeated<Character> f2 = new FreeBox("abcd\nefgh\nijkm\nlnop\nqrst\nuvwx");	
 		
-			Repeated<Box> rp= new Repeated<Box>(box,3,2);
-			System.out.println(rp.toString());
-			**/
+		Scaled<Repeated<Character>> boo = new Scaled<Repeated<Character>>(f1);
+		Scaled<Scaled<Box>> woo = new Scaled<Scaled<Box>>(s);		//	
+		
+		
+
 			
 		} catch	(IllegalArgumentException e) {
 		
