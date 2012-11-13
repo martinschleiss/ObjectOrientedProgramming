@@ -1,7 +1,7 @@
 import java.util.Arrays;
 
 public class Box implements Pict {
-	
+
 	private double width;
 	private double height;
 	private final char content;
@@ -25,6 +25,15 @@ public class Box implements Pict {
 		height *= factor;
 		
 	}
+	
+	protected double getHeight() {
+		return this.height;
+	}
+	
+	protected double getWidth() {
+		return this.width;
+	}
+	
 	public String toString() {
 		
 		String output = "";
@@ -51,4 +60,5 @@ public class Box implements Pict {
 		}		
 		return output;
 	}
+	
 }
