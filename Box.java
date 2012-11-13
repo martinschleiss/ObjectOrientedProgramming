@@ -10,7 +10,7 @@ public class Box implements Pict {
 	public Box(double width, double height, char content, char frame) throws IllegalArgumentException{
 		
 		if (frame == ' ') {
-			throw new IllegalArgumentException("Kein Leerzeichen erlaubt fuer Rahmen");
+			throw new IllegalArgumentException("Kein Leerzeichen als Rahmen erlaubt");
 		}
 		
 		this.width = width;
@@ -19,6 +19,9 @@ public class Box implements Pict {
 		this.frame = frame;
 	}
 	
+	/**
+	 * 0.1 <= factor <= 10.0; resize the picture	
+	 */
 	public void scale (double factor) {
 		
 		width *= factor;
@@ -34,6 +37,9 @@ public class Box implements Pict {
 		return this.width;
 	}
 	
+	/**
+	 * returns the picture as String
+	 */
 	public String toString() {
 		
 		String output = "";
@@ -60,5 +66,4 @@ public class Box implements Pict {
 		}		
 		return output;
 	}
-	
 }

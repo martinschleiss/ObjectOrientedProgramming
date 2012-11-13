@@ -4,10 +4,24 @@ public class Test {
 	
 	public static void main(String[] args) {
 		
+		
+		/**
+		 * Typbeziehungen:
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 */
+		
+		
+		
 		System.out.println("Hello Test");
 		
 		Box b = null;
 		FreeBox f = null;
+		ClearBox c = null;
+		DarkBox d = null;
 		
 		try {
 			
@@ -15,14 +29,18 @@ public class Test {
 			System.out.println(b);
 			
 			f = new FreeBox("apfel\nkuche\nnschm\nechtf\nantas\ntisch");
+			c = new ClearBox(5,4);
+			d = new DarkBox(4,5,'#');
+			System.out.println(c);
 			System.out.println(f);
 			f.scale(.5);
 			System.out.println(f);
+			System.out.println(d);
 			f.scale(4);
 			System.out.println(f);
-			Box b1= new Box(6.0,6.0, '.','Ü');
-			Box b2= new Box(6.0,6.0, '.','Ö');
-			Box b3= new Box(4.0,4.0, '.','Ä');
+			Box b1= new Box(6.0,6.0, '.','ï¿½');
+			Box b2= new Box(6.0,6.0, '.','ï¿½');
+			Box b3= new Box(4.0,4.0, '.','ï¿½');
 			ArrayList<Box> box=new ArrayList<Box>();
 			box.add(b1);
 			box.add(b2);
