@@ -1,54 +1,52 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
-public class FreeBox implements Pict {
-
-	private String content;
-	private final int width;
-	private final int height;
-	private double printHeight;
-	private double printWidth;
-
+public class FreeBox extends Repeated<Character> {
+	
 	public FreeBox(String s) {
 		
-		Scanner scan = new Scanner(s);
-		content = scan.nextLine();
-		printWidth = content.length();
-		printHeight = 1;
+		super(getBlackBoxesOfString(s), (int)getHeightOfContent(s), (int)getWidthOfContent(s));
 		
-		while (scan.hasNextLine()) {
-
-			content += scan.nextLine();
-			printHeight++;
-		}
-		
-		height = (int) printHeight;
-		width = (int) printWidth;
 	}
-
-	/**
-	 * Beim skalieren aendern sich nur die printDimensionen, die urspruenglichen
-	 * Dimensionen bleiben erhalten.
-	 */
-	public void scale (double factor) {
-		printHeight *= factor;
-		printWidth *= factor;
-	}
-
-	public String toString() {
-
-		String output = "";
-		int printHeight = (int) Math.round(this.printHeight + .49);
-		int printWidth = (int) Math.round(this.printWidth + .49); 
-		
-		for (int h = 0; h < printHeight; h++) {
 	
-			for (int w = 0; w < printWidth; w++) {
-				
-				output += content.charAt((h % height)*width+(w % width));
+	private static double getHeightOfContent(String s) {
+		Scanner scan = new Scanner(s);
+		String current = scan.nextLine();
+		double h = 0;
+		ArrayList<DarkBox> darkBoxes = new ArrayList<DarkBox>(); 
+		while (scan.hasNextLine()) {
+			for (int i = 0; i < current.length(); i++){
+			    char c = current.charAt(i);        
+			    DarkBox b = new DarkBox(1, 1, c);
+			    darkBoxes.add(b);
 			}
-			output += "\n";
+			current += scan.nextLine();
+			h++;
 		}
 		
-		return output;
+		return h;
+	}
+	
+	private static double getWidthOfContent(String s) {
+		Scanner scan = new Scanner(s);
+		String current = scan.nextLine();
+
+		return current.length();
+	}
+	
+	
+	private static ArrayList<Character> getBlackBoxesOfString(String s) {
+		Scanner scan = new Scanner(s);
+		String current = scan.nextLine();
+		ArrayList<Character> characters = new ArrayList<Character>(); 
+		while (scan.hasNextLine()) {
+			for (int i = 0; i < current.length(); i++){
+			    char c = current.charAt(i);        
+			    characters.add(new Character(c));
+			}
+			current = scan.nextLine();
+		}
+		
+		return characters;
 	}
 }
