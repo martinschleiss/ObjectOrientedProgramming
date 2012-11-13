@@ -2,7 +2,7 @@ public class ClearBox extends Box {
 	
 	private double ratio;
 	
-	public ClearBox(double width, double height) {
+	public ClearBox(int width, int height) {
 		
 		super(width, height, ' ', '*');
 		

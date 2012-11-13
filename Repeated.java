@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 
 public class Repeated<P>{
 
@@ -6,7 +7,16 @@ public class Repeated<P>{
 	private int width;
 	private int height;
 
-	public Repeated(ArrayList<P> list, int height, int width){
+	/**
+	 * (height*width) == list.size();
+	 */
+	public Repeated(ArrayList<P> list, int height, int width) throws InputMismatchException {
+		
+		if ( height*width != list.size() ) {
+			
+			throw new InputMismatchException("Groesse stimmt nicht mit Anzahl der Elemente ueberein");
+		}
+		
 		this.height=height;
 		this.width=width;
 

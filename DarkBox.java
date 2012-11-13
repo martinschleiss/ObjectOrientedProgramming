@@ -4,7 +4,7 @@ public class DarkBox extends Box {
 
 	private char color;
 
-	public DarkBox(double width, double height, char color) {
+	public DarkBox(int width, int height, char color) {
 
 		super(width, height, color, color);
 

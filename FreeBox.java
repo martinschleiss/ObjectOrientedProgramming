@@ -5,13 +5,13 @@ public class FreeBox extends Repeated<Character> {
 	
 	public FreeBox(String s) {
 		
-		super(getCharacterArray(s), (int)getHeightOfContent(s), (int)getWidthOfContent(s));
+		super(getCharacterArray(s), getHeightOfContent(s), getWidthOfContent(s));
 		
 	}
 	
-	private static double getHeightOfContent(String s) {
+	private static int getHeightOfContent(String s) {
 		Scanner scan = new Scanner(s);
-		double h = 0;
+		int h = 0;
 		while (scan.hasNextLine()) {
 			
 			scan.nextLine();
@@ -21,7 +21,7 @@ public class FreeBox extends Repeated<Character> {
 		return h;
 	}
 	
-	private static double getWidthOfContent(String s) {
+	private static int getWidthOfContent(String s) {
 		Scanner scan = new Scanner(s);
 		String current = scan.nextLine();
 

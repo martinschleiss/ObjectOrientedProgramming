@@ -7,7 +7,7 @@ public class Box implements Pict {
 	private final char content;
 	private final char frame;
 	
-	public Box(double width, double height, char content, char frame) throws IllegalArgumentException{
+	public Box(int width, int height, char content, char frame) throws IllegalArgumentException{
 		
 		if (frame == ' ') {
 			throw new IllegalArgumentException("Kein Leerzeichen als Rahmen erlaubt");
