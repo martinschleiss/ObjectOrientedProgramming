@@ -4,11 +4,11 @@ import java.util.Scanner;;
 
 public class Scaled<T extends Pict> implements Pict {
 	
-	private int height;
-	private int width;
+	private int height;	// > 0
+	private int width;		// > 0
 	private ArrayList<? extends Pict> list;
-	private int boxWidth;
-	private int boxHeight;
+	private int boxWidth;	// > 0
+	private int boxHeight;	// > 0
 	
 	public Scaled(ArrayList<? extends Pict> list, int height, int width) throws InputMismatchException {
 		
@@ -62,6 +62,7 @@ public class Scaled<T extends Pict> implements Pict {
 		return maximum;
 	}
 	
+	// 0.1 <= factor <= 10.0; resize the picture
 	public void scale(double factor) {
 		
 		for(Pict elem : list) {
@@ -98,6 +99,7 @@ public class Scaled<T extends Pict> implements Pict {
 	/**
      * returns the picture as String
 	 */
+//TODO: ich glaub die ganz letzte zeile wird nicht ausgegeben. da fehlte bei den tests immer der rahmen der box
 	public String toString() {
 		String s = "";
 		
@@ -108,10 +110,10 @@ public class Scaled<T extends Pict> implements Pict {
 				for(int bh = 0; bh < boxHeight; bh++ ) {
 					
 					for(int box = 0; box < width; box++) {
-						System.out.print(getStringForPictAtLine(list.get(box + h), bh));
+						s+= getStringForPictAtLine(list.get(box + h), bh);
 					}		
 					if(!(h == height - 1 && w == width - 1 && bh == boxHeight -1 )) {
-						System.out.print("\n");
+						s+="\n";
 					}
 				}				
 			}			

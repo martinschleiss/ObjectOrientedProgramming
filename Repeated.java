@@ -4,15 +4,15 @@ import java.util.Scanner;
 
 public class Repeated<P> implements Pict{
 
-	private	ArrayList<?> list;
-	private int width;
-	private int height;
-	private double scaleFactor = 1;
-	private int boxHeight;
-	private int boxWidth;
+	private ArrayList<P> list;
+	private int width;		// > 0
+	private int height;	// > 0
+	private double scaleFactor = 1; // > 0
+	private int boxHeight;	// > 0
+	private int boxWidth;	// > 0
 
 	/**
-	 * (height*width) == list.size();
+	 * (height*width) == list.size()
 	 */
 	public Repeated(ArrayList<P> list, int height, int width) throws InputMismatchException {
 		
@@ -28,6 +28,7 @@ public class Repeated<P> implements Pict{
 		this.boxWidth = getMaximumBoxWidth(this.list);
 	}
 	
+    // 0.1 <= factor <= 10.0; resize the picture
 	public void scale(double factor) {
 		this.scaleFactor *= factor;
 	}
@@ -95,6 +96,13 @@ public class Repeated<P> implements Pict{
 		return value;
 	}
 	
+    // returns the picture as String
+	
+	
+	//TODO Methode funktioniert noch nicht fuer Freebox, liefert ewig lange wurst, zeilen werden wiederholt ausgegeben.
+	//und liefert boxes doppelt untereinander
+	
+	
 	public String toString() {
 		String s = "";
 		
@@ -105,10 +113,10 @@ public class Repeated<P> implements Pict{
 				for(int bh = 0; bh < boxHeight; bh++ ) {
 					
 					for(int box = 0; box < width * scaleFactor; box++) {
-						System.out.print(getStringForPictAtLine(list.get(box % width + h % height), bh));
+						s += getStringForPictAtLine(list.get(box % width + h % height), bh);
 					}		
 					if(!(h == height - 1 && w == width - 1 && bh == boxHeight -1 )) {
-						System.out.print("\n");
+						s+= "\n";
 					}
 				}				
 			}			
@@ -116,7 +124,7 @@ public class Repeated<P> implements Pict{
 		
 		return s;
 	}
-
+//TODO: Loeschen, wenn nicht mehr gebraucht.
 	/*
 	private String help(){
 
