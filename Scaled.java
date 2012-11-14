@@ -105,6 +105,7 @@ public class Scaled<T extends Pict> implements Pict {
 	/**
 	 * returns the picture as String
 	 */
+//TODO: ich glaub die ganz letzte zeile wird nicht ausgegeben. da fehlte bei den tests immer der rahmen der box
 	public String toString() {
 		String s = "";
 
@@ -115,6 +116,7 @@ public class Scaled<T extends Pict> implements Pict {
 				for(int box = 0; box < width; box++) {
 					s += getStringForPictAtLine(list.get(h * width + box), bh);
 					if(box == width - 1) {
+						
 						s += "\n";
 					}
 				}

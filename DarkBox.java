@@ -1,48 +1,49 @@
 import java.util.Arrays;
 
-public class DarkBox extends Box {
+public class DarkBox implements Pict {
 
-	private char color;
+	private double width;		//Invariante: > 0
+	private double height;		//Invariante: > 0
+	private char content;
 
-	public DarkBox(int width, int height, char color) {
+	public DarkBox(int width, int height, char content) throws IllegalArgumentException{
 
-		super(width, height, color, color);
-
-		this.color = color;
-	}
-
-	/**
-	 * Die Farbe (das Zeichen) ist veraenderbar
-	 * @param c		kein Leerzeichen
-	 */
-	public void setColor(char c) throws IllegalArgumentException{
-
-		if (c == ' ') {
-
+		if (content == ' ') {
 			throw new IllegalArgumentException("Kein Leerzeichen als Inhalt erlaubt");
 		}
 
-		this.color = c;
+		this.width = width;
+		this.height = height;
+		this.content = content;
 	}
+
 	/**
-	 * returns the picture as String 
+	 * 0.1 <= factor <= 10.0; resize the picture	
+	 */
+	public void scale (double factor) {
+
+		width *= factor;
+		height *= factor;
+
+	}
+
+	/**
+	 * returns the picture as String
 	 */
 	public String toString() {
 
 		String output = "";
-		int printWidth = (int) Math.round(getWidth() + 0.49);
-		int printHeight = (int) Math.round(getHeight() + 0.49);
-		char[] printLine = new char [printWidth];
-
-		printLine[0] = printLine[printWidth-1] = color;
-		Arrays.fill(printLine, 1, (printWidth-1), color);
+		int printWidth = (int) Math.round(this.width + 0.5);
+		int printHeight = (int) Math.round(this.height + 0.5);
+		char[] contentLine = new char [printWidth];
+		Arrays.fill(contentLine, content);
 
 		for (int h = 0; h < printHeight; h++) {
 
-			output += new String(printLine) + "\n";
-
+				output += new String(contentLine);
+				
+				if (h < printHeight -1 ) output += "\n";
 		}		
 		return output;
 	}
-
 }

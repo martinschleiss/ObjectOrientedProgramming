@@ -4,15 +4,15 @@ import java.util.Scanner;
 
 public class Repeated<P> implements Pict{
 
-	private	ArrayList<?> list;
-	private int width;
-	private int height;
-	private double scaleFactor = 1;
-	private int boxHeight;
-	private int boxWidth;
+	private ArrayList<P> list;
+	private int width;		// > 0
+	private int height;	// > 0
+	private double scaleFactor = 1; // > 0
+	private int boxHeight;	// > 0
+	private int boxWidth;	// > 0
 
 	/**
-	 * (height*width) == list.size();
+	 * (height*width) == list.size()
 	 */
 	public Repeated(ArrayList<P> list, int height, int width) throws InputMismatchException {
 
@@ -97,7 +97,12 @@ public class Repeated<P> implements Pict{
 
 		return value;
 	}
-
+	
+    // returns the picture as String
+	
+	
+	//TODO Methode funktioniert noch nicht fuer Freebox, liefert ewig lange wurst, zeilen werden wiederholt ausgegeben.
+	//und liefert boxes doppelt untereinander
 	public String toString() {
 		String s = "";
 
@@ -106,9 +111,13 @@ public class Repeated<P> implements Pict{
 			for(int bh = 0; bh < boxHeight ; bh++ ) {
 
 				for(int box = 0; box < width * scaleFactor; box++) {
+					
 					s += getStringForPictAtLine(list.get(h % height * width + box % width), bh);
+					
 					if(box == width * scaleFactor - 1) {
+
 						s += "\n";
+
 					}
 				}		
 

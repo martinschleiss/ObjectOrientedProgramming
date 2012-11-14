@@ -6,7 +6,7 @@ public class FreeBox extends Repeated<Character> {
 	public FreeBox(String s) {
 		
 		super(getCharacterArray(s), getHeightOfContent(s), getWidthOfContent(s));
-		
+		System.out.println(getHeightOfContent(s) + " + " + getWidthOfContent(s));
 	}
 	
 	private static int getHeightOfContent(String s) {
@@ -36,7 +36,7 @@ public class FreeBox extends Repeated<Character> {
 		while (scan.hasNextLine()) {
 			current = scan.nextLine();
 			for (int i = 0; i < current.length(); i++){
-			    char c = current.charAt(i);        
+			    char c = current.charAt(i);
 			    characters.add(new Character(c));
 			}
 		}
