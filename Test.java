@@ -8,7 +8,7 @@ public class Test {
 	/**
 	 * Typbeziehungen: Anmerkungen
 	 * Repeated<ClearBox> und Repeated<DarkBox> sind Untertypen von Repeated<Box>, zumindest theoretisch ersetzbar, in Java nicht moeglich. 
-	 * Scaled<> kann durch beliebig geschachteltes Scaled<Scaled<P>> ersetzt werden
+	 * P in Scaled<P> oder Repeated<P> kann durch beliebig geschachteltes Scaled<Scaled<P>> oder analog bei Repeated ersetzt werden
 	 * 
 	 * 
 	 * 
