@@ -62,11 +62,11 @@ public class Test {
 		
 		universal.add(rpt);
     	universal.add(box11);
-		universal.add(f1);
-		universal.add(s);
+		//universal.add(f1);
+		//universal.add(s);
 		
 		System.out.println("Erzeuge Scaled<Pict> aus allen vorigen Strukturen...");
-		Scaled<Pict> all = new Scaled<Pict>(universal,2,2);
+		Scaled<Pict> all = new Scaled<Pict>(universal,2,1);
 		
 		System.out.println(all);
 		System.out.println("Skaliere um Faktor 1.5 ...");
