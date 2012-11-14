@@ -237,8 +237,31 @@ public class Test {
 		System.out.println("---------------------------------------------------\n");
 		System.out.println("Untebeziehungstests:\n\n");
 		
+		System.out.println("ClearBox anstelle von Box:");
 		
-			
+		Box b1 = new ClearBox(6,3);
+		System.out.println(b1);
+		double r = 0;
+		if(b1 instanceof ClearBox) {
+			r = ((ClearBox)b1).getRatio();	
+		}
+		System.out.println("Seitenverhaeltnis (0 falls keine ClearBox): " + r);
+		
+		System.out.println("\n---------------------------------------------------\n");
+		
+		System.out.println("FreeBox anstelle von Repeated<Character>:");
+		
+		String testreap = "oooooo\no****o\no****o\no****o\no****o\noooooo";
+		Repeated<Character> repeated1 = new FreeBox(testreap);
+		
+		System.out.println("Ausgabe via Repeated<Character>:");
+		System.out.println(repeated1);
+		
+		if(repeated1 instanceof FreeBox) {
+			System.out.println("Ausgabe via FreeBox:");
+			System.out.println(((FreeBox)repeated1).toString());
+		}
+		
 		} catch	(IllegalArgumentException e) {
 		
 			System.err.println(e.getMessage());

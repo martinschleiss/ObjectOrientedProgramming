@@ -99,10 +99,6 @@ public class Repeated<P> implements Pict{
 	}
 	
     // returns the picture as String
-	
-	
-	//TODO Methode funktioniert noch nicht fuer Freebox, liefert ewig lange wurst, zeilen werden wiederholt ausgegeben.
-	//und liefert boxes doppelt untereinander
 	public String toString() {
 		String s = "";
 
