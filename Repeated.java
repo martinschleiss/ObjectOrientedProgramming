@@ -28,6 +28,9 @@ public class Repeated<P> implements Pict{
 		this.boxWidth = getMaximumBoxWidth(this.list);
 	}
 	
+	/**
+	 * 0.1 <= factor <= 10.0; resize the picture	
+	 */
 	public void scale(double factor) {
 		this.scaleFactor *= factor;
 	}
@@ -105,10 +108,10 @@ public class Repeated<P> implements Pict{
 				for(int bh = 0; bh < boxHeight; bh++ ) {
 					
 					for(int box = 0; box < width * scaleFactor; box++) {
-						System.out.print(getStringForPictAtLine(list.get(box % width + h % height), bh));
+						s += getStringForPictAtLine(list.get(box % width + h % height), bh);
 					}		
 					if(!(h == height - 1 && w == width - 1 && bh == boxHeight -1 )) {
-						System.out.print("\n");
+						s += "\n";
 					}
 				}				
 			}			
@@ -116,90 +119,4 @@ public class Repeated<P> implements Pict{
 		
 		return s;
 	}
-
-	/*
-	private String help(){
-
-		String aus;
-		int h=0;
-		int b=1;
-
-		for(int t=0;t<height;t++){
-			for(int u=0;u<width;u++){
-				aus=array[t][u].toString();
-				int z=aus.indexOf("\n");
-				int r=aus.lastIndexOf("\n");
-				if(z>b){
-					b=z;
-				}
-				if(r>h){
-					h=r;
-				}
-			}
-		}
-		h=h/b;
-		String [] subString= new String[h];
-		for(int q=0;q<h;q++){
-			subString[q]="";
-		}
-		String ausgabe="";
-		int help=0;
-		for(int t=0;t<height;t++){
-			for(int u=0;u<width;u++){
-				String objOut=array[t][u].toString();
-				int z=objOut.indexOf("\n");
-				int h1=objOut.lastIndexOf("\n");
-				h1=h1/z;
-				if(h1>=h){
-					for(int r=0;r<h;r++){
-						if(z<b){
-							subString[r] +=objOut.substring(help,z+help )+" ";
-							int safe=z;
-							for(;safe<b;safe++){
-								subString[r] +="-";
-							}
-							help=help+z+1;
-						}else{
-							subString[r] +=objOut.substring(help,b+help )+" ";
-							help=help+1+b;
-						}
-					}
-					help=0;
-				}else{
-					for(int r=0;r<h1;r++){
-						if(z<b){
-							subString[r] +=objOut.substring(help,z+help )+" ";
-							int safe=z;
-							for(;safe<b;safe++){
-								subString[r] +="-";
-							}
-							help=help+z+1;
-						}else{
-							subString[r] +=objOut.substring(help,b+help )+" ";
-							help=help+1+b;
-						}
-					}
-					help=0;
-					for(;h1<h;h1++){
-						for(int l=0;l<b+1;l++){
-							subString[h1] +="-";
-						}
-					}
-				}
-			}
-			for(int w=0;w<h;w++){
-
-				ausgabe += subString[w]+"\n";
-			}
-			for(int q=0;q<h;q++){
-				subString[q]="";
-			}
-		}
-		return ausgabe;
-	}
-
-	public String toString(){
-		String ausgabe="";
-		
-	}*/
 }

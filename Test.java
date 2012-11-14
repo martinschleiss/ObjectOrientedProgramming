@@ -57,7 +57,28 @@ public class Test {
 		all.scale(1.5);
 		System.out.println(all);
 		
+		System.out.println("\n---------------------------------------------------\n");
+		
+		System.out.println("Teste Box:");
+		
+		Box box1 = new Box(6, 6, '*', 'o');
+		System.out.println("Box 1 unskaliert:");
+		System.out.println(box1 + "\n");
+		
+		box1.scale(4);
+		System.out.println("Box 1 skaliert um den Faktor 4:");
+		System.out.println(box1 + "\n");
 
+		box1 = new Box(6, 6, '*', 'o');
+		box1.scale(0.5);
+		System.out.println("Box 1 skaliert um den Faktor 0.5:");
+		System.out.println(box1 + "\n");
+		
+		box1 = new Box(6, 6, '*', 'o');
+		box1.scale(0.5);
+		box1.scale(4);
+		System.out.println("Box 1 skaliert um die Faktoren 0.5 und 4:");
+		System.out.println(box1 + "\n");
 			
 		} catch	(IllegalArgumentException e) {
 		
