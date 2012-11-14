@@ -25,7 +25,7 @@ public class Test {
 		try {	
 		
 		/**
-		 * ########################### Tests von Rafael #################################
+		 * ############################################################
 		 */
 		ArrayList<Pict> universal = new ArrayList<Pict>();
 		ArrayList<BaseBox> baseboxbox = new ArrayList<BaseBox>();
@@ -74,11 +74,9 @@ public class Test {
 		System.out.println(all);
 		
 		/**
-		 * ########################### Ende der Tests von Rafael #################################
+		 * ############################################################
 		 */
-		/**
-		 * ########################### Tests von Martin #################################
-		 */
+
 		System.out.println("\n---------------------------------------------------");
 		System.out.println("---------------------------------------------------\n");
 		System.out.println("Funktionale Tests:\n\n");
