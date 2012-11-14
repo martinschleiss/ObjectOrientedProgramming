@@ -15,29 +15,29 @@ public class Repeated<P> implements Pict{
 	 * (height*width) == list.size();
 	 */
 	public Repeated(ArrayList<P> list, int height, int width) throws InputMismatchException {
-		
+
 		if ( height*width != list.size() ) {
-			
+
 			throw new InputMismatchException("Groesse stimmt nicht mit Anzahl der Elemente ueberein");
 		}
-		
+
 		this.height = height;
 		this.width = width;
 		this.list = list;
 		this.boxHeight = getMaximumBoxHeight(this.list);
 		this.boxWidth = getMaximumBoxWidth(this.list);
 	}
-	
+
 	/**
 	 * 0.1 <= factor <= 10.0; resize the picture	
 	 */
 	public void scale(double factor) {
 		this.scaleFactor *= factor;
 	}
-	
+
 	private int getMaximumBoxHeight(ArrayList<?> l) {
 		int maximum = 0;
-		
+
 		for(Object elem : l) {
 			int temp = 0;
 			String s = elem.toString();
@@ -46,18 +46,18 @@ public class Repeated<P> implements Pict{
 				scan.nextLine();
 				temp++;
 			}
-			
+
 			if(temp > maximum) {
 				maximum = temp;
 			}
 		}
-		
+
 		return maximum;
 	}
-	
+
 	private int getMaximumBoxWidth(ArrayList<?> l) {
 		int maximum = 0;
-		
+
 		for(Object elem : l) {
 			String s = elem.toString();
 			Scanner scan = new Scanner(s);
@@ -69,10 +69,10 @@ public class Repeated<P> implements Pict{
 				}
 			}			
 		}
-		
+
 		return maximum;
 	}
-	
+
 	private String getStringForPictAtLine(Object p, int line) {
 		String value = "";
 		Scanner scan = new Scanner (p.toString());
@@ -84,7 +84,7 @@ public class Repeated<P> implements Pict{
 			}
 			count++;
 		}
-		
+
 		if(value.equals("")) {
 			for(int i = 0; i < boxWidth; i++) {
 				value += " ";
@@ -94,29 +94,27 @@ public class Repeated<P> implements Pict{
 				value += " ";
 			}
 		}
-		
+
 		return value;
 	}
-	
+
 	public String toString() {
 		String s = "";
-		
+
 		for(int h = 0; h < height * scaleFactor; h++) {		
-			
-			for(int w = 0; w < width * scaleFactor; w++) {	
-				
-				for(int bh = 0; bh < boxHeight; bh++ ) {
-					
-					for(int box = 0; box < width * scaleFactor; box++) {
-						s += getStringForPictAtLine(list.get(box % width + h % height), bh);
-					}		
-					if(!(h == height - 1 && w == width - 1 && bh == boxHeight -1 )) {
+
+			for(int bh = 0; bh < boxHeight ; bh++ ) {
+
+				for(int box = 0; box < width * scaleFactor; box++) {
+					s += getStringForPictAtLine(list.get(h % height * width + box % width), bh);
+					if(box == width * scaleFactor - 1) {
 						s += "\n";
 					}
-				}				
-			}			
+				}		
+
+			}							
 		}
-		
+
 		return s;
 	}
 }
