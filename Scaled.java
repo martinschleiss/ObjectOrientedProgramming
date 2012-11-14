@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;;
 
 public class Scaled<T extends Pict> implements Pict {
@@ -10,6 +11,13 @@ public class Scaled<T extends Pict> implements Pict {
 	private int boxHeight;
 	
 	public Scaled(ArrayList<? extends Pict> list, int height, int width) {
+		
+		if ( height*width != list.size() ) {
+			
+			throw new InputMismatchException("Groesse stimmt nicht mit Anzahl der Elemente ueberein");
+		}
+		
+		
 		this.height = height;
 		this.width = width;
 		this.list = list;
@@ -97,8 +105,8 @@ public class Scaled<T extends Pict> implements Pict {
 				
 				for(int bh = 0; bh < boxHeight; bh++ ) {
 					
-					for(int box = 0; box < boxWidth; box++) {
-						System.out.print(getStringForPictAtLine(list.get(box), bh));
+					for(int box = 0; box < width; box++) {
+						System.out.print(getStringForPictAtLine(list.get(box + h), bh));
 					}		
 					if(!(h == height - 1 && w == width - 1 && bh == boxHeight -1 )) {
 						System.out.print("\n");
