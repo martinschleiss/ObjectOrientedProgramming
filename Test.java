@@ -58,7 +58,7 @@ public class Test {
 		filler.add(f1);
 		filler.add(f2);
 		System.out.println("Erzeuge Scaled<Repeated<Character>> aus den vorigen FreeBoxes...");
-		Scaled<Repeated<Character>> s = new Scaled<Repeated<Character>>(filler,2,1);
+		//Scaled<Repeated<Character>> s = new Scaled<Repeated<Character>>(filler,2,1);
 		
 		universal.add(rpt);
     	universal.add(box11);
