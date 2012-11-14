@@ -11,8 +11,8 @@ public class Test {
 	 * ClearBox ist Untertyp von Box
 	 * DarkBox ist kein Untertyp von Box, da Box sicherstellen muss, dass sich die Eingabezeichen nicht aendern, in DarkBox sind diese aber veraenderbar
 	 * Box kann kein Untertyp von Repeated sein, da die Ausgabe von skalierten Instanzen nach unterschiedlichen Methoden erfolgt.
-	 * FreeBox ist Untertyp von Repeated<Character>y
-	 * Repeated<P> fuer unbekannte P ...
+	 * FreeBox ist Untertyp von Repeated<Character>, die Zusicherungen wuerden es auch umgekehrt erlauben (ergibt aber wenig Sinn)
+	 * Repeated<P> fuer unbekannte P: 
 	 * Repeated<P> wenn P Untertyp von Pict...
 	 * Repeated<Character> ist Obertyp ...
 	 * Repeated<ClearBox> und Repeated<DarkBox> sind Untertypen von Repeated<Box>, zumindest theoretisch ersetzbar, in Java nicht moeglich. 

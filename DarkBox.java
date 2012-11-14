@@ -1,42 +1,30 @@
 import java.util.Arrays;
 
-public class DarkBox implements Pict {
+public class DarkBox extends BaseBox {
 
-	private double width;		//Invariante: > 0
-	private double height;		//Invariante: > 0
-	private char content;
+	private char color;
 
 	public DarkBox(int width, int height, char content) throws IllegalArgumentException{
 
-		if (content == ' ') {
-			throw new IllegalArgumentException("Kein Leerzeichen als Inhalt erlaubt");
-		}
+		super(width, height, content, content);
 
-		this.width = width;
-		this.height = height;
-		this.content = content;
+		this.color = content;
 	}
 
-	/**
-	 * 0.1 <= factor <= 10.0; resize the picture	
-	 */
-	public void scale (double factor) {
-
-		width *= factor;
-		height *= factor;
-
+	public void setColor(char c) {
+		
+		this.color = c;
 	}
-
 	/**
 	 * returns the picture as String
 	 */
 	public String toString() {
 
 		String output = "";
-		int printWidth = (int) Math.round(this.width + 0.5);
-		int printHeight = (int) Math.round(this.height + 0.5);
+		int printWidth = (int) Math.round(super.getWidth() + 0.5);
+		int printHeight = (int) Math.round(super.getHeight() + 0.5);
 		char[] contentLine = new char [printWidth];
-		Arrays.fill(contentLine, content);
+		Arrays.fill(contentLine, color);
 
 		for (int h = 0; h < printHeight; h++) {
 
