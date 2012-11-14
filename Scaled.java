@@ -22,6 +22,7 @@ public class Scaled<T extends Pict> implements Pict {
 		this.list = list;
 		this.boxHeight = getMaximumBoxHeight(list);
 		this.boxWidth = getMaximumBoxWidth(list);
+		
 	}
 
 	private int getMaximumBoxHeight(ArrayList<? extends Pict> l) {
@@ -70,6 +71,9 @@ public class Scaled<T extends Pict> implements Pict {
 		for(Pict elem : list) {
 			elem.scale(factor);
 		}
+		
+		this.boxHeight = getMaximumBoxHeight(list);
+		this.boxWidth = getMaximumBoxWidth(list);
 
 	}
 
