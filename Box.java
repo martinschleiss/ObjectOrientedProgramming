@@ -2,8 +2,8 @@ import java.util.Arrays;
 
 public class Box implements Pict {
 
-	private double width;
-	private double height;
+	private double width;		//Invariante: > 0
+	private double height;		//Invariante: > 0
 	private final char content;
 	private final char frame;
 	

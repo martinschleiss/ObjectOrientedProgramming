@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Repeated<P>{
+public class Repeated<P> implements Pict{
 
 	private	P[][] array;
 	private int width;

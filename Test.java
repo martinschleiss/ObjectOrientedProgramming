@@ -9,24 +9,12 @@ public class Test {
 	 * Typbeziehungen: Anmerkungen
 	 * Repeated<ClearBox> und Repeated<DarkBox> sind Untertypen von Repeated<Box>, zumindest theoretisch ersetzbar, in Java nicht moeglich. 
 	 * Scaled<> kann durch beliebig geschachteltes Scaled<Scaled<P>> ersetzt werden
-	 * FreeBox kann nicht Untertyp von Box sein, da
 	 * 
 	 * 
 	 * 
 	 */
 		
-		try {
-			
-		ArrayList<String> a = new ArrayList<String>();
-		a.add("Hallo");
-		a.add("Was");
-		a.add("Geht");
-		a.add("ab");
-		
-		Repeated<String> arrr = new Repeated<String>(a,2,2);
-		
-		System.out.println(arrr);
-		
+		try {	
 		
 		ArrayList<Pict> universal = new ArrayList<Pict>();
 		
@@ -45,20 +33,29 @@ public class Test {
 		boxbox.add(c2);
 		boxbox.add(d1);
 		boxbox.add(d2);
-		
+				
 		Repeated<Box> r = new Repeated<Box>(boxbox, 3, 2);
-		Scaled<Box> s = new Scaled<Box>(boxbox, 2, 3);
 		
-		
-		
-		
+		universal.add(r);
+		universal.add(b1);
+
+		ArrayList<Repeated<Character>> filler = new ArrayList<Repeated<Character>>();
 		Repeated<Character> f1 = new FreeBox("apfel\nkuche\nnschm\nechtf\nantas\ntisch");	//FreeBox ist Untertyp von Repeated<Character>
 		Repeated<Character> f2 = new FreeBox("abcd\nefgh\nijkm\nlnop\nqrst\nuvwx");
-		//Repeated<Box> f3 = new Repeated<Box>();
 		
-		//Scaled<Repeated<Character>> boo = new Scaled<Repeated<Character>>(f1);
-		//Scaled<Scaled<Box>> woo = new Scaled<Scaled<Box>>(s);		//	
+		filler.add(f1);
+		filler.add(f2);
+		universal.add(f1);
 		
+		Scaled<Repeated<Character>> s = new Scaled<Repeated<Character>>(filler,2,1);
+		
+		universal.add(s);
+		
+		Scaled<Pict> all = new Scaled<Pict>(universal,2,2);
+		
+		System.out.println(all);
+		all.scale(1.5);
+		System.out.println(all);
 		
 
 			
