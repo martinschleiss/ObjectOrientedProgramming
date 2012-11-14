@@ -178,7 +178,7 @@ public class Test {
 		list.add(test4);
 		
 		Scaled<Box> scale1 = new Scaled<Box>(list, 2, 2);
-		System.out.println("FreeBox 1 unskaliert:");
+		System.out.println("Scaled 1 unskaliert:");
 		System.out.println(fbox1 + "\n");
 		
 		scale1.scale(4);
