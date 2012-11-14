@@ -57,7 +57,9 @@ public class Test {
 		all.scale(1.5);
 		System.out.println(all);
 		
-		System.out.println("\n---------------------------------------------------\n");
+		System.out.println("\n---------------------------------------------------");
+		System.out.println("---------------------------------------------------\n");
+		System.out.println("Funktionale Tests:\n\n");
 		
 		System.out.println("Teste Box:");
 		
@@ -182,6 +184,12 @@ public class Test {
 		scale1.scale(4);
 		System.out.println("Scaled 1 skaliert um die Faktoren 0.5 und 4:");
 		System.out.println(scale1 + "\n");
+		
+		System.out.println("\n---------------------------------------------------");
+		System.out.println("---------------------------------------------------\n");
+		System.out.println("Untebeziehungstests:\n\n");
+		
+		
 			
 		} catch	(IllegalArgumentException e) {
 		
