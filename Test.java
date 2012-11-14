@@ -235,7 +235,15 @@ public class Test {
 		System.out.println("---------------------------------------------------\n");
 		System.out.println("Untebeziehungstests:\n\n");
 		
+		System.out.println("ClearBox anstelle von Box:");
 		
+		Box b1 = new ClearBox(6,3);
+		System.out.println(b1);
+		double r = 0;
+		if(b1 instanceof ClearBox) {
+			r = ((ClearBox)b1).getRatio();	
+		}
+		System.out.println("Seitenverhaeltnis (0 falls keine ClearBox): " + r);
 			
 		} catch	(IllegalArgumentException e) {
 		
