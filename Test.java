@@ -76,7 +76,9 @@ public class Test {
 		/**
 		 * ########################### Ende der Tests von Rafael #################################
 		 */
-		
+		/**
+		 * ########################### Tests von Martin #################################
+		 */
 		System.out.println("\n---------------------------------------------------");
 		System.out.println("---------------------------------------------------\n");
 		System.out.println("Funktionale Tests:\n\n");
@@ -267,6 +269,58 @@ public class Test {
 			System.out.println("Ausgabe via FreeBox:");
 			System.out.println(((FreeBox)repeated1).toString());
 		}
+		
+		System.out.println("Ausgabe via Repeated<Character>:");
+		System.out.println(repeated1);
+		
+		if(repeated1 instanceof FreeBox) {
+			System.out.println("Ausgabe via FreeBox:");
+			System.out.println(((FreeBox)repeated1).toString());
+		}
+		
+
+		System.out.println("\n---------------------------------------------------\n");
+		
+		System.out.println("Scale<Pict> mit einem Box, einem ClearBox, einem DarkBox und einem Repeated Objekt:");
+		
+		Box test9 = new Box(4, 4, '*', 'o');
+		ClearBox test10 = new ClearBox(6, 6);
+		DarkBox test11= new DarkBox(6, 6, 'd');
+		
+		Box test12_0 = new Box(6, 6, 'r', 'R');
+		Box test12_1 = new Box(6, 6, 'r', 'R');
+		Box test12_2 = new Box(6, 6, 'r', 'R');
+		Box test12_3 = new Box(6, 6, 'r', 'R');
+		ArrayList<Box> list3_0 = new ArrayList<Box>();
+		list3_0.add(test12_0);
+		list3_0.add(test12_1);
+		list3_0.add(test12_2);
+		list3_0.add(test12_3);		
+		Repeated<Box> test12 = new Repeated<Box>(list3_0, 2, 2);
+		ArrayList<Pict> list3 = new ArrayList<Pict>();
+		list3.add(test9);
+		list3.add(test10);
+		list3.add(test11);
+		list3.add(test12);
+		
+		Scaled<Pict> scale2 = new Scaled<Pict>(list3, 2, 2);
+		System.out.println("Scaled 2 unskaliert:");
+		System.out.println(scale2 + "\n");
+		
+		scale1.scale(4);
+		System.out.println("Scaled 2 skaliert um den Faktor 4:");
+		System.out.println(scale2 + "\n");
+
+		scale2 = new Scaled<Pict>(list3, 2, 2);
+		scale2.scale(0.5);
+		System.out.println("Scaled 2 skaliert um den Faktor 0.5:");
+		System.out.println(scale2 + "\n");
+		
+		scale2 = new Scaled<Pict>(list3, 2, 2);
+		scale2.scale(0.5);
+		scale2.scale(4);
+		System.out.println("Scaled 2 skaliert um die Faktoren 0.5 und 4:");
+		System.out.println(scale2 + "\n");
 		
 		} catch	(IllegalArgumentException e) {
 		

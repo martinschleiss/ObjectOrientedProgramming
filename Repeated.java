@@ -85,7 +85,12 @@ public class Repeated<P> implements Pict{
 			count++;
 		}
 
-		if(value.equals("")) {
+		if(line > count) {
+			value = "";
+			for(int i = 0; i < boxWidth; i++) {
+				value += " ";
+			}			
+		} else if(value.equals("")) {
 			for(int i = 0; i < boxWidth; i++) {
 				value += " ";
 			}
