@@ -21,7 +21,7 @@ public class Test {
 	 */
 		//TODO auskommentierte zeilen wieder lauffaehig machen...
 		try {	
-		
+		/*
 		ArrayList<Pict> universal = new ArrayList<Pict>();
 		
 		ArrayList<Box> boxbox = new ArrayList<Box>();
@@ -68,7 +68,7 @@ public class Test {
 		System.out.println(all);
 		all.scale(1.5);
 		System.out.println(all);
-		
+		*/
 		System.out.println("\n---------------------------------------------------");
 		System.out.println("---------------------------------------------------\n");
 		System.out.println("Funktionale Tests:\n\n");
@@ -197,6 +197,39 @@ public class Test {
 		scale1.scale(4);
 		System.out.println("Scaled 1 skaliert um die Faktoren 0.5 und 4:");
 		System.out.println(scale1 + "\n");
+		
+		System.out.println("\n---------------------------------------------------\n");
+		
+		System.out.println("Teste Repeated:");
+		
+		Box test5 = new Box(6, 6, '*', 'o');
+		Box test6 = new Box(6, 6, '*', 'o');
+		Box test7 = new Box(6, 6, '*', 'o');
+		Box test8 = new Box(6, 6, '*', 'o');
+		ArrayList<Box> list2 = new ArrayList<Box>();
+		list2.add(test5);
+		list2.add(test6);
+		list2.add(test7);
+		list2.add(test8);
+		
+		Repeated<Box> reap1 = new Repeated<Box>(list2, 2, 2);
+		System.out.println("Repeated 1 unskaliert:");
+		System.out.println(reap1 + "\n");
+		
+		reap1.scale(4);
+		System.out.println("Repeated 1 skaliert um den Faktor 4:");
+		System.out.println(reap1 + "\n");
+
+		reap1 = new Repeated<Box>(list2, 2, 2);
+		reap1.scale(0.5);
+		System.out.println("Repeated 1 skaliert um den Faktor 0.5:");
+		System.out.println(reap1 + "\n");
+		
+		reap1 = new Repeated<Box>(list2, 2, 2);
+		reap1.scale(0.5);
+		reap1.scale(4);
+		System.out.println("Repeated 1 skaliert um die Faktoren 0.5 und 4:");
+		System.out.println(reap1 + "\n");
 		
 		System.out.println("\n---------------------------------------------------");
 		System.out.println("---------------------------------------------------\n");
