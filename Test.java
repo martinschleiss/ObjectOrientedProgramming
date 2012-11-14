@@ -35,10 +35,10 @@ public class Test {
 		
 		boxbox.add(b1);
 		boxbox.add(b2);
-		//boxbox.add(c1);
-		//boxbox.add(c2);
-		//boxbox.add(d1);
-		//boxbox.add(d2);
+		boxbox.add(c1);
+		boxbox.add(c2);
+		boxbox.add(d1);
+		boxbox.add(d2);
 		
 		System.out.println("Erzeuge Repeated<Box> mit erstellten Boxes...");
 		
@@ -48,8 +48,8 @@ public class Test {
 		System.out.println("Skaliere um Faktor 1.5...");
 		System.out.println("\n" + r);
 		
-		//universal.add(r);
-/*		universal.add(b1);
+		universal.add(r);
+    	universal.add(b1);
 
 		ArrayList<Repeated<Character>> filler = new ArrayList<Repeated<Character>>();
 		Repeated<Character> f1 = new FreeBox("apfel\nkuche\nnschm\nechtf\nantas\ntisch");	//FreeBox ist Untertyp von Repeated<Character>
@@ -57,17 +57,17 @@ public class Test {
 		
 		filler.add(f1);
 		filler.add(f2);
-		//universal.add(f1);
+		universal.add(f1);
 		
 		Scaled<Repeated<Character>> s = new Scaled<Repeated<Character>>(filler,2,1);
 		
-		//universal.add(s);
+		universal.add(s);
 		
 		Scaled<Pict> all = new Scaled<Pict>(universal,1,1);
 		
-		//System.out.println(all);
+		System.out.println(all);
 		all.scale(1.5);
-		//System.out.println(all);
+		System.out.println(all);
 		
 		System.out.println("\n---------------------------------------------------");
 		System.out.println("---------------------------------------------------\n");
@@ -93,7 +93,7 @@ public class Test {
 		box1.scale(4);
 		System.out.println("Box 1 skaliert um die Faktoren 0.5 und 4:");
 
-		System.out.println(box1 + "\n");*/
+		System.out.println(box1 + "\n");
 		
 		System.out.println("\n---------------------------------------------------\n");
 		
