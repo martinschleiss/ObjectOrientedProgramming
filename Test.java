@@ -33,14 +33,16 @@ public class Test {
 		boxbox.add(d2);
 		
 		Repeated<Box> r = new Repeated<Box>(boxbox, 3, 2);
-		Scaled<Box> s = new Scaled<Box>(b1);
+		Scaled<Box> s = new Scaled<Box>(boxbox, 3, 2);
 		
+		System.out.println(s);
+		System.out.println("bam");
 		Repeated<Character> f1 = new FreeBox("apfel\nkuche\nnschm\nechtf\nantas\ntisch");	//FreeBox ist Untertyp von Repeated<Character>
 		Repeated<Character> f2 = new FreeBox("abcd\nefgh\nijkm\nlnop\nqrst\nuvwx");	
-		
+		/*
 		Scaled<Repeated<Character>> boo = new Scaled<Repeated<Character>>(f1);
 		Scaled<Scaled<Box>> woo = new Scaled<Scaled<Box>>(s);		//	
-		
+		*/
 		
 
 			
