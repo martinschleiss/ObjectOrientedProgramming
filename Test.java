@@ -10,8 +10,8 @@ public class Test {
 	 * 
 	 * ClearBox ist Untertyp von Box
 	 * DarkBox ist kein Untertyp von Box, da Box sicherstellen muss, dass sich die Eingabezeichen nicht aendern, in DarkBox sind diese aber veraenderbar
-	 * Eine eigene Basisklasse fuer Boxes war in Ueberlegung
 	 * Box kann kein Untertyp von Repeated sein, da die Ausgabe von skalierten Instanzen nach unterschiedlichen Methoden erfolgt.
+	 * FreeBox ist Untertyp von Repeated<Character>y
 	 * Repeated<P> fuer unbekannte P ...
 	 * Repeated<P> wenn P Untertyp von Pict...
 	 * Repeated<Character> ist Obertyp ...
@@ -19,7 +19,7 @@ public class Test {
 	 * P in Scaled<P> oder Repeated<P> kann durch beliebig geschachteltes Scaled<Scaled<P>> oder analog bei Repeated ersetzt werden.
 	 * P in Scaled<P> wobei P Untertyp von Box ist...
 	 */
-		//TODO auskommentierte zeilen wieder lauffaehig machen...
+		
 		try {	
 		
 		ArrayList<Pict> universal = new ArrayList<Pict>();
