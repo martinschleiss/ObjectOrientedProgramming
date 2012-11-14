@@ -32,7 +32,7 @@ public class Box extends BaseBox {
 
 			if ( h == 0 || h == (printHeight-1) ) {
 
-				output += new String(frameLine) + "\n";
+				output += new String(frameLine);
 				
 				if ( h == 0) output += "\n";
 
