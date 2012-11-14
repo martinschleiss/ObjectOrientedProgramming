@@ -4,11 +4,12 @@ import java.util.Scanner;
 
 public class Repeated<P> implements Pict{
 
-	private	P[][] array;
+	private	ArrayList<?> list;
 	private int width;
 	private int height;
-	private String picture;
-	private boolean check; 
+	private double scaleFactor = 1;
+	private int boxHeight;
+	private int boxWidth;
 
 	/**
 	 * (height*width) == list.size();
@@ -20,73 +21,105 @@ public class Repeated<P> implements Pict{
 			throw new InputMismatchException("Groesse stimmt nicht mit Anzahl der Elemente ueberein");
 		}
 		
-		this.height=height;
-		this.width=width;
-		this.check=false;
-
-		array=(P[][]) new Object[height][width]; 
-		int counter=0;
-		for(int t=0;t<height;t++){
-			for(int u=0;u<width;u++){
-				array[t][u]=list.get(counter);
-				counter ++;
-
-			}
-		}
+		this.height = height;
+		this.width = width;
+		this.list = list;
+		this.boxHeight = getMaximumBoxHeight(this.list);
+		this.boxWidth = getMaximumBoxWidth(this.list);
 	}
-
-	public void scale(double factor){
-
-
-		Scanner scan = new Scanner(createPicture());
-		String content = scan.nextLine();
-		content =content +"\n";
-		double br = content.length();
-		double hei=1;
-		while (scan.hasNextLine()) {
-			content += scan.nextLine()+"\n";
-			hei++;
-		}
-		int h=(int)hei;
-		Scanner scan1 = new Scanner(createPicture());
-		String [] ar=new String[h];
-		int i=0;
-		while (scan1.hasNextLine()) {
-			ar[i]=scan1.nextLine();
-			i++;
-		}
-		int height=(int) hei;
-		int width=(int)br;
-		String output="";
-		br *=factor;
-		hei *=factor;
-		int prH = (int) Math.round(hei + .49);
-		int prW = (int) Math.round(br + .49);
-		if(factor>1){
-			for(int k=0;k<h;k++){
-				String zw=ar[k];
-				ar[k] +=zw.substring(0,prW-width-1);
-			}
-			for(int k=0;k<h;k++){
-				output +=ar[k]+"\n";
-			}
-			for(int k=0;k<(prH-height);k++){
-				output +=ar[k]+"\n";
-			}
-		}else if(factor<1){
-			for(int k=0;k<h;k++){
-				String zw=ar[k];
-				ar[k] =zw.substring(0,prW-1);
-			}
-			for(int k=0;k<prH+2;k++){
-				output +=ar[k]+"\n";
-			}
-		}
-		picture=output;
-		check=true;
+	
+	public void scale(double factor) {
+		this.scaleFactor *= factor;
+	}
+	
+	private int getMaximumBoxHeight(ArrayList<?> l) {
+		int maximum = 0;
 		
+		for(Object elem : l) {
+			int temp = 0;
+			String s = elem.toString();
+			Scanner scan = new Scanner(s);
+			while(scan.hasNext()) {
+				scan.nextLine();
+				temp++;
+			}
+			
+			if(temp > maximum) {
+				maximum = temp;
+			}
+		}
+		
+		return maximum;
 	}
-	private String createPicture(){
+	
+	private int getMaximumBoxWidth(ArrayList<?> l) {
+		int maximum = 0;
+		
+		for(Object elem : l) {
+			String s = elem.toString();
+			Scanner scan = new Scanner(s);
+			String current = "";
+			while(scan.hasNext()) {
+				current = scan.nextLine();
+				if(current.length() > maximum) {
+					maximum = current.length();
+				}
+			}			
+		}
+		
+		return maximum;
+	}
+	
+	private String getStringForPictAtLine(Object p, int line) {
+		String value = "";
+		Scanner scan = new Scanner (p.toString());
+		int count = 0;
+		while(scan.hasNext()) {
+			value = scan.nextLine();
+			if(line == count) {
+				break;
+			}
+			count++;
+		}
+		
+		if(value.equals("")) {
+			for(int i = 0; i < boxWidth; i++) {
+				value += " ";
+			}
+		} else {
+			while(value.length() < boxWidth) {
+				value += " ";
+			}
+		}
+		
+		return value;
+	}
+	
+	public String toString() {
+		String s = "";
+		
+		for(int h = 0; h < height * scaleFactor; h++) {		
+			
+			for(int w = 0; w < width * scaleFactor; w++) {	
+				
+				for(int bh = 0; bh < boxHeight; bh++ ) {
+					
+					for(int box = 0; box < width * scaleFactor; box++) {
+						System.out.print(getStringForPictAtLine(list.get(box % width + h % height), bh));
+					}		
+					if(!(h == height - 1 && w == width - 1 && bh == boxHeight -1 )) {
+						System.out.print("\n");
+					}
+				}				
+			}			
+		}
+		
+		return s;
+	}
+
+	/*
+	private String help(){
+
 		String aus;
 		int h=0;
 		int b=1;
@@ -168,13 +201,5 @@ public class Repeated<P> implements Pict{
 	public String toString(){
 		String ausgabe="";
 		
-		if(check){
-			ausgabe=picture;
-		}else{
-			ausgabe=createPicture();
-		}
-		
-		return ausgabe;
-
-	}
+	}*/
 }
