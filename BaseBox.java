@@ -13,10 +13,17 @@ public abstract class BaseBox implements Pict {
 			this.height = height;
 		}
 		
+		/**
+		 * @return Breite > 0
+		 */
 		protected double getWidth() {
 			
 			return width;
 		}
+		
+		/**
+		 * @return Hoehe > 0
+		 */
 		protected double getHeight() {
 			
 			return height;
@@ -29,7 +36,6 @@ public abstract class BaseBox implements Pict {
 
 			width *= factor;
 			height *= factor;
-
 		}
 
 		/**

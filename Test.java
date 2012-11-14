@@ -8,16 +8,18 @@ public class Test {
 	/**
 	 * Typbeziehungen: Anmerkungen
 	 * 
+	 * BaseBox ist Untertyp von Pict
+	 * Box und DarkBox sind Untertypen von Basebox
 	 * ClearBox ist Untertyp von Box
 	 * DarkBox ist kein Untertyp von Box, da Box sicherstellen muss, dass sich die Eingabezeichen nicht aendern, in DarkBox sind diese aber veraenderbar
 	 * Box kann kein Untertyp von Repeated sein, da die Ausgabe von skalierten Instanzen nach unterschiedlichen Methoden erfolgt.
 	 * FreeBox ist Untertyp von Repeated<Character>, die Zusicherungen wuerden es auch umgekehrt erlauben (ergibt aber wenig Sinn)
-	 * Repeated<P> fuer unbekannte P: 
-	 * Repeated<P> wenn P Untertyp von Pict...
-	 * Repeated<Character> ist Obertyp ...
+	 * Repeated<P> fuer unbekannte P: ist Obertyp von Repeated<U> wenn U Untertyp von P ist
+	 * Repeated<P> wenn P Untertyp von Pict ist Untertyp von Repeated<Pict> zumindest theoretisch ersetzbar, in Java nicht moeglich. 
 	 * Repeated<ClearBox> und Repeated<DarkBox> sind Untertypen von Repeated<Box>, zumindest theoretisch ersetzbar, in Java nicht moeglich. 
-	 * P in Scaled<P> oder Repeated<P> kann durch beliebig geschachteltes Scaled<Scaled<P>> oder analog bei Repeated ersetzt werden.
-	 * P in Scaled<P> wobei P Untertyp von Box ist...
+	 * P in Scaled<P> kann durch geschachteltes Scaled<Scaled<P>> ersetzt werden
+	 * P in Repeated<P> kann geschachtelt werden, wenn P Untertyp von Pict 
+	 * P in Scaled<P> wobei P Untertyp von Box ist: Scaled<P> Untertyp von Scaled<BaseBox>
 	 */
 		
 		try {	
