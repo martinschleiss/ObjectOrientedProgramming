@@ -62,7 +62,10 @@ public class Scaled<T extends Pict> implements Pict {
 		return maximum;
 	}
 	
-	// 0.1 <= factor <= 10.0; resize the picture
+
+	/**
+	 * 0.1 <= factor <= 10.0; resize the picture	
+	 */
 	public void scale(double factor) {
 		
 		for(Pict elem : list) {
@@ -110,10 +113,11 @@ public class Scaled<T extends Pict> implements Pict {
 				for(int bh = 0; bh < boxHeight; bh++ ) {
 					
 					for(int box = 0; box < width; box++) {
-						s+= getStringForPictAtLine(list.get(box + h), bh);
+
+						s += getStringForPictAtLine(list.get(box + h), bh);
 					}		
 					if(!(h == height - 1 && w == width - 1 && bh == boxHeight -1 )) {
-						s+="\n";
+						s += "\n";
 					}
 				}				
 			}			

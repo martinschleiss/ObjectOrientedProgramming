@@ -28,7 +28,9 @@ public class Repeated<P> implements Pict{
 		this.boxWidth = getMaximumBoxWidth(this.list);
 	}
 	
-    // 0.1 <= factor <= 10.0; resize the picture
+	/**
+	 * 0.1 <= factor <= 10.0; resize the picture	
+	 */
 	public void scale(double factor) {
 		this.scaleFactor *= factor;
 	}
@@ -116,7 +118,11 @@ public class Repeated<P> implements Pict{
 						s += getStringForPictAtLine(list.get(box % width + h % height), bh);
 					}		
 					if(!(h == height - 1 && w == width - 1 && bh == boxHeight -1 )) {
+<<<<<<< HEAD
 						s+= "\n";
+=======
+						s += "\n";
+>>>>>>> 92704ab54e0d89afbbd929d29f4ae685216e2bb4
 					}
 				}				
 			}			
@@ -124,6 +130,7 @@ public class Repeated<P> implements Pict{
 		
 		return s;
 	}
+<<<<<<< HEAD
 //TODO: Loeschen, wenn nicht mehr gebraucht.
 	/*
 	private String help(){
@@ -210,4 +217,6 @@ public class Repeated<P> implements Pict{
 		String ausgabe="";
 		
 	}*/
+=======
+>>>>>>> 92704ab54e0d89afbbd929d29f4ae685216e2bb4
 }
