@@ -23,54 +23,59 @@ public class Test {
 	 */
 		
 		try {	
-		/*
+		
+		/**
+		 * ########################### Tests von Rafael #################################
+		 */
 		ArrayList<Pict> universal = new ArrayList<Pict>();
-		
-		ArrayList<Box> boxbox = new ArrayList<Box>();
-		System.out.println("Erstelle Boxes...");
-		Box b1 = new Box(3, 3, '.', '#');
-		Box b2 = new Box(4, 4, '-', '+');
-		Box c1 = new ClearBox(5,4);			//ClearBox ist Untertyp von Box
-		Box c2 = new ClearBox(4,5);
-		DarkBox d1 = new DarkBox(4,5,'1');		//DarkBox ist kein Untertyp von Box;
-		DarkBox d2 = new DarkBox(4,5,'2');
-		
-		boxbox.add(b1);
-		boxbox.add(b2);
-		boxbox.add(c1);
-		boxbox.add(c2);
-		boxbox.add(d1);
-		boxbox.add(d2);
-		
-		System.out.println("Erzeuge Repeated<Box> mit erstellten Boxes...");
-		
-		Repeated<Box> r = new Repeated<Box>(boxbox, 2, 1);
-		
-		System.out.println("\n" + r);
-		System.out.println("Skaliere um Faktor 1.5...");
-		System.out.println("\n" + r);
-		
-		universal.add(r);
-    	universal.add(b1);
-
+		ArrayList<BaseBox> baseboxbox = new ArrayList<BaseBox>();
 		ArrayList<Repeated<Character>> filler = new ArrayList<Repeated<Character>>();
+		
+		System.out.println("Erstelle Boxes...");
+		Box box11 = new Box(3, 3, '.', '#');
+		BaseBox box12 = new Box(4, 4, '-', '+'); 	//Box ist Untertyp von BaseBox
+		Box c = new ClearBox(5,4);				//ClearBox ist Untertyp von Box
+		BaseBox d = new DarkBox(4,5,'1');		//DarkBox ist kein Untertyp von Box;
+		
+		baseboxbox.add(box11);
+		baseboxbox.add(box12);
+		baseboxbox.add(c);
+		baseboxbox.add(d);
+		
+		System.out.println("Erzeuge Repeated<BaseBox> mit erstellten Boxes...");
+		
+		Repeated<BaseBox> rpt = new Repeated<BaseBox>(baseboxbox, 2, 2);
+		
+		System.out.println("\n" + rpt);
+		System.out.println("Skaliere um Faktor 1.5...");
+		System.out.println("\n" + rpt);
+
+		System.out.println("Erzeuge FreeBox mit deklariertem Typ Repeated<Character>...");
 		Repeated<Character> f1 = new FreeBox("apfel\nkuche\nnschm\nechtf\nantas\ntisch");	//FreeBox ist Untertyp von Repeated<Character>
 		Repeated<Character> f2 = new FreeBox("abcd\nefgh\nijkm\nlnop\nqrst\nuvwx");
-		
+
 		filler.add(f1);
 		filler.add(f2);
-		universal.add(f1);
-		
+		System.out.println("Erzeuge Scaled<Repeated<Character>> aus den vorigen FreeBoxes...");
 		Scaled<Repeated<Character>> s = new Scaled<Repeated<Character>>(filler,2,1);
 		
+		universal.add(rpt);
+    	universal.add(box11);
+		universal.add(f1);
 		universal.add(s);
 		
-		Scaled<Pict> all = new Scaled<Pict>(universal,1,1);
+		System.out.println("Erzeuge Scaled<Pict> aus allen vorigen Strukturen...");
+		Scaled<Pict> all = new Scaled<Pict>(universal,2,2);
 		
 		System.out.println(all);
+		System.out.println("Skaliere um Faktor 1.5 ...");
 		all.scale(1.5);
 		System.out.println(all);
-		*/
+		
+		/**
+		 * ########################### Ende der Tests von Rafael #################################
+		 */
+		
 		System.out.println("\n---------------------------------------------------");
 		System.out.println("---------------------------------------------------\n");
 		System.out.println("Funktionale Tests:\n\n");
