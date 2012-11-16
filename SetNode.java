@@ -1,4 +1,6 @@
-
+/**
+ * Knoten einer einfach-verketteten, generischen Liste
+ */
 public class SetNode<T> {
 	
 	private T elem;
@@ -10,15 +12,29 @@ public class SetNode<T> {
 		this.next = next;
 	}
 	
+	/**
+	 * getter-Methode
+	 * @return gespeichertes Element
+	 */
 	public T getElem() {
 		
 		return this.elem;
 	}
+	
+	/**
+	 * getter-Methode
+	 * @return naechsten Knoten der Liste
+	 */
 	public SetNode<T> getNext() {
 		
 		return this.next;
 	}
 	
+	/**
+	 * Entfernt Element aus verketteten Liste
+	 * @param elem
+	 * @return
+	 */
 	public SetNode<T> remove(T elem) {
 		
 		if (this.elem == elem) {
@@ -29,6 +45,6 @@ public class SetNode<T> {
 			
 			next = next.remove(elem);
 		}
-		return next;
+		return this;
 	}
 }
