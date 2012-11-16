@@ -13,10 +13,27 @@ public class Set<T> implements Iterable<T> {
 	 * fuegt Element in Set ein
 	 * @param elem		wird eingefuegt, falls nicht in Set (wird mit == ueberprueft)
 	 */
-	public void insert(T elem) {
+	public void insert(T value) {
 		
-		remove(elem);
-		head = new SetNode<T>(elem,head);
+		remove(value);
+		head = new SetNode<T>(value,head);
+	}
+	
+	/**
+	 * fuegt Element vor prev in Set ein. Ist prev nicht enthalten, wird value am Ende eingefuegt
+	 * @param elem		wird eingefuegt, falls nicht in Set (wird mit == ueberprueft)
+	 */
+	public void insert(T value, T prev) {
+		
+		remove(value);
+		SetNode<T> tmp = head;
+		
+		while (tmp.getNext() != null && tmp.getValue() != prev) {
+			
+			tmp = tmp.getNext();
+		}
+		
+		tmp.insert(value);
 	}
 	
 	/**
@@ -32,10 +49,15 @@ public class Set<T> implements Iterable<T> {
 	}
 	
 	/**
-	 * liefert Iterator des Sets, Elementfolge des Iterators = Einfuegefolge des Sets
+	 * liefert Iterator des Sets, Elementfolge des Iterators = umgekehrte Einfuegefolge des Sets
 	 */
 	public Iterator<T> iterator() {
 		
 		return new SetIterator<T>(head);
+	}
+	
+	protected SetNode<T> getValue() {
+		
+		return this.head;
 	}
 }

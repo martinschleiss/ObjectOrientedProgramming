@@ -3,12 +3,12 @@
  */
 public class SetNode<T> {
 	
-	private T elem;
+	private T value;
 	private SetNode<T> next;
 	
-	SetNode (T elem, SetNode<T> next) {
+	SetNode (T value, SetNode<T> next) {
 		
-		this.elem = elem;
+		this.value = value;
 		this.next = next;
 	}
 	
@@ -16,9 +16,9 @@ public class SetNode<T> {
 	 * getter-Methode
 	 * @return gespeichertes Element
 	 */
-	public T getElem() {
+	public T getValue() {
 		
-		return this.elem;
+		return this.value;
 	}
 	
 	/**
@@ -35,16 +35,24 @@ public class SetNode<T> {
 	 * @param elem
 	 * @return
 	 */
-	public SetNode<T> remove(T elem) {
+	public SetNode<T> remove(T value) {
 		
-		if (this.elem == elem) {
+		if (this.value == value) {
 			
 			return next;
 		
 		} else if (next != null) {
 			
-			next = next.remove(elem);
+			next = next.remove(value);
 		}
 		return this;
+	}
+	
+	/**
+	 * Fuegt Element als Nachfolger dieses Knotens ein
+	 */
+	public void insert(T value) {
+		
+		next = new SetNode<T>(value,next);
 	}
 }

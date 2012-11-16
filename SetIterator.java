@@ -2,7 +2,7 @@ import java.util.Iterator;
 
 /**
  * Iteratorklasse von Set
- * Ausgabefolge = Einfuegefolge in Liste
+ * Ausgabefolge = umgekehrte Einfuegefolge der Listes
  */
 public class SetIterator<T> implements Iterator<T> {
 
@@ -31,7 +31,7 @@ public class SetIterator<T> implements Iterator<T> {
 			SetNode<T> result = node;
 			node = node.getNext();
 
-			return result.getElem();
+			return result.getValue();
 
 		} else {
 
@@ -45,7 +45,7 @@ public class SetIterator<T> implements Iterator<T> {
 	 */
 	public void remove() {
 		
-		node = node.remove(node.getElem());
+		node = node.remove(node.getValue());
 		
 	}
 }
