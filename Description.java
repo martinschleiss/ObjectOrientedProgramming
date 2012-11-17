@@ -5,9 +5,9 @@ public class Description implements Shorter {
 	 * NUR ZUM TEST, HAT NICHTS MIT AUFGABE ZU TUN UND KANN UEBERSCHRIEBEN WERDEN
 	 */
 
-	private int i;
+	private Double i;
 	
-	public Description(int i) {
+	public Description(Double i) {
 		
 		this.i = i;
 	}
@@ -18,7 +18,7 @@ public class Description implements Shorter {
 	}
 
 	@Override
-	public int getLength() {
+	public Double getLength() {
 
 		return i;
 	}

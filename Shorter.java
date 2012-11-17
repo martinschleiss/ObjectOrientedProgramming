@@ -12,5 +12,5 @@ public interface Shorter {
 
 	
 	//NUR TESTWEISE
-	public int getLength();
+	public Double getLength();
 }
