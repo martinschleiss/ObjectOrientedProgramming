@@ -6,27 +6,44 @@ public class OrderedSet<T extends Shorter> extends Set<T> {
 		super();
 	}
 
+	/**
+	 * Fuegt Element in Set ein. Die Elemente werden auf die Weise gespeichert, dass der Nachfolger nicht kuerzer als sein Vorgaenger ist
+	 * (zeitliche Dauern sind z.B. aufsteigend sortiert)
+	 */
 	public void insert(T value) {
 
-		SetNode<T> tmp = super.getValue();
-		
-		while (tmp != null && tmp.getNext() != null && tmp.getValue().shorter(value)) {
+		SetNode<T> pos = super.getListHead();
+		SetNode<T> tmp;
 
-			tmp = tmp.getNext();
-		}
+		if (pos == null) {
 
-		if (tmp != null) {
-
-			super.insert(value, tmp.getValue());
-		
-		} else {
-		
 			super.insert(value);
+
+		} else {
+
+			tmp = pos.getNext();
+
+			if (tmp == null) {
+				
+				if (pos.getValue().shorter(value)) {
+				
+					super.insert(value);
+
+				} else {
+					
+					super.insert(value,null);
+				}
+				
+			} else {
+
+				while (tmp.getNext() != null && tmp.getValue().shorter(value)) {
+
+					pos = pos.getNext();
+					tmp = tmp.getNext();
+				}
+
+				super.insert(value, pos.getValue());
+			}
 		}
-	}
-
-	public boolean shorter(T elem) {
-
-		return true;
 	}
 }

@@ -10,5 +10,7 @@ public interface Shorter {
 	 */
 	public boolean shorter(Shorter other);
 
+	
+	//NUR TESTWEISE
 	public int getLength();
 }

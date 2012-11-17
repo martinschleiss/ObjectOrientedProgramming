@@ -2,7 +2,7 @@ import java.util.Iterator;
 
 /**
  * Iteratorklasse von Set
- * Ausgabefolge = umgekehrte Einfuegefolge der Listes
+ * Ausgabefolge wird durch die Instanz von Set bestimmt
  */
 public class SetIterator<T> implements Iterator<T> {
 
