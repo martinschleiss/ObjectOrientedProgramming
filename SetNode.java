@@ -30,6 +30,10 @@ public class SetNode<T> {
 		return this.next;
 	}
 	
+	public void setNext(SetNode<T> elem) {
+		this.next = elem;
+	}
+	
 	/**
 	 * Entfernt Element aus verketteten Liste
 	 * @param elem

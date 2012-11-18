@@ -7,10 +7,12 @@ import java.util.Iterator;
 public class SetIterator<T> implements Iterator<T> {
 
 	private SetNode<T> node;
+	private SetNode<T> prev;
 
 	public SetIterator (SetNode<T> head) {
 
 		this.node = head;
+		prev = null;
 	}
 
 	/**
@@ -29,6 +31,7 @@ public class SetIterator<T> implements Iterator<T> {
 		if (node != null) {
 
 			SetNode<T> result = node;
+			prev = node;
 			node = node.getNext();
 
 			return result.getValue();
@@ -41,11 +44,14 @@ public class SetIterator<T> implements Iterator<T> {
 	}
 
 	/**
-	 * entfernt aktuelles Element aus der Liste
+	 * entfernt aktuelles Element aus der Liste TODO: head loeschbar machen
 	 */
 	public void remove() {
 		
 		node = node.remove(node.getValue());
+		if(prev != null) {
+			prev.setNext(node);
+		}
 		
 	}
 }

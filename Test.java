@@ -14,6 +14,11 @@ public class Test {
 		
 		Iterator<Description> it = set1.iterator();
 		
+		if(it.hasNext()) {
+			it.next();
+			it.remove();
+		}
+		it = set1.iterator();
 		while (it.hasNext()) {
 			
 			System.out.println(it.next());
