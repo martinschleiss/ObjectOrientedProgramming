@@ -5,12 +5,11 @@ public class Test {
 	public static void main(String[] args) {
 		
 		Set<Description> set1 = new OrderedSet<Description>();
-		
-		set1.insert(new Description(5.0));
-		set1.insert(new Description(1.0));
-		set1.insert(new Description(2.0));
-		set1.insert(new Description(4.0));
-		set1.insert(new Description(3.0));
+		//nur das kein Fehler auftritt, Strings eingefuegt, keine Tests von mir
+		set1.insert(new Description("hallo"));
+		set1.insert(new Description("wie"));
+		set1.insert(new Description("gehts"));
+		set1.insert(new Description("dir"));
 		
 		Iterator<Description> it = set1.iterator();
 		
@@ -26,11 +25,10 @@ public class Test {
 		
 		Set<Description> set2 = new OrderedMap<Description, Description>();
 		
-		set2.insert(new Description(5.0));
-		set2.insert(new Description(1.0));
-		set2.insert(new Description(2.0));
-		set2.insert(new Description(4.0));
-		set2.insert(new Description(3.0));
+		set2.insert(new Description("hallo"));
+		set2.insert(new Description("wie"));
+		set2.insert(new Description("gehts"));
+		set2.insert(new Description("dir"));
 		
 		Iterator<Description> it2 = set2.iterator();
 		

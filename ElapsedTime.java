@@ -1,4 +1,3 @@
-
 public class ElapsedTime implements Shorter{
 	private Double time; //>0
 	
@@ -10,21 +9,19 @@ public class ElapsedTime implements Shorter{
 	
 	/**
 	 * gibt true zurueck wenn time < other ist
+	 * muss noch geeandert werden, weil casting nicht erlaubt ist laut Angabe
 	 */
 	public boolean shorter(Shorter other){
+		Boolean check=false;
 		
-		return this.time<other.getLength();
-	}
-	
-	/**
-	 * gibt time zurueck, genaue Bedeutung von Untertypen abhängig (da stimmt noch was nicht!!!)
-	 */
-	
-	public Double getLength(){
+		if (this.getClass() == other.getClass()){
+			ElapsedTime et=(ElapsedTime) other;
+			check= this.time<et.time;
+			
+		}
 		
-		return time;
+		return check;
 	}
-	
 	/**
 	 * gibt die laenge  zurueck, genaue Bedeutung von Untertypen abhängig (da stimmt noch was nicht!!!)
 	 */

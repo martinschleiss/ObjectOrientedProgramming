@@ -23,19 +23,25 @@ public class MeanElapsedTime extends ElapsedTime{
 	
 	/**
 	 * gibt true zuruek, wenn der durchschnitt dieser Instanz kleiner ist als other
+	 * 
+	 * muss noch geeandert werden, weil casting nicht erlaubt ist laut Angabe
 	 */
+	
+	 @Override
 	public boolean shorter(Shorter other){
 
-		return this.average()<other.getLength();
+		Boolean check=false;
+		
+		if (this.getClass() == other.getClass()){
+			MeanElapsedTime mt=(MeanElapsedTime) other;
+			check= this.average()<mt.average();
+			
+		}
+		
+		return check;
+		
 	}
 	
-	/**
-	 * gibt den Durchschnitt der messwerte zuruek...(da stimmt noch was nicht!!!)
-	 */
-	public Double getLength(){
-		return average();
-
-	}
 	/**
 	 * gibt den größten Messwert zuruek
 	 */
@@ -93,3 +99,5 @@ public class MeanElapsedTime extends ElapsedTime{
 	}
 
 }
+
+
