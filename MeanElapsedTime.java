@@ -29,19 +29,18 @@ public class MeanElapsedTime extends ElapsedTime{
 	
 	 @Override
 	public boolean shorter(Shorter other){
-
+		 
 		Boolean check=false;
-		
+		/*
 		if (this.getClass() == other.getClass()){
 			MeanElapsedTime mt=(MeanElapsedTime) other;
 			check= this.average()<mt.average();
-			
-		}
-		
+		}*/
 		return check;
-		
 	}
-	
+	 public boolean shorter(MeanElapsedTime other){
+			return this.average()<other.average();
+		}
 	/**
 	 * gibt den größten Messwert zuruek
 	 */

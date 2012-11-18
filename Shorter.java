@@ -9,7 +9,6 @@ public interface Shorter {
 	 * @return			true, wenn this kuerzer als other, sonst false
 	 */
 	public boolean shorter(Shorter other);
-
 	
 	//NUR TESTWEISE
 	//public Double getLength();

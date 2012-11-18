@@ -26,19 +26,22 @@ public class CompositeTime extends ElapsedTime {
 	/**
 	 * muss noch geeandert werden, weil casting nicht erlaubt ist laut Angabe
 	 */
-	@Override
+	/*@Override
 	public boolean shorter(Shorter other){
 
 		Boolean check=false;
-
+		/*
 		if (other instanceof CompositeTime){
 			CompositeTime ct=(CompositeTime) other;
 			check= this.sum()<ct.sum();
 
 		}
 		return check;
-	}
+	}*/
 
+	public boolean shorter1(CompositeTime other){
+		return this.sum()<other.sum();
+	}
 	/**
 	 * totalTime != null
 	 * @return  summe aller Werte aus dem Array
@@ -65,5 +68,8 @@ public class CompositeTime extends ElapsedTime {
 			}
 		}
 		return shortest;
+	}
+	public int count(){
+		return totalTime.length;
 	}
 }

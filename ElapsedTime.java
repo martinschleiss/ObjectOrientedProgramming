@@ -13,14 +13,17 @@ public class ElapsedTime implements Shorter{
 	 */
 	public boolean shorter(Shorter other){
 		Boolean check=false;
-		
+		/*
 		if (this.getClass() == other.getClass()){
 			ElapsedTime et=(ElapsedTime) other;
 			check= this.time<et.time;
 			
-		}
+		}*/
 		
 		return check;
+	}
+	public boolean shorter(ElapsedTime other){
+		return this.time<other.time;
 	}
 	/**
 	 * gibt die laenge  zurueck, genaue Bedeutung von Untertypen abhängig (da stimmt noch was nicht!!!)
