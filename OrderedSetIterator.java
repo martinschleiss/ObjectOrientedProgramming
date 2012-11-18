@@ -22,10 +22,10 @@ public class OrderedSetIterator<T extends Shorter> implements Iterator<T> {
 	}
 	
 	/**
-	 * TODO: liefert das naechste Element, wobei nachfolgende Elemente entsprechend shorter niemals kuerzer sind als vorangegangene
+	 * liefert das naechste Element, wobei nachfolgende Elemente entsprechend shorter niemals kuerzer sind als vorangegangene
 	 */
 	public T next() {
-
+		
 		if (node != null) {
 
 			SetNode<T> result = node;
