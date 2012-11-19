@@ -21,6 +21,10 @@ public class OrderedMap<V extends Shorter, O> extends OrderedSet<V>{
 	
 	public Iterator<V> iterator() {
 
+		return new OrderedMapIterator<V, O>(this).it();
+	}
+	
+	public Iterator<V> it () {
 		return super.iterator();
 	}
 }
