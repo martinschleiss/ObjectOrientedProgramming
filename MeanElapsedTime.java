@@ -11,6 +11,7 @@ public class MeanElapsedTime extends ElapsedTime{
 		
 		measuredData=new  Set<Double>();
 		measuredData.insert(data);
+		variable=average();
 	}
 	
 	/**
@@ -19,30 +20,26 @@ public class MeanElapsedTime extends ElapsedTime{
 	 */
 	public void addData(Double data){
 		measuredData.insert(data);
+		variable=average();
 	}
 	
 	/**
-	 * gibt true zuruek, wenn der durchschnitt dieser Instanz kleiner ist als other
+	 *
 	 * 
 	 * muss noch geeandert werden, weil casting nicht erlaubt ist laut Angabe
 	 */
 	
-	 @Override
-	public boolean shorter(Shorter other){
-		 
-		Boolean check=false;
-		/*
-		if (this.getClass() == other.getClass()){
-			MeanElapsedTime mt=(MeanElapsedTime) other;
-			check= this.average()<mt.average();
-		}*/
-		return check;
-	}
-	 public boolean shorter(MeanElapsedTime other){
-			return this.average()<other.average();
+	
+		/**
+		 * @param Objekt zum vergleichen, Theoretisch vom Typ ElapsedTime, CompositeTime oder MeanElapsedTime moeglich
+		 * @return gibt true zuruek, wenn der durchschnitt dieser Instanz kleiner ist als other
+		 */
+		@Override
+	 public boolean shorter(ElapsedTime other){
+			return this.average()<other.variable;
 		}
 	/**
-	 * gibt den größten Messwert zuruek
+	 * gibt den groessten Messwert zuruek
 	 */
 	public Double major(){
 		
@@ -84,6 +81,7 @@ public class MeanElapsedTime extends ElapsedTime{
 	/**
 	 * gibt die Anzahl der Messwerte zuruek
 	 */
+	@Override
 	public int count(){
 		Iterator<Double> it=measuredData.iterator();
 		

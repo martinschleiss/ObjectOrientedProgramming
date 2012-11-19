@@ -12,26 +12,27 @@ public class Description implements Shorter {
 	}
 
 	/**
-	 * muss noch geeandert werden, weil casting nicht erlaubt ist laut Angabe
+	 * weil casting nicht erlaubt, wird diese Methode nie benoetigt 
+	 * ..fraglich, denn wieso ist dann Description ein Untertyp von Shorter?
 	 */
 	public boolean shorter(Shorter other) {
-
-		Boolean check=false;
-
-		if (this.getClass() == other.getClass()){
-			Description dp=(Description) other;
-			check= this.textual.length()<dp.textual.length();
-
-		}
-		return check;
+		return false;
 	}
-
+	
 	/**
-	 * 
+	 * @param other Objekt zum vergleichen, Theoretisch vom Typ ElapsedTime, CompositeTime oder MeanElapsedTime moeglich
+	 * @return gibt true zuruek, wenn die laenge des Textes in .this kleiner als der text in other ist
+	 */
+	public boolean shorter(Description other) {
+
+		return this.textual.length()<other.textual.length();
+
+	}
+	/**
 	 * @return anzahl der Zeilen
 	 */
 	public int countLines(){
-		
+
 		scan = new Scanner (textual);
 		int count = 0;
 		while(scan.hasNext()) {

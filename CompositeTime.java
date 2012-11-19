@@ -2,12 +2,13 @@
 
 public class CompositeTime extends ElapsedTime {
 
-	private Double [] totalTime;
+	private Double [] totalTime; 
 
 
 	public CompositeTime( Double [] totalTime) {
 		super(sum(totalTime));
 		this.totalTime=totalTime;
+		variable=sum();	// fuer den vergleich durch shorter()
 
 
 	}
@@ -23,24 +24,14 @@ public class CompositeTime extends ElapsedTime {
 		}
 		return sum;
 	}
+
 	/**
-	 * muss noch geeandert werden, weil casting nicht erlaubt ist laut Angabe
+	 * @param Objekt zum vergleichen, Theoretisch vom Typ ElapsedTime, CompositeTime oder MeanElapsedTime moeglich
+	 * @return gibt true zuruek, wenn der durchschnitt dieser Instanz kleiner ist als other
 	 */
-	/*@Override
-	public boolean shorter(Shorter other){
-
-		Boolean check=false;
-		/*
-		if (other instanceof CompositeTime){
-			CompositeTime ct=(CompositeTime) other;
-			check= this.sum()<ct.sum();
-
-		}
-		return check;
-	}*/
-
-	public boolean shorter1(CompositeTime other){
-		return this.sum()<other.sum();
+	@Override
+	public boolean shorter(ElapsedTime other){
+		return this.sum()<other.variable;
 	}
 	/**
 	 * totalTime != null
@@ -69,6 +60,10 @@ public class CompositeTime extends ElapsedTime {
 		}
 		return shortest;
 	}
+	/**
+	 * gibt die laenge des Arrays zuruek, also die Anzahl der Messwerte
+	 */
+	@Override
 	public int count(){
 		return totalTime.length;
 	}

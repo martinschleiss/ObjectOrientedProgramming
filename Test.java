@@ -56,9 +56,19 @@ public class Test {
 		mt1.addData(2.4);
 		mt1.addData(4.4);
 		mt1.addData(5.4);
-		mt1.addData(1.4);
+		mt1.addData(19.4);
 		System.out.println("Avarage 2: "+mt1.average());
 		System.out.println(mt.shorter(mt1));
+		
+		
+		MeanElapsedTime ept=new MeanElapsedTime(9.5);
+		ept.addData(5.6);
+		ept.addData(4.6);
+		ept.addData(7.6);
+		MeanElapsedTime ept1=new MeanElapsedTime(9.5);
+		ept1.addData(5.6);
+		ept1.addData(4.6);
+		System.out.println(ept.shorter(ept1));
 		
 		
 		
