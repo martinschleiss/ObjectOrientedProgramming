@@ -14,7 +14,7 @@ public class OrderedSet<T extends Shorter> extends Set<T> {
 	 */
 	public Iterator<T> iterator() {
 
-		return new SetIterator<T>(this);
+		return super.iterator();
 	}
 
 	/**

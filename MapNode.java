@@ -37,6 +37,10 @@ public class MapNode<V, O> extends SetNode<V> {
 		return this;
 	}
 	
+	public void insert(V value) {
+		next = new MapNode<V, O>(value, null, this.next);
+	}
+	
 	public void insert(V value, O obj) {
 		next = new MapNode<V, O>(value, obj, this.next);
 	}
