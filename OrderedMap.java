@@ -62,6 +62,6 @@ public class OrderedMap<V extends Shorter, O> extends OrderedSet<V>{
 	
 	public Iterator<V> iterator() {
 
-		return new SetIterator<V>(head);
+		return new SetIterator<V>(this);
 	}
 }

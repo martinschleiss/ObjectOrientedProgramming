@@ -8,13 +8,15 @@ public class SetIterator<T> implements Iterator<T> {
 
 	private SetNode<T> node;
 	private SetNode<T> prev;
+	private SetNode<T> previousOfPrev;
+	private Set<T> set;
 
-	public SetIterator (SetNode<T> head) {
-
-		this.node = head;
+	public SetIterator (Set<T> set) {
+		this.set = set;
+		node = this.set.getListHead();
 		prev = null;
 	}
-
+	
 	/**
 	 * liefert true, wenn noch weitere Listenelemente nachfolgen, ansonsten false
 	 */
@@ -24,13 +26,16 @@ public class SetIterator<T> implements Iterator<T> {
 	}
 	
 	/**
-	 * liefert naechstes Listenelement, null wenn Ende erreicht
+	 * liefert das naechste Element, wobei nachfolgende Elemente entsprechend shorter niemals kuerzer sind als vorangegangene
 	 */
 	public T next() {
-
+		
 		if (node != null) {
 
 			SetNode<T> result = node;
+			if(previousOfPrev != null) {
+				previousOfPrev = prev;
+			}
 			prev = node;
 			node = node.getNext();
 
@@ -44,14 +49,21 @@ public class SetIterator<T> implements Iterator<T> {
 	}
 
 	/**
-	 * entfernt aktuelles Element aus der Liste TODO: head loeschbar machen
+	 * entfernt zuletzt zurueckgegebenes Element aus der Liste
 	 */
-	public void remove() {
+	public void remove() throws IllegalStateException {
 		
-		node = node.remove(node.getValue());
-		if(prev != null) {
-			prev.setNext(node);
+		if(prev == null) {
+			throw new IllegalStateException();
+		} else {
+			if(previousOfPrev != null) {
+				prev.setNext(null);
+				prev = null;
+				previousOfPrev.setNext(node);
+			} else {
+				prev = null;
+				set.setListHead(node);
+			}
 		}
-		
 	}
 }
