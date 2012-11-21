@@ -1,50 +1,84 @@
 import java.util.Iterator;
 
-public class OrderedMapIterator<S extends Shorter, O> implements Iterator<S> {
-	public OrderedMapIterator () {
-		super();
-	}
-	
-	private S node;
-	
-	private OrderedMap<S, O> map;
-	private Iterator<S> it;
-	
-	public OrderedMapIterator (OrderedMap<S, O> map) {
+public class OrderedMapIterator<S extends Shorter<S>,P> implements Iterator<S> {
+
+	private MapNode<S,P> next;
+	private MapNode<S,P> current;
+	private MapNode<S,P> prev;
+	private OrderedMap<S,P> map;
+
+	public OrderedMapIterator (OrderedMap<S,P> map) {
+
 		this.map = map;
-		it = map.it();
+		next = map.getMapHead();
+		current = null;
+		prev = null;
 	}
-	
+
 	/**
 	 * liefert true, wenn noch weitere Listenelemente nachfolgen, ansonsten false
 	 */
 	public boolean hasNext() {
 
-		return it.hasNext();
+		return next != null;
 	}
-	
+
 	/**
 	 * liefert das naechste Element, wobei nachfolgende Elemente entsprechend shorter niemals kuerzer sind als vorangegangene
 	 */
 	public S next() {
-		node = it.next();
-		return node;
 
+		if (next != null) {
+
+			MapNode<S,P> result = next;
+
+			prev = current;
+			current = next;
+			next = next.getNext();
+
+			return result.getValue();
+
+		} else {
+
+			return null;
+		}
 	}
 
 	/**
 	 * entfernt zuletzt zurueckgegebenes Element aus der Liste
+	 * kann nur einmal pro next() aufgerufen werden.
 	 */
 	public void remove() throws IllegalStateException {
-		it.remove();
+
+		if(current == null) {
+
+			throw new IllegalStateException();
+
+		} else {
+
+			if(prev != null) {
+
+				map.remove(current.getValue());
+				current = null;
+				prev = null;
+
+			} else {
+
+				map.setListHead(next);
+				current = null;
+			}
+		}
 	}
-	
-	public Iterator<S> it() {
-		return this;
-	}
-	
-	public Iterator<O> iterator() {
-		//TODO: hier kommt der Zaubertrick mit einer inneren Klasse rein.
-		return null;
+
+	public Iterator<P> iterator() throws IllegalStateException{
+
+		if (current != null) {
+
+			return current.getObjects().iterator();
+
+		} else {
+
+			throw new IllegalStateException();
+		}
 	}
 }

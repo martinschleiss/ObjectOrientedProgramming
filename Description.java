@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 
-public class Description implements Shorter {
+public class Description implements Shorter<Description> {
 
 	private String textual; // !=null
 	private Scanner scan;
@@ -11,14 +11,6 @@ public class Description implements Shorter {
 		this.textual = textual;
 	}
 
-	/**
-	 * weil casting nicht erlaubt, wird diese Methode nie benoetigt 
-	 * ..fraglich, denn wieso ist dann Description ein Untertyp von Shorter?
-	 */
-	public boolean shorter(Shorter other) {
-		return false;
-	}
-	
 	/**
 	 * @param other Objekt zum vergleichen, Theoretisch vom Typ ElapsedTime, CompositeTime oder MeanElapsedTime moeglich
 	 * @return gibt true zuruek, wenn die laenge des Textes in .this kleiner als der text in other ist

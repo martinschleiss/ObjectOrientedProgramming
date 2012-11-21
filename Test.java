@@ -3,8 +3,8 @@ import java.util.Iterator;
 public class Test {
 	
 	public static void main(String[] args) {
-		
-		Set<Description> set1 = new OrderedSet<Description>();
+		/*
+		Set<Description> set1 = new Set<Description>();
 		//nur das kein Fehler auftritt, Strings eingefuegt, keine Tests von mir
 		set1.insert(new Description("hallo"));
 		set1.insert(new Description("wie"));
@@ -15,6 +15,11 @@ public class Test {
 		
 		if(it.hasNext()) {
 			it.next();
+			it.next();
+			it.next();
+			it.next();
+			it.next();
+			it.next();
 			it.remove();
 		}
 		it = set1.iterator();
@@ -22,7 +27,7 @@ public class Test {
 			
 			System.out.println(it.next());
 		}
-		
+		System.out.println("####################");
 		Set<Description> set2 = new OrderedMap<Description, Description>();
 		
 		set2.insert(new Description("hallo"));
@@ -70,7 +75,58 @@ public class Test {
 		ept1.addData(4.6);
 		System.out.println(ept.shorter(ept1));
 		
+		/**
+		 * offizieller Test laut Angabe beginnt hier:
+		 */
 		
+		System.out.println("#################### Test 1 ####################");
+		System.out.println("\nErzeuge OrderedSet<Description>...");
+
+		OrderedSet<Description> set = new OrderedSet<Description>();
+
+		System.out.println("\nFuege unsortierte Werte ein...");
+		Description d = new Description("Beschreibung 1");
 		
+		set.insert(d);
+		set.insert(new Description("Beschreibung 12"));
+		set.insert(new Description("Beschreibung 1234"));
+		set.insert(new Description("Beschreibung 123"));
+
+		
+		Iterator<Description> it = set.iterator();
+		int lineCount = 0;
+		
+		System.out.println("\nAusgabe des Sets mit Hilfe des Itertors: (Erwartete Zeilen: 4)");
+		
+		while (it.hasNext()) {
+			System.out.println(it.next());
+			lineCount++;
+		}
+		System.out.println("Anzahl der Zeilen: " + lineCount);
+		System.out.println("\nNehme folgende Aenderungen an Set vor:");
+		System.out.println("\nLoesche \"Beschreibung 1\"");
+		
+		set.remove(d);
+		
+		System.out.println("\nErzeuge neuen Iterator...");
+		it = set.iterator();
+		
+		System.out.println("\nRufe next() und anschliessend remove() auf, um aktuelles Element des Iterators zu loeschen...");
+		if (it.hasNext()) {
+			it.next();
+			it.remove();
+		}
+		
+		System.out.println("\nFuege gleiche, aber nicht idente Beschreibung \"Beschreibung 12\" in Set ein...");
+		set.insert(new Description("Beschreibung 12"));
+
+		System.out.println("\nAusgabe des Sets mit Hilfe des Itertors: (Erwartete Zeilen: 3)\n");
+		it = set.iterator();
+		lineCount = 0;
+		while (it.hasNext()) {
+			System.out.println(it.next());
+			lineCount++;
+		}
+		System.out.println("Anzahl der Zeilen: " + lineCount);
 	}
 }

@@ -1,30 +1,93 @@
-import java.util.Iterator;
+public class OrderedMap<T extends Shorter<T>, O> extends OrderedSet<T>{
 
-
-public class OrderedMap<V extends Shorter, O> extends OrderedSet<V>{
-	
+	private MapNode<T,O> head;
 
 	public OrderedMap() {
+
 		super();
+		head = null;
 	}
 	
-	public void insert(V value) {
-		O obj = null;
-		insert(value, obj);
-	}
-	
-	public void insert(V value, O obj) {
+	/**
+	 * Fuegt Element in Set ein. Die Elemente werden auf die Weise gespeichert, dass der Nachfolger nicht kuerzer als sein Vorgaenger ist
+	 * (zeitliche Dauern sind z.B. aufsteigend sortiert)
+	 */
+	public void insert(T value) {
 		
-		super.insert(value);
-
+		insert(value, null);
 	}
-	
-	public Iterator<V> iterator() {
 
-		return new OrderedMapIterator<V, O>(this).it();
+	/**
+	 * Fuegt Element in Set ein. Die Elemente werden auf die Weise gespeichert, dass der Nachfolger nicht kuerzer als sein Vorgaenger ist
+	 * (zeitliche Dauern sind z.B. aufsteigend sortiert)
+	 * @param obj	Objekt wird im neuen Knoten von value gespeichert
+	 */
+	//TODO: insert ist noch nicht sortiert, von orderedset kopieren
+	public void insert(T value, O obj) {
+
+		remove(value);
+
+		MapNode<T,O> pos = head;
+		MapNode<T,O> posNext;
+
+		if (pos == null) {
+
+			head = new MapNode<T,O>(value, obj, head);
+
+		} else {
+
+			if (value.shorter(pos.getValue())) {
+
+				head = new MapNode<T,O>(value, obj, pos);
+
+			} else {
+
+				posNext = pos.getNext();
+
+				if (posNext == null) {
+
+					head.insert(value);
+
+				} else {
+
+					while (posNext.getNext() != null && posNext.getValue().shorter(value)) {
+
+						pos = posNext;
+						posNext = posNext.getNext();
+					}
+					pos.setNext(new MapNode<T,O>(value, obj, posNext));
+				}
+			}
+		}
 	}
-	
-	public Iterator<V> it () {
-		return super.iterator();
+
+	public void add(T value, O obj) {
+
+		head.add(value,obj);
+	}
+
+	/**
+	 * entfernt Element aus Set
+	 * @param elem		wird entfernt, falls in Set (wird mit == ueberprueft)
+	 */
+	public void remove (T value) {
+
+		if (head != null) {
+
+			head = head.remove(value);
+		}
+	}
+
+	/**
+	 * liefert Iterator des Sets, wobei nachfolgende Elemente entsprechend shorter 
+	 * niemals kuerzer sind als vorangegangene
+	 */
+	public OrderedMapIterator<T,O> iterator() {
+
+		return new OrderedMapIterator<T,O>(this);
+	}
+	public MapNode<T,O> getMapHead() {
+		
+		return head;
 	}
 }

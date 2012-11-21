@@ -1,5 +1,8 @@
 import java.util.Iterator;
 
+/**
+ * Containerklasse zur Speicherung von frei waehlbaren Typen
+ */
 public class Set<T> implements Iterable<T> {
 
 	private SetNode<T> head;
@@ -13,21 +16,23 @@ public class Set<T> implements Iterable<T> {
 
 	/**
 	 * fuegt Element in Set ein
-	 * @param elem		wird eingefuegt, falls nicht bereits in Set (wird mit == ueberprueft)
+	 * @param value		wird eingefuegt, falls nicht bereits in Set (wird mit == ueberprueft)
 	 */
 	public void insert(T value) {
 
-		remove(value);
+		if (value != null) {
+			remove(value); //ist ein Vorkommen in der Liste, wird es entfernt, um idente Duplikate zu vermeiden.
 
-		if (head == null) {
+			if (head == null) {
 
-			head = new SetNode<T>(value,head);
-			last = head;
+				head = new SetNode<T>(value,head);
+				last = head;
 
-		} else {
+			} else {
 
-			last.insert(value);
-			last = last.getNext();
+				last.insert(value);
+				last = last.getNext();
+			}
 		}
 	}
 
@@ -46,64 +51,71 @@ public class Set<T> implements Iterable<T> {
 	/**
 	 * liefert Iterator des Sets, Elementfolge des Iterators = Einfuegefolge des Sets
 	 */
-	
 	public Iterator<T> iterator() {
 
 		return new SetIterator<T>(this);
 	}
 
+	/**
+	 * getter-Methode fuer den Listenkopf
+	 */
 	protected SetNode<T> getListHead() {
 
 		return this.head;
 	}
-	
-	public void setListHead(SetNode<T> elem) {
-		this.head = elem;
+
+	/**
+	 * setter-Methode fuer den Listenkopf
+	 */
+	protected void setListHead(SetNode<T> node) {
+
+		this.head = node;
 	}
-	
+
 	/*################################################################################################################
 	 * INNER CLASS
 	 * ################################################################################################################
 	 */
-	
+
 	/**
-	 * Iteratorklasse von Set
-	 * Ausgabefolge wird durch die Instanz von Set bestimmt
+	 * Iterator von Set
+	 * Ausgabefolge ist unbestimmt, wird durch die Liste des Sets vorgegeben 
 	 */
 	private class SetIterator<S> implements Iterator<S> {
 
-		private SetNode<S> node;
+		private SetNode<S> next;
+		private SetNode<S> current;
 		private SetNode<S> prev;
-		private SetNode<S> previousOfPrev;
 		private Set<S> set;
 
 		public SetIterator (Set<S> set) {
+
 			this.set = set;
-			node = this.set.getListHead();
+			next = set.getListHead();
+			current = null;
 			prev = null;
 		}
-		
+
 		/**
 		 * liefert true, wenn noch weitere Listenelemente nachfolgen, ansonsten false
 		 */
 		public boolean hasNext() {
 
-			return node != null;
+			return next != null;
 		}
-		
+
 		/**
-		 * liefert das naechste Element, wobei nachfolgende Elemente entsprechend shorter niemals kuerzer sind als vorangegangene
+		 * liefert das naechste Element der Liste
 		 */
 		public S next() {
-			
-			if (node != null) {
 
-				SetNode<S> result = node;
-				if(previousOfPrev != null) {
-					previousOfPrev = prev;
-				}
-				prev = node;
-				node = node.getNext();
+			if (next != null) {
+
+				SetNode<S> result = next;
+
+				prev = current;
+				current = next;
+				next = next.getNext();
 
 				return result.getValue();
 
@@ -111,24 +123,37 @@ public class Set<T> implements Iterable<T> {
 
 				return null;
 			}
-
 		}
-
+		
+		/**
+		 * @param value wird direkt hinter den aktuellen Knoten des Iterators eingefuegt
+		 */
+		public void add(S value) {
+			
+			current.insert(value);
+		}
 		/**
 		 * entfernt zuletzt zurueckgegebenes Element aus der Liste
+		 * kann nur einmal pro next() aufgerufen werden.
 		 */
 		public void remove() throws IllegalStateException {
-			
-			if(prev == null) {
+
+			if(current == null) {
+
 				throw new IllegalStateException();
+
 			} else {
-				if(previousOfPrev != null) {
-					prev.setNext(null);
+
+				if(prev != null) {
+
+					set.remove(current.getValue());
+					current = null;
 					prev = null;
-					previousOfPrev.setNext(node);
+
 				} else {
-					prev = null;
-					set.setListHead(node);
+
+					set.setListHead(next);
+					current = null;
 				}
 			}
 		}
