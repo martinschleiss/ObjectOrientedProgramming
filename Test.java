@@ -183,22 +183,21 @@ public class Test {
 		System.out.println("neuer groesster Wert der Set-Elemente (erwartet 21.6): " + longest.major());
 
 		System.out.println("\n#################### Test 4 ####################");
+		
+		System.out.println("\nEinfuegen aller vorigen Werte in ein OrderedSet...");
 
 		OrderedSet<ElapsedTime> set1 = new OrderedSet<ElapsedTime>();
-		int count = 0;
 		mapIt = map.iterator();
 
 		while (mapIt.hasNext()) {
 
 			set1.insert(mapIt.next());
-			count++;
 
 			itIt = mapIt.iterator();
 
 			while (itIt.hasNext()) {
 
 				set1.insert(itIt.next());
-				count++;
 			}
 		}
 
@@ -207,9 +206,17 @@ public class Test {
 		while (setIt.hasNext()) {
 
 			set1.insert(setIt.next());
+		}
+		
+		Iterator<ElapsedTime> it2 = set1.iterator();
+		int count = 0;
+		System.out.println("\nAusgabe aller Werte: (Erwartete Anzahl: 11)");
+		while (it2.hasNext()) {
+			System.out.println(it2.next());
 			count++;
 		}
-
-
+		
+		System.out.println("Anzahl: " + count);
+		
 	}
 }
