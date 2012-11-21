@@ -7,13 +7,13 @@ public class OrderedMap<T extends Shorter<T>, O> extends OrderedSet<T>{
 		super();
 		head = null;
 	}
-	
+
 	/**
 	 * Fuegt Element in Set ein. Die Elemente werden auf die Weise gespeichert, dass der Nachfolger nicht kuerzer als sein Vorgaenger ist
 	 * (zeitliche Dauern sind z.B. aufsteigend sortiert)
 	 */
 	public void insert(T value) {
-		
+
 		insert(value, null);
 	}
 
@@ -32,7 +32,7 @@ public class OrderedMap<T extends Shorter<T>, O> extends OrderedSet<T>{
 
 		if (pos == null) {
 
-			head = new MapNode<T,O>(value, obj, head);
+			head = new MapNode<T,O>(value, obj, pos);
 
 		} else {
 
@@ -46,7 +46,7 @@ public class OrderedMap<T extends Shorter<T>, O> extends OrderedSet<T>{
 
 				if (posNext == null) {
 
-					head.insert(value);
+					pos.insert(value);
 
 				} else {
 
@@ -55,7 +55,14 @@ public class OrderedMap<T extends Shorter<T>, O> extends OrderedSet<T>{
 						pos = posNext;
 						posNext = posNext.getNext();
 					}
-					pos.setNext(new MapNode<T,O>(value, obj, posNext));
+					if (posNext.getNext() == null && posNext.getValue().shorter(value)) {
+
+						posNext.setNext(new MapNode<T,O>(value,obj,posNext.getNext()));
+
+					} else {
+
+						pos.setNext(new MapNode<T,O>(value, obj, posNext));
+					}
 				}
 			}
 		}
@@ -87,7 +94,7 @@ public class OrderedMap<T extends Shorter<T>, O> extends OrderedSet<T>{
 		return new OrderedMapIterator<T,O>(this);
 	}
 	public MapNode<T,O> getMapHead() {
-		
+
 		return head;
 	}
 }

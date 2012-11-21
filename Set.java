@@ -20,19 +20,17 @@ public class Set<T> implements Iterable<T> {
 	 */
 	public void insert(T value) {
 
-		if (value != null) {
-			remove(value); //ist ein Vorkommen in der Liste, wird es entfernt, um idente Duplikate zu vermeiden.
+		remove(value); //ist ein Vorkommen in der Liste, wird es entfernt, um idente Duplikate zu vermeiden.
 
-			if (head == null) {
+		if (head == null) {
 
-				head = new SetNode<T>(value,head);
-				last = head;
+			head = new SetNode<T>(value,head);
+			last = head;
 
-			} else {
-
-				last.insert(value);
-				last = last.getNext();
-			}
+		} else {
+			System.out.println("last-insert");
+			last.insert(value);
+			last = last.getNext();
 		}
 	}
 
@@ -124,12 +122,12 @@ public class Set<T> implements Iterable<T> {
 				return null;
 			}
 		}
-		
+
 		/**
 		 * @param value wird direkt hinter den aktuellen Knoten des Iterators eingefuegt
 		 */
 		public void add(S value) {
-			
+
 			current.insert(value);
 		}
 		/**
