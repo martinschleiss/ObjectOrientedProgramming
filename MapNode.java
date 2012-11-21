@@ -1,4 +1,6 @@
-
+/**
+ * Knoten einer einfachverketteten Liste, der zusaetzlich zu SetNode noch eine beliebige Anzahl von Objekten der Klasse des Typparameters O speichert
+ */
 public class MapNode<T, O> extends SetNode<T>{
 
 	private Set<O> objects;
@@ -12,7 +14,10 @@ public class MapNode<T, O> extends SetNode<T>{
 
 		super(value,null);
 		objects = new Set<O>();
-		objects.insert(obj);
+		
+		if (obj != null) {
+			objects.insert(obj);
+		}
 		this.next = next;
 	}
 	

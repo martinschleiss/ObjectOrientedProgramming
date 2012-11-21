@@ -6,14 +6,12 @@ public class CompositeTime extends ElapsedTime {
 
 
 	public CompositeTime( Double [] totalTime) {
+
 		super(sum(totalTime));
 		this.totalTime=totalTime;
-		variable=sum();	// fuer den vergleich durch shorter()
-
-
 	}
 	/**
-	 * Nur fuer die Super() Methode relevant
+	 * Nur fuer Parameter des Superkonstruktors relevant
 	 * @param totTime
 	 * @return summe aller Werte aus dem Array
 	 */
@@ -26,13 +24,14 @@ public class CompositeTime extends ElapsedTime {
 	}
 
 	/**
-	 * @param Objekt zum vergleichen, Theoretisch vom Typ ElapsedTime, CompositeTime oder MeanElapsedTime moeglich
-	 * @return gibt true zuruek, wenn der durchschnitt dieser Instanz kleiner ist als other
+	 * Liefert Vergleichsmass fuer shorter()
+	 * @return		Summe der gemessenen Zeiten
 	 */
-	@Override
-	public boolean shorter(ElapsedTime other){
-		return this.sum()<other.variable;
+	public double getMessure() {
+		
+		return sum();
 	}
+	
 	/**
 	 * totalTime != null
 	 * @return  summe aller Werte aus dem Array
@@ -66,5 +65,9 @@ public class CompositeTime extends ElapsedTime {
 	@Override
 	public int count(){
 		return totalTime.length;
+	}
+	public String toString() {
+		
+		return "CompositeTime, Summe: " + sum();
 	}
 }

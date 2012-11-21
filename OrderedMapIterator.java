@@ -1,6 +1,9 @@
 import java.util.Iterator;
 
-public class OrderedMapIterator<S extends Shorter<S>,P> implements Iterator<S> {
+/**
+ * Iteratorklasse fuer OrderedMap
+ */
+public class OrderedMapIterator<S extends Shorter<? super S>,P> implements Iterator<S> {
 
 	private MapNode<S,P> next;
 	private MapNode<S,P> current;

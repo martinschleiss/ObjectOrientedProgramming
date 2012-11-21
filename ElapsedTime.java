@@ -1,7 +1,6 @@
 public class ElapsedTime implements Shorter<ElapsedTime> {
-	private Double time; //>0
-	protected Double variable;	//wird fuer Untertypen benoetigt um Vergleiche durchfuehren zu koennen
 	
+	private Double time; //>0	
 
 	public ElapsedTime(Double time){
 		
@@ -11,18 +10,31 @@ public class ElapsedTime implements Shorter<ElapsedTime> {
 	/**
 	 * 
 	 * @param other
-	 * @return  gibt true zurueck wenn time < other ist
+	 * @return  gibt true zurueck wenn Vergleichmass von this < Vergleichsmass von other ist.
 	 */
 	public boolean shorter(ElapsedTime other){
 		
-		return this.time < other.time;
+		return this.getMessure() < other.getMessure();
 	}
 	
 	/**
-	 * gibt die laenge  zurueck, ist fuer ElapsedTime immer eins
+	 * Liefert Vergleichsmass fuer shorter()
+	 * @return		verstrichene Zeit
+	 */
+	public double getMessure() {
+		
+		return this.time;
+	}
+	
+	/**
+	 * gibt die Anzahl der Messungen zurueck, ist fuer ElapsedTime immer eins
 	 */
 	public int count(){
 		return 1;
 	}
-
+	
+	public String toString() {
+		
+		return "ElapsedTime: " + time;
+	}
 }

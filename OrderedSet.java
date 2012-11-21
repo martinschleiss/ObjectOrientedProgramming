@@ -4,7 +4,7 @@ import java.util.Iterator;
  * Containerklasse zur Speicherung von Typen, die Shorter implementieren. Diese Klasse muss sicherstellen, dass der zurueckgelieferte Iterator die vorgegebene
  * Ausgabefolge einhalten muss. Diese besagt, dass ausgegebene Elemente entsprechend Shorter niemals kuerzer als vorangegangene sein duerfen.
  */
-public class OrderedSet<T extends Shorter<T>> extends Set<T> {
+public class OrderedSet<T extends Shorter<? super T>> extends Set<T> {
 
 	public OrderedSet() {
 
@@ -59,12 +59,10 @@ public class OrderedSet<T extends Shorter<T>> extends Set<T> {
 
 					if (posNext.getNext() == null && posNext.getValue().shorter(value)) {
 						
-						System.out.println("am ende");
 						posNext.setNext(new SetNode<T>(value,posNext.getNext()));
 						
 					} else {
 						
-						System.out.println("setNext-insert");
 						pos.setNext(new SetNode<T>(value, posNext));
 
 					}
@@ -81,7 +79,7 @@ public class OrderedSet<T extends Shorter<T>> extends Set<T> {
 	 * Iterator von OrderedSet (entspricht dem Iterator von Set ohne die add(S value) Methode
 	 * Invariante: Der Iterator veraendert die Ordnung die durch Shorter hergestellt wurde nicht.
 	 */
-	private class OrderedSetIterator<S extends Shorter<S>> implements Iterator<S> {
+	private class OrderedSetIterator<S extends Shorter<? super S>> implements Iterator<S> {
 
 		private SetNode<S> next;
 		private SetNode<S> current;

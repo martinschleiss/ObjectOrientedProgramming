@@ -28,7 +28,7 @@ public class Set<T> implements Iterable<T> {
 			last = head;
 
 		} else {
-			System.out.println("last-insert");
+			
 			last.insert(value);
 			last = last.getNext();
 		}

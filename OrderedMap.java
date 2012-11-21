@@ -1,4 +1,4 @@
-public class OrderedMap<T extends Shorter<T>, O> extends OrderedSet<T>{
+public class OrderedMap<T extends Shorter<? super T>, O> extends OrderedSet<T>{
 
 	private MapNode<T,O> head;
 
@@ -22,7 +22,6 @@ public class OrderedMap<T extends Shorter<T>, O> extends OrderedSet<T>{
 	 * (zeitliche Dauern sind z.B. aufsteigend sortiert)
 	 * @param obj	Objekt wird im neuen Knoten von value gespeichert
 	 */
-	//TODO: insert ist noch nicht sortiert, von orderedset kopieren
 	public void insert(T value, O obj) {
 
 		remove(value);
