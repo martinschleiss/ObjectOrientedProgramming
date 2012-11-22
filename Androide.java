@@ -1,5 +1,5 @@
 
-public class Androide {
+public abstract class Androide {
 	
 	private static int serial = 0;
 	private final int serialNumber;
