@@ -8,6 +8,6 @@ public abstract class Skin {
 
 	public Skin(Androide a) {
 		
-		codierung = a.getSeriennummer();
+		codierung = a.seriennummer();
 	}
 }

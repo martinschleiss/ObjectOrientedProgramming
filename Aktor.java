@@ -1,16 +1,10 @@
 
 public class Aktor extends Komponente {
 
-	private int leistung; //in kW
+	private int leistung;
 
-	public Aktor(String name, int leistung) {
+	public Aktor(String name, int leistung, Androide a) {
 		
-		super(name + " (Aktor)");
-		this.leistung = leistung;
-	}
-	
-	public int leistung() {
-		
-		return leistung;
+		super(name + " (Aktor)", leistung, a);
 	}
 }

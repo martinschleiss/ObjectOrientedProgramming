@@ -5,14 +5,29 @@
 public abstract class Komponente {
 	
 	private String name;
-	private final int codierung; //= Seriennummer des Androiden, der mit dieser Komponente ausgestattet ist.
 	
-	public Komponente(String name, Androide a) {
+	/**
+	 * Seriennummer des Androiden, der mit dieser Komponente ausgestattet ist.
+	 */
+	private final int codierung;
+
+	/**
+	 * in kW, wird nicht als Verbrauch interpretiert (daher bei Sensor: 0)
+	 */
+	private int leistung;
+	
+	public Komponente(String name, int leistung, Androide a) {
 		
 		this.name = name;
-		codierung = a.getSeriennummer();
+		this.leistung = leistung;
+		codierung = a.seriennummer();
 	}
 		
+	public int leistung() {
+		
+		return leistung;
+	}
+	
 	public String toString() {
 		
 		return name;

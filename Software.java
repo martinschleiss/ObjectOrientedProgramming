@@ -8,9 +8,9 @@ public abstract class Software {
 	
 	public Software(int sicherheitsstufe, Androide a) {
 		
-		assert (1 <= sicherheitsstufe && sicherheitsstufe <= 5) : "Ungueltige Sicherheitsstufe";
+		//TODO sicherheitsstufe zur enum-klasse machen.
 		
 		this.sicherheitsstufe = sicherheitsstufe;
-		codierung = a.getSeriennummer();
+		codierung = a.seriennummer();
 	}
 }
