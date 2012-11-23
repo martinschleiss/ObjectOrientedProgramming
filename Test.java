@@ -1,14 +1,11 @@
 public class Test {
 	
 	public static void main(String args[]) {
-		Androide a1 = new Androide();
-		Androide a2 = new Androide();
-		Androide a3 = new Androide();
-		Androide a4 = new Androide();
+
+		Komponente k1 = new Aktor("Greifarm",1);
+		Komponente k2 = new Sensor("Gyroskop");
 		
-		System.out.println(a1.getSerialNumber());
-		System.out.println(a2.getSerialNumber());
-		System.out.println(a3.getSerialNumber());
-		System.out.println(a4.getSerialNumber());
+		System.out.println(k1);
+		System.out.println(k2);
 	}
 }

@@ -1,15 +1,20 @@
+import java.util.ArrayList;
+
 
 public abstract class Androide {
 	
-	private static int serial = 0;
-	private final int serialNumber;
+	private static int serie = 0;
+	private final int seriennummer;
+	private ArrayList<Komponente> kit;
+	private Skin skin;
+	private Software software;
 	
 	public Androide() {
-		serialNumber = serial++;
+		seriennummer = serie++;
 	}
 	
-	public final int getSerialNumber() {
-		return serialNumber;
+	public final int getSeriennummer() {
+		return seriennummer;
 	}
 
 }
