@@ -8,7 +8,7 @@ public abstract class Androide {
 	private int version;
 	private ArrayList<Komponente> kit;
 	private Skin skin;
-	private Software software;
+	protected Software software;
 	private String protokoll;
 	
 	public Androide() {
@@ -46,6 +46,24 @@ public abstract class Androide {
 		stage(out);
 	}
 	
+	/**
+	 * Vorbedingung: liste darf nicht null sein.
+	 * Nachbedingung: Androide kann zur Liste hinzugefuegt worden sein oder nicht.
+	 * @param liste : die Liste zu der der Androide hinzugefuegt werden soll
+	 */
+	
+	public final void fuegeAndroideZuListeHinzu(ArrayList<Androide> liste) {
+		liste.add(this);
+	}
+	
+	/**
+	 * Vorbedingung: liste darf nicht null sein.
+	 * Nachbedingung: Androide kann zur Liste hinzugefuegt worden sein oder nicht.
+	 * @param liste : die Liste zu der der Androide hinzugefuegt werden soll
+	 */
+	
+	public abstract void phaseEinsFuegeAndroidZuListeHinzu(ArrayList<Androide> liste);
+	
 	public void erstetzeKomponente(Komponente a, Komponente b) {
 	
 		kit.remove(a);
@@ -55,4 +73,9 @@ public abstract class Androide {
 		
 		protokoll += "\n\t" + s;
 	}
+	
+	public String toString() {
+		return version + " " + protokoll + " " + skin;
+	}
+	
 }

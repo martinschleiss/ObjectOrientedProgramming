@@ -8,5 +8,7 @@ public class Test {
 		
 		System.out.println(k1);
 		System.out.println(k2);
+		
+		//TODO: Androiden Software Tests verfassen @Martin
 	}
 }

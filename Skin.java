@@ -10,4 +10,8 @@ public abstract class Skin {
 		
 		codierung = a.seriennummer();
 	}
+	
+	public String toString() {
+		return "Skin: " + codierung;
+	}
 }
