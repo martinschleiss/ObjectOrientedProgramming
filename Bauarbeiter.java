@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.TreeMap;
 
 public class Bauarbeiter extends Schwerarbeiter {
 		
@@ -8,14 +8,7 @@ public class Bauarbeiter extends Schwerarbeiter {
 	 * @param liste : die Liste zu der der Androide hinzugefuegt werden soll
 	 */
 
-	public void phaseEinsFuegeAndroidZuListeHinzu(ArrayList<Androide> liste) {
+	public void phaseEinsFuegeAndroidZuListeHinzu(TreeMap<Integer, Androide> liste) {
 		software().vonBauarbeiterInstalliert(this, liste);
 	}
-
-	@Override
-	public void insertWennVerordnungErfuellt(ArrayList<Androide> liste) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

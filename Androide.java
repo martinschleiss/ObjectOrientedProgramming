@@ -1,11 +1,11 @@
 import java.util.ArrayList;
+import java.util.TreeMap;
 
 
 public abstract class Androide {
 	
 	private static int serie = 0;
 	private final int seriennummer;
-	private int version;
 	private ArrayList<Komponente> kit;
 	private Skin skin;
 	private Software software;
@@ -14,7 +14,6 @@ public abstract class Androide {
 	public Androide() {
 		
 		seriennummer = serie++;
-		version = 1;
 		protokoll = "";
 		kit = new ArrayList<Komponente>();
 	}
@@ -63,8 +62,8 @@ public abstract class Androide {
 	 * Nachbedingung: Androide kann zur Liste hinzugefuegt worden sein oder nicht.
 	 * @param liste : die Liste zu der der Androide hinzugefuegt werden soll
 	 */
-	public final void fuegeAndroideZuListeHinzu(ArrayList<Androide> liste) {
-		liste.add(this);
+	public final void fuegeAndroideZuListeHinzu(TreeMap<Integer,Androide> liste) {
+		liste.put(seriennummer,this);
 	}
 	
 	/**
@@ -74,7 +73,7 @@ public abstract class Androide {
 	 */
 	
 	//public abstract void phaseEinsFuegeAndroidZuListeHinzu(ArrayList<Androide> liste);
-	public abstract void insertWennVerordnungErfuellt(ArrayList<Androide> liste);
+	//public abstract void insertWennVerordnungErfuellt(TreeMap<Integer,Androide> liste);
 	
 	
 	public void erstetzeKomponente(Komponente a, Komponente b) {

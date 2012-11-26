@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.TreeMap;
 
 
 public class SoftwareKaempfer extends Software {
@@ -14,7 +14,7 @@ public class SoftwareKaempfer extends Software {
 	 * @param s: die korrespondierende Sicherheitsstufe zur aktuellen Software
 	 */
 
-	public void phaseZweiFuegeAndroidZuListeHinzu(ArrayList<Androide> liste, Sicherheitsstufe s) {
+	public void phaseZweiFuegeAndroidZuListeHinzu(TreeMap<Integer, Androide> liste, Sicherheitsstufe s) {
 		s.aufSoftwareKaempfer(this, a, liste);
 	}
 	
@@ -25,7 +25,7 @@ public class SoftwareKaempfer extends Software {
 	 * @param k : der Kaempfer zu dem die Software hinzugefuegt worden ist
 	 */
 	
-	public void vonKaempferInstalliert(Kaempfer k, ArrayList<Androide> liste){ 
+	public void vonKaempferInstalliert(Kaempfer k, TreeMap<Integer, Androide> liste){ 
 		phaseZweiFuegeAndroidZuListeHinzu(liste, s);
 	};
 	
@@ -36,7 +36,7 @@ public class SoftwareKaempfer extends Software {
 	 * @param g : der Gesellschafter zu dem die Software hinzugefuegt worden ist
 	 */
 	
-	public void vonGesellschafterInstalliert(Gesellschafter g, ArrayList<Androide> liste){ };	
+	public void vonGesellschafterInstalliert(Gesellschafter g, TreeMap<Integer, Androide> liste){ };	
 	
 	/**
 	 * Vorbedingung: liste und b (Bauarbeiter) duerfen nicht null sein.
@@ -45,7 +45,7 @@ public class SoftwareKaempfer extends Software {
 	 * @param b : der Bauarbeiter zu dem die Software hinzugefuegt worden ist
 	 */
 	
-	public void vonBauarbeiterInstalliert(Bauarbeiter b, ArrayList<Androide> liste){ };
+	public void vonBauarbeiterInstalliert(Bauarbeiter b, TreeMap<Integer, Androide> liste){ };
 	
 	/**
 	 * Vorbedingung: liste und h (Hilfskraft) duerfen nicht null sein.
@@ -54,7 +54,7 @@ public class SoftwareKaempfer extends Software {
 	 * @param h : die Hilfskraft zu dem die Software hinzugefuegt worden ist
 	 */
 	
-	public void vonHilfskraftInstalliert(Hilfskraft h, ArrayList<Androide> liste){ };	
+	public void vonHilfskraftInstalliert(Hilfskraft h, TreeMap<Integer, Androide> liste){ };	
 	
 	/**
 	 * Vorbedingung: liste und l (Leibwaechter) duerfen nicht null sein.
@@ -63,7 +63,7 @@ public class SoftwareKaempfer extends Software {
 	 * @param l : der Leibwaechter zu dem die Software hinzugefuegt worden ist
 	 */
 	
-	public void vonLeibwaechterInstalliert(Leibwaechter l, ArrayList<Androide> liste){ };
+	public void vonLeibwaechterInstalliert(Leibwaechter l, TreeMap<Integer, Androide> liste){ };
 	
 	/**
 	 * Vorbedingung: liste und o (Objektbewacher) duerfen nicht null sein.
@@ -72,7 +72,7 @@ public class SoftwareKaempfer extends Software {
 	 * @param o : der Objektbewacher zu dem die Software hinzugefuegt worden ist
 	 */
 	
-	public void vonObjektbewacherInstalliert(Objektbewacher o, ArrayList<Androide> liste){ };
+	public void vonObjektbewacherInstalliert(Objektbewacher o, TreeMap<Integer, Androide> liste){ };
 	
 	/**
 	 * Vorbedingung: liste und s (Servicetechniker) duerfen nicht null sein.
@@ -81,7 +81,7 @@ public class SoftwareKaempfer extends Software {
 	 * @param s : der Servicetechniker zu dem die Software hinzugefuegt worden ist
 	 */
 	
-	public void vonServicetechnikerInstalliert(Servicetechniker s, ArrayList<Androide> liste){ };
+	public void vonServicetechnikerInstalliert(Servicetechniker s, TreeMap<Integer, Androide> liste){ };
 	
 	/**
 	 * Vorbedingung: liste und s (Sicherheitsstufe) duerfen nicht null sein.
@@ -90,5 +90,5 @@ public class SoftwareKaempfer extends Software {
 	 * @param s : die korrespondierende Sicherheitsstufe zur aktuellen Software
 	 */
 	
-	public void vonTransportarbeiterInstalliert(Transportarbeiter t, ArrayList<Androide> liste){ };
+	public void vonTransportarbeiterInstalliert(Transportarbeiter t, TreeMap<Integer, Androide> liste){ };
 }

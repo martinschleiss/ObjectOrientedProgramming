@@ -1,4 +1,4 @@
-import java.util.HashMap;
+import java.util.TreeMap;
 
 
 public class SkinSensitiv extends Skin {
@@ -13,7 +13,7 @@ public class SkinSensitiv extends Skin {
 	 * @param liste : die Liste zu der der Androide hinzugefuegt werden soll
 	 * @param b : der Bauarbeiter zu dem die Skin hinzugefuegt werden soll
 	 */
-	public void vonBedienerInstalliert(Bediener b, HashMap<Integer,Androide> liste) {
+	public void vonBedienerInstalliert(Bediener b, TreeMap<Integer,Androide> liste) {
 	//passt
 	}
 	
@@ -23,7 +23,7 @@ public class SkinSensitiv extends Skin {
 	 * @param liste : die Liste zu der der Androide hinzugefuegt werden soll
 	 * @param g : der Gesellschafter zu dem die Skin hinzugefuegt werden soll
 	 */
-	public void vonSchwerarbeiterInstalliert(Schwerarbeiter g, HashMap<Integer,Androide> liste) {
+	public void vonSchwerarbeiterInstalliert(Schwerarbeiter g, TreeMap<Integer,Androide> liste) {
 	//passt	- jetzt AktorenCheck
 	}
 	
@@ -33,7 +33,7 @@ public class SkinSensitiv extends Skin {
 	 * @param liste : die Liste zu der der Androide hinzugefuegt werden soll
 	 * @param h : die Hilfskraft zu dem die Skin hinzugefuegt werden soll
 	 */
-	public void vonBeschuetzer(Beschuetzer b, HashMap<Integer,Androide> liste) {
+	public void vonBeschuetzer(Beschuetzer b, TreeMap<Integer,Androide> liste) {
 	//passt	
 	}
 }

@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.TreeMap;
 
 
 public class Servicetechniker extends Schwerarbeiter {
@@ -9,7 +9,7 @@ public class Servicetechniker extends Schwerarbeiter {
 	 * @param liste : die Liste zu der der Androide hinzugefuegt werden soll
 	 */
 
-	public void phaseEinsFuegeAndroidZuListeHinzu(ArrayList<Androide> liste) {
-		software.vonServicetechnikerInstalliert(this, liste);
+	public void phaseEinsFuegeAndroidZuListeHinzu(TreeMap<Integer, Androide> liste) {
+		software().vonServicetechnikerInstalliert(this, liste);
 	}
 }
