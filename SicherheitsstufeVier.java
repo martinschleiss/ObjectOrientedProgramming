@@ -6,7 +6,8 @@ public class SicherheitsstufeVier extends Sicherheitsstufe {
 	//TODO: Zusicherungen definieren @Martin
 	
 	public void aufSoftwareBauarbeiter(SoftwareBauarbeiter s, Androide a, ArrayList<Androide> liste) {
-		a.fuegeAndroideZuListeHinzu(liste);
+		//a.fuegeAndroideZuListeHinzu(liste);
+		a.skin().vonSchwerarbeiterInstalliert(a, liste); //geht nicht aufgrund von ArrayList - HashMap madness
 	}
 	
 	public void aufSoftwareServicetechniker(SoftwareServicetechniker s, Androide a, ArrayList<Androide> liste) {

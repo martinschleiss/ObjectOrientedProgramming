@@ -5,7 +5,9 @@ public class Shop {
 	
 	private ArrayList<Androide> liste = new ArrayList<Androide>();
 
-	public void insert(Androide a) {
-		a.fuegeAndroideZuListeHinzu(liste);
+	
+	public String insert(Androide a) { //retourniert Fehlercode bzw Erfolgsmeldung
+		a.insertWennVerordnungErfuellt(liste);
+		//a.fuegeAndroideZuListeHinzu(liste);
 	}
 }

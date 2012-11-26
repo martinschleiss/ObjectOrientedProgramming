@@ -4,7 +4,8 @@ public class SicherheitsstufeDrei extends Sicherheitsstufe {
 	//TODO: Zusicherungen definieren @Martin
 	
 	public void aufSoftwareBauarbeiter(SoftwareBauarbeiter s, Androide a, ArrayList<Androide> liste) {
-		a.fuegeAndroideZuListeHinzu(liste);
+		//a.fuegeAndroideZuListeHinzu(liste); ich wuerde von hier aus weiter die skin kontrollieren - und dann die aktoren, also
+		a.skin().vonSchwerarbeiterInstalliert(a, liste);
 	}
 	
 	public void aufSoftwareServicetechniker(SoftwareServicetechniker s, Androide a, ArrayList<Androide> liste) {
@@ -20,6 +21,4 @@ public class SicherheitsstufeDrei extends Sicherheitsstufe {
 	public void aufSoftwareKaempfer(SoftwareKaempfer s, Androide a, ArrayList<Androide> liste) {}
 	public void aufSoftwareLeibwaechter(SoftwareLeibwaechter s, Androide a, ArrayList<Androide> liste) {}
 	public void aufSoftwareObjektbewacher(SoftwareObjektbewacher s, Androide a, ArrayList<Androide> liste) {}
-	
-
 }

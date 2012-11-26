@@ -1,12 +1,7 @@
 import java.util.ArrayList;
+
 public class Bauarbeiter extends Schwerarbeiter {
-	
-	public void installSoftware(Software software) {
-		super.installSoftware(software);
 		
-		
-	}
-	
 	/**
 	 * Vorbedingung: liste darf nicht null sein.
 	 * Nachbedingung: Androide kann zur Liste hinzugefuegt worden sein oder nicht.
@@ -14,7 +9,13 @@ public class Bauarbeiter extends Schwerarbeiter {
 	 */
 
 	public void phaseEinsFuegeAndroidZuListeHinzu(ArrayList<Androide> liste) {
-		software.vonBauarbeiterInstalliert(this, liste);
+		software().vonBauarbeiterInstalliert(this, liste);
+	}
+
+	@Override
+	public void insertWennVerordnungErfuellt(ArrayList<Androide> liste) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
