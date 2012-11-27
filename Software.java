@@ -4,7 +4,7 @@ import java.util.TreeMap;
  * Eine Instanz dieser Software ist Bestandteil genau eines Androiden.
  */
 public abstract class Software {
-	
+
 	/**
 	 * = Seriennummer des Androiden, der mit dieser Software ausgestattet ist.
 	 */

@@ -2,7 +2,7 @@ import java.util.TreeMap;
 
 
 public abstract class Sicherheitsstufe {
-	
+
 	public abstract String aufSoftwareBauarbeiter(Bauarbeiter a, TreeMap<Integer, Androide> liste);
 	public abstract String aufSoftwareGesellschafter(Gesellschafter a, TreeMap<Integer, Androide> liste);
 	public abstract String aufSoftwareHilfskraft(Hilfskraft a, TreeMap<Integer, Androide> liste);

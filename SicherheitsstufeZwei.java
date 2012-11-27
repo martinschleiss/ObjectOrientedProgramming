@@ -2,7 +2,7 @@ import java.util.TreeMap;
 
 
 public class SicherheitsstufeZwei extends Sicherheitsstufe {
-	
+
 	public String aufSoftwareHilfskraft(Hilfskraft a, TreeMap<Integer, Androide> liste) {
 		
 		return "Sicherheitstufe passt, " + a.skin().vonBedienerInstalliert(a, liste);

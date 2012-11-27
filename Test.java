@@ -22,7 +22,5 @@ public class Test {
 		Shop sh=new Shop();
 		System.out.println(sh.insert(a));
 		
-		
-		//TODO: Androiden Software Tests verfassen @Martin
 	}
 }

@@ -14,7 +14,7 @@ public class SkinSensitiv extends Skin {
 	
 	public String vonSchwerarbeiterInstalliert(Schwerarbeiter g, TreeMap<Integer,Androide> liste) {
 		
-		return "Skin ok, "; //TODO: visitor mit sicherheitsstufe einbaun. 3 oder 4
+		return "Skin ok, " + g.software().sicherheitsstufe().installiertKit(g,liste);
 	}
 	
 	public String vonObjektbewacherInstalliert(Objektbewacher a, TreeMap<Integer,Androide> liste) {

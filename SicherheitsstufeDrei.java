@@ -4,7 +4,7 @@ import java.util.TreeMap;
 public class SicherheitsstufeDrei extends Sicherheitsstufe {
 	
 	public String aufSoftwareBauarbeiter(Bauarbeiter a, TreeMap<Integer,Androide> liste) {
-		
+
 		return "Sicherheitsstufe passt, " + a.skin().vonSchwerarbeiterInstalliert(a, liste);
 	}
 	
