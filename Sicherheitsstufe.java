@@ -3,8 +3,6 @@ import java.util.TreeMap;
 
 public abstract class Sicherheitsstufe {
 	
-	//TODO: Zusicherungen definieren @Martin
-	
 	public abstract String aufSoftwareBauarbeiter(SoftwareBauarbeiter s, Bauarbeiter a, TreeMap<Integer, Androide> liste,String out);
 	public abstract String aufSoftwareGesellschafter(SoftwareGesellschafter s, Gesellschafter a, TreeMap<Integer, Androide> liste,String out);
 	public abstract String aufSoftwareHilfskraft(SoftwareHilfskraft s, Hilfskraft a, TreeMap<Integer, Androide> liste,String out);

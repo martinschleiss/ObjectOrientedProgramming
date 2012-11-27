@@ -3,8 +3,6 @@ import java.util.TreeMap;
 
 public class SicherheitsstufeFuenf extends Sicherheitsstufe {
 	
-	//TODO: Zusicherungen definieren @Martin
-	
 	public String aufSoftwareKaempfer(SoftwareKaempfer s, Kaempfer a, TreeMap<Integer, Androide> liste,String out) {
 		out+="Sicherheitstufe passt, ";
 		return a.skin().vonBeschuetzer(a, liste,out);

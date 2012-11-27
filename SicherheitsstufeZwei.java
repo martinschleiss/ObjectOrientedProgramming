@@ -3,8 +3,6 @@ import java.util.TreeMap;
 
 public class SicherheitsstufeZwei extends Sicherheitsstufe {
 	
-	//TODO: Zusicherungen definieren @Martin
-	
 	public String aufSoftwareHilfskraft(SoftwareHilfskraft s, Hilfskraft a, TreeMap<Integer, Androide> liste,String out) {
 		out+="Sicherheitstufe passt, ";
 		return a.skin().vonBedienerInstalliert(a, liste,out);

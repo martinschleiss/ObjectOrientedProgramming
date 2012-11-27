@@ -5,8 +5,6 @@ import java.util.TreeMap;
  */
 public abstract class Software {
 	
-	//TODO: Codierung implementieren @Martin
-	
 	//private final int codierung; //= Seriennummer des Androiden, der mit dieser Software ausgestattet ist.
 	protected Androide a;
 	protected Sicherheitsstufe s;

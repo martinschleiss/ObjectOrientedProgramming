@@ -2,8 +2,6 @@ import java.util.TreeMap;
 
 
 public class SicherheitsstufeVier extends Sicherheitsstufe {
-
-	//TODO: Zusicherungen definieren @Martin
 	
 	public String aufSoftwareBauarbeiter(SoftwareBauarbeiter s, Bauarbeiter a, TreeMap<Integer,Androide> liste,String out) {
 		out+="Sicherheitstufe passt, ";
