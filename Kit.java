@@ -19,12 +19,17 @@ public abstract class Kit {
 		codierung = a.seriennummer();
 	}
 	
+	/**
+	 * 
+	 * @param b
+	 * @param liste
+	 * @return
+	 */
 	public abstract String vonBedienerInstalliert(Bediener b, TreeMap<Integer,Androide> liste);
 			
 	public abstract String vonStufe3Installiert(Androide a, TreeMap<Integer, Androide> liste);
 	
 	public abstract String vonStufe4Installiert(Androide a, TreeMap<Integer, Androide> liste);
-	
 	
 	public String vonKaemperInstalliert(Kaempfer k, TreeMap<Integer, Androide> liste) {
 		

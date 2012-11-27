@@ -23,67 +23,50 @@ public abstract class Software {
 	}
 	
 	/**
-	 * Vorbedingung: liste und b (Bauarbeiter) duerfen nicht null sein.
-	 * Nachbedingung: Androide kann zur Liste hinzugefuegt worden sein oder nicht.
-	 * @param liste : die Liste zu der der Androide hinzugefuegt werden soll
-	 * @param b : der Bauarbeiter zu dem die Software hinzugefuegt worden ist
+	 * Vorbedingung: liste und b (Bauarbeiter) != null
+	 * Nachbedingung: Entspricht der Androide der Verordnung, wird er der Liste hinzugefuegt.
 	 */
-
 	public abstract String vonBauarbeiterInstalliert(Bauarbeiter b, TreeMap<Integer,Androide> liste);
 	
 	/**
-	 * Vorbedingung: liste und g (Gesellschafter) duerfen nicht null sein.
-	 * Nachbedingung: Androide kann zur Liste hinzugefuegt worden sein oder nicht.
-	 * @param liste : die Liste zu der der Androide hinzugefuegt werden soll
-	 * @param g : der Gesellschafter zu dem die Software hinzugefuegt worden ist
+	 * Vorbedingung: liste und g (Gesellschafter) != null
+	 * Nachbedingung: Entspricht der Androide der Verordnung, wird er der Liste hinzugefuegt.
 	 */
 	public abstract String vonGesellschafterInstalliert(Gesellschafter g, TreeMap<Integer,Androide> liste);
 	
 	/**
-	 * Vorbedingung: liste und h (Hilfskraft) duerfen nicht null sein.
-	 * Nachbedingung: Androide kann zur Liste hinzugefuegt worden sein oder nicht.
-	 * @param liste : die Liste zu der der Androide hinzugefuegt werden soll
-	 * @param h : die Hilfskraft zu dem die Software hinzugefuegt worden ist
+	 * Vorbedingung: liste und h (Hilfskraft) != null
+	 * Nachbedingung: Entspricht der Androide der Verordnung, wird er der Liste hinzugefuegt.
 	 */
 	public abstract String vonHilfskraftInstalliert(Hilfskraft h, TreeMap<Integer,Androide> liste);
 	
 	/**
-	 * Vorbedingung: liste und k (Kaempfer) duerfen nicht null sein.
-	 * Nachbedingung: Androide kann zur Liste hinzugefuegt worden sein oder nicht.
-	 * @param liste : die Liste zu der der Androide hinzugefuegt werden soll
-	 * @param k : der Kaempfer zu dem die Software hinzugefuegt worden ist
+	 * Vorbedingung: liste und k (Kaemfper) != null
+	 * Nachbedingung: Entspricht der Androide der Verordnung, wird er der Liste hinzugefuegt.
 	 */
 	public abstract String vonKaempferInstalliert(Kaempfer k, TreeMap<Integer,Androide> liste);
 	
 	/**
-	 * Vorbedingung: liste und l (Leibwaechter) duerfen nicht null sein.
-	 * Nachbedingung: Androide kann zur Liste hinzugefuegt worden sein oder nicht.
-	 * @param liste : die Liste zu der der Androide hinzugefuegt werden soll
-	 * @param l : der Leibwaechter zu dem die Software hinzugefuegt worden ist
+	 * Vorbedingung: liste und l (Leibwaechter) != null
+	 * Nachbedingung: Entspricht der Androide der Verordnung, wird er der Liste hinzugefuegt.
 	 */
 	public abstract String vonLeibwaechterInstalliert(Leibwaechter l, TreeMap<Integer,Androide> liste);
 	
 	/**
-	 * Vorbedingung: liste und o (Objektbewacher) duerfen nicht null sein.
-	 * Nachbedingung: Androide kann zur Liste hinzugefuegt worden sein oder nicht.
-	 * @param liste : die Liste zu der der Androide hinzugefuegt werden soll
-	 * @param o : der Objektbewacher zu dem die Software hinzugefuegt worden ist
+	 * Vorbedingung: liste und o (Objektbewacher) != null
+	 * Nachbedingung: Entspricht der Androide der Verordnung, wird er der Liste hinzugefuegt.
 	 */
 	public abstract String vonObjektbewacherInstalliert(Objektbewacher o, TreeMap<Integer,Androide> liste);
 	
 	/**
-	 * Vorbedingung: liste und s (Servicetechniker) duerfen nicht null sein.
-	 * Nachbedingung: Androide kann zur Liste hinzugefuegt worden sein oder nicht.
-	 * @param liste : die Liste zu der der Androide hinzugefuegt werden soll
-	 * @param s : der Servicetechniker zu dem die Software hinzugefuegt worden ist
+	 * Vorbedingung: liste und s (Servicetechniker) != null
+	 * Nachbedingung: Entspricht der Androide der Verordnung, wird er der Liste hinzugefuegt.
 	 */
 	public abstract String vonServicetechnikerInstalliert(Servicetechniker s, TreeMap<Integer,Androide> liste);
 	
 	/**
-	 * Vorbedingung: liste und t (Transportarbeiter) duerfen nicht null sein.
-	 * Nachbedingung: Androide kann zur Liste hinzugefuegt worden sein oder nicht.
-	 * @param liste : die Liste zu der der Androide hinzugefuegt werden soll
-	 * @param t : der Transportarbeiter zu dem die Software hinzugefuegt worden ist
+	 * Vorbedingung: liste und t (Transportarbeiter) != null
+	 * Nachbedingung: Entspricht der Androide der Verordnung, wird er der Liste hinzugefuegt.
 	 */
 	public abstract String vonTransportarbeiterInstalliert(Transportarbeiter t, TreeMap<Integer,Androide> liste);
 }
