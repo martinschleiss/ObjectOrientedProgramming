@@ -19,12 +19,8 @@ public class Test {
 		
 		f.create(a, k, skin, software);
 		
-		System.out.println(a);
-		
-		
-		
-		
-		
+		Shop sh=new Shop();
+		System.out.println(sh.insert(a));
 		
 		
 		//TODO: Androiden Software Tests verfassen @Martin

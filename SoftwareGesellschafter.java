@@ -15,8 +15,8 @@ public class SoftwareGesellschafter extends Software {
 	 * @param s: die korrespondierende Sicherheitsstufe zur aktuellen Software
 	 */
 
-	public void phaseZweiFuegeAndroidZuListeHinzu(TreeMap<Integer, Androide> liste, Sicherheitsstufe s) {
-		s.aufSoftwareGesellschafter(this, a, liste);
+	public String phaseZweiFuegeAndroidZuListeHinzu(TreeMap<Integer, Androide> liste, Sicherheitsstufe s,Gesellschafter g, String out) {
+		return s.aufSoftwareGesellschafter(this, g, liste,out);
 	}
 	
 	/**
@@ -26,8 +26,9 @@ public class SoftwareGesellschafter extends Software {
 	 * @param g : der Gesellschafter zu dem die Software hinzugefuegt worden ist
 	 */
 	
-	public void vonGesellschafterInstalliert(Gesellschafter g, TreeMap<Integer, Androide> liste){ 
-		phaseZweiFuegeAndroidZuListeHinzu(liste, s);
+	public String vonGesellschafterInstalliert(Gesellschafter g, TreeMap<Integer, Androide> liste){ 
+		String out="Software passt, ";
+		return phaseZweiFuegeAndroidZuListeHinzu(liste, s, g, out);
 	};
 	
 	/**
@@ -37,7 +38,7 @@ public class SoftwareGesellschafter extends Software {
 	 * @param b : der Bauarbeiter zu dem die Software hinzugefuegt worden ist
 	 */
 	
-	public void vonBauarbeiterInstalliert(Bauarbeiter b, TreeMap<Integer, Androide> liste){ };
+	public String vonBauarbeiterInstalliert(Bauarbeiter b, TreeMap<Integer, Androide> liste){return "Software passt nicht"; };
 	
 	/**
 	 * Vorbedingung: liste und h (Hilfskraft) duerfen nicht null sein.
@@ -46,7 +47,7 @@ public class SoftwareGesellschafter extends Software {
 	 * @param h : die Hilfskraft zu dem die Software hinzugefuegt worden ist
 	 */
 	
-	public void vonHilfskraftInstalliert(Hilfskraft h, TreeMap<Integer, Androide> liste){ };
+	public String vonHilfskraftInstalliert(Hilfskraft h, TreeMap<Integer, Androide> liste){ return "Software passt nicht";};
 	
 	/**
 	 * Vorbedingung: liste und k (Kaempfer) duerfen nicht null sein.
@@ -55,7 +56,7 @@ public class SoftwareGesellschafter extends Software {
 	 * @param k : der Kaempfer zu dem die Software hinzugefuegt worden ist
 	 */
 	
-	public void vonKaempferInstalliert(Kaempfer k, TreeMap<Integer, Androide> liste){ };
+	public String vonKaempferInstalliert(Kaempfer k, TreeMap<Integer, Androide> liste){return "Software passt nicht"; };
 	
 	/**
 	 * Vorbedingung: liste und l (Leibwaechter) duerfen nicht null sein.
@@ -64,7 +65,7 @@ public class SoftwareGesellschafter extends Software {
 	 * @param l : der Leibwaechter zu dem die Software hinzugefuegt worden ist
 	 */
 	
-	public void vonLeibwaechterInstalliert(Leibwaechter l, TreeMap<Integer, Androide> liste){ };
+	public String vonLeibwaechterInstalliert(Leibwaechter l, TreeMap<Integer, Androide> liste){return "Software passt nicht"; };
 	
 	/**
 	 * Vorbedingung: liste und o (Objektbewacher) duerfen nicht null sein.
@@ -73,7 +74,7 @@ public class SoftwareGesellschafter extends Software {
 	 * @param o : der Objektbewacher zu dem die Software hinzugefuegt worden ist
 	 */
 	
-	public void vonObjektbewacherInstalliert(Objektbewacher o, TreeMap<Integer, Androide> liste){ };
+	public String vonObjektbewacherInstalliert(Objektbewacher o, TreeMap<Integer, Androide> liste){ return "Software passt nicht";};
 	
 	/**
 	 * Vorbedingung: liste und s (Servicetechniker) duerfen nicht null sein.
@@ -82,7 +83,7 @@ public class SoftwareGesellschafter extends Software {
 	 * @param s : der Servicetechniker zu dem die Software hinzugefuegt worden ist
 	 */
 	
-	public void vonServicetechnikerInstalliert(Servicetechniker s, TreeMap<Integer, Androide> liste){ };
+	public String vonServicetechnikerInstalliert(Servicetechniker s, TreeMap<Integer, Androide> liste){ return "Software passt nicht";};
 	
 	/**
 	 * Vorbedingung: liste und s (Sicherheitsstufe) duerfen nicht null sein.
@@ -91,5 +92,5 @@ public class SoftwareGesellschafter extends Software {
 	 * @param s : die korrespondierende Sicherheitsstufe zur aktuellen Software
 	 */
 	
-	public void vonTransportarbeiterInstalliert(Transportarbeiter t, TreeMap<Integer, Androide> liste){ };
+	public String vonTransportarbeiterInstalliert(Transportarbeiter t, TreeMap<Integer, Androide> liste){return "Software passt nicht"; };
 }

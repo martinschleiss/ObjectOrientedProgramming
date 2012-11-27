@@ -12,8 +12,8 @@ public abstract class Androide {
 	private String protokoll;
 	
 	public Androide() {
-		
-		seriennummer = serie++;
+		serie++;
+		seriennummer = serie;
 		protokoll = "";
 		kit = new ArrayList<Komponente>();
 	}
@@ -63,6 +63,7 @@ public abstract class Androide {
 	 * @param liste : die Liste zu der der Androide hinzugefuegt werden soll
 	 */
 	public final void fuegeAndroideZuListeHinzu(TreeMap<Integer,Androide> liste) {
+	
 		liste.put(seriennummer,this);
 	}
 	
@@ -72,7 +73,7 @@ public abstract class Androide {
 	 * @param liste : die Liste zu der der Androide hinzugefuegt werden soll
 	 */
 	
-	//public abstract void phaseEinsFuegeAndroidZuListeHinzu(ArrayList<Androide> liste);
+	public abstract String phaseEinsFuegeAndroidZuListeHinzu(TreeMap<Integer,Androide> liste);
 	//public abstract void insertWennVerordnungErfuellt(TreeMap<Integer,Androide> liste);
 	
 	

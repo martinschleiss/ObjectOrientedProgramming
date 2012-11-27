@@ -8,7 +8,7 @@ public class Bauarbeiter extends Schwerarbeiter {
 	 * @param liste : die Liste zu der der Androide hinzugefuegt werden soll
 	 */
 
-	public void phaseEinsFuegeAndroidZuListeHinzu(TreeMap<Integer, Androide> liste) {
-		software().vonBauarbeiterInstalliert(this, liste);
+	public String phaseEinsFuegeAndroidZuListeHinzu(TreeMap<Integer, Androide> liste) {
+		return software().vonBauarbeiterInstalliert(this, liste);
 	}
 }

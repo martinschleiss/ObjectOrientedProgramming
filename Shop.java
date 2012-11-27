@@ -5,10 +5,12 @@ public class Shop {
 	private TreeMap<Integer, Androide> liste = new TreeMap<Integer, Androide>();
 
 	
-	public String insert(Androide a) { //retourniert Fehlercode bzw Erfolgsmeldung
+	public String insert(Androide s) { //retourniert Fehlercode bzw Erfolgsmeldung
 		//a.insertWennVerordnungErfuellt(liste);
 		//a.fuegeAndroideZuListeHinzu(liste);
-		return "";
+		s.phaseEinsFuegeAndroidZuListeHinzu(liste);
+		//System.out.println(liste.get(s.seriennummer()));
+		return s.phaseEinsFuegeAndroidZuListeHinzu(liste);
 	}
 	
 	public String find(int key) {

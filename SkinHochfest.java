@@ -14,7 +14,9 @@ public class SkinHochfest extends Skin {
 	 * @param liste : die Liste zu der der Androide hinzugefuegt werden soll
 	 * @param b : der Bauarbeiter zu dem die Skin hinzugefuegt werden soll
 	 */
-	public void vonBedienerInstalliert(Bediener b, TreeMap<Integer,Androide> liste) {
+	public String vonBedienerInstalliert(Bediener b, TreeMap<Integer,Androide> liste,String out) {
+		out +="Skin passt, ";
+		return out;
 	//passt nicht
 	}
 	
@@ -24,8 +26,12 @@ public class SkinHochfest extends Skin {
 	 * @param liste : die Liste zu der der Androide hinzugefuegt werden soll
 	 * @param g : der Gesellschafter zu dem die Skin hinzugefuegt werden soll
 	 */
-	public void vonSchwerarbeiterInstalliert(Schwerarbeiter g, TreeMap<Integer,Androide> liste) {
-	//passt	- jetzt Aktorencheck
+	public String vonSchwerarbeiterInstalliert(Schwerarbeiter g, TreeMap<Integer,Androide> liste,String out) {
+		
+		out +="Skin passt";
+		//System.out.println(out);
+		return out;
+		//weiter zu Komponenten
 	}
 	
 	/**
@@ -34,8 +40,16 @@ public class SkinHochfest extends Skin {
 	 * @param liste : die Liste zu der der Androide hinzugefuegt werden soll
 	 * @param h : die Hilfskraft zu dem die Skin hinzugefuegt werden soll
 	 */
-	public void vonBeschuetzer(Beschuetzer b, TreeMap<Integer,Androide> liste) {
-	//passt	
+	public String vonBeschuetzer(Beschuetzer b, TreeMap<Integer,Androide> liste,String out) {
+	
+		out +="Skin passt";
+		return out;
+		//weiter zu Komponenten
+	}
+	
+	@Override
+	public String toString() {
+		return super.toString()+"SkinHochfest "+"SRN: "+codierung;
 	}
 
 }
