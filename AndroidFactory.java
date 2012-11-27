@@ -1,5 +1,6 @@
-import java.util.ArrayList;
-
+/**
+ * Dient der Zusammenstellung eines Androiden
+ */
 
 public class AndroidFactory {
 
@@ -7,9 +8,13 @@ public class AndroidFactory {
 	
 	}
 
-	public void create(Androide a, ArrayList<Komponente> komponenten, Skin skin, Software software) {
+	/**
+	 * Ruft die fuer den Zusammenbau der Bauteile notwendigen Methoden in der Klasse Androide auf
+	 * @param a		Vorbedingung: not null
+	 */
+	public void create(Androide a, Kit kit, Skin skin, Software software) {
 		
-		a.installKomponenten(komponenten);
+		a.installKit(kit);
 		a.installSkin(skin);
 		a.installSoftware(software);
 	}

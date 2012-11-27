@@ -18,7 +18,7 @@ public abstract class Skin {
 	 * @param liste : die Liste zu der der Androide hinzugefuegt werden soll
 	 * @param b : der Bauarbeiter zu dem die Skin hinzugefuegt werden soll
 	 */
-	public abstract void vonBedienerInstalliert(Bediener b, TreeMap<Integer,Androide> liste);
+	public abstract String vonBedienerInstalliert(Bediener b, TreeMap<Integer,Androide> liste);
 	
 	/**
 	 * Vorbedingung: liste und s (Schwerarbeiter) duerfen nicht null sein.
@@ -26,7 +26,7 @@ public abstract class Skin {
 	 * @param liste : die Liste zu der der Androide hinzugefuegt werden soll
 	 * @param g : der Gesellschafter zu dem die Skin hinzugefuegt werden soll
 	 */
-	public abstract void vonSchwerarbeiterInstalliert(Schwerarbeiter g, TreeMap<Integer,Androide> liste);
+	public abstract String vonSchwerarbeiterInstalliert(Schwerarbeiter g, TreeMap<Integer,Androide> liste);
 	
 	/**
 	 * Vorbedingung: liste und b (Beschuetzer) duerfen nicht null sein.
@@ -34,7 +34,7 @@ public abstract class Skin {
 	 * @param liste : die Liste zu der der Androide hinzugefuegt werden soll
 	 * @param h : die Hilfskraft zu dem die Skin hinzugefuegt werden soll
 	 */
-	public abstract void vonBeschuetzer(Beschuetzer b, TreeMap<Integer,Androide> liste);
+	public abstract String vonBeschuetzer(Beschuetzer b, TreeMap<Integer,Androide> liste);
 	
 	public String toString() {
 		return "Skin: " + codierung;

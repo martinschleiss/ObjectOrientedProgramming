@@ -12,4 +12,9 @@ public class Transportarbeiter extends Schwerarbeiter {
 	public void phaseEinsFuegeAndroidZuListeHinzu(TreeMap<Integer, Androide> liste) {
 		software().vonTransportarbeiterInstalliert(this, liste);
 	}
+	
+	public String toString() {
+		
+		return "Transportarbeiter " + super.toString();
+	}	
 }

@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.TreeMap;
 
 
@@ -6,7 +5,7 @@ public abstract class Androide {
 	
 	private static int serie = 0;
 	private final int seriennummer;
-	private ArrayList<Komponente> kit;
+	private Kit kit;
 	private Skin skin;
 	private Software software;
 	private String protokoll;
@@ -15,7 +14,6 @@ public abstract class Androide {
 		
 		seriennummer = serie++;
 		protokoll = "";
-		kit = new ArrayList<Komponente>();
 	}
 	
 	public final int seriennummer() {
@@ -32,6 +30,11 @@ public abstract class Androide {
 		return skin;
 	}
 	
+	public Kit kit() {
+		
+		return kit;
+	}
+	
 	public void installSkin(Skin skin) {
 		
 		this.skin = skin;
@@ -44,50 +47,26 @@ public abstract class Androide {
 		stage("Software installiert: " + software + "\n");
 	}
 	
-	public void installKomponenten(ArrayList<Komponente> k) {
+	public void installKit(Kit kit) {
 		
-		kit.addAll(k);
-		String out = "Komponente(n) installiert: ";
+		this.kit = kit;
+		stage("Kit installiert: " + kit + "\n");
+	}
 		
-		for(Komponente i : k) {
-			
-			out += i + ", ";
-		}
-		
-		stage(out + "\n");
-	}
-	
-	/**
-	 * Vorbedingung: liste darf nicht null sein.
-	 * Nachbedingung: Androide kann zur Liste hinzugefuegt worden sein oder nicht.
-	 * @param liste : die Liste zu der der Androide hinzugefuegt werden soll
-	 */
-	public final void fuegeAndroideZuListeHinzu(TreeMap<Integer,Androide> liste) {
-		liste.put(seriennummer,this);
-	}
-	
-	/**
-	 * Vorbedingung: liste darf nicht null sein.
-	 * Nachbedingung: Androide kann zur Liste hinzugefuegt worden sein oder nicht.
-	 * @param liste : die Liste zu der der Androide hinzugefuegt werden soll
-	 */
-	
-	//public abstract void phaseEinsFuegeAndroidZuListeHinzu(ArrayList<Androide> liste);
-	//public abstract void insertWennVerordnungErfuellt(TreeMap<Integer,Androide> liste);
-	
-	
-	public void erstetzeKomponente(Komponente a, Komponente b) {
-	
-		kit.remove(a);
-		kit.add(b);
-	}
 	private void stage(String s) {
 		
 		protokoll += "\t" + s;
 	}
+
+	/**
+	 * Vorbedingung: liste darf nicht null sein.
+	 * Nachbedingung: Androide kann zur Liste hinzugefuegt worden sein oder nicht.
+	 * @param liste : die Liste zu der der Androide hinzugefuegt werden soll
+	 */
+	public abstract String insertWennPasst(TreeMap<Integer, Androide> liste);
 	
 	public String toString() {
 		
-		return "Androide, Seriennummer: " + seriennummer + ", " + "Aufzeichnungen:\n" + protokoll;
+		return "Seriennummer: " + seriennummer + ", " + "Aufzeichnungen:\n" + protokoll;
 	}	
 }

@@ -12,4 +12,9 @@ public class Leibwaechter extends Beschuetzer {
 	public void phaseEinsFuegeAndroidZuListeHinzu(TreeMap<Integer, Androide> liste) {
 		software().vonLeibwaechterInstalliert(this, liste);
 	}
+	
+	public String toString() {
+		
+		return "Leibwaechter " + super.toString();
+	}	
 }

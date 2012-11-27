@@ -6,6 +6,18 @@ public class SkinGepanzert extends Skin {
 	public SkinGepanzert(Androide a) {
 		super(a);
 	}
+		
+	/**
+	 * Vorbedingung: liste und b (Beschuetzer) duerfen nicht null sein.
+	 * Nachbedingung: Androide kann zur Liste hinzugefuegt worden sein oder nicht.
+	 * @param liste : die Liste zu der der Androide hinzugefuegt werden soll
+	 * @param h : die Hilfskraft zu dem die Skin hinzugefuegt werden soll
+	 */
+	public String vonBeschuetzer(Beschuetzer b, TreeMap<Integer,Androide> liste) {
+			
+		liste.put(b.seriennummer(), b);
+		return "Skin ok - Ueberpruefung erfolgreich";
+	}
 	
 	/**
 	 * Vorbedingung: liste und b (Bediener) duerfen nicht null sein.
@@ -13,8 +25,9 @@ public class SkinGepanzert extends Skin {
 	 * @param liste : die Liste zu der der Androide hinzugefuegt werden soll
 	 * @param b : der Bauarbeiter zu dem die Skin hinzugefuegt werden soll
 	 */
-	public void vonBedienerInstalliert(Bediener b, TreeMap<Integer,Androide> liste) {
-	//passt nicht
+	public String vonBedienerInstalliert(Bediener b, TreeMap<Integer,Androide> liste) {
+	
+		return "Fehler: Skin passt nicht";
 	}
 	
 	/**
@@ -23,17 +36,8 @@ public class SkinGepanzert extends Skin {
 	 * @param liste : die Liste zu der der Androide hinzugefuegt werden soll
 	 * @param g : der Gesellschafter zu dem die Skin hinzugefuegt werden soll
 	 */
-	public void vonSchwerarbeiterInstalliert(Schwerarbeiter g, TreeMap<Integer,Androide> liste) {
-	//passt	nicht
-	}
-	
-	/**
-	 * Vorbedingung: liste und b (Beschuetzer) duerfen nicht null sein.
-	 * Nachbedingung: Androide kann zur Liste hinzugefuegt worden sein oder nicht.
-	 * @param liste : die Liste zu der der Androide hinzugefuegt werden soll
-	 * @param h : die Hilfskraft zu dem die Skin hinzugefuegt werden soll
-	 */
-	public void vonBeschuetzer(Beschuetzer b, TreeMap<Integer,Androide> liste) {
-	//passt	
+	public String vonSchwerarbeiterInstalliert(Schwerarbeiter g, TreeMap<Integer,Androide> liste) {
+
+		return "Fehler: Skin passt nicht";
 	}
 }

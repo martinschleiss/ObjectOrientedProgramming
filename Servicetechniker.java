@@ -12,4 +12,9 @@ public class Servicetechniker extends Schwerarbeiter {
 	public void phaseEinsFuegeAndroidZuListeHinzu(TreeMap<Integer, Androide> liste) {
 		software().vonServicetechnikerInstalliert(this, liste);
 	}
+	
+	public String toString() {
+		
+		return "Servicetechniker " + super.toString();
+	}	
 }

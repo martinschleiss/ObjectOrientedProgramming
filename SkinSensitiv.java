@@ -13,8 +13,10 @@ public class SkinSensitiv extends Skin {
 	 * @param liste : die Liste zu der der Androide hinzugefuegt werden soll
 	 * @param b : der Bauarbeiter zu dem die Skin hinzugefuegt werden soll
 	 */
-	public void vonBedienerInstalliert(Bediener b, TreeMap<Integer,Androide> liste) {
-	//passt
+	public String vonBedienerInstalliert(Bediener b, TreeMap<Integer,Androide> liste) {
+
+		liste.put(b.seriennummer(), b);
+		return "Skin ok - Ueberpruefung erfolgreich";
 	}
 	
 	/**
@@ -23,8 +25,10 @@ public class SkinSensitiv extends Skin {
 	 * @param liste : die Liste zu der der Androide hinzugefuegt werden soll
 	 * @param g : der Gesellschafter zu dem die Skin hinzugefuegt werden soll
 	 */
-	public void vonSchwerarbeiterInstalliert(Schwerarbeiter g, TreeMap<Integer,Androide> liste) {
-	//passt	- jetzt AktorenCheck
+	public String vonSchwerarbeiterInstalliert(Schwerarbeiter g, TreeMap<Integer,Androide> liste) {
+		
+		liste.put(g.seriennummer(), g);
+		return "Skin ok - Ueberpruefung erfolgreich";
 	}
 	
 	/**
@@ -33,7 +37,9 @@ public class SkinSensitiv extends Skin {
 	 * @param liste : die Liste zu der der Androide hinzugefuegt werden soll
 	 * @param h : die Hilfskraft zu dem die Skin hinzugefuegt werden soll
 	 */
-	public void vonBeschuetzer(Beschuetzer b, TreeMap<Integer,Androide> liste) {
-	//passt	
+	public String vonBeschuetzer(Beschuetzer b, TreeMap<Integer,Androide> liste) {
+
+		liste.put(b.seriennummer(), b);
+		return "Skin ok - Ueberpruefung erfolgreich";
 	}
 }

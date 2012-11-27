@@ -3,7 +3,7 @@ import java.util.TreeMap;
 public class Shop {
 	
 	private TreeMap<Integer, Androide> liste = new TreeMap<Integer, Androide>();
-
+	private TreeMap<Integer, Androide> chronologischeListe = new TreeMap<Integer, Androide>();
 	
 	public String insert(Androide a) { //retourniert Fehlercode bzw Erfolgsmeldung
 		//a.insertWennVerordnungErfuellt(liste);

@@ -12,4 +12,9 @@ public class Kaempfer extends Beschuetzer {
 	public void phaseEinsFuegeAndroidZuListeHinzu(TreeMap<Integer, Androide> liste) {
 		software().vonKaempferInstalliert(this, liste);
 	}
+	
+	public String toString() {
+		
+		return "Kaempfer " + super.toString();
+	}	
 }

@@ -5,21 +5,39 @@ public class SicherheitsstufeDrei extends Sicherheitsstufe {
 	
 	//TODO: Zusicherungen definieren @Martin
 	
-	public void aufSoftwareBauarbeiter(SoftwareBauarbeiter s, Androide a, TreeMap<Integer,Androide> liste) {
-		a.fuegeAndroideZuListeHinzu(liste);
+	public String aufSoftwareBauarbeiter(Androide a, TreeMap<Integer,Androide> liste) {
+		
+		return "Sicherheitsstufe ok, " + a.skin().vonBauarbeiterInstalliert(a, liste);
 	}
 	
-	public void aufSoftwareServicetechniker(SoftwareServicetechniker s, Androide a, TreeMap<Integer,Androide> liste) {
-		a.fuegeAndroideZuListeHinzu(liste);
+	public String aufSoftwareServicetechniker(Androide a, TreeMap<Integer,Androide> liste) {
+
+		return "Sicherheitsstufe ok, " + a.skin().vonServiceTechnikerInstalliert(a, liste);
 	}
 	
-	public void aufSoftwareTransportarbeiter(SoftwareTransportarbeiter s, Androide a, TreeMap<Integer,Androide> liste) {
-		a.fuegeAndroideZuListeHinzu(liste);
+	public String aufSoftwareTransportarbeiter(Androide a, TreeMap<Integer,Androide> liste) {
+
+		return "Sicherheitsstufe ok, " + a.skin().vonTransportArbeiterInstalliert(a, liste);
 	}
 	
-	public void aufSoftwareGesellschafter(SoftwareGesellschafter s, Androide a, TreeMap<Integer,Androide> liste) {}
-	public void aufSoftwareHilfskraft(SoftwareHilfskraft s, Androide a, TreeMap<Integer,Androide> liste) {}
-	public void aufSoftwareKaempfer(SoftwareKaempfer s, Androide a, TreeMap<Integer,Androide> liste) {}
-	public void aufSoftwareLeibwaechter(SoftwareLeibwaechter s, Androide a, TreeMap<Integer,Androide> liste) {}
-	public void aufSoftwareObjektbewacher(SoftwareObjektbewacher s, Androide a, TreeMap<Integer,Androide> liste) {}
+	public String aufSoftwareGesellschafter(Androide a, TreeMap<Integer,Androide> liste) {
+		
+		return "Fehler: Sicherheitsstufe passt nicht.";
+	}
+	public String aufSoftwareHilfskraft(Androide a, TreeMap<Integer,Androide> liste) {
+		
+		return "Fehler: Sicherheitsstufe passt nicht.";
+	}
+	public String aufSoftwareKaempfer(Androide a, TreeMap<Integer,Androide> liste) {
+		
+		return "Fehler: Sicherheitsstufe passt nicht.";
+	}
+	public String aufSoftwareLeibwaechter(Androide a, TreeMap<Integer,Androide> liste) {
+		
+		return "Fehler: Sicherheitsstufe passt nicht.";
+	}
+	public String aufSoftwareObjektbewacher(Androide a, TreeMap<Integer,Androide> liste) {
+		
+		return "Fehler: Sicherheitsstufe passt nicht.";
+	}
 }

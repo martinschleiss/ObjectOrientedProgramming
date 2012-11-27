@@ -12,4 +12,9 @@ public class Objektbewacher extends Beschuetzer {
 	public void phaseEinsFuegeAndroidZuListeHinzu(TreeMap<Integer, Androide> liste) {
 		software().vonObjektbewacherInstalliert(this, liste);
 	}
+	
+	public String toString() {
+		
+		return "Objektbewacher " + super.toString();
+	}	
 }

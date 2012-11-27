@@ -12,4 +12,9 @@ public class Hilfskraft extends Bediener {
 	public void phaseEinsFuegeAndroidZuListeHinzu(TreeMap<Integer, Androide> liste) {
 		software().vonHilfskraftInstalliert(this, liste);
 	}
+	
+	public String toString() {
+		
+		return "Hilfskraft " + super.toString();
+	}	
 }

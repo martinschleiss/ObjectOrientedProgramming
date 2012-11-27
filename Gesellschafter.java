@@ -12,4 +12,9 @@ public class Gesellschafter extends Bediener {
 	public void phaseEinsFuegeAndroidZuListeHinzu(TreeMap<Integer, Androide> liste) {
 		software().vonGesellschafterInstalliert(this, liste);
 	}
+	
+	public String toString() {
+		
+		return "Gesellschafter " + super.toString();
+	}	
 }
