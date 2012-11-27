@@ -9,8 +9,8 @@ public class Objektbewacher extends Beschuetzer {
 	 * @param liste : die Liste zu der der Androide hinzugefuegt werden soll
 	 */
 
-	public void phaseEinsFuegeAndroidZuListeHinzu(TreeMap<Integer, Androide> liste) {
-		software().vonObjektbewacherInstalliert(this, liste);
+	public String phaseEinsFuegeAndroidZuListeHinzu(TreeMap<Integer, Androide> liste) {
+		return software().vonObjektbewacherInstalliert(this, liste);
 	}
 	
 	public String toString() {

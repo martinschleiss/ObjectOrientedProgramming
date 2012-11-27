@@ -6,37 +6,28 @@ import java.util.TreeMap;
  */
 public abstract class Skin {
 
-	private final int codierung; //= Seriennummer des Androiden, der mit dieser Skin ausgestattet ist.
+	/**
+	 * = Seriennummer des Androiden, der mit dieser Skin ausgestattet ist.
+	 */
+	private final int codierung;
 
 	public Skin(Androide a) {
+		
 		codierung = a.seriennummer();
 	}
 	
-	/**
-	 * Vorbedingung: liste und b (Bediener) duerfen nicht null sein.
-	 * Nachbedingung: Androide kann zur Liste hinzugefuegt worden sein oder nicht.
-	 * @param liste : die Liste zu der der Androide hinzugefuegt werden soll
-	 * @param b : der Bauarbeiter zu dem die Skin hinzugefuegt werden soll
-	 */
-	public abstract String vonBedienerInstalliert(Bediener b, TreeMap<Integer,Androide> liste);
+	public abstract String vonBedienerInstalliert(Bediener a, TreeMap<Integer,Androide> liste);
 	
-	/**
-	 * Vorbedingung: liste und s (Schwerarbeiter) duerfen nicht null sein.
-	 * Nachbedingung: Androide kann zur Liste hinzugefuegt worden sein oder nicht.
-	 * @param liste : die Liste zu der der Androide hinzugefuegt werden soll
-	 * @param g : der Gesellschafter zu dem die Skin hinzugefuegt werden soll
-	 */
 	public abstract String vonSchwerarbeiterInstalliert(Schwerarbeiter g, TreeMap<Integer,Androide> liste);
 	
-	/**
-	 * Vorbedingung: liste und b (Beschuetzer) duerfen nicht null sein.
-	 * Nachbedingung: Androide kann zur Liste hinzugefuegt worden sein oder nicht.
-	 * @param liste : die Liste zu der der Androide hinzugefuegt werden soll
-	 * @param h : die Hilfskraft zu dem die Skin hinzugefuegt werden soll
-	 */
-	public abstract String vonBeschuetzer(Beschuetzer b, TreeMap<Integer,Androide> liste);
+	public abstract String vonObjektbewacherInstalliert(Objektbewacher a, TreeMap<Integer,Androide> liste);
+	
+	public abstract String vonLeibwaechterInstalliert(Leibwaechter a, TreeMap<Integer,Androide> liste);
+	
+	public abstract String vonKaempferInstalliert(Kaempfer a, TreeMap<Integer, Androide> liste);
 	
 	public String toString() {
-		return "Skin: " + codierung;
+		
+		return "Codierung: " + codierung;
 	}
 }

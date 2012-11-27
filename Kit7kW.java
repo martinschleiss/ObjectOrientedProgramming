@@ -20,6 +20,7 @@ public class Kit7kW extends Kit {
 
 	public String vonStufe4Installiert(Androide a, TreeMap<Integer, Androide> liste) {
 		
-		return "Kit ok";
+		liste.put(a.seriennummer(), a);
+		return "Kit ok - Ueberpruefung erfolgreich. Androide wurde eingefuegt";
 	}
 }

@@ -10,16 +10,19 @@ public class Kit1kW extends Kit {
 	
 	public String vonBedienerInstalliert(Bediener b, TreeMap<Integer, Androide> liste) {
 
-		return "Kit ok";
+		liste.put(b.seriennummer(), b);
+		return "Kit ok - Ueberpruefung erfolgreich. Androide wurde eingefuegt";
 	}
 
 	public String vonStufe3Installiert(Androide a, TreeMap<Integer, Androide> liste) {
 
-		return "Kit ok";
+		liste.put(a.seriennummer(), a);
+		return "Kit ok - Ueberpruefung erfolgreich. Androide wurde eingefuegt";
 	}
 
 	public String vonStufe4Installiert(Androide a, TreeMap<Integer, Androide> liste) {
 		
-		return "Kit ok";
+		liste.put(a.seriennummer(), a);
+		return "Kit ok - Ueberpruefung erfolgreich. Androide wurde eingefuegt";
 	}
 }

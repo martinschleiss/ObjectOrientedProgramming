@@ -5,21 +5,22 @@ import java.util.TreeMap;
  */
 public abstract class Software {
 	
-	//TODO: Codierung implementieren @Martin
-	
-	private final int codierung; //= Seriennummer des Androiden, der mit dieser Software ausgestattet ist.
+	/**
+	 * = Seriennummer des Androiden, der mit dieser Software ausgestattet ist.
+	 */
+	private final int codierung;
 	private Sicherheitsstufe s;
 	
 	public Software(Androide a, Sicherheitsstufe s) {
+		
 		this.s = s;
 		codierung = a.seriennummer();
 	}
 	
-	protected Sicherheitsstufe sicherheitsstufe() {
+	public Sicherheitsstufe sicherheitsstufe() {
 		
 		return s;
 	}
-	
 	
 	/**
 	 * Vorbedingung: liste und b (Bauarbeiter) duerfen nicht null sein.

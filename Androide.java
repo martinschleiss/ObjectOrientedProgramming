@@ -11,8 +11,8 @@ public abstract class Androide {
 	private String protokoll;
 	
 	public Androide() {
-		
-		seriennummer = serie++;
+		serie++;
+		seriennummer = serie;
 		protokoll = "";
 	}
 	
@@ -54,7 +54,7 @@ public abstract class Androide {
 	}
 		
 	private void stage(String s) {
-		
+
 		protokoll += "\t" + s;
 	}
 
@@ -63,7 +63,8 @@ public abstract class Androide {
 	 * Nachbedingung: Androide kann zur Liste hinzugefuegt worden sein oder nicht.
 	 * @param liste : die Liste zu der der Androide hinzugefuegt werden soll
 	 */
-	public abstract String insertWennPasst(TreeMap<Integer, Androide> liste);
+
+	public abstract String phaseEinsFuegeAndroidZuListeHinzu(TreeMap<Integer,Androide> liste);
 	
 	public String toString() {
 		

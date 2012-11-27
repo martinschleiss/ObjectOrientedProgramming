@@ -28,6 +28,7 @@ public abstract class Kit {
 	
 	public String vonKaemperInstalliert(Kaempfer k, TreeMap<Integer, Androide> liste) {
 		
+		liste.put(k.seriennummer(), k);
 		return "Kit ok";
 	}
 	

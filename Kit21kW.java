@@ -19,7 +19,7 @@ public class Kit21kW extends Kit {
 	}
 
 	public String vonStufe4Installiert(Androide a, TreeMap<Integer, Androide> liste) {
-		
+
 		return "Fehler: Leistungsueberschreitung";
 	}
 }

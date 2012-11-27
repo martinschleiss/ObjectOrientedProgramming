@@ -3,41 +3,29 @@ import java.util.TreeMap;
 
 public class SicherheitsstufeDrei extends Sicherheitsstufe {
 	
-	//TODO: Zusicherungen definieren @Martin
-	
-	public String aufSoftwareBauarbeiter(Androide a, TreeMap<Integer,Androide> liste) {
+	public String aufSoftwareBauarbeiter(Bauarbeiter a, TreeMap<Integer,Androide> liste) {
 		
-		return "Sicherheitsstufe ok, " + a.skin().vonBauarbeiterInstalliert(a, liste);
+		return "Sicherheitsstufe passt, " + a.skin().vonSchwerarbeiterInstalliert(a, liste);
 	}
 	
-	public String aufSoftwareServicetechniker(Androide a, TreeMap<Integer,Androide> liste) {
-
-		return "Sicherheitsstufe ok, " + a.skin().vonServiceTechnikerInstalliert(a, liste);
+	public String aufSoftwareServicetechniker(Servicetechniker a, TreeMap<Integer,Androide> liste) {
+		
+		return "Sicherheitstufe passt, " + a.skin().vonSchwerarbeiterInstalliert(a, liste);
 	}
 	
-	public String aufSoftwareTransportarbeiter(Androide a, TreeMap<Integer,Androide> liste) {
-
-		return "Sicherheitsstufe ok, " + a.skin().vonTransportArbeiterInstalliert(a, liste);
+	public String aufSoftwareTransportarbeiter(Transportarbeiter a, TreeMap<Integer,Androide> liste) {
+		
+		return "Sicherheitstufe passt, " + a.skin().vonSchwerarbeiterInstalliert(a, liste);
 	}
 	
-	public String aufSoftwareGesellschafter(Androide a, TreeMap<Integer,Androide> liste) {
+	public String aufSoftwareGesellschafter(Gesellschafter a, TreeMap<Integer,Androide> liste) {return "Sicherheitstufe passt nicht";}
+	public String aufSoftwareHilfskraft(Hilfskraft a, TreeMap<Integer,Androide> liste) {return "Sicherheitstufe passt nicht";}
+	public String aufSoftwareKaempfer(Kaempfer a, TreeMap<Integer,Androide> liste) {return "Sicherheitstufe passt nicht";}
+	public String aufSoftwareLeibwaechter(Leibwaechter a, TreeMap<Integer,Androide> liste) {return "Sicherheitstufe passt nicht";}
+	public String aufSoftwareObjektbewacher(Objektbewacher a, TreeMap<Integer,Androide> liste) {return "Sicherheitstufe passt nicht";}
+	
+	public String installiertKit(Schwerarbeiter a, TreeMap<Integer, Androide> liste) {
 		
-		return "Fehler: Sicherheitsstufe passt nicht.";
-	}
-	public String aufSoftwareHilfskraft(Androide a, TreeMap<Integer,Androide> liste) {
-		
-		return "Fehler: Sicherheitsstufe passt nicht.";
-	}
-	public String aufSoftwareKaempfer(Androide a, TreeMap<Integer,Androide> liste) {
-		
-		return "Fehler: Sicherheitsstufe passt nicht.";
-	}
-	public String aufSoftwareLeibwaechter(Androide a, TreeMap<Integer,Androide> liste) {
-		
-		return "Fehler: Sicherheitsstufe passt nicht.";
-	}
-	public String aufSoftwareObjektbewacher(Androide a, TreeMap<Integer,Androide> liste) {
-		
-		return "Fehler: Sicherheitsstufe passt nicht.";
+		return a.kit().vonStufe3Installiert(a, liste);	
 	}
 }

@@ -2,42 +2,38 @@ import java.util.TreeMap;
 
 
 public class SkinGepanzert extends Skin {
-	
+
 	public SkinGepanzert(Androide a) {
 		super(a);
 	}
-		
-	/**
-	 * Vorbedingung: liste und b (Beschuetzer) duerfen nicht null sein.
-	 * Nachbedingung: Androide kann zur Liste hinzugefuegt worden sein oder nicht.
-	 * @param liste : die Liste zu der der Androide hinzugefuegt werden soll
-	 * @param h : die Hilfskraft zu dem die Skin hinzugefuegt werden soll
-	 */
-	public String vonBeschuetzer(Beschuetzer b, TreeMap<Integer,Androide> liste) {
-			
-		liste.put(b.seriennummer(), b);
-		return "Skin ok - Ueberpruefung erfolgreich";
-	}
-	
-	/**
-	 * Vorbedingung: liste und b (Bediener) duerfen nicht null sein.
-	 * Nachbedingung: Androide kann zur Liste hinzugefuegt worden sein oder nicht.
-	 * @param liste : die Liste zu der der Androide hinzugefuegt werden soll
-	 * @param b : der Bauarbeiter zu dem die Skin hinzugefuegt werden soll
-	 */
-	public String vonBedienerInstalliert(Bediener b, TreeMap<Integer,Androide> liste) {
-	
-		return "Fehler: Skin passt nicht";
-	}
-	
-	/**
-	 * Vorbedingung: liste und s (Schwerarbeiter) duerfen nicht null sein.
-	 * Nachbedingung: Androide kann zur Liste hinzugefuegt worden sein oder nicht.
-	 * @param liste : die Liste zu der der Androide hinzugefuegt werden soll
-	 * @param g : der Gesellschafter zu dem die Skin hinzugefuegt werden soll
-	 */
-	public String vonSchwerarbeiterInstalliert(Schwerarbeiter g, TreeMap<Integer,Androide> liste) {
 
+	public String vonBedienerInstalliert(Bediener a, TreeMap<Integer,Androide> liste) {
+		
 		return "Fehler: Skin passt nicht";
+	}
+	
+	public String vonSchwerarbeiterInstalliert(Schwerarbeiter g, TreeMap<Integer,Androide> liste) {
+		
+		return "Fehler: Skin passt nicht";
+	}
+	
+	public String vonObjektbewacherInstalliert(Objektbewacher a, TreeMap<Integer,Androide> liste) {
+
+		return "Skin ok, " + a.kit().vonStufe4Installiert(a, liste);
+	}
+	
+	public String vonLeibwaechterInstalliert(Leibwaechter a, TreeMap<Integer,Androide> liste) {
+
+		return "Skin ok, " + a.kit().vonStufe4Installiert(a, liste);
+	}
+	
+	public String vonKaempferInstalliert(Kaempfer a, TreeMap<Integer, Androide> liste) {
+		
+		return "Skin ok, " + a.kit().vonKaemperInstalliert(a, liste);
+	}
+
+	public String toString() {
+
+		return "Skin Gepanzert, " + super.toString();
 	}
 }
