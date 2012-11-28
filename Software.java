@@ -23,23 +23,29 @@ public abstract class Software {
 	}
 	
 	/**
-	 * Vorbedingung: liste und b (Bauarbeiter) != null
-	 * Nachbedingung:	Androide entspricht Verordnung:				wird der Liste hinzugefuegt (oder ueberschrieben)
-	 * 					Androide entspricht nicht der Verordnung:	wird aus Liste geloescht, falls in Liste
+	 * Vorbedingung: liste und Androide != null
+	 * Nachbedingung:
+	 * 			entspricht Verordnung: wird der Liste hinzugefuegt (oder ueberschrieben)
+	 * 			entspricht nicht der Verordnung: wird aus Liste geloescht, falls in Liste
+	 * @return Aufzeichnungen der Ueberpruefung und ueber Erfolg oder Misserfolg des Inserts
 	 */
 	public abstract String vonBauarbeiterInstalliert(Bauarbeiter b, TreeMap<Integer,Androide> liste);
 	
 	/**
-	 * Vorbedingung: liste und g (Gesellschafter) != null
-	 * Nachbedingung:	Androide entspricht Verordnung:				wird der Liste hinzugefuegt (oder ueberschrieben)
-	 * 					Androide entspricht nicht der Verordnung:	wird aus Liste geloescht, falls in Liste
+	 * Vorbedingung: liste und Androide != null
+	 * Nachbedingung:
+	 * 			entspricht Verordnung: wird der Liste hinzugefuegt (oder ueberschrieben)
+	 * 			entspricht nicht der Verordnung: wird aus Liste geloescht, falls in Liste
+	 * @return Aufzeichnungen der Ueberpruefung und ueber Erfolg oder Misserfolg des Inserts
 	 */
 	public abstract String vonGesellschafterInstalliert(Gesellschafter g, TreeMap<Integer,Androide> liste);
 	
 	/**
-	 * Vorbedingung: liste und h (Hilfskraft) != null
-	 * Nachbedingung:	Androide entspricht Verordnung:				wird der Liste hinzugefuegt (oder ueberschrieben)
-	 * 					Androide entspricht nicht der Verordnung:	wird aus Liste geloescht, falls in Liste
+	 * Vorbedingung: liste und Androide != null
+	 * Nachbedingung:
+	 * 			entspricht Verordnung: wird der Liste hinzugefuegt (oder ueberschrieben)
+	 * 			entspricht nicht der Verordnung: wird aus Liste geloescht, falls in Liste
+	 * @return Aufzeichnungen der Ueberpruefung und ueber Erfolg oder Misserfolg des Inserts
 	 */
 	public abstract String vonHilfskraftInstalliert(Hilfskraft h, TreeMap<Integer,Androide> liste);
 	
@@ -51,9 +57,11 @@ public abstract class Software {
 	public abstract String vonKaempferInstalliert(Kaempfer k, TreeMap<Integer,Androide> liste);
 	
 	/**
-	 * Vorbedingung: liste und l (Leibwaechter) != null
-	 * Nachbedingung:	Androide entspricht Verordnung:				wird der Liste hinzugefuegt (oder ueberschrieben)
-	 * 					Androide entspricht nicht der Verordnung:	wird aus Liste geloescht, falls in Liste
+	 * Vorbedingung: liste und Androide != null
+	 * Nachbedingung:
+	 * 			entspricht Verordnung: wird der Liste hinzugefuegt (oder ueberschrieben)
+	 * 			entspricht nicht der Verordnung: wird aus Liste geloescht, falls in Liste
+	 * @return Aufzeichnungen der Ueberpruefung und ueber Erfolg oder Misserfolg des Inserts
 	 */
 	public abstract String vonLeibwaechterInstalliert(Leibwaechter l, TreeMap<Integer,Androide> liste);
 	
@@ -65,16 +73,20 @@ public abstract class Software {
 	public abstract String vonObjektbewacherInstalliert(Objektbewacher o, TreeMap<Integer,Androide> liste);
 	
 	/**
-	 * Vorbedingung: liste und s (Servicetechniker) != null
-	 * Nachbedingung:	Androide entspricht Verordnung:				wird der Liste hinzugefuegt (oder ueberschrieben)
-	 * 					Androide entspricht nicht der Verordnung:	wird aus Liste geloescht, falls in Liste
+	 * Vorbedingung: liste und Androide != null
+	 * Nachbedingung:
+	 * 			entspricht Verordnung: wird der Liste hinzugefuegt (oder ueberschrieben)
+	 * 			entspricht nicht der Verordnung: wird aus Liste geloescht, falls in Liste
+	 * @return Aufzeichnungen der Ueberpruefung und ueber Erfolg oder Misserfolg des Inserts
 	 */
 	public abstract String vonServicetechnikerInstalliert(Servicetechniker s, TreeMap<Integer,Androide> liste);
 	
 	/**
-	 * Vorbedingung: liste und t (Transportarbeiter) != null
-	 * Nachbedingung:	Androide entspricht Verordnung:				wird der Liste hinzugefuegt (oder ueberschrieben)
-	 * 					Androide entspricht nicht der Verordnung:	wird aus Liste geloescht, falls in Liste
+	 * Vorbedingung: liste und Androide != null
+	 * Nachbedingung:
+	 * 			entspricht Verordnung: wird der Liste hinzugefuegt (oder ueberschrieben)
+	 * 			entspricht nicht der Verordnung: wird aus Liste geloescht, falls in Liste
+	 * @return Aufzeichnungen der Ueberpruefung und ueber Erfolg oder Misserfolg des Inserts
 	 */
 	public abstract String vonTransportarbeiterInstalliert(Transportarbeiter t, TreeMap<Integer,Androide> liste);
 	
@@ -83,6 +95,6 @@ public abstract class Software {
 	 */
 	public String toString() {
 		
-		return "Software, " + s.toString();
+		return "Software, " + s.toString() + ", Codierung: " + codierung;
 	}
 }

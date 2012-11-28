@@ -17,25 +17,36 @@ public abstract class Kit {
 	
 	/**
 	 * Vorbedingung: liste und b (Bediener) != null
-	 * Nachbedingung: Entspricht der Androide der Verordnung, wird er der Liste hinzugefuegt.
+	 * Nachbedingung:
+	 * 			b entspricht Verordnung: wird der Liste hinzugefuegt (oder ueberschrieben)
+	 * 			b entspricht nicht der Verordnung: wird aus Liste geloescht, falls in Liste
+	 * @return Aufzeichnungen der Ueberpruefung und ueber Erfolg oder Misserfolg des Inserts
 	 */
 	public abstract String vonBedienerInstalliert(Bediener b, TreeMap<Integer,Androide> liste);
 	
 	/**
 	 * Vorbedingung: liste und a (Androide mit Sicherheitsstufe 3) != null
-	 * Nachbedingung: Entspricht der Androide der Verordnung, wird er der Liste hinzugefuegt.
+	 * Nachbedingung:
+	 * 			a entspricht Verordnung: wird der Liste hinzugefuegt (oder ueberschrieben)
+	 * 			a entspricht nicht der Verordnung: wird aus Liste geloescht, falls in Liste
+	 * @return Aufzeichnungen der Ueberpruefung und ueber Erfolg oder Misserfolg des Inserts
 	 */
 	public abstract String vonStufe3Installiert(Androide a, TreeMap<Integer, Androide> liste);
 	
 	/**
 	 * Vorbedingung: liste und a (Androide mit Sicherheitsstufe 4) != null
-	 * Nachbedingung: Entspricht der Androide der Verordnung, wird er der Liste hinzugefuegt.
+	 * Nachbedingung:
+	 * 			a entspricht Verordnung: wird der Liste hinzugefuegt (oder ueberschrieben)
+	 * 			a entspricht nicht der Verordnung: wird aus Liste geloescht, falls in Liste
+	 * @return Aufzeichnungen der Ueberpruefung und ueber Erfolg oder Misserfolg des Inserts
 	 */
 	public abstract String vonStufe4Installiert(Androide a, TreeMap<Integer, Androide> liste);
 	
 	/**
-	 * Vorbedingung: liste und k (Kaempfer) != null
-	 * Nachbedingung: Entspricht der Androide der Verordnung, wird er der Liste hinzugefuegt.
+	 * Vorbedingung: liste und a (Androide) != null
+	 * Nachbedingung:
+	 * 			a entspricht Verordnung: wird der Liste hinzugefuegt (oder ueberschrieben)
+	 * @return Aufzeichnungen der Ueberpruefung und ueber Erfolg des Inserts
 	 */
 	public String vonKaemperInstalliert(Kaempfer k, TreeMap<Integer, Androide> liste) {
 		
@@ -48,6 +59,6 @@ public abstract class Kit {
 	 */
 	public String toString() {
 		
-		return "Name: " + name + ", Seriennummer: " + codierung;
+		return "Name: " + name + ", Codierung: " + codierung;
 	}
 }

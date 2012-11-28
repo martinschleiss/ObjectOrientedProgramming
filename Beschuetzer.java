@@ -1,4 +1,6 @@
-
+/**
+ * Kraeftiger, flinker Androide zum Schutz fuer Menschen und Objekte
+ */
 public abstract class Beschuetzer extends Androide {
 	
 	/**
@@ -6,6 +8,6 @@ public abstract class Beschuetzer extends Androide {
 	 */
 	public String toString() {
 		
-		return "Beschuezter " + super.toString();
+		return "(Beschuezter), " + super.toString();
 	}
 }

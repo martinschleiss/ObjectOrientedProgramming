@@ -15,6 +15,9 @@ public class Hilfskraft extends Bediener {
 		return software().vonHilfskraftInstalliert(this, liste);
 	}
 	
+	/**
+	 * Liefert String-Repraesentation des Objekts
+	 */
 	public String toString() {
 		
 		return "Hilfskraft " + super.toString();

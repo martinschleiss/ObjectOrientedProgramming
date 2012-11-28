@@ -1,4 +1,6 @@
-
+/**
+ * Leichtgewichtiger, flinker Androide fuer Einsatz in Menschennaehe
+ */
 public abstract class Bediener extends Androide {
 
 	/**
@@ -6,6 +8,6 @@ public abstract class Bediener extends Androide {
 	 */
 	public String toString() {
 		
-		return "Bediener " + super.toString();
+		return "(Bediener), " + super.toString();
 	}	
 }

@@ -15,6 +15,9 @@ public class Kaempfer extends Beschuetzer {
 		return software().vonKaempferInstalliert(this, liste);
 	}
 	
+	/**
+	 * Liefert String-Repraesentation des Objekts
+	 */
 	public String toString() {
 		
 		return "Kaempfer " + super.toString();

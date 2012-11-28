@@ -15,6 +15,9 @@ public class Bauarbeiter extends Schwerarbeiter {
 		return software().vonBauarbeiterInstalliert(this, liste);
 	}
 	
+	/**
+	 * Liefert String-Repraesentation des Objekts
+	 */
 	public String toString() {
 		
 		return "Bauarbeiter " + super.toString();

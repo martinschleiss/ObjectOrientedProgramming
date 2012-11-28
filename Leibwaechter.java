@@ -15,6 +15,9 @@ public class Leibwaechter extends Beschuetzer {
 		return software().vonLeibwaechterInstalliert(this, liste);
 	}
 	
+	/**
+	 * Liefert String-Repraesentation des Objekts
+	 */
 	public String toString() {
 		
 		return "Leibwaechter " + super.toString();

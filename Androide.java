@@ -1,6 +1,8 @@
 import java.util.TreeMap;
 
-
+/**
+ * Ein Androide wird leer initialisiert. Software, Skin und Kit werden in der AndroidFactory mit dem Androiden zusammengefuehrt.
+ */
 public abstract class Androide {
 	
 	private static int serie = 0; //= fortlaufende Seriennummer 
@@ -62,6 +64,16 @@ public abstract class Androide {
 	}
 	
 	/**
+	 * Updated Skin (ueberschreibt alte) Diese Aenderung wird protokolliert.
+	 * @param software	!= null
+	 */
+	public void updateSkin(Skin skin) {
+		
+		this.skin = skin;
+		stage("Neue Skin installiert: " + skin + "\n");
+	}
+	
+	/**
 	 * Installiert neue Software (ueberschreibt alte, falls vorhanden) Diese Aenderung wird protokolliert.
 	 * @param software	!= null
 	 */
@@ -69,6 +81,15 @@ public abstract class Androide {
 		
 		this.software = software;
 		stage("Software installiert: " + software + "\n");
+	}
+	/**
+	 * Updated Software (ueberschreibt alte) Diese Aenderung wird protokolliert.
+	 * @param software	!= null
+	 */
+	public void updateSoftware(Software software) {
+		
+		this.software = software;
+		stage("Neue Software installiert: " + software + "\n");
 	}
 	
 	/**
@@ -80,7 +101,17 @@ public abstract class Androide {
 		this.kit = kit;
 		stage("Kit installiert: " + kit + "\n");
 	}
+	
+	/**
+	 * Updated Software (ueberschreibt alte) Diese Aenderung wird protokolliert.
+	 * @param software	!= null
+	 */
+	public void updateKit(Kit kit) {
 		
+		this.kit = kit;
+		stage("Neues Kit installiert: " + kit + "\n");
+	}
+	
 	private void stage(String s) {
 
 		protokoll += "\t" + s;
@@ -95,8 +126,11 @@ public abstract class Androide {
 	 */
 	public abstract String insertWennGueltig(TreeMap<Integer,Androide> liste);
 	
+	/**
+	 * Liefert String-Repraesentation des Objekts
+	 */
 	public String toString() {
 		
-		return "Seriennummer: " + seriennummer + ", " + "Aufzeichnungen:\n" + protokoll;
+		return "Seriennummer: " + seriennummer + "\nAufzeichnungen:\n" + protokoll;
 	}	
 }

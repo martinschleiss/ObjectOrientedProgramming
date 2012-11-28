@@ -14,6 +14,9 @@ public class Transportarbeiter extends Schwerarbeiter {
 		return software().vonTransportarbeiterInstalliert(this, liste);
 	}
 	
+	/**
+	 * Liefert String-Repraesentation des Objekts
+	 */
 	public String toString() {
 		
 		return "Transportarbeiter " + super.toString();

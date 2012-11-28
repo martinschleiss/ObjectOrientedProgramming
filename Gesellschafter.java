@@ -15,6 +15,9 @@ public class Gesellschafter extends Bediener {
 		return software().vonGesellschafterInstalliert(this, liste);
 	}
 	
+	/**
+	 * Liefert String-Repraesentation des Objekts
+	 */
 	public String toString() {
 		
 		return "Gesellschafter " + super.toString();

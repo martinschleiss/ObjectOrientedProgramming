@@ -1,4 +1,6 @@
-
+/**
+ * Kraeftiger, ausdauernder Androide zum Umgang mit Lasten
+ */
 public abstract class Schwerarbeiter extends Androide {
 	
 	/**
@@ -6,7 +8,6 @@ public abstract class Schwerarbeiter extends Androide {
 	 */
 	public String toString() {
 		
-		return "Schwerarbeiter " + super.toString();
+		return "(Schwerarbeiter), " + super.toString();
 	}	
-
 }

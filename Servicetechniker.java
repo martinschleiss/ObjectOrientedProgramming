@@ -15,6 +15,9 @@ public class Servicetechniker extends Schwerarbeiter {
 		return software().vonServicetechnikerInstalliert(this, liste);
 	}
 	
+	/**
+	 * Liefert String-Repraesentation des Objekts
+	 */
 	public String toString() {
 		
 		return "Servicetechniker " + super.toString();

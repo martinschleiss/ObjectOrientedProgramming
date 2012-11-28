@@ -15,6 +15,9 @@ public class Objektbewacher extends Beschuetzer {
 		return software().vonObjektbewacherInstalliert(this, liste);
 	}
 	
+	/**
+	 * Liefert String-Repraesentation des Objekts
+	 */
 	public String toString() {
 		
 		return "Objektbewacher " + super.toString();
