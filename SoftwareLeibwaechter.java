@@ -8,6 +8,15 @@ public class SoftwareLeibwaechter extends Software {
 		super(a, s);
 	}
 	
+	/**
+	 * Fuer alle nachfolgenden Visitor-Methoden:
+	 * Vorbedingung: liste und Android != null, Androide.software() != null
+	 * Nachbedingung:
+	 * 			entspricht Verordnung: wird der Liste hinzugefuegt (oder ueberschrieben)
+	 * 			entspricht nicht der Verordnung: wird aus Liste geloescht, falls in Liste
+	 * @return Aufzeichnungen der Ueberpruefung und ueber Erfolg oder Misserfolg des Inserts
+	 */
+	
 	public String vonLeibwaechterInstalliert(Leibwaechter l, TreeMap<Integer,Androide> liste) { 
 
 		return "Software ok, " + sicherheitsstufe().aufSoftwareLeibwaechter(l, liste);

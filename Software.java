@@ -23,7 +23,7 @@ public abstract class Software {
 	}
 	
 	/**
-	 * Vorbedingung: liste und Bauarbeiter != null
+	 * Vorbedingung: liste, Bauarbeiter != null
 	 * Nachbedingung:
 	 * 			entspricht Verordnung: wird der Liste hinzugefuegt (oder ueberschrieben)
 	 * 			entspricht nicht der Verordnung: wird aus Liste geloescht, falls in Liste

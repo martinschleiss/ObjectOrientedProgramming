@@ -90,7 +90,7 @@ public class Test {
 		skin1 = new SkinHochfest(a1);
 		kit1 =new Kit1kW("Servicetechnikerkit",a1);
 		f.create(a2, kit1, skin1, software1);
-		System.out.println("Neuer Servicetechniker:\t\t" + sh.insert(a1) +  "\n");
+		System.out.println("Neuer Servicetechniker:\t\t" + sh.insert(a2) +  "\n");
 		
 		a1 = new Transportarbeiter();
 		s1 = new SicherheitsstufeVier();
@@ -110,9 +110,9 @@ public class Test {
 		}
 		
 		System.out.println("############################## Test 3 ##############################\n");
-		System.out.println("Suche und Ausgabe von Android mit Seriennummer 8...\n");
-		System.out.println("(Erwartet: Servicearbeiter)\n");
-		System.out.println(sh.find(8));
+		System.out.println("Suche und Ausgabe von Android mit Seriennummer 7...\n");
+		System.out.println("(Erwartet: Objektbewacher)\n");
+		System.out.println(sh.find(7));
 		
 		System.out.println("############################## Test 4.a: Kits ##############################\n");
 		System.out.println("Aendere Servicetechniker-Kit von Servicetechniker mit Sicherheitststufe 3 auf staerkeres Kit mit 7kW");
