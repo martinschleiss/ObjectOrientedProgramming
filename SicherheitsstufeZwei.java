@@ -1,7 +1,7 @@
 import java.util.TreeMap;
 
 
-public class SicherheitsstufeZwei extends Sicherheitsstufe {
+public class SicherheitsstufeZwei implements Sicherheitsstufe {
 
 	public String aufSoftwareHilfskraft(Hilfskraft a, TreeMap<Integer, Androide> liste) {
 		
@@ -19,5 +19,13 @@ public class SicherheitsstufeZwei extends Sicherheitsstufe {
 	public String installiertKit(Schwerarbeiter a, TreeMap<Integer, Androide> liste) {
 		
 		return "Fehler: Ungueltiger Programmzustand";
+	}
+	
+	/**
+	 * Liefert String-Repraesentation des Objekts
+	 */
+	public String toString() {
+		
+		return "Sicherheitsstufe: 2";
 	}
 }

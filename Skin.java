@@ -6,10 +6,7 @@ import java.util.TreeMap;
  */
 public abstract class Skin {
 
-	/**
-	 * = Seriennummer des Androiden, der mit dieser Skin ausgestattet ist.
-	 */
-	private final int codierung;
+	private final int codierung; //= Seriennummer des Androiden, der mit dieser Skin ausgestattet ist.
 
 	public Skin(Androide a) {
 		
@@ -26,6 +23,9 @@ public abstract class Skin {
 	
 	public abstract String vonKaempferInstalliert(Kaempfer a, TreeMap<Integer, Androide> liste);
 	
+	/**
+	 * Liefert String-Repraesentation des Objekts
+	 */
 	public String toString() {
 		
 		return "Codierung: " + codierung;

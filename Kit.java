@@ -7,11 +7,7 @@ import java.util.TreeMap;
 public abstract class Kit {
 	
 	private String name;
-	
-	/**
-	 * = Seriennummer des Androiden, der mit dieser Komponente ausgestattet ist.
-	 */
-	private final int codierung;
+	private final int codierung; //= Seriennummer des Androiden, der mit dieser Komponente ausgestattet ist.
 	
 	public Kit(String name, Androide a) {
 		
@@ -20,23 +16,36 @@ public abstract class Kit {
 	}
 	
 	/**
-	 * 
-	 * @param b
-	 * @param liste
-	 * @return
+	 * Vorbedingung: liste und b (Bediener) != null
+	 * Nachbedingung: Entspricht der Androide der Verordnung, wird er der Liste hinzugefuegt.
 	 */
 	public abstract String vonBedienerInstalliert(Bediener b, TreeMap<Integer,Androide> liste);
-			
+	
+	/**
+	 * Vorbedingung: liste und a (Androide mit Sicherheitsstufe 3) != null
+	 * Nachbedingung: Entspricht der Androide der Verordnung, wird er der Liste hinzugefuegt.
+	 */
 	public abstract String vonStufe3Installiert(Androide a, TreeMap<Integer, Androide> liste);
 	
+	/**
+	 * Vorbedingung: liste und a (Androide mit Sicherheitsstufe 4) != null
+	 * Nachbedingung: Entspricht der Androide der Verordnung, wird er der Liste hinzugefuegt.
+	 */
 	public abstract String vonStufe4Installiert(Androide a, TreeMap<Integer, Androide> liste);
 	
+	/**
+	 * Vorbedingung: liste und k (Kaempfer) != null
+	 * Nachbedingung: Entspricht der Androide der Verordnung, wird er der Liste hinzugefuegt.
+	 */
 	public String vonKaemperInstalliert(Kaempfer k, TreeMap<Integer, Androide> liste) {
 		
 		liste.put(k.seriennummer(), k);
 		return "Kit ok";
 	}
 	
+	/**
+	 * Liefert String-Repraesentation des Objekts
+	 */
 	public String toString() {
 		
 		return "Name: " + name + ", Seriennummer: " + codierung;

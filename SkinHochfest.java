@@ -8,7 +8,8 @@ public class SkinHochfest extends Skin {
 	}
 
 	public String vonBedienerInstalliert(Bediener a, TreeMap<Integer,Androide> liste) {
-		
+
+		liste.remove(a.seriennummer());
 		return "Fehler: Skin passt nicht";
 	}
 	

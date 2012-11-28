@@ -6,11 +6,8 @@ public class Shop {
 	private TreeMap<Integer, Androide> chronologischeListe = new TreeMap<Integer, Androide>();
 	
 	public String insert(Androide s) { //retourniert Fehlercode bzw Erfolgsmeldung
-		//a.insertWennVerordnungErfuellt(liste);
-		//a.fuegeAndroideZuListeHinzu(liste);
-		s.phaseEinsFuegeAndroidZuListeHinzu(liste);
-		//System.out.println(liste.get(s.seriennummer()));
-		return s.phaseEinsFuegeAndroidZuListeHinzu(liste);
+
+		return s.insertWennGueltig(liste);
 	}
 	
 	public String find(int key) {

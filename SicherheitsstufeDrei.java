@@ -1,7 +1,7 @@
 import java.util.TreeMap;
 
 
-public class SicherheitsstufeDrei extends Sicherheitsstufe {
+public class SicherheitsstufeDrei implements Sicherheitsstufe {
 	
 	public String aufSoftwareBauarbeiter(Bauarbeiter a, TreeMap<Integer,Androide> liste) {
 
@@ -27,5 +27,13 @@ public class SicherheitsstufeDrei extends Sicherheitsstufe {
 	public String installiertKit(Schwerarbeiter a, TreeMap<Integer, Androide> liste) {
 		
 		return a.kit().vonStufe3Installiert(a, liste);	
+	}
+	
+	/**
+	 * Liefert String-Repraesentation des Objekts
+	 */
+	public String toString() {
+		
+		return "Sicherheitsstufe: 3";
 	}
 }

@@ -8,12 +8,14 @@ public class SkinGepanzert extends Skin {
 	}
 
 	public String vonBedienerInstalliert(Bediener a, TreeMap<Integer,Androide> liste) {
-		
+
+		liste.remove(a.seriennummer());
 		return "Fehler: Skin passt nicht";
 	}
 	
-	public String vonSchwerarbeiterInstalliert(Schwerarbeiter g, TreeMap<Integer,Androide> liste) {
-		
+	public String vonSchwerarbeiterInstalliert(Schwerarbeiter a, TreeMap<Integer,Androide> liste) {
+
+		liste.remove(a.seriennummer());
 		return "Fehler: Skin passt nicht";
 	}
 	

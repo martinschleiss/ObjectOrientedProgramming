@@ -13,6 +13,7 @@ public class Kit3kW extends Kit {
 	
 	public String vonBedienerInstalliert(Bediener b, TreeMap<Integer, Androide> liste) {
 
+		liste.remove(b.seriennummer());
 		return "Fehler: Leistungsueberschreitung";
 	}
 

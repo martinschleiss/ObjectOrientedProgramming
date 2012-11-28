@@ -4,12 +4,14 @@ import java.util.TreeMap;
 public class Leibwaechter extends Beschuetzer {
 
 	/**
-	 * Vorbedingung: liste darf nicht null sein.
-	 * Nachbedingung: Androide kann zur Liste hinzugefuegt worden sein oder nicht.
-	 * @param liste : die Liste zu der der Androide hinzugefuegt werden soll
+	 * Vorbedingung: liste != null
+	 * Nachbedingung:
+	 * 			entspricht Verordnung: wird der Liste hinzugefuegt (oder ueberschrieben)
+	 * 			entspricht nicht der Verordnung: wird aus Liste geloescht, falls in Liste
+	 * @return Aufzeichnungen der Ueberpruefung und ueber Erfolg oder Misserfolg des Inserts
 	 */
-
-	public String phaseEinsFuegeAndroidZuListeHinzu(TreeMap<Integer, Androide> liste) {
+	public String insertWennGueltig(TreeMap<Integer, Androide> liste) {
+		
 		return software().vonLeibwaechterInstalliert(this, liste);
 	}
 	
