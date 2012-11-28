@@ -24,7 +24,7 @@ public class SicherheitsstufeEins implements Sicherheitsstufe {
 	 */
 	public String aufSoftwareHilfsKraft(Hilfskraft a, TreeMap<Integer,Androide> liste) {
 
-		return "Sicherheitstufe ok, " + a.skin().vonBedienerInstalliert(a, liste);
+		return "Sicherheitsstufe ok, " + a.skin().vonBedienerInstalliert(a, liste);
 	}
 	
 	/**

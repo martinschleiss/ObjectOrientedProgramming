@@ -12,7 +12,7 @@ public class SicherheitsstufeVier implements Sicherheitsstufe {
 	 */
 	public String aufSoftwareBauarbeiter(Bauarbeiter a, TreeMap<Integer,Androide> liste) {
 		
-		return "Sicherheitstufe ok, " + a.skin().vonSchwerarbeiterInstalliert(a, liste);
+		return "Sicherheitsstufe ok, " + a.skin().vonSchwerarbeiterInstalliert(a, liste);
 	}
 	
 	/**
@@ -24,7 +24,7 @@ public class SicherheitsstufeVier implements Sicherheitsstufe {
 	 */
 	public String aufSoftwareServicetechniker(Servicetechniker a, TreeMap<Integer,Androide> liste) {
 		
-		return "Sicherheitstufe ok, " + a.skin().vonSchwerarbeiterInstalliert(a, liste);
+		return "Sicherheitsstufe ok, " + a.skin().vonSchwerarbeiterInstalliert(a, liste);
 	}
 	
 	/**
@@ -36,7 +36,7 @@ public class SicherheitsstufeVier implements Sicherheitsstufe {
 	 */
 	public String aufSoftwareTransportarbeiter(Transportarbeiter a, TreeMap<Integer,Androide> liste) {
 		
-		return "Sicherheitstufe ok, " + a.skin().vonSchwerarbeiterInstalliert(a, liste);
+		return "Sicherheitsstufe ok, " + a.skin().vonSchwerarbeiterInstalliert(a, liste);
 	}
 	
 	/**
@@ -48,7 +48,7 @@ public class SicherheitsstufeVier implements Sicherheitsstufe {
 	 */
 	public String aufSoftwareLeibwaechter(Leibwaechter a, TreeMap<Integer,Androide> liste) {
 
-		return "Sicherheitstufe ok, " + a.skin().vonLeibwaechterInstalliert(a, liste);
+		return "Sicherheitsstufe ok, " + a.skin().vonLeibwaechterInstalliert(a, liste);
 	}
 
 	/**
@@ -60,7 +60,7 @@ public class SicherheitsstufeVier implements Sicherheitsstufe {
 	 */
 	public String aufSoftwareObjektbewacher(Objektbewacher a, TreeMap<Integer,Androide> liste) {
 		
-		return "Sicherheitstufe ok, " + a.skin().vonObjektbewacherInstalliert(a, liste);
+		return "Sicherheitsstufe ok, " + a.skin().vonObjektbewacherInstalliert(a, liste);
 	}
 	
 	/**
@@ -111,7 +111,7 @@ public class SicherheitsstufeVier implements Sicherheitsstufe {
 	 */
 	public String installiertKit(Schwerarbeiter a, TreeMap<Integer, Androide> liste) {
 		
-		return a.kit().vonStufe3Installiert(a, liste);	
+		return a.kit().vonStufe4Installiert(a, liste);	
 	}
 	
 	/**

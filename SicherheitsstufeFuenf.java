@@ -12,7 +12,7 @@ public class SicherheitsstufeFuenf implements Sicherheitsstufe {
 	 */
 	public String aufSoftwareKaempfer(Kaempfer a, TreeMap<Integer,Androide> liste) {
 
-		return "Sicherheitstufe ok, " + a.skin().vonKaempferInstalliert(a, liste);
+		return "Sicherheitsstufe ok, " + a.skin().vonKaempferInstalliert(a, liste);
 	}
 	
 	/**

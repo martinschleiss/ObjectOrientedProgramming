@@ -9,7 +9,7 @@ import java.util.TreeMap;
 public abstract class Software {
 
 	private final int codierung; //= Seriennummer des Androiden, der mit dieser Software ausgestattet ist.
-	private Sicherheitsstufe s;
+	private final Sicherheitsstufe s; //darf laut Angabe nicht veraendert werden
 	
 	public Software(Androide a, Sicherheitsstufe s) {
 		
@@ -23,7 +23,7 @@ public abstract class Software {
 	}
 	
 	/**
-	 * Vorbedingung: liste und Androide != null
+	 * Vorbedingung: liste und Bauarbeiter != null
 	 * Nachbedingung:
 	 * 			entspricht Verordnung: wird der Liste hinzugefuegt (oder ueberschrieben)
 	 * 			entspricht nicht der Verordnung: wird aus Liste geloescht, falls in Liste
@@ -32,7 +32,7 @@ public abstract class Software {
 	public abstract String vonBauarbeiterInstalliert(Bauarbeiter b, TreeMap<Integer,Androide> liste);
 	
 	/**
-	 * Vorbedingung: liste und Androide != null
+	 * Vorbedingung: liste und Gesellschafter != null
 	 * Nachbedingung:
 	 * 			entspricht Verordnung: wird der Liste hinzugefuegt (oder ueberschrieben)
 	 * 			entspricht nicht der Verordnung: wird aus Liste geloescht, falls in Liste
@@ -41,7 +41,7 @@ public abstract class Software {
 	public abstract String vonGesellschafterInstalliert(Gesellschafter g, TreeMap<Integer,Androide> liste);
 	
 	/**
-	 * Vorbedingung: liste und Androide != null
+	 * Vorbedingung: liste und Hilfskraft != null
 	 * Nachbedingung:
 	 * 			entspricht Verordnung: wird der Liste hinzugefuegt (oder ueberschrieben)
 	 * 			entspricht nicht der Verordnung: wird aus Liste geloescht, falls in Liste
@@ -50,14 +50,16 @@ public abstract class Software {
 	public abstract String vonHilfskraftInstalliert(Hilfskraft h, TreeMap<Integer,Androide> liste);
 	
 	/**
-	 * Vorbedingung: liste und k (Kaemfper) != null
-	 * Nachbedingung:	Androide entspricht Verordnung:				wird der Liste hinzugefuegt (oder ueberschrieben)
-	 * 					Androide entspricht nicht der Verordnung:	wird aus Liste geloescht, falls in Liste
+	 * Vorbedingung: liste und Kaempfer != null
+	 * Nachbedingung:
+	 * 			entspricht Verordnung: wird der Liste hinzugefuegt (oder ueberschrieben)
+	 * 			entspricht nicht der Verordnung: wird aus Liste geloescht, falls in Liste
+	 * @return Aufzeichnungen der Ueberpruefung und ueber Erfolg oder Misserfolg des Inserts
 	 */
 	public abstract String vonKaempferInstalliert(Kaempfer k, TreeMap<Integer,Androide> liste);
 	
 	/**
-	 * Vorbedingung: liste und Androide != null
+	 * Vorbedingung: liste und Leibwaechter != null
 	 * Nachbedingung:
 	 * 			entspricht Verordnung: wird der Liste hinzugefuegt (oder ueberschrieben)
 	 * 			entspricht nicht der Verordnung: wird aus Liste geloescht, falls in Liste
@@ -66,14 +68,16 @@ public abstract class Software {
 	public abstract String vonLeibwaechterInstalliert(Leibwaechter l, TreeMap<Integer,Androide> liste);
 	
 	/**
-	 * Vorbedingung: liste und o (Objektbewacher) != null
-	 * Nachbedingung:	Androide entspricht Verordnung:				wird der Liste hinzugefuegt (oder ueberschrieben)
-	 * 					Androide entspricht nicht der Verordnung:	wird aus Liste geloescht, falls in Liste
+	 * Vorbedingung: liste und Objektbewacher != null
+	 * Nachbedingung:
+	 * 			entspricht Verordnung: wird der Liste hinzugefuegt (oder ueberschrieben)
+	 * 			entspricht nicht der Verordnung: wird aus Liste geloescht, falls in Liste
+	 * @return Aufzeichnungen der Ueberpruefung und ueber Erfolg oder Misserfolg des Inserts
 	 */
 	public abstract String vonObjektbewacherInstalliert(Objektbewacher o, TreeMap<Integer,Androide> liste);
 	
 	/**
-	 * Vorbedingung: liste und Androide != null
+	 * Vorbedingung: liste und Servicetechniker != null
 	 * Nachbedingung:
 	 * 			entspricht Verordnung: wird der Liste hinzugefuegt (oder ueberschrieben)
 	 * 			entspricht nicht der Verordnung: wird aus Liste geloescht, falls in Liste
@@ -82,7 +86,7 @@ public abstract class Software {
 	public abstract String vonServicetechnikerInstalliert(Servicetechniker s, TreeMap<Integer,Androide> liste);
 	
 	/**
-	 * Vorbedingung: liste und Androide != null
+	 * Vorbedingung: liste und Transportarbeiter != null
 	 * Nachbedingung:
 	 * 			entspricht Verordnung: wird der Liste hinzugefuegt (oder ueberschrieben)
 	 * 			entspricht nicht der Verordnung: wird aus Liste geloescht, falls in Liste

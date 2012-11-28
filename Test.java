@@ -32,75 +32,103 @@ public class Test {
 		System.out.println("\n############################## Test 1.d ##############################\n");
 		System.out.println("Fuege Bauarbeiter in Shop ein... (Erwartet: Einfuegen schlaegt fehl)\n");
 		System.out.println("Ergebnis:\n\n" + sh.insert(a1) +  "\n");
-			
-		
-		/*
-		
-		System.out.println("Ergebnis: "+sh.insert(a)+"\n");
 	
-		System.out.println("Software auf Kaempfer geaendert:");
+		System.out.println("############################## Test 2.a ##############################\n");
+		System.out.println("Erstelle gueltige Instanz von jedem Untertypen von Androide und fuege in Shop ein...\n");
 		
-		Software software2 = new SoftwareKaempfer(a,s);
+		a1 = new Bauarbeiter();
+		s1 = new SicherheitsstufeDrei();
+		software1 = new SoftwareBauarbeiter(a1,s1);
+		skin1 = new SkinSensitiv(a1);
+		kit1 =new Kit1kW("Bauarbeiterkit",a1);
+		f.create(a1, kit1, skin1, software1);
+		System.out.println("Neuer Bauarbeiter:\t\t" + sh.insert(a1) +  "\n");
 		
-		a.installSoftware(software2);
+		a1 = new Gesellschafter();
+		s1 = new SicherheitsstufeEins();
+		software1 = new SoftwareGesellschafter(a1,s1);
+		skin1 = new SkinSensitiv(a1);
+		kit1 =new Kit1kW("Gesellschafterkit",a1);
+		f.create(a1, kit1, skin1, software1);
+		System.out.println("Neuer Gesellschafter:\t\t" + sh.insert(a1) +  "\n");
 		
-		System.out.println("Ergebnis: "+sh.insert(a)+"\n");
+		a1 = new Hilfskraft();
+		s1 = new SicherheitsstufeZwei();
+		software1 = new SoftwareHilfskraft(a1,s1);
+		skin1 = new SkinSensitiv(a1);
+		kit1 =new Kit1kW("Hilfskraftkit",a1);
+		f.create(a1, kit1, skin1, software1);
+		System.out.println("Neue Hilfskraft:\t\t" + sh.insert(a1) +  "\n");
 		
-		System.out.println("Entwickle Gesellschafter mit passenden Software, Sicherheitstufe 1, Kit1kW und Senstitiven Skin");
+		a1 = new Kaempfer();
+		s1 = new SicherheitsstufeFuenf();
+		software1 = new SoftwareKaempfer(a1,s1);
+		skin1 = new SkinGepanzert(a1);
+		kit1 =new Kit21kW("Kaempferkit",a1);
+		f.create(a1, kit1, skin1, software1);
+		System.out.println("Neuer Kaempfer:\t\t\t" + sh.insert(a1) +  "\n");
 		
-		Androide b=new Gesellschafter();
+		a1 = new Leibwaechter();
+		s1 = new SicherheitsstufeVier();
+		software1 = new SoftwareLeibwaechter(a1,s1);
+		skin1 = new SkinHochfest(a1);
+		kit1 =new Kit7kW("Leibwaechterkit",a1);
+		f.create(a1, kit1, skin1, software1);
+		System.out.println("Neuer Leibwaechter:\t\t" + sh.insert(a1) +  "\n");
 		
-		Sicherheitsstufe s3 = new SicherheitsstufeEins();
-		Software software3 = new SoftwareGesellschafter(b,s3);
-		Skin skin3 = new SkinSensitiv(b);
-		Kit kit1=new Kit1kW("Greifarm",a);
-	
-		f.create(b, kit1, skin3, software3);
-		System.out.println("Ergebnis: "+sh.insert(b)+"\n");
+		a1 = new Objektbewacher();
+		s1 = new SicherheitsstufeVier();
+		software1 = new SoftwareObjektbewacher(a1,s1);
+		skin1 = new SkinGepanzert(a1);
+		kit1 =new Kit7kW("Objektbewacherkit",a1);
+		f.create(a1, kit1, skin1, software1);
+		System.out.println("Neuer Objektbewacher:\t\t" + sh.insert(a1) +  "\n");
 		
-		System.out.println("Skin auf Gepanzert geaendert:");
-		Skin skin4 = new SkinGepanzert(b);
-	    b.installSkin(skin4);
-		System.out.println("Ergebnis: "+sh.insert(b)+"\n");
-	
+		Androide a2 = new Servicetechniker();
+		s1 = new SicherheitsstufeDrei();
+		software1 = new SoftwareServicetechniker(a1,s1);
+		skin1 = new SkinHochfest(a1);
+		kit1 =new Kit1kW("Servicetechnikerkit",a1);
+		f.create(a2, kit1, skin1, software1);
+		System.out.println("Neuer Servicetechniker:\t\t" + sh.insert(a1) +  "\n");
 		
-		System.out.println("Entwickle Kaempfer mit passenden Software, Sicherheitstufe 5, Kit21kW und Gepanzerter Skin");
+		a1 = new Transportarbeiter();
+		s1 = new SicherheitsstufeVier();
+		software1 = new SoftwareTransportarbeiter(a1,s1);
+		skin1 = new SkinSensitiv(a1);
+		kit1 =new Kit7kW("Transportarbeiterkit",a1);
+		f.create(a1, kit1, skin1, software1);
+		System.out.println("Neuer Transportarbeiter:\t" + sh.insert(a1) +  "\n");
 		
-		
-		Androide ka=new Kaempfer();
-		Sicherheitsstufe s4 = new SicherheitsstufeFuenf();
-		Software software4 = new SoftwareKaempfer(ka,s4);
-		Skin skin5 = new SkinGepanzert(ka);
-		Kit kit4=new Kit21kW("Greifarm",ka);
-	
-		f.create(ka, kit4, skin5, software4);
-		System.out.println("Ergebnis: "+sh.insert(ka)+"\n");
-		//System.out.println(sh.find(ka.seriennummer()));
-		
-		
-		
-		System.out.println("Entwickle Leibwaechter mit passenden Software, Sicherheitstufe 4, Kit21kW und Gepanzerter Skin");
-		Androide le=new Leibwaechter();
-		Sicherheitsstufe s5 = new SicherheitsstufeVier();
-		Software software5 = new SoftwareLeibwaechter(le,s5);
-		Skin skin6 = new SkinGepanzert(le);
-		Kit kit5=new Kit21kW("Greifarm",le);
-		f.create(le, kit5, skin6,software5);
-		System.out.println("Ergebnis: "+sh.insert(le)+"\n");
-		
-		System.out.println("Android mit der Seriennummer 3 ausgeben: ");
-		System.out.println(sh.find(ka.seriennummer()));
-		
-		
-		System.out.println("-----------------------------------------------------------");
-		
-		System.out.println("Alle zum Verkauf moeglichen Androiden (ueber Iterator) :");
-		
+		System.out.println("############################## Test 2.b ##############################\n");
+		System.out.println("Erstellen von Iterator und Ausgabe aller Androiden in Shop...");
+		System.out.println("(Erwartet: Anzahl 8, Seriennummern 2-9)\n");
 		Iterator<Androide> i=sh.iterator();
 		
 		while(i.hasNext()){
 			System.out.println(i.next());
 		}
-		*/
+		
+		System.out.println("############################## Test 3 ##############################\n");
+		System.out.println("Suche und Ausgabe von Android mit Seriennummer 8...\n");
+		System.out.println("(Erwartet: Servicearbeiter)\n");
+		System.out.println(sh.find(8));
+		
+		System.out.println("############################## Test 4.a: Kits ##############################\n");
+		System.out.println("Aendere Servicetechniker-Kit von Servicetechniker mit Sicherheitststufe 3 auf staerkeres Kit mit 7kW");
+		System.out.println("(Erwartet: Insert schlaegt fehl, da kW-Grenze fuer Software-Sicherheitsstufe 3 ueberschritten wird\n");
+		
+		a2.updateKit(new Kit7kW("ServicetechnikerKit-Plus",a2));
+		System.out.println(a2);
+		System.out.println("Insert von Servicetechniker:\t" + sh.insert(a2) +  "\n");
+		
+		System.out.println("############################## Test 4.b: Kits ##############################\n");
+		System.out.println("Aendere Servicetechniker-Software auf Stufe 4 und versuche erneut Upgrade auf staerkeres Kit mit 7kW");
+		System.out.println("(Erwartet: Insert gelingt, da kW-Grenze fuer Software-Sicherheitsstufe 4 nicht mehr ueberschritten wird\n");
+		
+		a2.updateSoftware(new SoftwareServicetechniker(a2,new SicherheitsstufeVier()));
+		System.out.println(a2);
+		System.out.println("Insert von Servicetechniker:\t" + sh.insert(a2) +  "\n");
 	}
+	
 }

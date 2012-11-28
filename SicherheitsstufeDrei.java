@@ -24,7 +24,7 @@ public class SicherheitsstufeDrei implements Sicherheitsstufe {
 	 */
 	public String aufSoftwareServicetechniker(Servicetechniker a, TreeMap<Integer,Androide> liste) {
 		
-		return "Sicherheitstufe ok, " + a.skin().vonSchwerarbeiterInstalliert(a, liste);
+		return "Sicherheitsstufe ok, " + a.skin().vonSchwerarbeiterInstalliert(a, liste);
 	}
 	
 	/**
@@ -36,7 +36,7 @@ public class SicherheitsstufeDrei implements Sicherheitsstufe {
 	 */
 	public String aufSoftwareTransportarbeiter(Transportarbeiter a, TreeMap<Integer,Androide> liste) {
 		
-		return "Sicherheitstufe ok, " + a.skin().vonSchwerarbeiterInstalliert(a, liste);
+		return "Sicherheitsstufe ok, " + a.skin().vonSchwerarbeiterInstalliert(a, liste);
 	}
 	
 	/**

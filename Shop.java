@@ -10,14 +10,20 @@ public class Shop {
 	private TreeMap<Integer, Androide> liste = new TreeMap<Integer, Androide>();
 	
 	/**
-	 * Vorbedingung: a (Androide) != null
+	 * Vorbedingung: 
+	 * 		a (Androide) != null
+	 * 		a (Androide wurde mit AndroidFactory vollstaendig initialisiert, 
+	 * 		d.h.: a.skin != null, a.software != null und a.kit != null
+	 * 
 	 * Nachbedingung:
 	 * 			a entspricht Verordnung: wird der Liste hinzugefuegt (oder ueberschrieben)
 	 * 			a entspricht nicht der Verordnung: wird aus Liste geloescht, falls in Liste
 	 * @return Aufzeichnungen der Ueberpruefung und ueber Erfolg oder Misserfolg des Inserts
 	 */
 	public String insert(Androide a) {
-
+		/**
+		 * Die Ueberpruefungsreihenfolge in dieser Implementierung ist: Software -> Sicherheitsstufe -> Skin -> Kit
+		 */
 		return a.insertWennGueltig(liste);
 	}
 	
@@ -45,22 +51,24 @@ public class Shop {
 		
 		return new ShopIterator<Androide>(liste);
 	}
+
 	
 	/**
+	 * ++++++++++++++++++++++++++++++ Innere Klasse ++++++++++++++++++++++++++++++
+	 *
 	 * Iterator liefert Elemente des Shops geordnet nach Auslieferdatum (= aufsteigend sortiert nach Seriennummer)
 	 */
 	private class ShopIterator<T> implements Iterator<T> {
 
 		private TreeMap<Integer,T> list;
 		private T value;
-		private Integer currentKey;
+		private Integer currentKey;	//History Constraint: currentKey(t-1) < currentKey(t) fuer Zeitpunkt t
 		
 		public ShopIterator(TreeMap<Integer,T> list) {
 			
 			this.list = list;
 			currentKey = list.firstKey();
 			value = list.get(currentKey);
-			
 		}
 		
 		/**

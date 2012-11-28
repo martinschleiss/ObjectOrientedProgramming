@@ -3,6 +3,7 @@ import java.util.TreeMap;
 /**
  * Eine Instanz von Kit ist Bestandteil genau eines Androiden. Zur Vereinfachung wird angenommen
  * dass es - einmal hergestellt - nicht in einen anderen Androiden eingebaut werden kann.
+ * Visitormethoden werden von Skin aufgerufen und verweisen bei Erfolg direkt auf die Visitormethoden in Kit
  */
 public abstract class Kit {
 	
@@ -51,7 +52,7 @@ public abstract class Kit {
 	public String vonKaemperInstalliert(Kaempfer k, TreeMap<Integer, Androide> liste) {
 		
 		liste.put(k.seriennummer(), k);
-		return "Kit ok";
+		return "Kit ok - Ueberpruefung erfolgreich. Androide wurde eingefuegt";
 	}
 	
 	/**

@@ -54,7 +54,8 @@ public abstract class Androide {
 	}
 	
 	/**
-	 * Installiert neue Skin (ersetzt alte, falls vorhanden). Diese Aenderung wird protokolliert.
+	 * Installiert neue Skin. Diese Aenderung wird protokolliert.
+	 * Methode soll nur zur Initialisierung des Androiden verwendet werden - fuer Aenderungen update-Methoden verwenden
 	 * @param skin	!= null
 	 */
 	public void installSkin(Skin skin) {
@@ -64,7 +65,7 @@ public abstract class Androide {
 	}
 	
 	/**
-	 * Updated Skin (ueberschreibt alte) Diese Aenderung wird protokolliert.
+	 * Updated Skin (ueberschreibt alte Skin) Diese Aenderung wird protokolliert.
 	 * @param software	!= null
 	 */
 	public void updateSkin(Skin skin) {
@@ -74,7 +75,8 @@ public abstract class Androide {
 	}
 	
 	/**
-	 * Installiert neue Software (ueberschreibt alte, falls vorhanden) Diese Aenderung wird protokolliert.
+	 * Installiert neue Software. Diese Aenderung wird protokolliert.
+	 * Methode soll nur zur Initialisierung des Androiden verwendet werden - fuer Aenderungen update-Methoden verwenden
 	 * @param software	!= null
 	 */
 	public void installSoftware(Software software) {
@@ -83,7 +85,7 @@ public abstract class Androide {
 		stage("Software installiert: " + software + "\n");
 	}
 	/**
-	 * Updated Software (ueberschreibt alte) Diese Aenderung wird protokolliert.
+	 * Updated Software (ueberschreibt alte Software) Diese Aenderung wird protokolliert.
 	 * @param software	!= null
 	 */
 	public void updateSoftware(Software software) {
@@ -93,7 +95,8 @@ public abstract class Androide {
 	}
 	
 	/**
-	 * Installiert neues Kit (ersetzt altes, falls vorhanden) Diese Aenderung wird protokolliert.
+	 * Installiert neues Kit. Diese Aenderung wird protokolliert.
+	 * Methode soll nur zur Initialisierung des Androiden verwendet werden - fuer Aenderungen update-Methoden verwenden
 	 * @param kit	!= null
 	 */
 	public void installKit(Kit kit) {
@@ -103,8 +106,8 @@ public abstract class Androide {
 	}
 	
 	/**
-	 * Updated Software (ueberschreibt alte) Diese Aenderung wird protokolliert.
-	 * @param software	!= null
+	 * Updated Kit (ueberschreibt altes Kit) Diese Aenderung wird protokolliert.
+	 * @param kit	!= null
 	 */
 	public void updateKit(Kit kit) {
 		

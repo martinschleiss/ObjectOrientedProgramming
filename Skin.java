@@ -3,6 +3,7 @@ import java.util.TreeMap;
 /**
  * Eine Instanz von Skin ist Bestandteil genau eines Androiden. Zur Vereinfachung wird angenommen
  * dass sie - einmal hergestellt - nicht in einen anderen Androiden eingebaut werden kann.
+ * Visitormethoden werden von Software aufgerufen und verweisen bei Erfolg direkt auf die Visitormethoden in Kit
  */
 public abstract class Skin {
 
