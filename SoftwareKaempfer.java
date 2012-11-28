@@ -47,4 +47,7 @@ public class SoftwareKaempfer extends Software {
 		
 		return "Fehler: Software passt nicht.";
 	}
+	public String toString(){
+		return "Software Kaempfer";
+	}
 }

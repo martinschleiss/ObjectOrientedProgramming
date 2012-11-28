@@ -46,17 +46,18 @@ public class Shop {
 		@Override
 		public boolean hasNext() {
 
-			return value != null;
+			return currentKey != null;
 		}
 
 		@Override
 		public T next() {
 
-			currentKey = list.higherKey(currentKey);
+			
 			
 			if (currentKey != null) {
 				
 				value = list.get(currentKey);
+				currentKey = list.higherKey(currentKey);
 			
 				return value; 
 			}

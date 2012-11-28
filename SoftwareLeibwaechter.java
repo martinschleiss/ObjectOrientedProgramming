@@ -47,4 +47,7 @@ public class SoftwareLeibwaechter extends Software {
 		
 		return "Fehler: Software passt nicht.";
 	}
+	public String toString(){
+		return "Software Leibwaechter";
+	}
 }

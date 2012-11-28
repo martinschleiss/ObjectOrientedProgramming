@@ -47,4 +47,7 @@ public class SoftwareBauarbeiter extends Software {
 		
 		return "Fehler: Software passt nicht.";
 	}
+	public String toString(){
+		return "Software Bauarbeiter";
+	}
 }
