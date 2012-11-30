@@ -1,5 +1,5 @@
 
-public class Auto implements Runnable{
+public class Auto<T extends Strategie> implements Runnable{
 
 	private Feld f;
 	private final Fahrbahn fahrbahn;

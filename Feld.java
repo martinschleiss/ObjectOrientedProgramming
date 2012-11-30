@@ -10,14 +10,13 @@ public class Feld {
 	}
 
 	public void fuegeAutoHinzu(Auto a) {
+		Fahrbahn.adjazentesFeld adj = f.feldRelation(this, a.aktuellesFeld());
+		a.aktuellesFeld().entferneAuto(a);
+		a.wechsleZuFeld(this);
 		synchronized(this) {
-			if(autos.contains(a) == false) {
-				for(Auto i : autos) {
-					Fahrbahn.adjazentesFeld adj = f.feldRelation(this, a.aktuellesFeld());
-					i.angestoszenVonAdjazentemFeld(adj);
-					a.aktuellesFeld().entferneAuto(a);
-					a.wechsleZuFeld(this);
-					autos.add(a);					
+			if(autos.contains(a) == false) {				
+				for(Auto i : autos) {					
+					i.angestoszenVonAdjazentemFeld(adj);										
 				}
 				autos.add(a);
 			}
