@@ -2,25 +2,37 @@
 public abstract class Auto<T extends Strategie> implements Runnable{
 
 	private Feld f;
-	private final Fahrbahn fahrbahn;
-	public enum ausrichtung {NORD, OST, SUED, WEST};
-	private ausrichtung akutell;
 	private int punkte = 0;
 	private final Strategie s;
+	private boolean running;
+	private int schritte;
 	
-	public Auto(Fahrbahn fahrbahn, Feld startFeld, T s) {
-		this.fahrbahn = fahrbahn;
+	public Auto(Feld startFeld, T s) {
 		this.f = startFeld;
-		this.akutell = ausrichtung.NORD;
 		this.s = s;
+		this.running = false;
+		this.schritte = 0;
 	}
 	
 	public void run() {
+		/*
+		while(!running) {
+			try {
+				wait();
+			} catch(InterruptedException e) {
+				running = true;
+			}
+		}*/
 		
 		while(true) {
-			Fahrbahn.adjazentesFeld a = s.naechstesFeld(aktuellesFeld(), this.akutell);
-			Feld ziel = fahrbahn.adjazentesFeld(aktuellesFeld(), a);
+			
+			Feld ziel = s.naechstesFeld(aktuellesFeld());
 			ziel.fuegeAutoHinzu(this);
+			
+			if(schritte >= 10000) {
+				System.out.println(schritte);
+				return;
+			}
 			
 			try {
 				Thread.sleep(this.warteZeitInMillisekunden());
@@ -40,15 +52,15 @@ public abstract class Auto<T extends Strategie> implements Runnable{
 		return f;
 	}
 	
-	public void angestoszenVonAdjazentemFeld(Fahrbahn.adjazentesFeld n) {
+	public void angestoszenVonAdjazentemFeld(Feld.adjazentesFeld n) {
 		
 	}
 	
 	public final void plusPunkt() {
 		++punkte;
 	}
-	
+	/*
 	private final void minusPunkt() {
 		--punkte;
-	}
+	}*/
 }

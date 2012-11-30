@@ -1,12 +1,13 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.awt.Point;
+
 public class Fahrbahn {
-	
-	private final int breite;
-	private final int hoehe;
+
+	private int breite;
+	private int hoehe;
 	private final ArrayList<Feld> felder;
-	public enum adjazentesFeld {N, NO, O, SO, S, SW, W, NW};
-	
+
 	public Fahrbahn(int breite, int hoehe) {
 		this.breite = breite;
 		this.hoehe = hoehe;
@@ -14,35 +15,120 @@ public class Fahrbahn {
 		for(int i = 0; i < (breite * hoehe); i++) {
 			felder.add(new Feld(this));
 		}
-		
+		int x = 0;
+		int y = 0;
+
+		for(int i = 0; i < felder.size(); i++) {
+			x = i % breite;
+			y = i / hoehe;
+
+			HashMap<Feld.adjazentesFeld, Feld> nachbarn = new HashMap<Feld.adjazentesFeld, Feld>();
+
+			//N
+			if(y - 1 >= 0) {
+				nachbarn.put(Feld.adjazentesFeld.N, felder.get(x + ((y - 1) * breite)));
+				System.out.println("N");
+			}
+			//NO
+
+			//O
+			if(x + 1 < breite) {
+				nachbarn.put(Feld.adjazentesFeld.O, felder.get(x + 1 + (y * breite)));
+				System.out.println("O");
+			}			
+			//SO
+
+			//S
+			if(y + 1 < hoehe) {
+				nachbarn.put(Feld.adjazentesFeld.S, felder.get(x + ((y + 1) * breite)));
+				System.out.println("S");
+			}			
+			//SW
+
+			//W
+			if(x - 1 >= 0) {
+				nachbarn.put(Feld.adjazentesFeld.W, felder.get(x - 1 + ((y) * breite)));
+				System.out.println("W");
+			}
+			//NW
+			felder.get(i).setzeNachbarn(nachbarn);
+		}
 	}
-	
-	/*
-	 *   1 2 3
-	 *   4 A 5
-	 *   6 7 8
-	 * 
-	 */	
-	public Feld adjazentesFeld(Feld f, adjazentesFeld n) {
-		return null;
-	}
-	
+
+
+
 	/**
 	 * throws NichtAdjazentesFeldException
 	 * @param mitte
 	 * @param anderes
 	 * @return
 	 */
-	public adjazentesFeld feldRelation(Feld mitte, Feld anderes) {
-		return adjazentesFeld.N;
+	public Feld.adjazentesFeld feldRelation(Feld mitte, Feld anderes) {
+		return Feld.adjazentesFeld.N;
 	}
-	
-	public final void autoZuFahrbahnHinzufuegen(Auto a, Point p) {
+
+	public final Feld feldAnPosition(Point p) {
+		return felder.get(p.x + (breite * p.y));
+	}	
+
+	public final void autoZuFahrbahnHinzufuegen(Auto<? extends Strategie> a, Point p) {
 		//Auto darf nur einmal existieren
+
+		for(Feld f : felder) {
+			f.entferneAuto(a);
+		}
+
+		Feld ziel = felder.get(p.x + (breite * p.y));
+		ziel.fuegeAutoHinzu(a);
 	}
-	
+
 	public final void spawnAlleAutos() {
 		//Alle Autos anstarten - synchronized
+
 	}
+	/*
+	Feld ziel = null;
+
+	int i = felder.indexOf(f);
+	int x = i % breite;
+	int y = i / hoehe;
+
+	if(n == adjazentesFeld.N) {
+		if(y - 1 >= 0) {
+			ziel = felder.get(x + ((y - 1) * breite));
+			System.out.println("N");
+		}
+	} else if(n == adjazentesFeld.NO) {
+		assert(false);
+	} else if(n == adjazentesFeld.O) {
+		if(x + 1 < breite) {
+			ziel = felder.get(x + 1 + (y * breite));
+			System.out.println("O");
+		}			
+	} else if(n == adjazentesFeld.SO) {
+		assert(false);
+	} else if(n == adjazentesFeld.S) {
+		if(y + 1 < hoehe) {
+			ziel = felder.get(x + ((y + 1) * breite));
+			System.out.println("S");
+		}			
+	} else if(n == adjazentesFeld.SW) {
+		assert(false);
+	} else if(n == adjazentesFeld.W) {
+		if(x - 1 >= 0) {
+			ziel = felder.get(x - 1 + ((y) * breite));
+			System.out.println("W");
+		}
+
+	} else {
+		assert(false);
+	}
+
+	if(ziel == null) {
+		return adjazentesFeld(f, n);
+	}
+
+	return ziel;
+	 */
 
 }

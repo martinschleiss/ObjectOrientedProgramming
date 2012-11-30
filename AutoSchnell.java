@@ -1,8 +1,8 @@
 
 public class AutoSchnell<T extends Strategie> extends Auto<T> {
 
-	public AutoSchnell(Fahrbahn fahrbahn, Feld startFeld, T s) {
-		super(fahrbahn, startFeld, s);
+	public AutoSchnell(Feld startFeld, T s) {
+		super(startFeld, s);
 	}
 	
 	public final int warteZeitInMillisekunden() {
