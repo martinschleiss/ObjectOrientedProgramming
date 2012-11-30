@@ -1,6 +1,9 @@
 import java.util.ArrayList;
 public class Feld {
 	
+	/**
+	 * @GuardedBy("this")
+	 */
 	private ArrayList<Auto> autos;
 	private final Fahrbahn f;
 	
@@ -23,7 +26,7 @@ public class Feld {
 		}
 	}
 	
-	public void entferneAuto(Auto a) {
+	private final void entferneAuto(Auto a) {
 		synchronized(this) {
 			if(autos.contains(a) == true) {
 				autos.remove(a);

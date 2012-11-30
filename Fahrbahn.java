@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.awt.Point;
 public class Fahrbahn {
 	
 	private final int breite;
@@ -34,6 +35,14 @@ public class Fahrbahn {
 	 */
 	public adjazentesFeld feldRelation(Feld mitte, Feld anderes) {
 		return adjazentesFeld.N;
+	}
+	
+	public final void autoZuFahrbahnHinzufuegen(Auto a, Point p) {
+		//Auto darf nur einmal existieren
+	}
+	
+	public final void spawnAlleAutos() {
+		//Alle Autos anstarten - synchronized
 	}
 
 }
