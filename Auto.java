@@ -3,7 +3,7 @@ public class Auto<T extends Strategie> implements Runnable{
 
 	private Feld f;
 	private final Fahrbahn fahrbahn;
-	private enum ausrichtung {NORD, OST, SUED, WEST};
+	public enum ausrichtung {NORD, OST, SUED, WEST};
 	private ausrichtung akutell;
 	private int punkte = 0;
 	private final Strategie s;
@@ -18,7 +18,7 @@ public class Auto<T extends Strategie> implements Runnable{
 	public void run() {
 		
 		while(true) {
-			Fahrbahn.adjazentesFeld a = s.naechstesFeld(aktuellesFeld());
+			Fahrbahn.adjazentesFeld a = s.naechstesFeld(aktuellesFeld(), this.akutell);
 			Feld ziel = fahrbahn.adjazentesFeld(aktuellesFeld(), a);
 			ziel.fuegeAutoHinzu(this);
 		}		
