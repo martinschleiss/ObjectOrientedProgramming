@@ -4,21 +4,21 @@ public class Feld {
 	/**
 	 * @GuardedBy("this")
 	 */
-	private ArrayList<Auto> autos;
+	private ArrayList<Auto<? extends Strategie>> autos;
 	private final Fahrbahn f;
 	
 	public Feld(Fahrbahn f) {
-		autos = new ArrayList<Auto>();
+		autos = new ArrayList<Auto<? extends Strategie>>();
 		this.f = f;
 	}
 
-	public void fuegeAutoHinzu(Auto a) {
+	public void fuegeAutoHinzu(Auto<? extends Strategie> a) {
 		Fahrbahn.adjazentesFeld adj = f.feldRelation(this, a.aktuellesFeld());
 		a.aktuellesFeld().entferneAuto(a);
 		a.wechsleZuFeld(this);
 		synchronized(this) {
 			if(autos.contains(a) == false) {				
-				for(Auto i : autos) {					
+				for(Auto<? extends Strategie> i : autos) {					
 					i.angestoszenVonAdjazentemFeld(adj);										
 				}
 				autos.add(a);
@@ -26,7 +26,7 @@ public class Feld {
 		}
 	}
 	
-	private final void entferneAuto(Auto a) {
+	private final void entferneAuto(Auto<? extends Strategie> a) {
 		synchronized(this) {
 			if(autos.contains(a) == true) {
 				autos.remove(a);

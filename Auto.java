@@ -8,7 +8,7 @@ public class Auto<T extends Strategie> implements Runnable{
 	private int punkte = 0;
 	private final Strategie s;
 	
-	public Auto(Fahrbahn fahrbahn, Feld startFeld, Strategie s) {
+	public Auto(Fahrbahn fahrbahn, Feld startFeld, T s) {
 		this.fahrbahn = fahrbahn;
 		this.f = startFeld;
 		this.akutell = ausrichtung.NORD;
