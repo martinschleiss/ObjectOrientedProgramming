@@ -1,5 +1,5 @@
 
-public class Auto<T extends Strategie> implements Runnable{
+public abstract class Auto<T extends Strategie> implements Runnable{
 
 	private Feld f;
 	private final Fahrbahn fahrbahn;
@@ -21,8 +21,16 @@ public class Auto<T extends Strategie> implements Runnable{
 			Fahrbahn.adjazentesFeld a = s.naechstesFeld(aktuellesFeld(), this.akutell);
 			Feld ziel = fahrbahn.adjazentesFeld(aktuellesFeld(), a);
 			ziel.fuegeAutoHinzu(this);
+			
+			try {
+				Thread.sleep(this.warteZeitInMillisekunden());
+			} catch (InterruptedException e) {
+				return;
+			}
 		}		
 	}
+	
+	public abstract int warteZeitInMillisekunden();
 	
 	public final void wechsleZuFeld(Feld ziel) {
 		f = ziel;
