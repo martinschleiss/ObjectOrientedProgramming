@@ -2,8 +2,8 @@ public class StrategieLinkeWandEntlang extends Strategie {
 	
 	private ausrichtung a;
 	
-	public StrategieLinkeWandEntlang(Fahrbahn f, ausrichtung a) {
-		super(f, a);
+	public StrategieLinkeWandEntlang(ausrichtung a) {
+		super();
 		this.a = a;
 	}
 	
@@ -35,11 +35,6 @@ public class StrategieLinkeWandEntlang extends Strategie {
 				ziel = aktuell.adjazentesFeld(Feld.adjazentesFeld.N);
 				a = ausrichtung.NORD;
 			}
-		}
-
-		if(ziel == null) {
-			System.out.println("Bam");
-			assert(false);
 		}
 		
 		return ziel;

@@ -7,7 +7,6 @@ public class Feld {
 	 * @GuardedBy("this")
 	 */
 	private ArrayList<Auto<? extends Strategie>> autos;
-	private final Fahrbahn f;
 	private Feld n;
 	private Feld no;
 	private Feld o;
@@ -20,9 +19,8 @@ public class Feld {
 
 	private boolean initialisiert;
 
-	public Feld(Fahrbahn f) {
+	public Feld() {
 		autos = new ArrayList<Auto<? extends Strategie>>();
-		this.f = f;
 		this.initialisiert = false;
 	}
 
