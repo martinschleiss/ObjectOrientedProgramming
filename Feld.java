@@ -71,28 +71,23 @@ public class Feld {
 	 * 
 	 */	
 	public Feld adjazentesFeld(adjazentesFeld n) {
-		
-		Feld ziel = null;
-		
-		
+			
 		if(n == adjazentesFeld.N) {
-			ziel = this.n;
+			return this.n;
 		} else if(n == adjazentesFeld.NO) {
-			assert(false);
+			return this.no;
 		} else if(n == adjazentesFeld.O) {
-			ziel = this.o;			
+			return this.o;			
 		} else if(n == adjazentesFeld.SO) {
-			assert(false);
+			return this.so;
 		} else if(n == adjazentesFeld.S) {
-			ziel = this.s;			
+			return this.s;			
 		} else if(n == adjazentesFeld.SW) {
-			assert(false);
+			return this.sw;
 		} else if(n == adjazentesFeld.W) {
-			ziel = this.w;
+			return this.w;
 		} else {
-			assert(false);
+			return this.nw;
 		}
-		
-		return ziel;
 	}
 }

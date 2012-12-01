@@ -27,28 +27,28 @@ public class Fahrbahn {
 			//N
 			if(y - 1 >= 0) {
 				nachbarn.put(Feld.adjazentesFeld.N, felder.get(x + ((y - 1) * breite)));
-				System.out.println("N");
+				
 			}
 			//NO
 
 			//O
 			if(x + 1 < breite) {
 				nachbarn.put(Feld.adjazentesFeld.O, felder.get(x + 1 + (y * breite)));
-				System.out.println("O");
+				
 			}			
 			//SO
 
 			//S
 			if(y + 1 < hoehe) {
 				nachbarn.put(Feld.adjazentesFeld.S, felder.get(x + ((y + 1) * breite)));
-				System.out.println("S");
+				
 			}			
 			//SW
 
 			//W
 			if(x - 1 >= 0) {
 				nachbarn.put(Feld.adjazentesFeld.W, felder.get(x - 1 + ((y) * breite)));
-				System.out.println("W");
+				
 			}
 			//NW
 			felder.get(i).setzeNachbarn(nachbarn);

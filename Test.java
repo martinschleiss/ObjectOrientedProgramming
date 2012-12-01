@@ -6,8 +6,9 @@ public class Test {
 	
 		Fahrbahn f = new Fahrbahn(2, 2);
 		ArrayList<Auto<? extends Strategie>> testAutos = new ArrayList<Auto<? extends Strategie>>();
-		StrategieLinkeWandEntlang s = new StrategieLinkeWandEntlang(f, Strategie.ausrichtung.NORD);
-		for(int i = 0; i < 20; i++) {
+		
+		for(int i = 0; i < 1000; i++) {
+			StrategieLinkeWandEntlang s = new StrategieLinkeWandEntlang(f, Strategie.ausrichtung.NORD);
 			Auto<StrategieLinkeWandEntlang> a = new AutoNormal<StrategieLinkeWandEntlang>(f.feldAnPosition(new Point(0, 0)), s);
 			testAutos.add(a);
 			f.autoZuFahrbahnHinzufuegen(a, new Point(0,0));
@@ -17,7 +18,5 @@ public class Test {
 			Thread t = new Thread(a);
 			t.start();
 		}
-		
-		System.out.println("Success!");
 	}	
 }
