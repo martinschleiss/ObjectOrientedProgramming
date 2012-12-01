@@ -4,7 +4,7 @@ public class Test {
 	
 	public static void main(String [] args) {
 	
-		Fahrbahn f = new Fahrbahn(2, 2);
+		Fahrbahn f = new Fahrbahn(400, 400);
 		ArrayList<Auto<? extends Strategie>> testAutos = new ArrayList<Auto<? extends Strategie>>();
 		
 		for(int i = 0; i < 1000; i++) {

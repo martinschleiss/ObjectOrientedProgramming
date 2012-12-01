@@ -55,18 +55,6 @@ public class Fahrbahn {
 		}
 	}
 
-
-
-	/**
-	 * throws NichtAdjazentesFeldException
-	 * @param mitte
-	 * @param anderes
-	 * @return
-	 */
-	public Feld.adjazentesFeld feldRelation(Feld mitte, Feld anderes) {
-		return Feld.adjazentesFeld.N;
-	}
-
 	public final Feld feldAnPosition(Point p) {
 		return felder.get(p.x + (breite * p.y));
 	}	

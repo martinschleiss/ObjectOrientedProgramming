@@ -27,13 +27,13 @@ public class Feld {
 	}
 
 	public void fuegeAutoHinzu(Auto<? extends Strategie> a) {
-		adjazentesFeld adj = f.feldRelation(this, a.aktuellesFeld());
+		adjazentesFeld ursprung = feldRelation(a.aktuellesFeld());
 		a.aktuellesFeld().entferneAuto(a);
 		a.wechsleZuFeld(this);
 		synchronized(this) {
 			if(autos.contains(a) == false) {				
 				for(Auto<? extends Strategie> i : autos) {					
-					i.angestoszenVonAdjazentemFeld(adj);										
+					i.angestoszenVonAdjazentemFeld(ursprung);										
 				}
 				autos.add(a);
 			}
@@ -88,6 +88,37 @@ public class Feld {
 			return this.w;
 		} else {
 			return this.nw;
+		}
+	}
+	
+	/**
+	 * throws NichtAdjazentesFeldException
+	 * @param mitte
+	 * @param anderes
+	 * @return
+	 */	
+	public adjazentesFeld feldRelation(Feld f) {
+		if(f == n) {
+			return adjazentesFeld.N;
+		} else if(f == no) {
+			return adjazentesFeld.NO;
+		} else if(f == o) {
+			return adjazentesFeld.O;
+		} else if(f == so) {
+			return adjazentesFeld.SO;
+		} else if(f == s) {
+			return adjazentesFeld.S;
+		} else if(f == sw) {
+			return adjazentesFeld.SW;
+		} else if(f == w) {
+			return adjazentesFeld.W;
+		} else if(f == nw) {
+			return adjazentesFeld.NW;
+		} else {
+			//TODO: throw exception
+			
+			
+			return adjazentesFeld.N;
 		}
 	}
 }
