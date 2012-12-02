@@ -17,19 +17,22 @@ public class Fahrbahn {
 		}
 		int x = 0;
 		int y = 0;
-
 		for(int i = 0; i < felder.size(); i++) {
 			x = i % breite;
 			y = i / hoehe;
 
 			HashMap<Feld.adjazentesFeld, Feld> nachbarn = new HashMap<Feld.adjazentesFeld, Feld>();
-
+		
 			//N
 			if(y - 1 >= 0) {
 				nachbarn.put(Feld.adjazentesFeld.N, felder.get(x + ((y - 1) * breite)));
 				
 			}
 			//NO
+			if(y-1 >=0 && x < breite-1){
+				nachbarn.put(Feld.adjazentesFeld.NO, felder.get(x+1 + ((y - 1) * breite)));
+				
+			}
 
 			//O
 			if(x + 1 < breite) {
@@ -38,12 +41,19 @@ public class Fahrbahn {
 			}			
 			//SO
 
+			if(x<breite-1&&y<hoehe-1){
+				nachbarn.put(Feld.adjazentesFeld.SO, felder.get(x+1 + ((y + 1) * breite)));
+				
+			}
 			//S
 			if(y + 1 < hoehe) {
 				nachbarn.put(Feld.adjazentesFeld.S, felder.get(x + ((y + 1) * breite)));
 				
 			}			
 			//SW
+			if(x-1 >= 0 && y < hoehe-1){
+				nachbarn.put(Feld.adjazentesFeld.SW, felder.get(x-1 + ((y + 1) * breite)));
+			}
 
 			//W
 			if(x - 1 >= 0) {
@@ -51,6 +61,10 @@ public class Fahrbahn {
 				
 			}
 			//NW
+			if(y-1 >= 0 && x-1 >= 0){
+				nachbarn.put(Feld.adjazentesFeld.NW, felder.get(x-1 + ((y - 1) * breite)));
+				
+			}
 			felder.get(i).setzeNachbarn(nachbarn);
 		}
 	}
