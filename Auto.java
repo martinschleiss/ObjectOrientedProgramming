@@ -22,7 +22,7 @@ public abstract class Auto<T extends Strategie> implements Runnable{
 			Feld ziel = s.naechstesFeld(aktuellesFeld());
 			ziel.fuegeAutoHinzu(this);
 			
-			if(schritte >= 1000) {
+			if(schritte >= 100) {
 				System.out.println(schritte);
 				return;
 			}
