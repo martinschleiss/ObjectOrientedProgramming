@@ -25,13 +25,14 @@ public class Feld {
 	}
 
 	public void fuegeAutoHinzu(Auto<? extends Strategie> a) {
-		adjazentesFeld ursprung = feldRelation(a.aktuellesFeld());
+		//adjazentesFeld ursprung = feldRelation(a.aktuellesFeld());
 		a.aktuellesFeld().entferneAuto(a);
 		a.wechsleZuFeld(this);
 		synchronized(this) {
 			if(autos.contains(a) == false) {				
 				for(Auto<? extends Strategie> i : autos) {					
-					i.angestoszenVonAdjazentemFeld(ursprung);										
+					i.minusPunkt();
+					a.plusPunkt();
 				}
 				autos.add(a);
 			}
@@ -95,7 +96,7 @@ public class Feld {
 	 * @param anderes
 	 * @return
 	 */	
-	public adjazentesFeld feldRelation(Feld f) {
+/*	public adjazentesFeld feldRelation(Feld f) {
 		if(f == n) {
 			return adjazentesFeld.N;
 		} else if(f == no) {
@@ -118,5 +119,6 @@ public class Feld {
 			
 			return adjazentesFeld.N;
 		}
-	}
+
+	}*/
 }

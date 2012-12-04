@@ -23,6 +23,12 @@ public abstract class Auto<T extends Strategie> implements Runnable{
 		this.fahrbahn = fahrbahn;
 		number = serialNumber++;
 	}
+	public int getPunkte(){
+		return punkte;
+	}
+	public int getSchritte(){
+		return schritte;
+	}
 
 	public void run() {
 
@@ -33,7 +39,8 @@ public abstract class Auto<T extends Strategie> implements Runnable{
 
 				if(schritte >= 50) {
 					fahrbahn.stoppeSpiel();
-					System.out.println(schritte);
+					//System.out.println("Schritte:"+schritte+" Punkte: " +punkte);
+					//System.out.println(punkte);
 					return;
 				}
 
@@ -56,10 +63,10 @@ public abstract class Auto<T extends Strategie> implements Runnable{
 		return f;
 	}
 
-	public void angestoszenVonAdjazentemFeld(Feld.adjazentesFeld n) {
-
-	}
-
+	/*public void angestoszenVonAdjazentemFeld(Feld.adjazentesFeld n) {
+		
+	}*/
+	
 	public String getaetigteSchritte() {
 		synchronized(this) {
 			return number + ": " + schritte;
@@ -72,7 +79,7 @@ public abstract class Auto<T extends Strategie> implements Runnable{
 		}
 	}
 
-	private final void minusPunkt() {
+	public final void minusPunkt() {
 		synchronized(this) {
 			--punkte;
 		}
