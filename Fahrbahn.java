@@ -7,10 +7,14 @@ public class Fahrbahn {
 	private int breite;
 	private int hoehe;
 	private final ArrayList<Feld> felder;
-
+	private ArrayList<Auto<? extends Strategie>> autos;
+	private final ThreadGroup group;
+	private boolean running = false;
 	public Fahrbahn(int breite, int hoehe) {
 		this.breite = breite;
 		this.hoehe = hoehe;
+		group = new ThreadGroup("Auto");
+		autos = new ArrayList<Auto<? extends Strategie>>();
 		felder = new ArrayList<Feld>();
 		for(int i = 0; i < (breite * hoehe); i++) {
 			felder.add(new Feld());
@@ -22,33 +26,33 @@ public class Fahrbahn {
 			y = i / hoehe;
 
 			HashMap<Feld.adjazentesFeld, Feld> nachbarn = new HashMap<Feld.adjazentesFeld, Feld>();
-		
+
 			//N
 			if(y - 1 >= 0) {
 				nachbarn.put(Feld.adjazentesFeld.N, felder.get(x + ((y - 1) * breite)));
-				
+
 			}
 			//NO
 			if(y-1 >=0 && x < breite-1){
 				nachbarn.put(Feld.adjazentesFeld.NO, felder.get(x+1 + ((y - 1) * breite)));
-				
+
 			}
 
 			//O
 			if(x + 1 < breite) {
 				nachbarn.put(Feld.adjazentesFeld.O, felder.get(x + 1 + (y * breite)));
-				
+
 			}			
 			//SO
 
 			if(x<breite-1&&y<hoehe-1){
 				nachbarn.put(Feld.adjazentesFeld.SO, felder.get(x+1 + ((y + 1) * breite)));
-				
+
 			}
 			//S
 			if(y + 1 < hoehe) {
 				nachbarn.put(Feld.adjazentesFeld.S, felder.get(x + ((y + 1) * breite)));
-				
+
 			}			
 			//SW
 			if(x-1 >= 0 && y < hoehe-1){
@@ -58,12 +62,12 @@ public class Fahrbahn {
 			//W
 			if(x - 1 >= 0) {
 				nachbarn.put(Feld.adjazentesFeld.W, felder.get(x - 1 + ((y) * breite)));
-				
+
 			}
 			//NW
 			if(y-1 >= 0 && x-1 >= 0){
 				nachbarn.put(Feld.adjazentesFeld.NW, felder.get(x-1 + ((y - 1) * breite)));
-				
+
 			}
 			felder.get(i).setzeNachbarn(nachbarn);
 		}
@@ -79,14 +83,53 @@ public class Fahrbahn {
 		for(Feld f : felder) {
 			f.entferneAuto(a);
 		}
+		autos.remove(a);
+		autos.add(a);
 
 		Feld ziel = felder.get(p.x + (breite * p.y));
 		ziel.fuegeAutoHinzu(a);
 	}
 
 	public final void spawnAlleAutos() {
-		//Alle Autos anstarten - synchronized
-
+		//Alle Autos anstarten
+		for(Auto<? extends Strategie> a: autos) {
+			Thread t = new Thread(group, a);
+			t.start();
+		}
 	}
 
+	public final void stoppeSpiel() throws InterruptedException {
+		synchronized(this) {
+			if(running == false) {
+				group.interrupt();
+				running = true;
+				notifyAll();
+			} else {
+				throw new InterruptedException();
+			}
+		}
+	}
+
+	public String ergebnisse() {
+		String output = "";
+		synchronized(this) {
+			while(!running) {
+				try {
+					wait();
+				} catch (InterruptedException e) {
+
+					e.printStackTrace();
+
+				}
+			}
+		}
+
+
+		for(Auto<? extends Strategie> a: autos) {
+			output += a.getaetigteSchritte();
+			output += "\n";
+		}
+		return output;
+
+	}
 }
