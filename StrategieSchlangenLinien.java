@@ -1,7 +1,8 @@
 import java.util.Random;
 
 /**
- * Strategie laesst 
+ * Strategie versucht schlangenlinienfoermige Manoever. Stoesst ein Auto an die Wand, wird seine Ausrichtung zufaellig veraendert.
+ * Fuehrt ein versuchtes Manoever zu keinem Erfolg (Auto faehrt an Wand), wird die Position des Autos nicht veraendert.
  */
 public class StrategieSchlangenLinien extends Strategie{
 
@@ -15,6 +16,14 @@ public class StrategieSchlangenLinien extends Strategie{
 		state = 0;
 	}
 
+	/**
+	 * erzeugt ein gueltiges Manoever fuer das jeweils uebergebene Auto
+	 * Bewegliche Autos duerfen nach links, halblinks, geradeaus, halbrechts und rechts lenken
+	 * Bei Schnellen Autos duerfen nach halblinks, geradeaus und halbrechts lenken. rechts und links liefern null
+	 * 
+	 * @param a		!= null
+	 * @return naechstes Feld fuer Auto a
+	 */
 	public Feld naechstesManoever(Auto a) {
 
 		int count = 0;
@@ -45,7 +54,7 @@ public class StrategieSchlangenLinien extends Strategie{
 				
 				random = generator.nextInt(4);
 				
-				switch (state) {
+				switch (random) {
 				case 0:		a.setAusrichtung(Auto.ausrichtung.N);
 				break;
 				case 1:		a.setAusrichtung(Auto.ausrichtung.O);

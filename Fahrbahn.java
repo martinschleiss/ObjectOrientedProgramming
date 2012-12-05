@@ -1,11 +1,15 @@
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.awt.Point;
+
+/**
+ * Repraesentiert Fahrbahn aus einem rechteckigen Feld aus Feldern.
+ * Von hier aus koennen Autos gespawnt, das Spiel begonnen und gestoppt werden und Ergebnisse ausgegeben werden.
+ */
 
 public class Fahrbahn {
 
-	private int breite;
-	private int hoehe;
+	private int breite; // > 0
+	//private int hoehe; // > 0
 	private final ArrayList<Feld> felder;
 	private ArrayList<Auto> autos;
 	private final ThreadGroup group;
@@ -13,7 +17,7 @@ public class Fahrbahn {
 
 	public Fahrbahn(int breite, int hoehe) {
 		this.breite = breite;
-		this.hoehe = hoehe;
+		//this.hoehe = hoehe;
 		group = new ThreadGroup("Auto");
 		autos = new ArrayList<Auto>();
 		felder = new ArrayList<Feld>();
@@ -74,16 +78,28 @@ public class Fahrbahn {
 		}
 	}
 
+	/**
+	 * Liefert korrespondierendes Feld der Fahrbahn anhand der Koordinaten des Punktes
+	 * @param p != null
+	 * @return feld, wenn Point innerhalb der Fahrbahn, null sonst
+	 */
 	public final Feld feldAnPosition(Point p) {
-		return felder.get(p.x + (breite * p.y));
+		
+		if (p.x + (breite * p.y) < felder.size()) {
+		
+			return felder.get(p.x + (breite * p.y));
+		} else {
+			
+			return null;
+		}
 	}	
 
+	/**
+	 * Fuegt Auto der Fahrbahn duplikatfrei hinzu
+	 * @param a != null, a nicht schon auf einem Feld der Fahrbahn sein
+	 */
 	public final void autoZuFahrbahnHinzufuegen(Auto a) {
-		//Auto darf nur einmal existieren
 
-		for(Feld f : felder) {
-			f.entferneAuto(a);
-		}
 		autos.remove(a);
 		autos.add(a);
 
@@ -91,14 +107,22 @@ public class Fahrbahn {
 		ziel.fuegeAutoHinzu(a);
 	}
 
+	/**
+	 * Startet den Betrieb des Autodroms und damit alle Autos
+	 */
 	public final void spawnAlleAutos() {
-		//Alle Autos anstarten
+
 		for(Auto a: autos) {
+
 			Thread t = new Thread(group, a);
 			t.start();
 		}
 	}
 
+	/**
+	 * Stoppt Betrieb des Autodroms und damit alle Autos
+	 * @throws InterruptedException
+	 */
 	public final void stoppeSpiel() throws InterruptedException {
 
 		synchronized(this) {
@@ -113,6 +137,9 @@ public class Fahrbahn {
 		}
 	}
 
+	/**
+	 * Liefert Ergebnisse der Fahrt
+	 */
 	public String ergebnisse() {
 		String output = "";
 		synchronized(this) {

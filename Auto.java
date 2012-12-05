@@ -1,4 +1,6 @@
-
+/**
+ * Baisklasse repraesentiert Autodrom-Auto
+ */
 public abstract class Auto implements Runnable{
 
 	public static enum ausrichtung {N, O, S, W};
@@ -8,16 +10,8 @@ public abstract class Auto implements Runnable{
 	private ausrichtung a;
 	private final Strategie s;
 	private final int number;
-	
-	/**
-	 * @GuardedBy("this")
-	 */
-	private int punkte = 0;
-
-	/**
-	 * @GuardedBy("this")
-	 */
-	private int schritte;
+	private int punkte; // >= 0
+	private int schritte; // >= 0
 
 
 	public Auto(Fahrbahn f, Feld startfeld, ausrichtung a, Strategie s) {
@@ -27,45 +21,56 @@ public abstract class Auto implements Runnable{
 		this.a = a;
 		this.s = s;
 		this.schritte = 0;
+		this.punkte = 0;
 		number = serialNumber++;
 	}
 
+	/**
+	 * versucht ein Manoever durchzufuehren und stoppt alle anderen Autos, wenn dieses Auto 10 Punkte erreicht,
+	 * oder sich 50 Schritte bewegt hat 
+	 */
 	public void run() {
 
 		while(true) {
+			
 			try {
 				
 				Feld ziel = s.naechstesManoever(this);
 				ziel.fuegeAutoHinzu(this);
 
-				if(schritte >= 100) {
+				if(punkte >= 10 || schritte >= 100) {
 					
 					fahrbahn.stoppeSpiel();
-					
 				}
 				
-				if(punkte >= 10) {
-					
-					fahrbahn.stoppeSpiel();
-				}
-
 				Thread.sleep(this.wartezeit());
 				
 			} catch (InterruptedException e) {
-				System.err.println(e.getMessage());
-				return;
+				//Thread.currentThread().interrupt();
+				//System.out.println(e.getMessage());
+				return; //stand so im Skritpum
 			}
-
 			schritte++;
 		}		
 	}
-
+	
+	/**
+	 * Die Zeit, die Autos warten sollen unterscheidet sich je nach Geschwindigkeit
+	 * @return wartezeit > 0 in Millisekunden
+	 */
 	public abstract int wartezeit();
 
+	/**
+	 * Setter-Methode fuer Feld
+	 * @param ziel != null
+	 */
 	public final void wechsleZuFeld(Feld ziel) {
 		f = ziel;
 	}
 
+	/**
+	 * Getter-Methode fuer Feld
+	 */
 	public final Feld aktuellesFeld() {
 		return f;
 	}
@@ -75,16 +80,27 @@ public abstract class Auto implements Runnable{
 		this.f = f;
 	}
 	
+	/**
+	 * Getter-Methode fuer Ausrichtung
+	 */
 	public ausrichtung getAusrichtung() {
 		
 		return a;
 	}
 
+	/**
+	 * Setter-Methode fuer Ausrichtung
+	 * @param a != null
+	 */
 	public void setAusrichtung(ausrichtung a) {
 		
 		this.a = a;
 	}
 	
+	/**
+	 * Liefert Feld, dass beim Geradeausfahren der jeweiligen Ausrichtung als naechstes kommen wuerde
+	 * @return tmp - naechtes Feld, ist null wenn an den Rand gefahren
+	 */
 	public Feld geradeaus() {
 		
 		Feld tmp = null;
@@ -109,6 +125,10 @@ public abstract class Auto implements Runnable{
 		return tmp;
 	}
 	
+	/**
+	 * Liefert Feld, dass beim Halblinksfahren der jeweiligen Ausrichtung als naechstes kommen wuerde
+	 * @return tmp - naechtes Feld, ist null wenn an den Rand gefahren
+	 */
 	public Feld lenkeHalblinks() {
 
 		Feld tmp = null;
@@ -137,6 +157,10 @@ public abstract class Auto implements Runnable{
 		return tmp;
 	}
 
+	/**
+	 * Liefert Feld, dass beim Halbrechtsfahren der jeweiligen Ausrichtung als naechstes kommen wuerde
+	 * @return tmp - naechtes Feld, ist null wenn an den Rand gefahren
+	 */
 	public Feld lenkeHalbrechts() {
 
 		Feld tmp = null;
@@ -165,36 +189,76 @@ public abstract class Auto implements Runnable{
 		return tmp;
 	}
 	
+	/**
+	 * Liefert Feld, dass beim Linksfahren der jeweiligen Ausrichtung als naechstes kommen wuerde
+	 * @return tmp - naechtes Feld, ist null wenn an den Rand gefahren
+	 */
 	public abstract Feld lenkeLinks();
+	
+	/**
+	 * Liefert Feld, dass beim Rechtsfahren der jeweiligen Ausrichtung als naechstes kommen wuerde
+	 * @return tmp - naechtes Feld, ist null wenn an den Rand gefahren
+	 */
 	public abstract Feld lenkeRechts();
 
+	/**
+	 * Liefert "Seriennummer" des Autos
+	 * @return number > 0
+	 */
 	public int uniqueNumber() {
+		
 		return number;
 	}	
 
+	/**
+	 * Liefert aktuellen Punktestand
+	 */
 	public int getPunkte(){
+		
 		synchronized(this) {
+		
 			return punkte;
 		}
 	}
 	
+	/**
+	 * Liefert aktuelle Schrittanzahl
+	 */
 	public int getSchritte(){
+		
 		synchronized(this) {
+		
 			return schritte;
 		}
 	}
 
+	/**
+	 * Addiert einen Punkt zum aktuellen Punktestand
+	 */
 	public final void plusPunkt() {
+		
 		synchronized(this) { 
+		
 			++punkte;
 		}
 	}
 
+	/**
+	 * Subtrahiert einen Punkt zum aktuellen Punktestand
+	 */
 	public final void minusPunkt() {
+		
 		synchronized(this) {
+		
 			--punkte;
 		}
 	}
+	
+	/**
+	 * Dient zum berechnen, ob zwei Ausrichtungen frontal gegeneinander laufen
+	 * @param o		!= null, Ausrichtung des anderen Autos
+	 * @return		true, wenn Ausrichtungen entgegengesetzt, sonst false
+	 */
 	public boolean isFrontal(ausrichtung o) {
 		
 		if (this.a == ausrichtung.N && o == ausrichtung.S) {

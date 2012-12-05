@@ -1,11 +1,11 @@
 import java.util.ArrayList;
-import java.util.HashMap;
 
+/**
+ * Klasse Feld repraesentiert Teil einer Fahrbahn, auf dem sich mehrere Autos befinden koennen.
+ * Ist mit umgebenden Feldern in einer 8er Nachbarschaft verkettet. Randfelder zeigen auf null, dort wo der Rand ist
+ */
 public class Feld {
 
-	/**
-	 * @GuardedBy("this")
-	 */
 	private ArrayList<Auto> autos;
 	private Feld n;
 	private Feld no;
@@ -15,11 +15,9 @@ public class Feld {
 	private Feld sw;
 	private Feld w;
 	private Feld nw;
-	public enum adjazentesFeld {N, NO, O, SO, S, SW, W, NW};
-
-	//private boolean initialisiert;
 
 	public Feld() {
+		
 		autos = new ArrayList<Auto>();
 		n = null;
 		no = null;
@@ -29,84 +27,12 @@ public class Feld {
 		sw = null;
 		w = null;
 		nw = null;
-		//this.initialisiert = false;
 	}
 
-	public void fuegeAutoHinzu(Auto a) {
-
-		a.aktuellesFeld().entferneAuto(a);
-		a.wechsleZuFeld(this);
-		
-		synchronized(this) {
-		
-			if (!autos.contains(a)) {
-				
-				for(Auto i : autos) {
-					
-					if (a.isFrontal(i.getAusrichtung())) {
-					
-						i.plusPunkt();
-						a.plusPunkt();
-						
-					} else {
-						
-						i.minusPunkt();
-					}
-				}
-				autos.add(a);
-			}
-		}
-	}
-
-	public final void entferneAuto(Auto a) {
-		synchronized(this) {
-				autos.remove(a);
-			}	
-	}
-/*
-	public final void setzeNachbarn(HashMap<adjazentesFeld, Feld> nachbarn) {
-
-		if(initialisiert == false) {
-			initialisiert = true;
-			n = nachbarn.get(adjazentesFeld.N);
-			no = nachbarn.get(adjazentesFeld.NO);
-			o = nachbarn.get(adjazentesFeld.O);
-			so = nachbarn.get(adjazentesFeld.SO);
-			s = nachbarn.get(adjazentesFeld.S);
-			sw = nachbarn.get(adjazentesFeld.SW);
-			w = nachbarn.get(adjazentesFeld.W);
-			nw = nachbarn.get(adjazentesFeld.NW);
-		}
-
-	}*/
-	
-	/*
-	 *   1 2 3
-	 *   4 A 5
-	 *   6 7 8
-	 * 
-	 */	
-	/*public Feld adjazentesFeld(adjazentesFeld n) {
-			
-		if(n == adjazentesFeld.N) {
-			return this.n;
-		} else if(n == adjazentesFeld.NO) {
-			return this.no;
-		} else if(n == adjazentesFeld.O) {
-			return this.o;			
-		} else if(n == adjazentesFeld.SO) {
-			return this.so;
-		} else if(n == adjazentesFeld.S) {
-			return this.s;			
-		} else if(n == adjazentesFeld.SW) {
-			return this.sw;
-		} else if(n == adjazentesFeld.W) {
-			return this.w;
-		} else {
-			return this.nw;
-		}
-	}*/
-	
+	/**
+	 * Setter-Methoden fuer alle Felder der 8er-Nachbarschaft.
+	 * @param n != null
+	 */
 	public void setN(Feld n) {
 
 		this.n = n;
@@ -140,6 +66,10 @@ public class Feld {
 		this.nw = n;
 	}
 
+	/**
+	 * Getter-Methoden fuer alle Felder der 8er-Nachbarschaft
+	 * @return Nachbarfeld des Feldes in der jeweiligen Richtung, null wenn Rand
+	 */
 	public Feld getN() {
 
 		return n;
@@ -171,5 +101,44 @@ public class Feld {
 	public Feld getNW() {
 
 		return nw;
+	}
+
+	/**
+	 * Fuegt Auto dem Feld duplikatfrei hinzu und berechnet Punkte fuer Zusammenstoesse anhand der Vorgaben
+	 * @param a != null
+	 */
+	public void fuegeAutoHinzu(Auto a) {
+
+		a.aktuellesFeld().entferneAuto(a);
+		a.wechsleZuFeld(this);
+		
+		synchronized(this) {
+		
+			if (!autos.contains(a)) {
+				
+				for(Auto i : autos) {
+					
+					if (a.isFrontal(i.getAusrichtung())) {
+					
+						i.plusPunkt();
+						a.plusPunkt();
+						
+					} else {
+						
+						i.minusPunkt();
+					}
+				}
+				autos.add(a);
+			}
+		}
+	}
+
+	/**
+	 * Entfernt Auto von Feld
+	 */
+	public final void entferneAuto(Auto a) {
+		synchronized(this) {
+				autos.remove(a);
+			}	
 	}
 }
