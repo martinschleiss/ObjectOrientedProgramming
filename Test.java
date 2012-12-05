@@ -36,7 +36,7 @@ public class Test {
 		}*/
 		
 		Random generator = new Random();
-		Fahrbahn f = new Fahrbahn(10, 10);
+		Fahrbahn f = new Fahrbahn(5, 5);
 
 		Strategie random = new StrategieRandom();
 		//Strategie snake = new StrategieSchlangenLinien();
@@ -46,7 +46,7 @@ public class Test {
 
 		for (int i = 0; i < 10; i++) {
 
-			startpunkte.add(new Point(generator.nextInt(10),generator.nextInt(10)));
+			startpunkte.add(new Point(generator.nextInt(5),generator.nextInt(5)));
 			System.out.println("Neuer Startpunkt: " + startpunkte.get(i));
 		}
 
