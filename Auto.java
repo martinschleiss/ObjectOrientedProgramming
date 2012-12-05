@@ -38,7 +38,7 @@ public abstract class Auto implements Runnable{
 				Feld ziel = s.naechstesManoever(this);
 				ziel.fuegeAutoHinzu(this);
 
-				if(punkte >= 10) {
+				if(punkte >= 10 || schritte >= 100) {
 					
 					fahrbahn.stoppeSpiel();
 					
