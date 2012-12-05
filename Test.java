@@ -67,11 +67,6 @@ public class Test {
 
 		f.spawnAlleAutos();
 		System.out.println(f.ergebnisse());
-		int counter=0;
 
-		for(Auto i : autos) {		
-			System.out.println("Auto "+counter+": Schritte: "+i.getSchritte()+" Punkte: " +i.getPunkte());
-			counter++;
-		}
 	}	
 }
