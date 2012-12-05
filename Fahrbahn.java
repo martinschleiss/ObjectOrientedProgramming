@@ -100,15 +100,12 @@ public class Fahrbahn {
 	}
 
 	public final void stoppeSpiel() throws InterruptedException {
-				
+
 		synchronized(this) {
-		
 			if(running == false) {
-			
 				group.interrupt();
 				running = true;
-				notifyAll();
-			
+					notifyAll();
 			} else {
 			
 				throw new InterruptedException();
@@ -129,7 +126,7 @@ public class Fahrbahn {
 		}
 
 		for(Auto a: autos) {
-			output += a.getaetigteSchritte();
+			output += "Auto "+ a.uniqueNumber()+": Schritte: "+ a.getSchritte() +" Punkte: " + a.getPunkte();
 			output += "\n";
 		}
 		return output;

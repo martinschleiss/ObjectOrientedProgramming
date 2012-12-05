@@ -45,8 +45,12 @@ public class Feld {
 					
 					if (a.isFrontal(i.getAusrichtung())) {
 					
-						i.minusPunkt();
+						i.plusPunkt();
 						a.plusPunkt();
+						
+					} else {
+						
+						i.minusPunkt();
 					}
 				}
 				autos.add(a);

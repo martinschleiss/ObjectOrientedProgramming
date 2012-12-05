@@ -29,14 +29,6 @@ public abstract class Auto implements Runnable{
 		this.schritte = 0;
 		number = serialNumber++;
 	}
-	
-	public int getPunkte(){
-		return punkte;
-	}
-	
-	public int getSchritte(){
-		return schritte;
-	}
 
 	public void run() {
 
@@ -46,8 +38,10 @@ public abstract class Auto implements Runnable{
 				Feld ziel = s.naechstesManoever(this);
 				ziel.fuegeAutoHinzu(this);
 
-				if(schritte >= 50) {
+				if(schritte >= 100) {
+					
 					fahrbahn.stoppeSpiel();
+					
 				}
 				
 				if(punkte >= 10) {
@@ -86,7 +80,7 @@ public abstract class Auto implements Runnable{
 		return a;
 	}
 
-	protected void setAusrichtung(ausrichtung a) {
+	public void setAusrichtung(ausrichtung a) {
 		
 		this.a = a;
 	}
@@ -173,10 +167,20 @@ public abstract class Auto implements Runnable{
 	
 	public abstract Feld lenkeLinks();
 	public abstract Feld lenkeRechts();
-	
-	public String getaetigteSchritte() {
+
+	public int uniqueNumber() {
+		return number;
+	}	
+
+	public int getPunkte(){
 		synchronized(this) {
-			return number + ": " + schritte;
+			return punkte;
+		}
+	}
+	
+	public int getSchritte(){
+		synchronized(this) {
+			return schritte;
 		}
 	}
 

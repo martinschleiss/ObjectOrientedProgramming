@@ -24,7 +24,6 @@ public class Test {
 		for (int i = 0; i < 10; i++) {
 
 			startpunkte.add(new Point(generator.nextInt(10),generator.nextInt(10)));
-			System.out.println("Neuer Startpunkt: " + startpunkte.get(i));
 		}
 
 		for (int i = 0; i < 5; i++) {
@@ -44,11 +43,5 @@ public class Test {
 
 		f1.spawnAlleAutos();
 		System.out.println(f1.ergebnisse());
-		int counter=0;
-
-		for(Auto i : autos) {		
-			System.out.println("Auto "+counter+": Schritte: "+i.getSchritte()+" Punkte: " +i.getPunkte());
-			counter++;
-		}
 	}	
 }
