@@ -21,7 +21,7 @@ public class StrategieRandom extends Strategie{
 		int count = 0;
 		Feld tmp = null;
 
-		while ((tmp == null) && count < 5) {
+		while ((tmp == null) && count < 10) {
 
 			state = generator.nextInt(5);
 

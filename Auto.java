@@ -49,6 +49,11 @@ public abstract class Auto implements Runnable{
 				if(schritte >= 50) {
 					fahrbahn.stoppeSpiel();
 				}
+				
+				if(punkte >= 10) {
+					
+					fahrbahn.stoppeSpiel();
+				}
 
 				Thread.sleep(this.wartezeit());
 				

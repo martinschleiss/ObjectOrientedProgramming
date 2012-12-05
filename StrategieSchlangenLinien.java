@@ -1,6 +1,5 @@
 /**
- * fuer bewegliche Autos
- *
+ * Strategie laesst 
  */
 public class StrategieSchlangenLinien extends Strategie{
 
@@ -17,7 +16,7 @@ public class StrategieSchlangenLinien extends Strategie{
 		int count = 0;
 		Feld tmp = null;
 
-		while ((tmp == null) && count < 5) {
+		while ((tmp == null) && count < 10) {
 
 			state = (state + 1) % 5;
 

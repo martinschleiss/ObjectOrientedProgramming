@@ -70,7 +70,6 @@ public class Fahrbahn {
 			//NW
 			if(y-1 >= 0 && x-1 >= 0){
 				tmp.setNW(felder.get(x-1 + ((y - 1) * breite)));
-
 			}
 		}
 	}
@@ -101,26 +100,17 @@ public class Fahrbahn {
 	}
 
 	public final void stoppeSpiel() throws InterruptedException {
-
+				
 		synchronized(this) {
-
+		
 			if(running == false) {
-
+			
 				group.interrupt();
-				boolean terminate = false;
-
-				for (Auto i : autos) {
-
-					if (i.getPunkte() >= 10 || i.getSchritte() > 200) {
-
-						terminate = true;
-					}
-				}
 				running = true;
-				if (!terminate) {
-					notifyAll();
-				}
+				notifyAll();
+			
 			} else {
+			
 				throw new InterruptedException();
 			}
 		}

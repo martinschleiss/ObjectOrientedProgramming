@@ -4,46 +4,23 @@ import java.util.Random;
 public class Test {
 
 	public static void main(String [] args) {
-
-		/*Fahrbahn f = new Fahrbahn(10, 10);
-		ArrayList<Auto<? extends Strategie>> testAutos = new ArrayList<Auto<? extends Strategie>>();
-
-		for(int i = 0; i < 2; i++) {
-			StrategieRandom sr = new StrategieRandom(Strategie.ausrichtung.NORD);
-			Auto<StrategieRandom> a = new AutoSchnell<StrategieRandom>(f.feldAnPosition(new Point(0, 0)), sr, f);
-			testAutos.add(a);
-			f.autoZuFahrbahnHinzufuegen(a, new Point((int)Math.random() * 10,(int)Math.random() * 10));
-		}
-		for(int i = 0; i < 2; i++) {
-			StrategieSchlangenLinien ss = new StrategieSchlangenLinien(Strategie.ausrichtung.SUED);
-			Auto<StrategieSchlangenLinien> b = new AutoBeweglich<StrategieSchlangenLinien>(f.feldAnPosition(new Point(0, 0)), ss, f);
-			testAutos.add(b);
-			f.autoZuFahrbahnHinzufuegen(b, new Point((int)Math.random() * 10,(int)Math.random() * 10));
-		}
-		for(int i = 0; i < 2; i++) {
-			StrategieLinkeWandEntlang slw = new StrategieLinkeWandEntlang(Strategie.ausrichtung.OST);
-			Auto<StrategieLinkeWandEntlang> c = new AutoBeweglich<StrategieLinkeWandEntlang>(f.feldAnPosition(new Point(0, 0)), slw, f);
-			testAutos.add(c);
-			f.autoZuFahrbahnHinzufuegen(c, new Point((int)Math.random() * 10,(int)Math.random() * 10));
-		}
-
-		f.spawnAlleAutos();
-		System.out.println(f.ergebnisse());
-		int counter=0;
-		for(Auto<? extends Strategie> i : testAutos) {		
-			System.out.println("Auto "+counter+": Schritte: "+i.getSchritte()+" Punkte: " +i.getPunkte());
-			counter++;
-		}*/
 		
+		System.out.println("Initialisiere Fahrbahnen und Strategien...");
 		Random generator = new Random();
-		Fahrbahn f = new Fahrbahn(10, 10);
-
+		Fahrbahn f1 = new Fahrbahn(10,10);
+		Fahrbahn f2 = new Fahrbahn(50,50);
+		Fahrbahn f3 = new Fahrbahn (100,100);
+		
 		Strategie random = new StrategieRandom();
-		//Strategie snake = new StrategieSchlangenLinien();
+		Strategie snake = new StrategieSchlangenLinien();
 
 		ArrayList<Point> startpunkte = new ArrayList<Point>();
 		ArrayList<Auto> autos = new ArrayList<Auto>();
 
+		System.out.println("#################### Test 1: ####################");
+		System.out.println("Feld: 10 x 10");
+		System.out.println("Autos: 5 Bewegliche, 5 Schnelle - alle mit Random-Strategie");
+		System.out.println("Initialisiere Fahrbahnen und Strategien...");
 		for (int i = 0; i < 10; i++) {
 
 			startpunkte.add(new Point(generator.nextInt(10),generator.nextInt(10)));
@@ -52,21 +29,21 @@ public class Test {
 
 		for (int i = 0; i < 5; i++) {
 
-			autos.add(new AutoBeweglich(f,f.feldAnPosition(startpunkte.get(i)),Auto.ausrichtung.N,random));
+			autos.add(new AutoBeweglich(f1,f1.feldAnPosition(startpunkte.get(i)),Auto.ausrichtung.N,random));
 		}
 
 		for (int i = 5; i < 10; i++) {
 
-			autos.add(new AutoBeweglich(f,f.feldAnPosition(startpunkte.get(i)),Auto.ausrichtung.N,random));
+			autos.add(new AutoSchnell(f1,f1.feldAnPosition(startpunkte.get(i)),Auto.ausrichtung.N,random));
 		}
 
 		for (int i = 0; i < autos.size(); i++) {
 
-			f.autoZuFahrbahnHinzufuegen(autos.get(i));
+			f1.autoZuFahrbahnHinzufuegen(autos.get(i));
 		}
 
-		f.spawnAlleAutos();
-		System.out.println(f.ergebnisse());
+		f1.spawnAlleAutos();
+		System.out.println(f1.ergebnisse());
 		int counter=0;
 
 		for(Auto i : autos) {		
