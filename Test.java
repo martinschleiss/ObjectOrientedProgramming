@@ -38,7 +38,7 @@ public class Test {
 		Random generator = new Random();
 		Fahrbahn f = new Fahrbahn(5, 5);
 
-		Strategie random = new StrategieRandom();
+		//Strategie random = new StrategieRandom();
 		//Strategie snake = new StrategieSchlangenLinien();
 
 		ArrayList<Point> startpunkte = new ArrayList<Point>();
@@ -51,12 +51,12 @@ public class Test {
 		}
 
 		for (int i = 0; i < 5; i++) {
-
+			Strategie random = new StrategieRandom();
 			autos.add(new AutoBeweglich(f,f.feldAnPosition(startpunkte.get(i)),Auto.ausrichtung.N,random));
 		}
 
 		for (int i = 5; i < 10; i++) {
-
+			Strategie random = new StrategieRandom();
 			autos.add(new AutoBeweglich(f,f.feldAnPosition(startpunkte.get(i)),Auto.ausrichtung.N,random));
 		}
 
