@@ -4,63 +4,43 @@
  */
 public class StrategieSchlangenLinien extends Strategie{
 
-	private ausrichtung a;
-	public StrategieSchlangenLinien(ausrichtung a){
+	private int state;
+
+	public StrategieSchlangenLinien() {
+
 		super();
-		this.a=a;
+		state = 0;
 	}
 
-	public Feld naechstesFeld(Feld aktuell) {
-		Feld ziel = null;
+	public Feld naechstesManoever(Auto a) {
 
-		if(a == ausrichtung.NORD) {
-			ziel= aktuell.adjazentesFeld(Feld.adjazentesFeld.N);
-			//a = ausrichtung.NORD;
-			if(ziel==null){
-				ziel= aktuell.adjazentesFeld(Feld.adjazentesFeld.W);
-				a = ausrichtung.WEST;
-				if(ziel==null){
-					ziel= aktuell.adjazentesFeld(Feld.adjazentesFeld.O);
-					a = ausrichtung.OST;
+		int count = 0;
+		Feld tmp = null;
 
-				}
+		while ((tmp == null) && count < 5) {
+
+			state = (state + 1) % 5;
+
+			switch (state) {
+			case 0:		tmp = a.lenkeLinks();						
+			break;
+			case 1:		tmp = a.lenkeHalblinks();
+			break;
+			case 2:		tmp = a.geradeaus();
+			break;
+			case 3:		tmp = a.lenkeHalbrechts();
+			break;
+			case 4:		tmp = a.lenkeRechts();
+			break;
+			default:	tmp = a.aktuellesFeld();
 			}
-		}else if(a == ausrichtung.SUED) {
-			ziel= aktuell.adjazentesFeld(Feld.adjazentesFeld.W);
-			a = ausrichtung.WEST;
-			if(ziel==null){
-				ziel= aktuell.adjazentesFeld(Feld.adjazentesFeld.O);
-				a = ausrichtung.OST;
-				if(ziel==null){
-					ziel= aktuell.adjazentesFeld(Feld.adjazentesFeld.O);
-				}
-			}
-		}else if(a == ausrichtung.WEST) {
-			ziel= aktuell.adjazentesFeld(Feld.adjazentesFeld.W);
-
-			if(ziel==null){
-				ziel= aktuell.adjazentesFeld(Feld.adjazentesFeld.S);
-				a = ausrichtung.SUED;
-				if(ziel==null){
-					ziel= aktuell.adjazentesFeld(Feld.adjazentesFeld.N);
-					a = ausrichtung.NORD;
-
-				}
-			}
-		}else if(a == ausrichtung.OST) {
-			ziel= aktuell.adjazentesFeld(Feld.adjazentesFeld.O);
-
-			if(ziel==null){
-				ziel= aktuell.adjazentesFeld(Feld.adjazentesFeld.S);
-				a = ausrichtung.SUED;
-				if(ziel==null){
-					ziel= aktuell.adjazentesFeld(Feld.adjazentesFeld.N);
-					a = ausrichtung.NORD;
-				}
-			}
+			count++;
 		}
-
-		return ziel;
+		if (tmp != null) {
+			return tmp;
+		} else {
+			return a.aktuellesFeld();
+		}
 	}
 }
 

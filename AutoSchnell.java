@@ -1,11 +1,22 @@
+public class AutoSchnell extends Auto {
 
-public class AutoSchnell<T extends Strategie> extends Auto<T> {
+	public AutoSchnell(Fahrbahn f, Feld startfeld, ausrichtung a, Strategie s) {
 
-	public AutoSchnell(Feld startFeld, T s, Fahrbahn fahrbahn) {
-		super(startFeld, s, fahrbahn);
+		super(f, startfeld, a, s);
 	}
-	
-	public final int warteZeitInMillisekunden() {
+
+	public final int wartezeit() {
+
 		return 50;
+	}
+
+	public Feld lenkeLinks() {
+		
+		return null;
+	}
+
+	public Feld lenkeRechts() {
+		
+		return null;
 	}
 }

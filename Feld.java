@@ -6,7 +6,7 @@ public class Feld {
 	/**
 	 * @GuardedBy("this")
 	 */
-	private ArrayList<Auto<? extends Strategie>> autos;
+	private ArrayList<Auto> autos;
 	private Feld n;
 	private Feld no;
 	private Feld o;
@@ -17,36 +17,49 @@ public class Feld {
 	private Feld nw;
 	public enum adjazentesFeld {N, NO, O, SO, S, SW, W, NW};
 
-	private boolean initialisiert;
+	//private boolean initialisiert;
 
 	public Feld() {
-		autos = new ArrayList<Auto<? extends Strategie>>();
-		this.initialisiert = false;
+		autos = new ArrayList<Auto>();
+		n = null;
+		no = null;
+		o = null;
+		so = null;
+		s = null;
+		sw = null;
+		w = null;
+		nw = null;
+		//this.initialisiert = false;
 	}
 
-	public void fuegeAutoHinzu(Auto<? extends Strategie> a) {
-		//adjazentesFeld ursprung = feldRelation(a.aktuellesFeld());
+	public void fuegeAutoHinzu(Auto a) {
+
 		a.aktuellesFeld().entferneAuto(a);
 		a.wechsleZuFeld(this);
+		
 		synchronized(this) {
-			if(autos.contains(a) == false) {				
-				for(Auto<? extends Strategie> i : autos) {					
-					i.minusPunkt();
-					a.plusPunkt();
+		
+			if (!autos.contains(a)) {
+				
+				for(Auto i : autos) {
+					
+					if (a.isFrontal(i.getAusrichtung())) {
+					
+						i.minusPunkt();
+						a.plusPunkt();
+					}
 				}
 				autos.add(a);
 			}
 		}
 	}
 
-	public final void entferneAuto(Auto<? extends Strategie> a) {
+	public final void entferneAuto(Auto a) {
 		synchronized(this) {
-			if(autos.contains(a) == true) {
 				autos.remove(a);
-			}
-		}		
+			}	
 	}
-
+/*
 	public final void setzeNachbarn(HashMap<adjazentesFeld, Feld> nachbarn) {
 
 		if(initialisiert == false) {
@@ -61,7 +74,7 @@ public class Feld {
 			nw = nachbarn.get(adjazentesFeld.NW);
 		}
 
-	}
+	}*/
 	
 	/*
 	 *   1 2 3
@@ -69,7 +82,7 @@ public class Feld {
 	 *   6 7 8
 	 * 
 	 */	
-	public Feld adjazentesFeld(adjazentesFeld n) {
+	/*public Feld adjazentesFeld(adjazentesFeld n) {
 			
 		if(n == adjazentesFeld.N) {
 			return this.n;
@@ -88,37 +101,71 @@ public class Feld {
 		} else {
 			return this.nw;
 		}
-	}
-	
-	/**
-	 * throws NichtAdjazentesFeldException
-	 * @param mitte
-	 * @param anderes
-	 * @return
-	 */	
-/*	public adjazentesFeld feldRelation(Feld f) {
-		if(f == n) {
-			return adjazentesFeld.N;
-		} else if(f == no) {
-			return adjazentesFeld.NO;
-		} else if(f == o) {
-			return adjazentesFeld.O;
-		} else if(f == so) {
-			return adjazentesFeld.SO;
-		} else if(f == s) {
-			return adjazentesFeld.S;
-		} else if(f == sw) {
-			return adjazentesFeld.SW;
-		} else if(f == w) {
-			return adjazentesFeld.W;
-		} else if(f == nw) {
-			return adjazentesFeld.NW;
-		} else {
-			//TODO: throw exception
-			
-			
-			return adjazentesFeld.N;
-		}
-
 	}*/
+	
+	public void setN(Feld n) {
+
+		this.n = n;
+	}
+	public void setNO(Feld n) {
+
+		this.no = n;
+	}
+	public void setO(Feld n) {
+
+		this.o = n;
+	}
+	public void setSO(Feld n) {
+
+		this.so = n;
+	}
+	public void setS(Feld n) {
+
+		this.s = n;
+	}
+	public void setSW(Feld n) {
+
+		this.sw = n;
+	}
+	public void setW(Feld n) {
+
+		this.w = n;
+	}
+	public void setNW(Feld n) {
+
+		this.nw = n;
+	}
+
+	public Feld getN() {
+
+		return n;
+	}
+	public Feld getNO() {
+
+		return no;
+	}
+	public Feld getO() {
+
+		return o;
+	}
+	public Feld getSO() {
+
+		return so;
+	}
+	public Feld getS() {
+
+		return s;
+	}
+	public Feld getSW() {
+
+		return sw;
+	}
+	public Feld getW() {
+
+		return w;
+	}
+	public Feld getNW() {
+
+		return nw;
+	}
 }

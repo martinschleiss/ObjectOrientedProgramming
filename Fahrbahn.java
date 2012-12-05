@@ -7,69 +7,71 @@ public class Fahrbahn {
 	private int breite;
 	private int hoehe;
 	private final ArrayList<Feld> felder;
-	private ArrayList<Auto<? extends Strategie>> autos;
+	private ArrayList<Auto> autos;
 	private final ThreadGroup group;
 	private boolean running = false;
+
 	public Fahrbahn(int breite, int hoehe) {
 		this.breite = breite;
 		this.hoehe = hoehe;
 		group = new ThreadGroup("Auto");
-		autos = new ArrayList<Auto<? extends Strategie>>();
+		autos = new ArrayList<Auto>();
 		felder = new ArrayList<Feld>();
 		for(int i = 0; i < (breite * hoehe); i++) {
 			felder.add(new Feld());
 		}
+
 		int x = 0;
 		int y = 0;
+		Feld tmp = null;
+
 		for(int i = 0; i < felder.size(); i++) {
+
 			x = i % breite;
 			y = i / hoehe;
-
-			HashMap<Feld.adjazentesFeld, Feld> nachbarn = new HashMap<Feld.adjazentesFeld, Feld>();
+			tmp = felder.get(i);
 
 			//N
 			if(y - 1 >= 0) {
-				nachbarn.put(Feld.adjazentesFeld.N, felder.get(x + ((y - 1) * breite)));
-
+				tmp.setN(felder.get(x + ((y - 1) * breite)));	
 			}
-			//NO
-			if(y-1 >=0 && x < breite-1){
-				nachbarn.put(Feld.adjazentesFeld.NO, felder.get(x+1 + ((y - 1) * breite)));
 
+			//NO
+			if(y - 1 >=0 && x < breite - 1){
+				tmp.setNO(felder.get(x + 1 + ((y - 1) * breite)));
 			}
 
 			//O
 			if(x + 1 < breite) {
-				nachbarn.put(Feld.adjazentesFeld.O, felder.get(x + 1 + (y * breite)));
-
-			}			
-			//SO
-
-			if(x<breite-1&&y<hoehe-1){
-				nachbarn.put(Feld.adjazentesFeld.SO, felder.get(x+1 + ((y + 1) * breite)));
-
+				tmp.setO(felder.get(x + 1 + (y * breite)));
 			}
+
+			//SO
+			if(x < breite - 1 && y < hoehe - 1){
+				tmp.setSO(felder.get(x+1 + ((y + 1) * breite)));
+			}
+
 			//S
 			if(y + 1 < hoehe) {
-				nachbarn.put(Feld.adjazentesFeld.S, felder.get(x + ((y + 1) * breite)));
+				tmp.setS(felder.get(x + ((y + 1) * breite)));
+			}
 
-			}			
 			//SW
 			if(x-1 >= 0 && y < hoehe-1){
-				nachbarn.put(Feld.adjazentesFeld.SW, felder.get(x-1 + ((y + 1) * breite)));
+				tmp.setSW(felder.get(x-1 + ((y + 1) * breite)));
 			}
 
 			//W
 			if(x - 1 >= 0) {
-				nachbarn.put(Feld.adjazentesFeld.W, felder.get(x - 1 + ((y) * breite)));
+				tmp.setW(felder.get(x - 1 + ((y) * breite)));
 
 			}
+
 			//NW
 			if(y-1 >= 0 && x-1 >= 0){
-				nachbarn.put(Feld.adjazentesFeld.NW, felder.get(x-1 + ((y - 1) * breite)));
+				tmp.setNW(felder.get(x-1 + ((y - 1) * breite)));
 
 			}
-			felder.get(i).setzeNachbarn(nachbarn);
 		}
 	}
 
@@ -77,7 +79,7 @@ public class Fahrbahn {
 		return felder.get(p.x + (breite * p.y));
 	}	
 
-	public final void autoZuFahrbahnHinzufuegen(Auto<? extends Strategie> a, Point p) {
+	public final void autoZuFahrbahnHinzufuegen(Auto a) {
 		//Auto darf nur einmal existieren
 
 		for(Feld f : felder) {
@@ -86,24 +88,38 @@ public class Fahrbahn {
 		autos.remove(a);
 		autos.add(a);
 
-		Feld ziel = felder.get(p.x + (breite * p.y));
+		Feld ziel = a.aktuellesFeld();
 		ziel.fuegeAutoHinzu(a);
 	}
 
 	public final void spawnAlleAutos() {
 		//Alle Autos anstarten
-		for(Auto<? extends Strategie> a: autos) {
+		for(Auto a: autos) {
 			Thread t = new Thread(group, a);
 			t.start();
 		}
 	}
 
 	public final void stoppeSpiel() throws InterruptedException {
+
 		synchronized(this) {
+
 			if(running == false) {
+
 				group.interrupt();
+				boolean terminate = false;
+
+				for (Auto i : autos) {
+
+					if (i.getPunkte() >= 10 || i.getSchritte() > 200) {
+
+						terminate = true;
+					}
+				}
 				running = true;
-				notifyAll();
+				if (!terminate) {
+					notifyAll();
+				}
 			} else {
 				throw new InterruptedException();
 			}
@@ -117,19 +133,15 @@ public class Fahrbahn {
 				try {
 					wait();
 				} catch (InterruptedException e) {
-
 					e.printStackTrace();
-
 				}
 			}
 		}
 
-
-		for(Auto<? extends Strategie> a: autos) {
+		for(Auto a: autos) {
 			output += a.getaetigteSchritte();
 			output += "\n";
 		}
 		return output;
-
 	}
 }

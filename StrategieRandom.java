@@ -1,249 +1,52 @@
+import java.util.Random;
+
 /**
  *fuer schnelle Autos
  *
  */
 public class StrategieRandom extends Strategie{
 
-	private ausrichtung a;
-	public enum adjazentFeldN {N, NO, NW};
-	public enum adjazentFeldO {O, NO, SO};
-	public enum adjazentFeldS {S, SO, SW};
-	public enum adjazentFeldW {W, NW, SW};
+	private int state;
+	Random generator;
 
-	public StrategieRandom(ausrichtung a){
+	public StrategieRandom() {
+
 		super();
-		this.a=a;
+		state = 0;
+		generator = new Random();
 	}
 
+	public Feld naechstesManoever(Auto a) {
 
-	public Feld naechstesFeld(Feld aktuell){
-		Feld ziel = null;
-		
-		if(a==ausrichtung.NORD){
+		int count = 0;
+		Feld tmp = null;
 
-			adjazentFeldN[] values = adjazentFeldN.values();
-			adjazentFeldN value = values[(int) (Math.random() * 3)];
-			String c= value.toString();
+		while ((tmp == null) && count < 5) {
+
+			state = generator.nextInt(5);
+
+			switch (state) {
+			case 0:		tmp = a.lenkeLinks(); System.out.println(tmp + "links");						
+			break;
+			case 1:		tmp = a.lenkeHalblinks(); System.out.println(tmp + "halblinks");	
+			break;
+			case 2:		tmp = a.geradeaus(); System.out.println(tmp + "gerade");	
+			break;
+			case 3:		tmp = a.lenkeHalbrechts(); System.out.println(tmp + "halbrechts");	
+			break;
+			case 4:		tmp = a.lenkeRechts(); System.out.println(tmp + "rechts");	
+			break;
+			default:	tmp = a.aktuellesFeld();
+			}
 			
-			if(c.equals("NO")){
-				ziel= aktuell.adjazentesFeld(Feld.adjazentesFeld.NO);
-				a = ausrichtung.OST;
-
-				if(ziel==null){
-					ziel= aktuell.adjazentesFeld(Feld.adjazentesFeld.N);
-					a = ausrichtung.NORD;
-					if(ziel==null){
-						ziel= aktuell.adjazentesFeld(Feld.adjazentesFeld.NW);
-						a = ausrichtung.WEST;
-						if(ziel==null){// an einer Wand angefahren--> umdrehen
-							ziel= aktuell.adjazentesFeld(Feld.adjazentesFeld.S);
-							a = ausrichtung.SUED;
-						}
-					}
-				}
-			}else if(c.equals("N")){
-				ziel= aktuell.adjazentesFeld(Feld.adjazentesFeld.N);
-
-				if(ziel==null){
-					ziel= aktuell.adjazentesFeld(Feld.adjazentesFeld.NO);
-					a = ausrichtung.OST;
-					if(ziel==null){
-						ziel= aktuell.adjazentesFeld(Feld.adjazentesFeld.NW);
-						a = ausrichtung.WEST;
-						if(ziel==null){// an einer Wand angefahren--> umdrehen
-							ziel= aktuell.adjazentesFeld(Feld.adjazentesFeld.S);
-							a = ausrichtung.SUED;
-						}
-					}
-				}
-			}else if(c.equals("NW")){
-				ziel= aktuell.adjazentesFeld(Feld.adjazentesFeld.NW);
-				a = ausrichtung.WEST;
-
-				if(ziel==null){
-					ziel= aktuell.adjazentesFeld(Feld.adjazentesFeld.N);
-					a = ausrichtung.NORD;
-					if(ziel==null){
-						ziel= aktuell.adjazentesFeld(Feld.adjazentesFeld.NO);
-						a = ausrichtung.OST;
-						if(ziel==null){// an einer Wand angefahren--> umdrehen
-							ziel= aktuell.adjazentesFeld(Feld.adjazentesFeld.S);
-							a = ausrichtung.SUED;
-						}
-					}
-				}
-			}
-			return ziel;
-
-		}else if(a==ausrichtung.OST) {
-
-			adjazentFeldO[] values = adjazentFeldO.values();
-			adjazentFeldO value = values[(int) (Math.random() * 3)];
-			String c= value.toString();
-
-			if(c.equals("O")){
-				ziel= aktuell.adjazentesFeld(Feld.adjazentesFeld.O);
-
-				if(ziel==null){
-					ziel= aktuell.adjazentesFeld(Feld.adjazentesFeld.NO);
-					a = ausrichtung.NORD;
-					if(ziel==null){
-						ziel= aktuell.adjazentesFeld(Feld.adjazentesFeld.SO);
-						a = ausrichtung.SUED;
-						
-						if(ziel==null){// an einer Wand angefahren--> umdrehen
-							ziel= aktuell.adjazentesFeld(Feld.adjazentesFeld.W);
-							a = ausrichtung.WEST;
-						}
-					}
-				}
-			}else if(c.equals("NO")){
-				ziel= aktuell.adjazentesFeld(Feld.adjazentesFeld.NO);
-				a = ausrichtung.NORD;
-
-				if(ziel==null){
-					ziel= aktuell.adjazentesFeld(Feld.adjazentesFeld.O);
-					a = ausrichtung.OST;
-					if(ziel==null){
-						ziel= aktuell.adjazentesFeld(Feld.adjazentesFeld.SO);
-						a = ausrichtung.SUED;
-						if(ziel==null){// an einer Wand angefahren--> umdrehen
-							ziel= aktuell.adjazentesFeld(Feld.adjazentesFeld.W);
-							a = ausrichtung.WEST;
-						}
-					}
-				}
-			}else if(c.equals("SO")){
-				ziel= aktuell.adjazentesFeld(Feld.adjazentesFeld.SO);
-				a = ausrichtung.SUED;
-
-				if(ziel==null){
-					ziel= aktuell.adjazentesFeld(Feld.adjazentesFeld.NO);
-					a = ausrichtung.NORD;
-					if(ziel==null){
-						ziel= aktuell.adjazentesFeld(Feld.adjazentesFeld.O);
-						a = ausrichtung.OST;
-						if(ziel==null){// an einer Wand angefahren--> umdrehen
-							ziel= aktuell.adjazentesFeld(Feld.adjazentesFeld.W);
-							a = ausrichtung.WEST;
-						}
-					}
-				}
-			}
-			return ziel;
-
-		}else if(a==ausrichtung.SUED){
-			adjazentFeldS[] values = adjazentFeldS.values();
-			adjazentFeldS value = values[(int) (Math.random() * 3)];
-			String c= value.toString();
-
-			if(c.equals("S")){
-				ziel= aktuell.adjazentesFeld(Feld.adjazentesFeld.S);
-
-				if(ziel==null){
-					ziel= aktuell.adjazentesFeld(Feld.adjazentesFeld.SW);
-					a = ausrichtung.WEST;
-					if(ziel==null){
-						ziel= aktuell.adjazentesFeld(Feld.adjazentesFeld.SO);
-						a = ausrichtung.OST;
-						if(ziel==null){// an einer Wand angefahren--> umdrehen
-							ziel= aktuell.adjazentesFeld(Feld.adjazentesFeld.N);
-							a = ausrichtung.NORD;
-						}
-					}
-				}
-			}else if(c.equals("SO")){
-				ziel= aktuell.adjazentesFeld(Feld.adjazentesFeld.SO);
-				a = ausrichtung.OST;
-
-				if(ziel==null){
-					ziel= aktuell.adjazentesFeld(Feld.adjazentesFeld.SW);
-					a = ausrichtung.WEST;
-					if(ziel==null){
-						ziel= aktuell.adjazentesFeld(Feld.adjazentesFeld.S);
-						a = ausrichtung.SUED;
-						if(ziel==null){// an einer Wand angefahren--> umdrehen
-							ziel= aktuell.adjazentesFeld(Feld.adjazentesFeld.N);
-							a = ausrichtung.NORD;
-						}
-					}
-				}
-			}else if(c.equals("SW")){
-				ziel= aktuell.adjazentesFeld(Feld.adjazentesFeld.SW);
-				a = ausrichtung.WEST;
-
-				if(ziel==null){
-					ziel= aktuell.adjazentesFeld(Feld.adjazentesFeld.SO);
-					a = ausrichtung.OST;
-					if(ziel==null){
-						ziel= aktuell.adjazentesFeld(Feld.adjazentesFeld.S);
-						a = ausrichtung.SUED;
-						if(ziel==null){// an einer Wand angefahren--> umdrehen
-							ziel= aktuell.adjazentesFeld(Feld.adjazentesFeld.N);
-							a = ausrichtung.NORD;
-						}
-					}
-				}
-			}
-			return ziel;
-
-		}else{
-			adjazentFeldW[] values = adjazentFeldW.values();
-			adjazentFeldW value = values[(int) (Math.random() * 3)];
-			String c= value.toString();
-
-			if(c.equals("W")){
-				ziel= aktuell.adjazentesFeld(Feld.adjazentesFeld.W);
-				a = ausrichtung.WEST;
-
-				if(ziel==null){
-					ziel= aktuell.adjazentesFeld(Feld.adjazentesFeld.NW);
-					a = ausrichtung.NORD;
-					if(ziel==null){
-						ziel= aktuell.adjazentesFeld(Feld.adjazentesFeld.SW);
-						a = ausrichtung.SUED;
-						if(ziel==null){// an einer Wand angefahren--> umdrehen
-							ziel= aktuell.adjazentesFeld(Feld.adjazentesFeld.O);
-							a = ausrichtung.OST;
-						}
-					}
-				}
-			}else if(c.equals("NW")){
-				ziel= aktuell.adjazentesFeld(Feld.adjazentesFeld.NW);
-				a = ausrichtung.NORD;
-
-				if(ziel==null){
-					ziel= aktuell.adjazentesFeld(Feld.adjazentesFeld.SW);
-					a = ausrichtung.SUED;
-					if(ziel==null){
-						ziel= aktuell.adjazentesFeld(Feld.adjazentesFeld.W);
-						a = ausrichtung.WEST;
-						if(ziel==null){// an einer Wand angefahren--> umdrehen
-							ziel= aktuell.adjazentesFeld(Feld.adjazentesFeld.O);
-							a = ausrichtung.OST;
-						}
-					}
-				}
-			}else if(c.equals("SW")){
-				ziel= aktuell.adjazentesFeld(Feld.adjazentesFeld.SW);
-				a = ausrichtung.SUED;
-
-				if(ziel==null){
-					ziel= aktuell.adjazentesFeld(Feld.adjazentesFeld.NW);
-					a = ausrichtung.NORD;
-					if(ziel==null){
-						ziel= aktuell.adjazentesFeld(Feld.adjazentesFeld.W);
-						a = ausrichtung.WEST;
-						if(ziel==null){// an einer Wand angefahren--> umdrehen
-							ziel= aktuell.adjazentesFeld(Feld.adjazentesFeld.O);
-							a = ausrichtung.OST;
-						}
-					}
-				}
-			}
-			return ziel;
-
+			System.out.println("Versuch: " + count);
+			
+			count++;
+		}
+		if (tmp != null) {
+		return tmp;
+		} else {
+			return a.aktuellesFeld();
 		}
 	}
-
 }
