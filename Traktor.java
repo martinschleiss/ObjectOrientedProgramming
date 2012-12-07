@@ -9,6 +9,9 @@ public abstract class Traktor {
 	public Traktor() {
 		nummer = aktuelleTraktorAnzahl++;
 	}
+	public TraktorErweiterung getErweiterung(){
+		return erweiterung;
+	}
 	
 	public int serienNummer() {
 		return nummer;
@@ -24,13 +27,20 @@ public abstract class Traktor {
 	
 	public void setzeTraktorErweiterung(TraktorErweiterung e) {
 		erweiterung = e;
+	
 	}
+	
+	
+	public Double erweiterungsAusmasz() {
+		return erweiterung.erweiterungsAusmasz();
+	}
+
 	
 	public abstract double bisherigerVerbrauch();
 	public abstract void erhoeheVerbrauch(double verbrauch);
 	
 	public String toString() {
 		
-		return "Traktor, Nr: " + nummer + ", Betriebsstunden: " + betriebsstunden;
+		return "Traktor, Nr: " + nummer + ", Betriebsstunden: " + betriebsstunden+ " Erweiterung: "+erweiterung+" "+erweiterungsAusmasz();
 	}
 }

@@ -1,9 +1,17 @@
 
 public class TraktorErweiterungDuengestreuer extends TraktorErweiterung {
 	
-	private int fassungskapazitaet;
+	private double fassungskapazitaet;
+	
+	public TraktorErweiterungDuengestreuer(double fassungskapazitaet){
+		this.fassungskapazitaet=fassungskapazitaet;
+	}
 	
 	public double erweiterungsAusmasz() {
 		return fassungskapazitaet;
+	}
+	@Override
+	public String toString(){
+		return "Duengestreuer";
 	}
 }

@@ -23,10 +23,76 @@ public class Bauernhof {
 		return liste.contains(t);
 	}
 	
+	public void erhoeheBetriebsstunden(Traktor traktor){
+		//TODO 
+	}
+	
 	public TraktorIterator iterator() {
 		
 		return liste.iterator();
 	}
+	
+	/**
+	 * param traktor  je nach Traktortyp entsprechende Ausgabe
+	 * @return Durchschnittlicher verbrauch nach Motorart 
+	 */
+	public Double durchschnittArbeitstundenNachMotorart(Traktor traktor){
+		
+		TraktorIterator it = iterator();
+		
+		Double sumBiogas=0.0;
+		Double sumDiesel=0.0;
+		int counter=0;
+		if(it.hasNext()){
+			Traktor t=it.next();
+			if( t instanceof TraktorMitBiogasMotor){
+				sumBiogas +=t.betriebsstunden();
+			}else {
+				sumDiesel +=t.betriebsstunden();
+			}
+			counter ++;
+		}
+		
+		if(traktor instanceof TraktorMitBiogasMotor){
+			return sumDiesel/counter;
+		}else{
+			return sumBiogas/counter;
+		}
+		
+	}
+	/**
+	 * 
+	 * @param erweiterung: je nach Erweiterungstyp entsprechende Ausgabe
+	 * @return durchschnitt der Betriebsstunden von Allen Traktoren und spezifisch nach Erweiterung
+	 */
+	
+	public String durchschnittArbeitstundenNachErweiterung(TraktorErweiterung erweiterung){
+		
+		TraktorIterator it = iterator();
+		
+		Double sumDrill=0.0;
+		Double sumDuenger=0.0;
+		int counter=0;
+		if(it.hasNext()){
+			Traktor t=it.next();
+			if( t.getErweiterung() instanceof TraktorErweiterungDrillmaschine){
+				sumDrill +=t.betriebsstunden();
+			}else {
+				sumDuenger +=t.betriebsstunden();
+			}
+			counter ++;
+		}
+		
+		if(erweiterung instanceof TraktorErweiterungDrillmaschine){
+			return "Alle Traktoren: "+(sumDrill+sumDuenger)/counter+" Traktoren die saeen: "+sumDrill/counter;
+		}else{
+			return "Alle Traktoren: "+(sumDrill+sumDuenger)/counter+" Traktoren die duengern: "+sumDuenger/counter;
+		}
+	}
+	
+	
+	
+	
 	
 	/**
 	 * ++++++++++++++++++++++++++++++ INNER CLASS ++++++++++++++++++++++++++++++
