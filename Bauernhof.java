@@ -63,6 +63,9 @@ public class Bauernhof {
 			return new ListIterator(head);
 		}
 		
+		/**
+		 * ++++++++++++++++++++++++++++++ INNER INNER CLASS ++++++++++++++++++++++++++++++
+		 */
 		private class Node {
 
 			private Traktor t;
@@ -104,6 +107,9 @@ public class Bauernhof {
 
 		}
 		
+		/**
+		 * ++++++++++++++++++++++++++++++ INNER INNER CLASS ++++++++++++++++++++++++++++++
+		 */
 		private class ListIterator implements TraktorIterator {
 
 			private Node current;
