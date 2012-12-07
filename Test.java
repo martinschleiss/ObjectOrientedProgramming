@@ -15,5 +15,17 @@ public class Test {
 		b.removeTraktor(t1);
 		System.out.println(b.containsTraktor(t1));//false
 		
+		b.addTraktor(t1);
+		b.addTraktor(t2);
+		b.addTraktor(t3);
+		b.addTraktor(t4);
+		
+		TraktorIterator it = b.iterator();
+		
+		while (it.hasNext()) {
+			
+			System.out.println(it.next());
+		}
+		
 	}
 }

@@ -23,16 +23,14 @@ public class Bauernhof {
 		return liste.contains(t);
 	}
 	
+	public TraktorIterator iterator() {
+		
+		return liste.iterator();
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-
+	/**
+	 * ++++++++++++++++++++++++++++++ INNER CLASS ++++++++++++++++++++++++++++++
+	 */
 	private class Traktorliste {
 
 		private Node head;
@@ -60,6 +58,11 @@ public class Bauernhof {
 			return head != null && head.contains(t);
 		}
 		
+		public ListIterator iterator() {
+			
+			return new ListIterator(head);
+		}
+		
 		private class Node {
 
 			private Traktor t;
@@ -74,6 +77,11 @@ public class Bauernhof {
 			public Traktor getTraktor() {
 				
 				return t;
+			}
+			
+			public Node getNext() {
+
+				return next;
 			}
 
 			public boolean contains(Traktor t) {
@@ -92,6 +100,38 @@ public class Bauernhof {
 					next = next.remove(t);
 				}
 				return this;
+			}
+
+		}
+		
+		private class ListIterator implements TraktorIterator {
+
+			private Node current;
+			
+			public ListIterator(Node head) {
+				
+				current = head;
+			}
+			
+			@Override
+			public boolean hasNext() {
+
+				return current != null;
+			}
+
+			@Override
+			public Traktor next() {
+				
+				if (current != null) {
+					
+					Node output = current;
+					current = current.getNext();
+					return output.getTraktor();
+				
+				} else {
+					
+					return null;
+				}
 			}
 		}
 	}

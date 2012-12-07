@@ -28,4 +28,9 @@ public abstract class Traktor {
 	
 	public abstract double bisherigerVerbrauch();
 	public abstract void erhoeheVerbrauch(double verbrauch);
+	
+	public String toString() {
+		
+		return "Traktor, Nr: " + nummer + ", Betriebsstunden: " + betriebsstunden;
+	}
 }
