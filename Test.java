@@ -38,6 +38,8 @@ public class Test {
 		b.addTraktor(t5);
 		b.addTraktor(t6);
 		
+		b.erhoeheBetriebsstunden(t1, 3);
+		
 		TraktorIterator it = b.iterator();
 		
 		while (it.hasNext()) {
