@@ -4,10 +4,10 @@ public class Test {
 		
 		Bauernhof b = new Bauernhof("Hof");
 		
-		Traktor t1 = new TraktorMitDieselMotor();
+		Traktor t1 = new TraktorMitBiogasMotor();
 		Traktor t2 = new TraktorMitDieselMotor();
 		Traktor t3 = new TraktorMitDieselMotor();
-		Traktor t4 = new TraktorMitBiogasMotor();
+		Traktor t4 = new TraktorMitDieselMotor();
 		Traktor t5 = new TraktorMitBiogasMotor();
 		Traktor t6 = new TraktorMitBiogasMotor();
 		
@@ -24,9 +24,9 @@ public class Test {
 		
 		t1.setzeTraktorErweiterung(tErStreuer1);
 		t2.setzeTraktorErweiterung(tErStreuer1);
-		t3.setzeTraktorErweiterung(tErDrill1);
+		t3.setzeTraktorErweiterung(tErStreuer2);
 		t4.setzeTraktorErweiterung(tErDrill2);
-		t5.setzeTraktorErweiterung(tErStreuer2);
+		t5.setzeTraktorErweiterung(tErDrill1);
 		t6.setzeTraktorErweiterung(tErDrill2);
 		
 		
@@ -39,7 +39,18 @@ public class Test {
 		b.addTraktor(t6);
 		
 		b.erhoeheBetriebsstunden(t1, 3);
+		b.erhoeheBetriebsstunden(t2, 2);
+		b.erhoeheBetriebsstunden(t3, 6);
+		b.erhoeheBetriebsstunden(t4, 5);
+		b.erhoeheBetriebsstunden(t5, 8);
+		b.erhoeheBetriebsstunden(t6, 10);
 		
+		b.setBiogasVerbrauch(t1, 10);
+		b.setDieselVerbrauch(t2, 20);
+		b.setDieselVerbrauch(t3, 25);
+		b.setDieselVerbrauch(t4, 15);
+		b.setBiogasVerbrauch(t5, 19);
+		b.setBiogasVerbrauch(t6, 45);
 		TraktorIterator it = b.iterator();
 		
 		while (it.hasNext()) {
@@ -48,6 +59,8 @@ public class Test {
 		}
 		System.out.println(b.durchschnittArbeitstundenNachErweiterung(new TraktorErweiterungDrillmaschine(10)));
 		System.out.println(b.durchschnittArbeitstundenNachMotorart(new TraktorMitBiogasMotor()));
+		System.out.println(b.durchschnittDieselverbrauchNachErweiterung(new TraktorErweiterungDuengestreuer(500)));
+		System.out.println(b.durchschnittGasverbrauchNachErweiterung(new TraktorErweiterungDuengestreuer(500)));
 		
 	}
 }
