@@ -57,10 +57,14 @@ public class Test {
 			
 			System.out.println(it.next());
 		}
+		
 		System.out.println(b.durchschnittArbeitstundenNachErweiterung(new TraktorErweiterungDrillmaschine(10)));
 		System.out.println(b.durchschnittArbeitstundenNachMotorart(new TraktorMitBiogasMotor()));
 		System.out.println(b.durchschnittDieselverbrauchNachErweiterung(new TraktorErweiterungDuengestreuer(500)));
 		System.out.println(b.durchschnittGasverbrauchNachErweiterung(new TraktorErweiterungDuengestreuer(500)));
-		
+		System.out.println(b.anzahlMinMaxSaeschare(new TraktorMitBiogasMotor()));
+		System.out.println(b.durchschnittFassungsVermoegen(new TraktorMitDieselMotor()));
 	}
+	
+	
 }

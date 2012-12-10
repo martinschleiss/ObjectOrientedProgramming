@@ -39,7 +39,6 @@ public class Bauernhof {
 	public boolean erhoeheBetriebsstunden(Traktor t, int stunden){
 
 		if (liste.contains(t)) {
-			System.out.println(stunden);
 			t.erhoeheBetriebsstundenUm(stunden);
 
 			return true;
@@ -132,11 +131,12 @@ public class Bauernhof {
 		return liste.iterator();
 	}
 
+	//TODO rueckgabeTypen aller Statistiken besprechen, ob String oder double
 	/**
 	 * @param traktor  je nach Traktortyp entsprechende Ausgabe
 	 * @return Durchschnittlicher verbrauch nach Motorart 
 	 */
-	public Double durchschnittArbeitstundenNachMotorart(Traktor traktor){
+	public double durchschnittArbeitstundenNachMotorart(Traktor traktor){
 
 		TraktorIterator it = liste.iterator();
 
@@ -188,10 +188,10 @@ public class Bauernhof {
 			}
 		}
 
-		String out="Alle Traktoren: "+(sumDrill+sumDuenger)/(counterDrill+counterDuenger);
+		String out="Durchschnittliche Arbeitstunden aller Traktoren: "+(sumDrill+sumDuenger)/(counterDrill+counterDuenger);
 
 		if(erweiterung instanceof TraktorErweiterungDrillmaschine){
-			System.out.println(sumDrill+" ");
+
 			return out+" Traktoren die saeen: "+sumDrill/counterDrill;
 		}else{
 			return out+" Traktoren die duengern: "+sumDuenger/counterDuenger;
@@ -221,8 +221,8 @@ public class Bauernhof {
 				counterDuenger++;
 			}
 		}
-		String out="Verbrauch aller Diesel Traktoren: "+(sumDrill+sumDuenger)/(counterDrill+counterDuenger);
-		
+		String out="Durchschnittlicher Verbrauch aller DieselTraktoren: "+(sumDrill+sumDuenger)/(counterDrill+counterDuenger);
+
 		if(erweiterung instanceof TraktorErweiterungDrillmaschine){
 			return out+" Traktoren die saeen: "+sumDrill/counterDrill;
 		}else{
@@ -253,15 +253,102 @@ public class Bauernhof {
 				counterDuenger++;
 			}
 		}
-		String out="Verbrauch aller Biogas Traktoren: "+(sumDrill+sumDuenger)/(counterDrill+counterDuenger);
-		
+		String out="Durchschnittlicher Verbrauch aller BiogasTraktoren: "+(sumDrill+sumDuenger)/(counterDrill+counterDuenger);
+
 		if(erweiterung instanceof TraktorErweiterungDrillmaschine){
 			return out+" Traktoren die saeen: "+sumDrill/counterDrill;
 		}else{
 			return out+" Traktoren die duengern: "+sumDuenger/counterDuenger;
 		}
 	}
-	
+	/**
+	 * 
+	 * @param traktor je nach Traktortyp entsprechende Ausgabe
+	 * @return min/max der Saeschare aller Traktoren und spezifisch nach traktortyp
+	 */
+	public String anzahlMinMaxSaeschare(Traktor traktor){
+		TraktorIterator it = liste.iterator();
+
+		double minSaeschareBiogas=Double.MAX_VALUE;
+		double maxSaeschareBiogas=0;
+		double minSaeschareDiesel=Double.MAX_VALUE;
+		double maxSaeschareDiesel=0;
+
+		while(it.hasNext()){
+			Traktor t=it.next();
+			//System.out.println(t.serienNummer());
+			if(t instanceof TraktorMitBiogasMotor&& t.getErweiterung() instanceof TraktorErweiterungDrillmaschine){
+				minSaeschareBiogas=min(t.erweiterungsAusmasz(),minSaeschareBiogas);
+				maxSaeschareBiogas=max(t.erweiterungsAusmasz(),maxSaeschareBiogas);
+				//System.out.println(t.serienNummer() +" "+minSaeschareBiogas+" "+maxSaeschareBiogas);
+
+
+			}else if(t instanceof TraktorMitDieselMotor&& t.getErweiterung() instanceof TraktorErweiterungDrillmaschine){
+				minSaeschareDiesel=min(t.erweiterungsAusmasz(),minSaeschareDiesel);
+				maxSaeschareDiesel=max(t.erweiterungsAusmasz(),maxSaeschareDiesel);
+				//System.out.println(t.serienNummer() +" "+minSaeschareDiesel+" "+maxSaeschareDiesel);
+
+			}
+		}
+
+		String out="Saescharen aller Traktoren zusammen: min: "+min(minSaeschareBiogas,minSaeschareDiesel)+" max: "+max(maxSaeschareBiogas,maxSaeschareDiesel);
+		if(traktor instanceof TraktorMitBiogasMotor ){
+			return out+" mit Biogas min: "+minSaeschareBiogas+" max: "+maxSaeschareBiogas;
+		}else{
+			return out+" mit Diesel min: "+minSaeschareDiesel+" max: "+maxSaeschareDiesel;
+		}
+
+	}
+
+	private double min(double a, double b){
+		if(a<b){
+			return a;
+		}else {
+			return b;
+		}
+
+	}
+
+	private double max(double a, double b){
+		if(a>b){
+			return a;
+		}else {
+			return b;
+		}
+
+	}
+
+	/**
+	 * 
+	 * @param traktor je nach Traktortyp entsprechende Ausgabe
+	 * @return durchschnitt des Fassungsvermoegens aller Traktoren und spezifisch nach Traktortyp
+	 */
+	public String durchschnittFassungsVermoegen(Traktor traktor){
+
+		TraktorIterator it = liste.iterator();
+
+		double sumFassungsvermoegenBiogas=0;
+		double sumFassungsvermoegenDiesel=0;
+		int counterBiogas=0;
+		int counterDiesel=0;
+		while(it.hasNext()){
+			Traktor t=it.next();
+			if(t instanceof TraktorMitBiogasMotor && t.getErweiterung() instanceof TraktorErweiterungDuengestreuer){
+				sumFassungsvermoegenBiogas +=t.erweiterungsAusmasz();
+				counterBiogas++;
+			}else if(t instanceof TraktorMitDieselMotor && t.getErweiterung() instanceof TraktorErweiterungDuengestreuer){
+				sumFassungsvermoegenDiesel  +=t.erweiterungsAusmasz();
+				counterDiesel++;
+			}
+		}
+		String out="Durchschnittliches Fassungsvermoegen aller Traktoren: "+(sumFassungsvermoegenBiogas+sumFassungsvermoegenDiesel)/(counterDiesel+counterBiogas);
+
+		if(traktor instanceof TraktorMitBiogasMotor ){
+			return out+" Mit Biogas: "+(sumFassungsvermoegenBiogas/counterBiogas);
+		}else{
+			return out+" Mit Diesel: "+(sumFassungsvermoegenDiesel/counterDiesel);
+		}
+	}
 
 	/**
 	 * ++++++++++++++++++++++++++++++ INNER CLASS ++++++++++++++++++++++++++++++
