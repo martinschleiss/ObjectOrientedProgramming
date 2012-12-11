@@ -5,6 +5,19 @@ public class Test {
 	public static void main(String[] args) {
 
 		Bauernhof b = new Bauernhof("Hof");
+		
+		
+		Bauernhof b1 = new Bauernhof("Alm");
+		Liste liste=new Liste();
+		liste.add(b);
+		liste.add(b1);
+		
+		ObjectIterator lis = liste.iterator();
+		
+		while(lis.hasNext()){
+			Bauernhof h=(Bauernhof)lis.next();
+			System.out.println(h.getName());
+		}
 
 		Traktor t1 = new TraktorMitBiogasMotor();
 		Traktor t2 = new TraktorMitDieselMotor();
@@ -53,7 +66,7 @@ public class Test {
 		b.setDieselVerbrauch(t4, 15);
 		b.setBiogasVerbrauch(t5, 19);
 		b.setBiogasVerbrauch(t6, 45);
-		TraktorIterator it = b.iterator();
+		ObjectIterator it = b.iterator();
 
 		while (it.hasNext()) {
 

@@ -2,12 +2,15 @@
 public class Bauernhof {
 
 	private final String name;
-	private Traktorliste liste;
+	private Liste liste;
 
 	public Bauernhof(String name) {
 
 		this.name = name;
-		liste = new Traktorliste();
+		liste = new Liste();
+	}
+	public String getName(){
+		return name;
 	}
 	
 	@Gruppenmitglied("Rafael")
@@ -128,7 +131,7 @@ public class Bauernhof {
 		}
 	}
 
-	public TraktorIterator iterator() {
+	public ObjectIterator iterator() {
 
 		return liste.iterator();
 	}
@@ -140,14 +143,14 @@ public class Bauernhof {
 	 */
 	public double durchschnittArbeitstundenNachMotorart(Traktor traktor){
 
-		TraktorIterator it = liste.iterator();
+		ObjectIterator it = liste.iterator();
 
 		double sumBiogas=0.0;
 		double sumDiesel=0.0;
 		int counterBiogas=0;
 		int counterDiesel=0;
 		while(it.hasNext()){
-			Traktor t=it.next();
+			Traktor t=(Traktor)it.next();
 			if( t instanceof TraktorMitBiogasMotor){
 				sumBiogas +=t.betriebsstunden();
 				counterBiogas++;
@@ -172,7 +175,7 @@ public class Bauernhof {
 	 */
 	public String durchschnittArbeitstundenNachErweiterung(TraktorErweiterung erweiterung){
 
-		TraktorIterator it = liste.iterator();
+		ObjectIterator it = liste.iterator();
 
 
 		double sumDrill=0.0;
@@ -180,7 +183,7 @@ public class Bauernhof {
 		int counterDrill=0;
 		int counterDuenger=0;
 		while(it.hasNext()){
-			Traktor t=it.next();
+			Traktor t=(Traktor)it.next();
 			if( t.getErweiterung() instanceof TraktorErweiterungDrillmaschine){
 				sumDrill += t.betriebsstunden();
 				counterDrill++;
@@ -206,7 +209,7 @@ public class Bauernhof {
 	 */
 	public String durchschnittDieselverbrauchNachErweiterung(TraktorErweiterung erweiterung){
 
-		TraktorIterator it = liste.iterator();
+		ObjectIterator it = liste.iterator();
 
 
 		double sumDrill=0.0;
@@ -214,7 +217,7 @@ public class Bauernhof {
 		int counterDrill=0;
 		int counterDuenger=0;
 		while(it.hasNext()){
-			Traktor t=it.next();
+			Traktor t=(Traktor)it.next();
 			if(t instanceof TraktorMitDieselMotor && t.getErweiterung() instanceof TraktorErweiterungDrillmaschine){
 				sumDrill += t.bisherigerVerbrauch();
 				counterDrill++;
@@ -238,7 +241,7 @@ public class Bauernhof {
 	 */
 	public String durchschnittGasverbrauchNachErweiterung(TraktorErweiterung erweiterung){
 
-		TraktorIterator it = liste.iterator();
+		ObjectIterator it = liste.iterator();
 
 
 		double sumDrill=0.0;
@@ -246,7 +249,7 @@ public class Bauernhof {
 		int counterDrill=0;
 		int counterDuenger=0;
 		while(it.hasNext()){
-			Traktor t=it.next();
+			Traktor t=(Traktor)it.next();
 			if(t instanceof TraktorMitBiogasMotor && t.getErweiterung() instanceof TraktorErweiterungDrillmaschine){
 				sumDrill += t.bisherigerVerbrauch();
 				counterDrill++;
@@ -269,7 +272,7 @@ public class Bauernhof {
 	 * @return min/max der Saeschare aller Traktoren und spezifisch nach traktortyp
 	 */
 	public String anzahlMinMaxSaeschare(Traktor traktor){
-		TraktorIterator it = liste.iterator();
+		ObjectIterator it = liste.iterator();
 
 		double minSaeschareBiogas=Double.MAX_VALUE;
 		double maxSaeschareBiogas=0;
@@ -277,7 +280,7 @@ public class Bauernhof {
 		double maxSaeschareDiesel=0;
 
 		while(it.hasNext()){
-			Traktor t=it.next();
+			Traktor t=(Traktor)it.next();
 			//System.out.println(t.serienNummer());
 			if(t instanceof TraktorMitBiogasMotor&& t.getErweiterung() instanceof TraktorErweiterungDrillmaschine){
 				minSaeschareBiogas=min(t.erweiterungsAusmasz(),minSaeschareBiogas);
@@ -327,14 +330,14 @@ public class Bauernhof {
 	 */
 	public String durchschnittFassungsVermoegen(Traktor traktor){
 
-		TraktorIterator it = liste.iterator();
+		ObjectIterator it = liste.iterator();
 
 		double sumFassungsvermoegenBiogas=0;
 		double sumFassungsvermoegenDiesel=0;
 		int counterBiogas=0;
 		int counterDiesel=0;
 		while(it.hasNext()){
-			Traktor t=it.next();
+			Traktor t=(Traktor)it.next();
 			if(t instanceof TraktorMitBiogasMotor && t.getErweiterung() instanceof TraktorErweiterungDuengestreuer){
 				sumFassungsvermoegenBiogas +=t.erweiterungsAusmasz();
 				counterBiogas++;
@@ -352,12 +355,13 @@ public class Bauernhof {
 		}
 	}
 
+
 	/**
 	 * ++++++++++++++++++++++++++++++ INNER CLASS ++++++++++++++++++++++++++++++
 	 * 
 	 * Nicht-generische, verkettete Liste zum Speichern von Traktoren
 	 */
-	private class Traktorliste {
+		private class Traktorliste {
 
 		private Node head;
 
