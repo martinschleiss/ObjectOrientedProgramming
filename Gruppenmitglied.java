@@ -1,6 +1,10 @@
+import java.lang.annotation.*;
 
-//TODO: Methode value implementieren
-
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ ElementType.TYPE, ElementType.METHOD, ElementType.CONSTRUCTOR })
+	
 public @interface Gruppenmitglied {
 
+	String value() default "Chuck Norris"; //Name des Verantwortlichen
 }
+

@@ -1,3 +1,4 @@
+@Gruppenmitglied("Anil")
 public class Bauernhof {
 
 	private final String name;
@@ -8,7 +9,8 @@ public class Bauernhof {
 		this.name = name;
 		liste = new Traktorliste();
 	}
-
+	
+	@Gruppenmitglied("Rafael")
 	public void addTraktor(Traktor t) {
 
 		liste.add(t);
