@@ -1,3 +1,8 @@
+/**
+ * Repraesentiert einen Bauernhof
+ * Bietet Methoden zum Verwalten von Traktoren sowie zur Berechnung von statistischen Werten an
+ */
+
 @Gruppenmitglied("Anil")
 public class Bauernhof {
 
@@ -9,26 +14,59 @@ public class Bauernhof {
 		this.name = name;
 		liste = new Liste();
 	}
-	public String getName(){
+	
+	/**
+	 * Getter-Methode fuer Namen des Bauernhofs
+	 * @return name: unveraenderlich
+	 */
+	public String name(){
+		
 		return name;
 	}
 	
-	@Gruppenmitglied("Rafael")
+	/**
+	 * Liefert Traktor anhand der eindeutigen Seriennummer, falls gespeichert
+	 * @param seriennummer > 0
+	 * @return Traktor mit Seriennummer
+	 */
+	public Traktor getTraktor(int seriennummer){
+		
+		return liste.getTraktor(seriennummer);
+	}
+	
+	/**
+	 * Speichert Traktor t in Liste
+	 * @param t != null
+	 */
 	public void addTraktor(Traktor t) {
 
 		liste.add(t);
 	}
 
+	/**
+	 * Entfernt erstes Vorkommen von Traktor t aus der Liste
+	 * @param t != null
+	 */
 	public void removeTraktor(Traktor t) {
 
 		liste.remove(t);
 	}
 
+	/**
+	 * Liefert Wahrheitswert zur Bestimmung, ob Traktor t in Liste enthalten
+	 * @param t != null
+	 * @return true: wenn enthalten, false: sonst
+	 */
 	public boolean containsTraktor(Traktor t) {
 
 		return liste.contains(t);
 	}
 
+	/**
+	 * Getter-Methode fuer Betriebsstunden
+	 * @param t != null
+	 * @return betriebsstunden >= 0: wenn Traktor t enthalten, sonst: -1
+	 */
 	public int getBetriebsstunden(Traktor t) {
 
 		if (liste.contains(t)) {
@@ -41,6 +79,13 @@ public class Bauernhof {
 		}
 	}
 
+	/**
+	 * Setter-Methode fuer Betriebsstunden
+	 * @param t != null
+	 * @param stunden > 0
+	 * 
+	 * @return true: wenn Traktor enthalten, false: sonst
+	 */
 	public boolean erhoeheBetriebsstunden(Traktor t, int stunden){
 
 		if (liste.contains(t)) {
@@ -53,13 +98,12 @@ public class Bauernhof {
 			return false;
 		}
 	}
-	public Traktor getTraktor(int seriennummer){
-		
-		return liste.getTraktor(seriennummer);
-	}
 
-	//TODO: Methoden und Argumente der Getter und Setter besprechen:
-
+	/**
+	 * Getter-Methode fuer Verbrauch
+	 * @param t != null
+	 * @return verbrauch >= 0: wenn Traktor t enthalten, sonst: -1
+	 */
 	public int getVerbrauch(Traktor t) {
 
 		if (liste.contains(t)) {
@@ -72,6 +116,13 @@ public class Bauernhof {
 		}
 	}
 
+	/**
+	 * Setter-Methode fuer Verbrauch
+	 * @param t != null
+	 * @param verbrauch > 0 (steigt), < 0 (sinkt)
+	 * 
+	 * @return true: wenn Traktor enthalten, false: sonst
+	 */
 	public boolean setVerbrauch(Traktor t, int verbrauch) {
 
 		if (liste.contains(t)) {
@@ -85,6 +136,11 @@ public class Bauernhof {
 		}
 	}
 
+	/**
+	 * Getter-Methode fuer Verbrauch von Diesel-Traktoren
+	 * @param t != null
+	 * @return verbrauch >= 0: wenn Traktor t enthalten, sonst: -1
+	 */
 	public int getDieselVerbrauch(TraktorMitDieselMotor t) {
 
 		if (liste.contains(t)) {
@@ -97,7 +153,14 @@ public class Bauernhof {
 		}
 	}
 
-	public boolean setDieselVerbrauch(Traktor t, int verbrauch) {
+	/**
+	 * Setter-Methode fuer Verbrauch von DieselTraktoren
+	 * @param t != null
+	 * @param verbrauch > 0 (steigt), < 0 (sinkt)
+	 * 
+	 * @return true: wenn Traktor enthalten, false: sonst
+	 */
+	public boolean setDieselVerbrauch(TraktorMitDieselMotor t, int verbrauch) {
 
 		if (liste.contains(t)) {
 
@@ -110,6 +173,11 @@ public class Bauernhof {
 		}
 	}
 
+	/**
+	 * Getter-Methode fuer Verbrauch von Biogas-Traktoren
+	 * @param t != null
+	 * @return verbrauch >= 0: wenn Traktor t enthalten, sonst: -1
+	 */
 	public double getBiogasVerbrauch(TraktorMitBiogasMotor t) {
 
 		if (liste.contains(t)) {
@@ -122,6 +190,13 @@ public class Bauernhof {
 		}
 	}
 
+	/**
+	 * Setter-Methode fuer Verbrauch von Biogas-Traktoren
+	 * @param t != null
+	 * @param verbrauch > 0 (steigt), < 0 (sinkt)
+	 * 
+	 * @return true: wenn Traktor enthalten, false: sonst
+	 */
 	public boolean setBiogasVerbrauch(Traktor t, double verbrauch) {
 
 		if (liste.contains(t)) {
@@ -135,19 +210,23 @@ public class Bauernhof {
 		}
 	}
 
-	public ObjectIterator iterator() {
+	/**
+	 * Liefert Iterator ueber die Liste der gespeicherten Traktoren
+	 * @return Iterator, next() liefert Object, keinen Traktor
+	 * 			Ausgabefolge: unbestimmt
+	 */
+	public Iterator iterator() {
 
 		return liste.iterator();
 	}
 
-	//TODO rueckgabeTypen aller Statistiken besprechen, ob String oder double
 	/**
 	 * @param traktor  je nach Traktortyp entsprechende Ausgabe
 	 * @return Durchschnittlicher verbrauch nach Motorart 
 	 */
 	public double durchschnittArbeitstundenNachMotorart(Traktor traktor){
 
-		ObjectIterator it = liste.iterator();
+		Iterator it = liste.iterator();
 
 		double sumBiogas=0.0;
 		double sumDiesel=0.0;
@@ -179,7 +258,7 @@ public class Bauernhof {
 	 */
 	public String durchschnittArbeitstundenNachErweiterung(TraktorErweiterung erweiterung){
 
-		ObjectIterator it = liste.iterator();
+		Iterator it = liste.iterator();
 
 
 		double sumDrill=0.0;
@@ -213,7 +292,7 @@ public class Bauernhof {
 	 */
 	public String durchschnittDieselverbrauchNachErweiterung(TraktorErweiterung erweiterung){
 
-		ObjectIterator it = liste.iterator();
+		Iterator it = liste.iterator();
 
 
 		double sumDrill=0.0;
@@ -245,7 +324,7 @@ public class Bauernhof {
 	 */
 	public String durchschnittGasverbrauchNachErweiterung(TraktorErweiterung erweiterung){
 
-		ObjectIterator it = liste.iterator();
+		Iterator it = liste.iterator();
 
 
 		double sumDrill=0.0;
@@ -276,7 +355,7 @@ public class Bauernhof {
 	 * @return min/max der Saeschare aller Traktoren und spezifisch nach traktortyp
 	 */
 	public String anzahlMinMaxSaeschare(Traktor traktor){
-		ObjectIterator it = liste.iterator();
+		Iterator it = liste.iterator();
 
 		double minSaeschareBiogas=Double.MAX_VALUE;
 		double maxSaeschareBiogas=0;
@@ -286,11 +365,11 @@ public class Bauernhof {
 		while(it.hasNext()){
 			Traktor t=(Traktor)it.next();
 			if(t instanceof TraktorMitBiogasMotor&& t.getErweiterung() instanceof TraktorErweiterungDrillmaschine){
-				minSaeschareBiogas=min(t.erweiterungsAusmasz(),minSaeschareBiogas);
-				maxSaeschareBiogas=max(t.erweiterungsAusmasz(),maxSaeschareBiogas);
+				minSaeschareBiogas=min(t.erweiterungsAusmass(),minSaeschareBiogas);
+				maxSaeschareBiogas=max(t.erweiterungsAusmass(),maxSaeschareBiogas);
 			}else if(t instanceof TraktorMitDieselMotor&& t.getErweiterung() instanceof TraktorErweiterungDrillmaschine){
-				minSaeschareDiesel=min(t.erweiterungsAusmasz(),minSaeschareDiesel);
-				maxSaeschareDiesel=max(t.erweiterungsAusmasz(),maxSaeschareDiesel);
+				minSaeschareDiesel=min(t.erweiterungsAusmass(),minSaeschareDiesel);
+				maxSaeschareDiesel=max(t.erweiterungsAusmass(),maxSaeschareDiesel);
 			}
 		}
 
@@ -328,7 +407,7 @@ public class Bauernhof {
 	 */
 	public String durchschnittFassungsVermoegen(Traktor traktor){
 
-		ObjectIterator it = liste.iterator();
+		Iterator it = liste.iterator();
 
 		double sumFassungsvermoegenBiogas=0;
 		double sumFassungsvermoegenDiesel=0;
@@ -337,10 +416,10 @@ public class Bauernhof {
 		while(it.hasNext()){
 			Traktor t=(Traktor)it.next();
 			if(t instanceof TraktorMitBiogasMotor && t.getErweiterung() instanceof TraktorErweiterungDuengestreuer){
-				sumFassungsvermoegenBiogas +=t.erweiterungsAusmasz();
+				sumFassungsvermoegenBiogas +=t.erweiterungsAusmass();
 				counterBiogas++;
 			}else if(t instanceof TraktorMitDieselMotor && t.getErweiterung() instanceof TraktorErweiterungDuengestreuer){
-				sumFassungsvermoegenDiesel  +=t.erweiterungsAusmasz();
+				sumFassungsvermoegenDiesel  +=t.erweiterungsAusmass();
 				counterDiesel++;
 			}
 		}

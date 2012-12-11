@@ -7,7 +7,7 @@ public class TraktorErweiterungDrillmaschine extends TraktorErweiterung {
 	}
 	
 	@Override
-	public double erweiterungsAusmasz() {
+	public double erweiterungsAusmass() {
 		return saeschare;
 	}
 	@Override

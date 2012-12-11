@@ -1,5 +1,9 @@
-public class Liste {
+/**
+ * Nicht-generische, einfach-verkettete Liste zum Speichern von Traktoren und Bauernhoefen
+ * Mit entsprechenden Getter-Methoden ist diese Liste fuer beliebige Typen erweiterbar
+ */
 
+public class Liste {
 
 	private Node head;
 
@@ -8,98 +12,168 @@ public class Liste {
 		head = null;
 	}
 
-	public Traktor getTraktor(int seriennummer){
-		ObjectIterator oi=iterator();
-		while(oi.hasNext()){
-			Traktor t=(Traktor)oi.next();
-			if(t.serienNummer()==seriennummer){
-				return t;
-			}
-		}
-		return null;
-	}
-	public Bauernhof getBauernhof(String name){
-		ObjectIterator oi=iterator();
-		while(oi.hasNext()){
-			Bauernhof b=(Bauernhof)oi.next();
-			if(b.getName().equals(name)){
-				return b;
-			}
-		}
-		return null;
-	}
-	public void add(Object t) {
-		
+	/**
+	 * Fuegt Objekt o der Liste hinzu
+	 * @param o != null
+	 */
+	public void add(Object o) {
 
-		head = new Node(t,head);
+		head = new Node(o,head);
 	}
 
-	public void remove(Object t) {
+	/**
+	 * Entfernt erstes Vorkommen von Objekt o aus der Liste
+	 * @param o != null
+	 */
+	public void remove(Object o) {
 
 		if (head != null) {
 
-			head = head.remove(t);
+			head = head.remove(o);
 		}
 	}
 
-	public boolean contains(Object t) {
+	/**
+	 * Liefert Wahrheitswert zur Bestimmung, ob Objekt o in Liste enthalten
+	 * @param o != null
+	 * @return	true: wenn in Liste enthalten, false: sonst
+	 */
+	public boolean contains(Object o) {
 
-		return head != null && head.contains(t);
+		return head != null && head.contains(o);
 	}
 
+	/**
+	 * Liefert Iterator ueber die Liste, die Ausgabefolge ist unbestimmt
+	 * @return ListIterator, liefert Object bei Aufruf von next()
+	 */
 	public ListIterator iterator() {
 
 		return new ListIterator(head);
 	}
 
 	/**
-	 * ++++++++++++++++++++++++++++++ INNER INNER CLASS ++++++++++++++++++++++++++++++
+	 * Liefert Traktor anhand der eindeutigen Seriennummer
+	 * @param seriennummer > 0
+	 * @return Traktor: wenn enthalten, null: sonst
+	 */
+	public Traktor getTraktor(int seriennummer){
+
+		Iterator it = iterator();
+		Object o;
+
+		while(it.hasNext()){
+
+			o = it.next();
+
+			if (o instanceof Traktor) {
+
+				Traktor t = (Traktor) o;
+				
+				if(t.serienNummer() == seriennummer){
+					
+					return t;
+				}
+			}
+		}
+		return null;
+	}
+	
+	/**
+	 * Liefert Bauernhof anhand des unveraenderlichen Namens
+	 * @param name
+	 * @return Bauernhof: wenn enthalten, null: sonst
+	 */
+	public Bauernhof getBauernhof(String name){
+
+		Iterator it = iterator();
+		Object o;
+
+		while(it.hasNext()){
+
+			o = it.next();
+
+			if (o instanceof Bauernhof) {
+
+				Bauernhof b = (Bauernhof) o;
+				
+				if(b.name() == name){
+					
+					return b;
+				}
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * ++++++++++++++++++++++++++++++ INNER CLASS ++++++++++++++++++++++++++++++
+	 * 
+	 * Ein Knoten speichert jeweils ein Element und eine Referenz zum Nachfolgerknoten
 	 */
 	private class Node {
 
-		private Object t;
-		private Node next;
+		private Object o; // != null
+		private Node next; //null, wenn Listenende
 
-		public Node(Object t, Node next) {
+		public Node(Object o, Node next) {
 
-			this.t = t;
+			this.o = o;
 			this.next = next;
 		}
 
+		/**
+		 * Getter-Methode fuer Objekt
+		 * @return gespeichertes Objekt != null
+		 */
 		public Object getObject() {
 
-			return t;
+			return o;
 		}
-
+		/**
+		 * Getter-Methode fuer Nachfolger-Knoten
+		 * @return Nachfolgerknoten, null: wenn Listenende erreicht
+		 */
 		public Node getNext() {
 
 			return next;
 		}
 
-		public boolean contains(Object t) {
+		/**
+		 * Liefert Wahrheitswert zur Bestimmung, ob Objekt o in diesem oder einem Nachfolgerknoten enthalten
+		 * @param o != null
+		 * @return	true: wenn in diesem oder einem Nachfolgerknoten enthalten, false: sonst
+		 */
+		public boolean contains(Object o) {
 
-			return this.t == t || (next != null && next.contains(t));
+			return this.o == o || (next != null && next.contains(o));
 		}
 
-		public Node remove(Object t) {
+		/**
+		 * Entfernt das erste Vorkommen von Objekt o in diesem oder einem Nachfolgerknoten
+		 * @param o != null
+		 * @return next: wenn Objekt in diesem Knoten enthalten war, sonst this
+		 */
+		public Node remove(Object o) {
 
-			if (this.t == t) {
+			if (this.o == o) {
 
 				return next;
 
 			} else if (next != null) {
 
-				next = next.remove(t);
+				next = next.remove(o);
 			}
 			return this;
 		}
-
 	}
 
 	/**
-	 * ++++++++++++++++++++++++++++++ INNER INNER CLASS ++++++++++++++++++++++++++++++
+	 * ++++++++++++++++++++++++++++++ INNER CLASS ++++++++++++++++++++++++++++++
+	 * 
+	 * Listeniterator zum Iterieren der Liste, Ausgabefolge unbestimmt
 	 */
-	private class ListIterator implements ObjectIterator{
+	private class ListIterator implements Iterator{
 
 		private Node current;
 
@@ -108,12 +182,19 @@ public class Liste {
 			current = head;
 		}
 
-
+		/**
+		 * Liefert Wahrheitswert zur Bestimmstimmung, ob Listenende erreicht
+		 * @return true: wenn Listenende erreicht, sonst: false
+		 */
 		public boolean hasNext() {
 
 			return current != null;
 		}
-
+		
+		/**
+		 * Liefert naechstes Listenelement
+		 * @return null: wenn Listenende erreicht, naechstes Listenelement: sonst
+		 */
 		public Object next() {
 
 			if (current != null) {
