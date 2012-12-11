@@ -8,6 +8,26 @@ public class Liste {
 		head = null;
 	}
 
+	public Traktor getTraktor(int seriennummer){
+		ObjectIterator oi=iterator();
+		while(oi.hasNext()){
+			Traktor t=(Traktor)oi.next();
+			if(t.serienNummer()==seriennummer){
+				return t;
+			}
+		}
+		return null;
+	}
+	public Bauernhof getBauernhof(String name){
+		ObjectIterator oi=iterator();
+		while(oi.hasNext()){
+			Bauernhof b=(Bauernhof)oi.next();
+			if(b.getName().equals(name)){
+				return b;
+			}
+		}
+		return null;
+	}
 	public void add(Object t) {
 		
 
@@ -46,7 +66,7 @@ public class Liste {
 			this.next = next;
 		}
 
-		public Object getTraktor() {
+		public Object getObject() {
 
 			return t;
 		}
@@ -100,7 +120,7 @@ public class Liste {
 
 				Node output = current;
 				current = current.getNext();
-				return output.getTraktor();
+				return output.getObject();
 
 			} else {
 

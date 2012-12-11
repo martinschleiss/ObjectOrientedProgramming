@@ -5,32 +5,19 @@ public class Test {
 	public static void main(String[] args) {
 
 		Bauernhof b = new Bauernhof("Hof");
-		
-		
-		Bauernhof b1 = new Bauernhof("Alm");
 		Liste liste=new Liste();
 		liste.add(b);
-		liste.add(b1);
-		
-		ObjectIterator lis = liste.iterator();
-		
-		while(lis.hasNext()){
-			Bauernhof h=(Bauernhof)lis.next();
-			System.out.println(h.getName());
+		System.out.println("Drei Bauernhoefe erstellen.....");
+		for(int i=1;i<4;i++){
+			liste.add(new Bauernhof("Hof"+i));
 		}
-
+		System.out.println("\n6 Traktoren mit Erweiterung erstellen.....");
 		Traktor t1 = new TraktorMitBiogasMotor();
 		Traktor t2 = new TraktorMitDieselMotor();
 		Traktor t3 = new TraktorMitDieselMotor();
 		Traktor t4 = new TraktorMitDieselMotor();
 		Traktor t5 = new TraktorMitBiogasMotor();
 		Traktor t6 = new TraktorMitBiogasMotor();
-
-		b.addTraktor(t1);
-		System.out.println(b.containsTraktor(t1));//true
-		System.out.println(b.containsTraktor(t2));//false
-		b.removeTraktor(t1);
-		System.out.println(b.containsTraktor(t1));//false
 
 		TraktorErweiterung tErDrill1=new TraktorErweiterungDrillmaschine(300);
 		TraktorErweiterung tErStreuer1=new TraktorErweiterungDuengestreuer(750.0);
@@ -44,81 +31,170 @@ public class Test {
 		t5.setzeTraktorErweiterung(tErDrill1);
 		t6.setzeTraktorErweiterung(tErDrill2);
 
+		Bauernhof b1=liste.getBauernhof("Hof1");
+		System.out.println("\nTraktoren in Hof1, Hof2 und Hof3 hinzufuegen.....");
+		b1.addTraktor(t1);
+		b1.addTraktor(t2);
+		b1.addTraktor(t3);
+		b1.addTraktor(t4);
+		b1.addTraktor(t5);
+		b1.addTraktor(t6);
+
+		Bauernhof b2=liste.getBauernhof("Hof2");
+		b2.addTraktor(t1);
+		b2.addTraktor(t2);
+		b2.addTraktor(t3);
+		b2.addTraktor(t4);
+		b2.addTraktor(t5);
+		b2.addTraktor(t6);
+
+		Bauernhof b3=liste.getBauernhof("Hof3");
+		b3.addTraktor(t1);
+		b3.addTraktor(t2);
+		b3.addTraktor(t3);
+		b3.addTraktor(t4);
+		b3.addTraktor(t5);
+		b3.addTraktor(t6);
 
 
-		b.addTraktor(t1);
-		b.addTraktor(t2);
-		b.addTraktor(t3);
-		b.addTraktor(t4);
-		b.addTraktor(t5);
-		b.addTraktor(t6);
+		System.out.println("\nVon Hof1 Traktor mit der Seriennummer 3 ausgeben: \n"+liste.getBauernhof("Hof1").getTraktor(3));
+		System.out.println("\nVon Hof3 Traktor mit der Seriennummer 5 ausgeben: \n"+liste.getBauernhof("Hof3").getTraktor(5));
+		System.out.println("\nAlle Traktoren von Hof 2 ausgeben:");
+		Bauernhof b2Test=liste.getBauernhof("Hof2");
+		ObjectIterator lis=b2Test.iterator();
 
-		b.erhoeheBetriebsstunden(t1, 3);
-		b.erhoeheBetriebsstunden(t2, 2);
-		b.erhoeheBetriebsstunden(t3, 6);
-		b.erhoeheBetriebsstunden(t4, 5);
-		b.erhoeheBetriebsstunden(t5, 8);
-		b.erhoeheBetriebsstunden(t6, 10);
-
-		b.setBiogasVerbrauch(t1, 10);
-		b.setDieselVerbrauch(t2, 20);
-		b.setDieselVerbrauch(t3, 25);
-		b.setDieselVerbrauch(t4, 15);
-		b.setBiogasVerbrauch(t5, 19);
-		b.setBiogasVerbrauch(t6, 45);
-		ObjectIterator it = b.iterator();
-
-		while (it.hasNext()) {
-
-			System.out.println(it.next());
+		while(lis.hasNext()){
+			Traktor t=(Traktor)lis.next();
+			System.out.println(t);
 		}
+		b2Test.removeTraktor(b2Test.getTraktor(0));
+		b2Test.removeTraktor(b2Test.getTraktor(1));
+		b2Test.removeTraktor(b2Test.getTraktor(2));
 
-		System.out.println(b.durchschnittArbeitstundenNachErweiterung(new TraktorErweiterungDrillmaschine(10)));
-		System.out.println(b.durchschnittArbeitstundenNachMotorart(new TraktorMitBiogasMotor()));
-		System.out.println(b.durchschnittDieselverbrauchNachErweiterung(new TraktorErweiterungDuengestreuer(500)));
-		System.out.println(b.durchschnittGasverbrauchNachErweiterung(new TraktorErweiterungDuengestreuer(500)));
-		System.out.println(b.anzahlMinMaxSaeschare(new TraktorMitBiogasMotor()));
-		System.out.println(b.durchschnittFassungsVermoegen(new TraktorMitDieselMotor()));
+		System.out.println("\nTraktoren 0,1 und 2 von Hof 2 entfernen....");
+		System.out.println("\nAlle Traktoren von Hof 2 nach Aenderung ausgeben:");
+		ObjectIterator lis1=b2Test.iterator();
 
+		while(lis1.hasNext()){
+			Traktor t=(Traktor)lis1.next();
+			System.out.println(t);
+		}
+		System.out.println("\nVom Hof2, die Betriebsstunden von Traktor3 um 11 stunden erhoehen und ausgeben...");
+		b2Test.erhoeheBetriebsstunden(b2Test.getTraktor(3), 11);
+
+		ObjectIterator lis2=b2Test.iterator();
+
+		while(lis2.hasNext()){
+			Traktor t=(Traktor)lis2.next();
+			System.out.println(t);
+		}
+		System.out.println("\nBetriebsstunden und Verbrauch der Traktoren von Hof1 geaendert... ");
+		
+		Bauernhof b11=liste.getBauernhof("Hof1");
+		b11.erhoeheBetriebsstunden(b11.getTraktor(0), 4);
+		b11.erhoeheBetriebsstunden(b11.getTraktor(1), 6);
+		b11.erhoeheBetriebsstunden(b11.getTraktor(2), 9);
+		b11.erhoeheBetriebsstunden(b11.getTraktor(3), 12);
+		b11.erhoeheBetriebsstunden(b11.getTraktor(4), 3);
+		b11.erhoeheBetriebsstunden(b11.getTraktor(5), 7);
+		
+		b11.setBiogasVerbrauch(b11.getTraktor(0), 89);
+		b11.setBiogasVerbrauch(b11.getTraktor(4), 70);
+		b11.setBiogasVerbrauch(b11.getTraktor(5), 139);
+		
+		b11.setDieselVerbrauch(b11.getTraktor(1), 200);
+		b11.setDieselVerbrauch(b11.getTraktor(2), 220);
+		b11.setDieselVerbrauch(b11.getTraktor(3), 180);
+		
+		ObjectIterator lis3=b11.iterator();
+
+		while(lis3.hasNext()){
+			Traktor t=(Traktor)lis3.next();
+			System.out.println(t);
+		}
+		
+		System.out.println("\nStatistiken ausgeben: ");
+		System.out.println(b11.durchschnittArbeitstundenNachErweiterung(new TraktorErweiterungDrillmaschine(10)));
+		System.out.println("Durchschnittliche Arbeitsstunden nach Motorart(Biogasmotor): "+b11.durchschnittArbeitstundenNachMotorart(new TraktorMitBiogasMotor()));
+		System.out.println(b11.durchschnittDieselverbrauchNachErweiterung(new TraktorErweiterungDuengestreuer(500)));
+		System.out.println(b11.durchschnittGasverbrauchNachErweiterung(new TraktorErweiterungDuengestreuer(500)));
+		System.out.println(b11.anzahlMinMaxSaeschare(new TraktorMitBiogasMotor()));
+		System.out.println(b11.durchschnittFassungsVermoegen(new TraktorMitDieselMotor()));
 
 		
+		
+		
+		System.out.println("\nBetriebsstunden und Verbrauch der Traktoren von Hof3 geaendert... ");
+		
+		Bauernhof b33=liste.getBauernhof("Hof3");
+		
+		b33.erhoeheBetriebsstunden(b33.getTraktor(0), 23);
+		b33.erhoeheBetriebsstunden(b33.getTraktor(1), 5);
+		b33.erhoeheBetriebsstunden(b33.getTraktor(2), 1);
+		b33.erhoeheBetriebsstunden(b33.getTraktor(3), 13);
+		b33.erhoeheBetriebsstunden(b33.getTraktor(4), 5);
+		b33.erhoeheBetriebsstunden(b33.getTraktor(5), 9);
+		
+		b33.setBiogasVerbrauch(b33.getTraktor(0), 44);
+		b33.setBiogasVerbrauch(b33.getTraktor(4), 76);
+		b33.setBiogasVerbrauch(b33.getTraktor(5), 12);
+		
+		b33.setDieselVerbrauch(b33.getTraktor(1), 100);
+		b33.setDieselVerbrauch(b33.getTraktor(2), 120);
+		b33.setDieselVerbrauch(b33.getTraktor(3), 150);
+		
+		ObjectIterator lis4=b33.iterator();
+
+		while(lis4.hasNext()){
+			Traktor t=(Traktor)lis4.next();
+			System.out.println(t);
+		}
+		
+		System.out.println("\nStatistiken ausgeben: ");
+		System.out.println(b33.durchschnittArbeitstundenNachErweiterung(new TraktorErweiterungDrillmaschine(10)));
+		System.out.println("Durchschnittliche Arbeitsstunden nach Motorart(Biogasmotor): "+b33.durchschnittArbeitstundenNachMotorart(new TraktorMitBiogasMotor()));
+		System.out.println(b33.durchschnittDieselverbrauchNachErweiterung(new TraktorErweiterungDuengestreuer(500)));
+		System.out.println(b33.durchschnittGasverbrauchNachErweiterung(new TraktorErweiterungDuengestreuer(500)));
+		System.out.println(b33.anzahlMinMaxSaeschare(new TraktorMitBiogasMotor()));
+		System.out.println(b33.durchschnittFassungsVermoegen(new TraktorMitDieselMotor()));
+		System.out.println("\n");
 		/**
 		 * ++++++++++++++++++++ Ausgabe der Annotationen ++++++++++++++++++++
 		 */
-		
+
 		/**
 		 * Annotationen der Klassen:
 		 */
 
 		//TODO: Mit allen Klassen - erst am Ende
-		
+
 		Gruppenmitglied g = Bauernhof.class.getAnnotation(Gruppenmitglied.class);
 		if (g != null) {
-			
+
 			System.out.println("Klasse: " + Bauernhof.class + ", Annotation: " + g.value());
 		} else {
-			
+
 			System.out.println("Klasse: " + Bauernhof.class + ", Annotation: null");
 		}
-		
+
 		/**
 		 * Annotationen der Methoden:
 		 */
-		
+
 		//TODO: Mit den Methoden aller Klassen - erst am Ende
-		
+
 		Method[] methods = Bauernhof.class.getMethods();
-		
+
 		for (int i = 0; i < methods.length; i++) {
-			
+
 			g = methods[i].getAnnotation(Gruppenmitglied.class);
-			
+
 			if (g != null) {
-				
+
 				System.out.println("Methode: " + methods[i] + ",\tAnnotation: " + g.value());
-				
+
 			} else {
-				
+
 				System.out.println("Methode: " + methods[i] + ",\tAnnotation: null");
 			}
 		}

@@ -41,6 +41,6 @@ public abstract class Traktor {
 	
 	public String toString() {
 		
-		return "Traktor, Nr: " + nummer + ", Betriebsstunden: " + betriebsstunden+ " Erweiterung: "+erweiterung+" "+erweiterungsAusmasz();
+		return "Nr: " + nummer + ", Betriebsstunden: " + betriebsstunden+ " Erweiterung: "+erweiterung+" "+erweiterungsAusmasz();
 	}
 }

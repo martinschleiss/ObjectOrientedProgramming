@@ -12,5 +12,10 @@ public class TraktorMitDieselMotor extends Traktor {
 	public void erhoeheVerbrauch(double verbrauch) {
 		dieselVerbrauch += (int)verbrauch;
 	}
-	
+	@Override
+	public String toString() {
+		
+		return "Traktor (DieselMotor), "+super.toString();
+				
+	}
 }

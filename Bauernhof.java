@@ -53,6 +53,10 @@ public class Bauernhof {
 			return false;
 		}
 	}
+	public Traktor getTraktor(int seriennummer){
+		
+		return liste.getTraktor(seriennummer);
+	}
 
 	//TODO: Methoden und Argumente der Getter und Setter besprechen:
 
@@ -281,18 +285,12 @@ public class Bauernhof {
 
 		while(it.hasNext()){
 			Traktor t=(Traktor)it.next();
-			//System.out.println(t.serienNummer());
 			if(t instanceof TraktorMitBiogasMotor&& t.getErweiterung() instanceof TraktorErweiterungDrillmaschine){
 				minSaeschareBiogas=min(t.erweiterungsAusmasz(),minSaeschareBiogas);
 				maxSaeschareBiogas=max(t.erweiterungsAusmasz(),maxSaeschareBiogas);
-				//System.out.println(t.serienNummer() +" "+minSaeschareBiogas+" "+maxSaeschareBiogas);
-
-
 			}else if(t instanceof TraktorMitDieselMotor&& t.getErweiterung() instanceof TraktorErweiterungDrillmaschine){
 				minSaeschareDiesel=min(t.erweiterungsAusmasz(),minSaeschareDiesel);
 				maxSaeschareDiesel=max(t.erweiterungsAusmasz(),maxSaeschareDiesel);
-				//System.out.println(t.serienNummer() +" "+minSaeschareDiesel+" "+maxSaeschareDiesel);
-
 			}
 		}
 
@@ -352,170 +350,6 @@ public class Bauernhof {
 			return out+" Mit Biogas: "+(sumFassungsvermoegenBiogas/counterBiogas);
 		}else{
 			return out+" Mit Diesel: "+(sumFassungsvermoegenDiesel/counterDiesel);
-		}
-	}
-
-
-	/**
-	 * ++++++++++++++++++++++++++++++ INNER CLASS ++++++++++++++++++++++++++++++
-	 * 
-	 * Nicht-generische, verkettete Liste zum Speichern von Traktoren
-	 */
-		private class Traktorliste {
-
-		private Node head;
-
-		public Traktorliste() {
-
-			head = null;
-		}
-
-		/**
-		 * speichert Traktor t in der Liste
-		 * @param t != null
-		 */
-		public void add(Traktor t) {
-
-			head = new Node(t,head);
-		}
-
-		/**
-		 * loescht erstes Vorkommen von Traktor t aus der Liste
-		 * @param t != null
-		 */
-		public void remove(Traktor t) {
-
-			if (head != null) {
-
-				head = head.remove(t);
-			}
-		}
-
-		/**
-		 * liefert Wahrheitswert zur Bestimmung, ob Traktor t in Liste enthalten ist
-		 * @param	t != null
-		 * @return	true: wenn enthalten, false: sonst
-		 */
-		public boolean contains(Traktor t) {
-
-			return head != null && head.contains(t);
-		}
-
-		/**
-		 * erzeugt Iterator ueber die Traktorliste
-		 * @return	TraktorIterator: Ausgabefolge unbestimmt
-		 */
-		public ListIterator iterator() {
-
-			return new ListIterator(head);
-		}
-
-		/**
-		 * ++++++++++++++++++++++++++++++ INNER INNER CLASS ++++++++++++++++++++++++++++++
-		 * 
-		 * Knoten einer Liste, speichert je einen Traktor und eine Referenz auf den Nachfolgerknoten
-		 */
-		private class Node {
-
-			private Traktor t; // != null
-			private Node next;
-
-			public Node(Traktor t, Node next) {
-
-				this.t = t;
-				this.next = next;
-			}
-
-			/**
-			 * Getter-Methode
-			 * @return gespeicherten Traktor t != null
-			 */
-			public Traktor getTraktor() {
-
-				return t;
-			}
-
-			/**
-			 * Getter-Methode fuer naechsten Knoten der Liste
-			 * @return null: wenn letztes Element der Liste, Nachfolgerknoten: sonst 
-			 */
-			public Node getNext() {
-
-				return next;
-			}
-
-			/**
-			 * liefert Wahrheitswert zur Bestimmung, ob Traktor t in diesem oder einem Nachfolgerknoten enthalten ist
-			 * @param	t != null
-			 * @return	true: wenn enthalten, false: sonst
-			 */
-			public boolean contains(Traktor t) {
-
-				return this.t == t || (next != null && next.contains(t));
-			}
-
-			/**
-			 * loescht erstes Vorkommen von Traktor t aus diesem oder einem Nachfolgerknoten
-			 * @param	t != null
-			 * @return	Nachfolgerknoten: wenn t gespeichert, this: sonst
-			 */
-			public Node remove(Traktor t) {
-
-				if (this.t == t) {
-
-					return next;
-
-				} else if (next != null) {
-
-					next = next.remove(t);
-				}
-				return this;
-			}
-		}
-
-		/**
-		 * ++++++++++++++++++++++++++++++ INNER INNER CLASS ++++++++++++++++++++++++++++++
-		 * 
-		 * Nicht-generischer Iterator fuer Traktorliste
-		 * Ausgabefolge unbestimmt
-		 */
-		private class ListIterator implements TraktorIterator {
-
-			private Node current;
-
-			public ListIterator(Node head) {
-
-				current = head;
-			}
-
-			/**
-			 * Zur Abfrage, ob Listenende erreicht
-			 * @return false, wenn Ende der Liste erreicht, sonst true
-			 */
-			@Override
-			public boolean hasNext() {
-
-				return current != null;
-			}
-
-			/**
-			 * Liefert naechsten Traktor der Liste
-			 * @return naechsten Traktor der Liste, null wenn Listenende erreicht (hasNext() == false)
-			 */
-			@Override
-			public Traktor next() {
-
-				if (current != null) {
-
-					Node output = current;
-					current = current.getNext();
-					return output.getTraktor();
-
-				} else {
-
-					return null;
-				}
-			}
 		}
 	}
 }

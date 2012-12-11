@@ -12,4 +12,10 @@ public class TraktorMitBiogasMotor extends Traktor {
 	public void erhoeheVerbrauch(double verbrauch) {
 		biogasVerbrauch += verbrauch;
 	}
+	@Override
+	public String toString() {
+		
+		return "Traktor (BiogasMotor), "+super.toString();
+				
+	}
 }
