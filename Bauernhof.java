@@ -224,31 +224,53 @@ public class Bauernhof {
 	 * @param traktor  je nach Traktortyp entsprechende Ausgabe
 	 * @return Durchschnittlicher verbrauch nach Motorart 
 	 */
-	public double durchschnittArbeitstundenNachMotorart(Traktor traktor){
+	public String avgBetriebsstundenNachMotorart() {
 
 		Iterator it = liste.iterator();
 
-		double sumBiogas=0.0;
-		double sumDiesel=0.0;
+		int sumBiogas=0;
+		int sumDiesel=0;
 		int counterBiogas=0;
 		int counterDiesel=0;
+		
 		while(it.hasNext()){
+			
 			Traktor t=(Traktor)it.next();
+			
 			if( t instanceof TraktorMitBiogasMotor){
+				
 				sumBiogas +=t.betriebsstunden();
 				counterBiogas++;
-			}else {
+				
+			} else if (t instanceof TraktorMitDieselMotor){
+				
 				sumDiesel +=t.betriebsstunden();
 				counterDiesel++;
 			}
 		}
-
-		if(traktor instanceof TraktorMitBiogasMotor){
-			return sumBiogas/counterBiogas;
-		}else{
-			return sumDiesel/counterDiesel;
+		
+		String biogas;
+		String diesel;
+		
+		if (counterBiogas > 0) {
+			
+			biogas = "Biogas: " + (sumBiogas/counterBiogas);
+			
+		} else {
+			
+			biogas = "Biogas: keine Traktoren verfuegbar";
+		}
+		
+		if (counterDiesel > 0) {
+			
+			diesel = "Diesel: " + (sumDiesel/counterDiesel);
+			
+		} else {
+			
+			diesel = "Diesel: keine Traktoren verfuegbar";
 		}
 
+		return "Durchschnitt Betriebsstunden nach Motorart:\n\t" + diesel + "\n\t" + biogas;
 	}
 
 	/**
@@ -256,64 +278,105 @@ public class Bauernhof {
 	 * @param erweiterung: je nach Erweiterungstyp entsprechende Ausgabe
 	 * @return durchschnitt der Betriebsstunden von Allen Traktoren und spezifisch nach Erweiterung
 	 */
-	public String durchschnittArbeitstundenNachErweiterung(TraktorErweiterung erweiterung){
+	public String avgBetriebsstundenNachErweiterung(){
 
 		Iterator it = liste.iterator();
 
-
-		double sumDrill=0.0;
-		double sumDuenger=0.0;
+		int sumDrill=0;
+		int sumDuenger=0;
 		int counterDrill=0;
 		int counterDuenger=0;
+		
 		while(it.hasNext()){
+			
 			Traktor t=(Traktor)it.next();
-			if( t.getErweiterung() instanceof TraktorErweiterungDrillmaschine){
-				sumDrill += t.betriebsstunden();
+			
+			if( t.getErweiterung() instanceof TraktorErweiterungDrillmaschine) {
+				
+				sumDrill +=t.betriebsstunden();
 				counterDrill++;
-			}else {
+				
+			} else if (t.getErweiterung() instanceof TraktorErweiterungDuengestreuer) {
+				
 				sumDuenger +=t.betriebsstunden();
 				counterDuenger++;
 			}
 		}
-
-		String out="Durchschnittliche Arbeitstunden aller Traktoren: "+(sumDrill+sumDuenger)/(counterDrill+counterDuenger);
-
-		if(erweiterung instanceof TraktorErweiterungDrillmaschine){
-
-			return out+" Traktoren die saeen: "+sumDrill/counterDrill;
-		}else{
-			return out+" Traktoren die duengern: "+sumDuenger/counterDuenger;
+		
+		String drill;
+		String duenger;
+		String avg;
+		
+		if (counterDrill > 0) {
+			
+			drill = "Drillmaschine: " + (sumDrill/counterDrill);
+			
+		} else {
+			
+			drill = "Drillmaschine: keine Traktoren verfuegbar";
 		}
+		
+		if (counterDuenger > 0) {
+			
+			duenger = "Duengerstreuer: " + (sumDuenger/counterDuenger);
+			
+		} else {
+			
+			duenger = "Duengerstreuer: keine Traktoren verfuegbar";
+		}
+		
+		if (counterDuenger+counterDrill > 0) {
+			
+			avg = "Beide Erweiterungen: " + (sumDrill+sumDuenger)/(counterDuenger+counterDrill);
+			
+		} else {
+			
+			avg = "Beide Erweiterungen: keine Traktoren verfuegbar";
+		}
+		
+		return "Durchschnitt Betriebsstunden nach Erweiterungen:\n\t" + drill + "\n\t" + duenger + "\n\t" + avg;
 	}
+	
 	/**
 	 * 
 	 * @param erweiterung: je nach Erweiterungstyp entsprechende Ausgabe
 	 * @return durchschnittlicher Verbrauch von Allen Traktoren mit Dieselmotor und spezifisch nach Erweiterung
 	 */
-	public String durchschnittDieselverbrauchNachErweiterung(TraktorErweiterung erweiterung){
+	public String avgDieselverbrauchNachErweiterung(){
 
 		Iterator it = liste.iterator();
-
 
 		double sumDrill=0.0;
 		double sumDuenger=0.0;
 		int counterDrill=0;
 		int counterDuenger=0;
+		
 		while(it.hasNext()){
+		
 			Traktor t=(Traktor)it.next();
-			if(t instanceof TraktorMitDieselMotor && t.getErweiterung() instanceof TraktorErweiterungDrillmaschine){
-				sumDrill += t.bisherigerVerbrauch();
-				counterDrill++;
-			}else if(t instanceof TraktorMitDieselMotor) {
+			
+			if(t instanceof TraktorMitDieselMotor) {
+				
+				if (t.getErweiterung() instanceof TraktorErweiterungDrillmaschine){
+					
+					sumDrill += t.bisherigerVerbrauch();
+					counterDrill++;
+				
+				} else if (t.getErweiterung() instanceof TraktorErweiterungDuengerstreuer) {
+				
 				sumDuenger +=t.bisherigerVerbrauch();
 				counterDuenger++;
 			}
 		}
+		
 		String out="Durchschnittlicher Verbrauch aller DieselTraktoren: "+(sumDrill+sumDuenger)/(counterDrill+counterDuenger);
 
 		if(erweiterung instanceof TraktorErweiterungDrillmaschine){
+		
 			return out+" Traktoren die saeen: "+sumDrill/counterDrill;
+		
 		}else{
+			
 			return out+" Traktoren die duengern: "+sumDuenger/counterDuenger;
 		}
 	}

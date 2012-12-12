@@ -1,17 +1,21 @@
+/**
+ * Duengestreuer als Erweiterung fuer Traktoren
+ */
 
 public class TraktorErweiterungDuengestreuer extends TraktorErweiterung {
 	
-	private double fassungskapazitaet;
+	private double fassungskapazitaet; // > 0
 	
-	public TraktorErweiterungDuengestreuer(double fassungskapazitaet){
+	public TraktorErweiterungDuengestreuer(double fassungskapazitaet) {
+		
 		this.fassungskapazitaet=fassungskapazitaet;
 	}
 	
 	/**
 	 * Liefert Groesse des Ausmasses
 	 * @return ausmass >= 0
-	 * 			nur ganzzahlige Genauigkeit
 	 */
+	@Override
 	public double erweiterungsAusmass() {
 		
 		return fassungskapazitaet;

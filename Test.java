@@ -61,7 +61,7 @@ public class Test {
 		System.out.println("\nVon Hof3 Traktor mit der Seriennummer 5 ausgeben: \n"+liste.getBauernhof("Hof3").getTraktor(5));
 		System.out.println("\nAlle Traktoren von Hof 2 ausgeben:");
 		Bauernhof b2Test=liste.getBauernhof("Hof2");
-		ObjectIterator lis=b2Test.iterator();
+		Iterator lis=b2Test.iterator();
 
 		while(lis.hasNext()){
 			Traktor t=(Traktor)lis.next();
@@ -73,7 +73,7 @@ public class Test {
 
 		System.out.println("\nTraktoren 0,1 und 2 von Hof 2 entfernen....");
 		System.out.println("\nAlle Traktoren von Hof 2 nach Aenderung ausgeben:");
-		ObjectIterator lis1=b2Test.iterator();
+		Iterator lis1=b2Test.iterator();
 
 		while(lis1.hasNext()){
 			Traktor t=(Traktor)lis1.next();
@@ -82,7 +82,7 @@ public class Test {
 		System.out.println("\nVom Hof2, die Betriebsstunden von Traktor3 um 11 stunden erhoehen und ausgeben...");
 		b2Test.erhoeheBetriebsstunden(b2Test.getTraktor(3), 11);
 
-		ObjectIterator lis2=b2Test.iterator();
+		Iterator lis2=b2Test.iterator();
 
 		while(lis2.hasNext()){
 			Traktor t=(Traktor)lis2.next();
@@ -106,7 +106,7 @@ public class Test {
 		b11.setDieselVerbrauch(b11.getTraktor(2), 220);
 		b11.setDieselVerbrauch(b11.getTraktor(3), 180);
 		
-		ObjectIterator lis3=b11.iterator();
+		Iterator lis3=b11.iterator();
 
 		while(lis3.hasNext()){
 			Traktor t=(Traktor)lis3.next();
@@ -143,7 +143,7 @@ public class Test {
 		b33.setDieselVerbrauch(b33.getTraktor(2), 120);
 		b33.setDieselVerbrauch(b33.getTraktor(3), 150);
 		
-		ObjectIterator lis4=b33.iterator();
+		Iterator lis4=b33.iterator();
 
 		while(lis4.hasNext()){
 			Traktor t=(Traktor)lis4.next();
