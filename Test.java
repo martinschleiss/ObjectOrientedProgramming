@@ -80,7 +80,8 @@ public class Test {
 		
 		Bauernhof b0 = liste.getBauernhof("Hof0");
 		
-		System.out.println("\nStatistiken Hof0 ausgeben: \n");
+		System.out.println("\nStatistiken Hof0 ausgeben:");
+		System.out.println("\"keine Traktoren verfuegbar\" bedeutet: Division durch 0 verhindert.\n");
 		System.out.println(b0.avgBetriebsstundenNachErweiterung());
 		System.out.println("Durchschnittliche Arbeitsstunden nach Motorart(Biogasmotor): "+b0.avgBetriebsstundenNachMotorart());
 		System.out.println(b0.avgDieselverbrauchNachErweiterung());
@@ -134,16 +135,18 @@ public class Test {
 			System.out.println(t);
 		}
 
-		System.out.println("\nStatistiken ausgeben: \n");
+		System.out.println("\nStatistiken ausgeben:");
+		System.out.println("\"keine Traktoren verfuegbar\" bedeutet: Division durch 0 verhindert.\n");
 		System.out.println(b0.avgBetriebsstundenNachErweiterung());
-		System.out.println("Durchschnittliche Arbeitsstunden nach Motorart(Biogasmotor): "+b0.avgBetriebsstundenNachMotorart());
+		System.out.println(b0.avgBetriebsstundenNachMotorart());
 		System.out.println(b0.avgDieselverbrauchNachErweiterung());
 		System.out.println(b0.avgBiogasverbrauchNachErweiterung());
 		System.out.println(b0.anzahlMinMaxSaeschare());
 		System.out.println(b0.avgFassungsVermoegen());
 		System.out.println("========================================================================================================");
 		
-		System.out.println("\nStatistik fuer leeren Bauernhof: \n");
+		System.out.println("\nStatistik fuer leeren Bauernhof:");
+		System.out.println("\"keine Traktoren verfuegbar\" bedeutet: Division durch 0 verhindert.\n");
 		
 		Bauernhof bLeer = new Bauernhof("Leer");
 		System.out.println("\nStatistiken ausgeben: \n");
