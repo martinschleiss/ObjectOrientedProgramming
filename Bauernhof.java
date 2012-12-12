@@ -568,6 +568,6 @@ public class Bauernhof {
 			avg = "Diesel: keine Traktoren verfuegbar";
 		}
 		
-		return "Durchschnitt Fassungsvermoegen der Duengestreuer nach Motorart:\n\t: " + avg + "\n\t" + diesel + "\n\t" + biogas;
+		return "Durchschnitt Fassungsvermoegen der Duengestreuer nach Motorart:\n\t" + avg + "\n\t" + diesel + "\n\t" + biogas;
 	}
 }
