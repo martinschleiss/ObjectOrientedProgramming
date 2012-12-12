@@ -5,7 +5,7 @@ public class Test {
 	public static void main(String[] args) throws ClassNotFoundException {
 
 		int anzahlB = 20;
-		int anzahlT = 300;
+		int anzahlT = 100;
 		
 		Bauernhof b = new Bauernhof("Hof");
 		Liste liste=new Liste();
@@ -74,6 +74,73 @@ public class Test {
 				}
 			}
 		}
+		
+		System.out.println("========================================================================================================");
+		
+		Bauernhof b0 = liste.getBauernhof("Hof0");
+		
+		System.out.println("\nStatistiken Hof0 ausgeben: \n");
+		System.out.println(b0.avgBetriebsstundenNachErweiterung());
+		System.out.println("Durchschnittliche Arbeitsstunden nach Motorart(Biogasmotor): "+b0.avgBetriebsstundenNachMotorart());
+		System.out.println(b0.avgDieselverbrauchNachErweiterung());
+		System.out.println(b0.avgBiogasverbrauchNachErweiterung());
+		System.out.println(b0.anzahlMinMaxSaeschare());
+		System.out.println(b0.avgFassungsVermoegen());
+
+		System.out.println("\nBetriebsstunden und Verbrauch der Traktoren von Hof0 geaendert... \n");
+		
+		Iterator traktoren = b0.iterator();
+
+		while(traktoren.hasNext()) {
+			Object o = traktoren.next();
+			if(o instanceof Traktor) {
+				Traktor t = (Traktor) o;
+				int x = (int) (Math.random() * anzahlB);
+				b0.erhoeheBetriebsstunden(t, x);
+			}
+		}
+		
+		traktoren = b0.iterator();
+
+		while(traktoren.hasNext()) {
+			Object o = traktoren.next();
+			if(o instanceof Traktor) {
+				Traktor t = (Traktor) o;
+				if(t.serienNummer() % 2 == 0) {
+					int x = (int) (Math.random() * anzahlB);
+					b0.setBiogasVerbrauch(t, x);
+				}
+			}
+		}
+		
+		traktoren = b0.iterator();
+
+		while(traktoren.hasNext()) {
+			Object o = traktoren.next();
+			if(o instanceof Traktor) {
+				Traktor t = (Traktor) o;
+				if(t.serienNummer() % 2 == 1) {
+					int x = (int) (Math.random() * anzahlB);
+					b0.setDieselVerbrauch(t, x);
+				}
+			}
+		}
+
+		Iterator lis4=b0.iterator();
+
+		while(lis4.hasNext()){
+			Traktor t=(Traktor)lis4.next();
+			System.out.println(t);
+		}
+
+		System.out.println("\nStatistiken ausgeben: \n");
+		System.out.println(b0.avgBetriebsstundenNachErweiterung());
+		System.out.println("Durchschnittliche Arbeitsstunden nach Motorart(Biogasmotor): "+b0.avgBetriebsstundenNachMotorart());
+		System.out.println(b0.avgDieselverbrauchNachErweiterung());
+		System.out.println(b0.avgBiogasverbrauchNachErweiterung());
+		System.out.println(b0.anzahlMinMaxSaeschare());
+		System.out.println(b0.avgFassungsVermoegen());
+		System.out.println("========================================================================================================");
 		/*
 
 		System.out.println("\nVon Hof1 Traktor mit der Seriennummer 3 ausgeben: \n"+liste.getBauernhof("Hof1").getTraktor(3));
