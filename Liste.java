@@ -67,7 +67,7 @@ public class Liste {
 			o = it.next();
 
 			if (o instanceof Traktor) {
-
+				
 				Traktor t = (Traktor) o;
 				
 				if(t.serienNummer() == seriennummer){
@@ -90,14 +90,14 @@ public class Liste {
 		Object o;
 
 		while(it.hasNext()){
-
+			
 			o = it.next();
 
 			if (o instanceof Bauernhof) {
 
 				Bauernhof b = (Bauernhof) o;
 				
-				if(b.name() == name){
+				if(b.name().equals(name)){
 					
 					return b;
 				}
