@@ -139,11 +139,11 @@ public class Bauernhof {
 	/**
 	 * Getter-Methode fuer Verbrauch von Diesel-Traktoren
 	 * @param t != null
-	 * @return verbrauch >= 0: wenn Traktor t enthalten, sonst: -1
+	 * @return verbrauch >= 0: wenn Traktor t enthalten und t von Typ TraktorMitDieselMotor, sonst: -1
 	 */
-	private int getDieselVerbrauch(TraktorMitDieselMotor t) {
+	private int getDieselVerbrauch(Traktor t) {
 
-		if (liste.contains(t)) {
+		if (t instanceof TraktorMitDieselMotor && liste.contains(t)) {
 
 			return (int)t.bisherigerVerbrauch();
 
@@ -158,11 +158,11 @@ public class Bauernhof {
 	 * @param t != null
 	 * @param verbrauch > 0 (steigt), < 0 (sinkt)
 	 * 
-	 * @return true: wenn Traktor enthalten, false: sonst
+	 * @return true: wenn Traktor enthalten und t von Typ TraktorMitDieselMotor, false: sonst
 	 */
-	public boolean setDieselVerbrauch(TraktorMitDieselMotor t, int verbrauch) {
+	public boolean setDieselVerbrauch(Traktor t, int verbrauch) {
 
-		if (liste.contains(t)) {
+		if (t instanceof TraktorMitDieselMotor && liste.contains(t)) {
 
 			t.erhoeheVerbrauch(verbrauch);
 			return true;
@@ -176,11 +176,11 @@ public class Bauernhof {
 	/**
 	 * Getter-Methode fuer Verbrauch von Biogas-Traktoren
 	 * @param t != null
-	 * @return verbrauch >= 0: wenn Traktor t enthalten, sonst: -1
+	 * @return verbrauch >= 0: wenn Traktor t enthalten und t von Typ TraktorMitBiogasMotor, sonst: -1
 	 */
-	private double getBiogasVerbrauch(TraktorMitBiogasMotor t) {
+	private double getBiogasVerbrauch(Traktor t) {
 
-		if (liste.contains(t)) {
+		if (t instanceof TraktorMitBiogasMotor && liste.contains(t)) {
 
 			return t.bisherigerVerbrauch();
 
@@ -195,11 +195,11 @@ public class Bauernhof {
 	 * @param t != null
 	 * @param verbrauch > 0 (steigt), < 0 (sinkt)
 	 * 
-	 * @return true: wenn Traktor enthalten, false: sonst
+	 * @return true: wenn Traktor enthalten und t von Typ TraktorMitBiogasMotor, false: sonst
 	 */
 	public boolean setBiogasVerbrauch(Traktor t, double verbrauch) {
 
-		if (liste.contains(t)) {
+		if (t instanceof TraktorMitBiogasMotor && liste.contains(t)) {
 
 			t.erhoeheVerbrauch(verbrauch);
 			return true;
@@ -341,7 +341,7 @@ public class Bauernhof {
 	 * 
 	 * @param erweiterung: je nach Erweiterungstyp entsprechende Ausgabe
 	 * @return durchschnittlicher Verbrauch von Allen Traktoren mit Dieselmotor und spezifisch nach Erweiterung
-	 */
+	 
 	public String avgDieselverbrauchNachErweiterung(){
 
 		Iterator it = liste.iterator();
