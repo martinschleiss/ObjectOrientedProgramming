@@ -47,7 +47,7 @@ public class Liste {
 	 * Liefert Iterator ueber die Liste, die Ausgabefolge ist unbestimmt
 	 * @return ListIterator, liefert Object bei Aufruf von next()
 	 */
-	public ListIterator iterator() {
+	public Iterator iterator() {
 
 		return new ListIterator(head);
 	}
@@ -116,7 +116,7 @@ public class Liste {
 		private Object o; // != null
 		private Node next; //null, wenn Listenende
 
-		public Node(Object o, Node next) {
+		private Node(Object o, Node next) {
 
 			this.o = o;
 			this.next = next;
@@ -126,7 +126,7 @@ public class Liste {
 		 * Getter-Methode fuer Objekt
 		 * @return gespeichertes Objekt != null
 		 */
-		public Object getObject() {
+		private Object getObject() {
 
 			return o;
 		}
@@ -134,7 +134,7 @@ public class Liste {
 		 * Getter-Methode fuer Nachfolger-Knoten
 		 * @return Nachfolgerknoten, null: wenn Listenende erreicht
 		 */
-		public Node getNext() {
+		private Node getNext() {
 
 			return next;
 		}
@@ -144,7 +144,7 @@ public class Liste {
 		 * @param o != null
 		 * @return	true: wenn in diesem oder einem Nachfolgerknoten enthalten, false: sonst
 		 */
-		public boolean contains(Object o) {
+		private boolean contains(Object o) {
 
 			return this.o == o || (next != null && next.contains(o));
 		}
@@ -154,7 +154,7 @@ public class Liste {
 		 * @param o != null
 		 * @return next: wenn Objekt in diesem Knoten enthalten war, sonst this
 		 */
-		public Node remove(Object o) {
+		private Node remove(Object o) {
 
 			if (this.o == o) {
 
@@ -177,7 +177,7 @@ public class Liste {
 
 		private Node current;
 
-		public ListIterator(Node head) {
+		private ListIterator(Node head) {
 
 			current = head;
 		}
