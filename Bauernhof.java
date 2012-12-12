@@ -57,7 +57,7 @@ public class Bauernhof {
 	 * @param t != null
 	 * @return true: wenn enthalten, false: sonst
 	 */
-	public boolean containsTraktor(Traktor t) {
+	private boolean containsTraktor(Traktor t) {
 
 		return liste.contains(t);
 	}
@@ -67,7 +67,7 @@ public class Bauernhof {
 	 * @param t != null
 	 * @return betriebsstunden >= 0: wenn Traktor t enthalten, sonst: -1
 	 */
-	public int getBetriebsstunden(Traktor t) {
+	private int getBetriebsstunden(Traktor t) {
 
 		if (liste.contains(t)) {
 
@@ -104,7 +104,7 @@ public class Bauernhof {
 	 * @param t != null
 	 * @return verbrauch >= 0: wenn Traktor t enthalten, sonst: -1
 	 */
-	public int getVerbrauch(Traktor t) {
+	private int getVerbrauch(Traktor t) {
 
 		if (liste.contains(t)) {
 
@@ -141,7 +141,7 @@ public class Bauernhof {
 	 * @param t != null
 	 * @return verbrauch >= 0: wenn Traktor t enthalten, sonst: -1
 	 */
-	public int getDieselVerbrauch(TraktorMitDieselMotor t) {
+	private int getDieselVerbrauch(TraktorMitDieselMotor t) {
 
 		if (liste.contains(t)) {
 
@@ -178,7 +178,7 @@ public class Bauernhof {
 	 * @param t != null
 	 * @return verbrauch >= 0: wenn Traktor t enthalten, sonst: -1
 	 */
-	public double getBiogasVerbrauch(TraktorMitBiogasMotor t) {
+	private double getBiogasVerbrauch(TraktorMitBiogasMotor t) {
 
 		if (liste.contains(t)) {
 

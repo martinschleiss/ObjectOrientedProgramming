@@ -72,14 +72,14 @@ public abstract class Traktor {
 	 * Liefert bisherigen Verbrauch
 	 * @return verbrauch, kann je nach Unterklasse auch nur ganzzahlige Genauigkeit besitzen
 	 */
-	public abstract double bisherigerVerbrauch();
+	abstract double bisherigerVerbrauch();
 	
 	/**
 	 * Veraendert Verbrauch um uebergebenen Wert
 	 * @param 	verbrauch > 0 (erhoehen), < 0 (verringern)
 	 * 			wird in Unterklassen mit nur ganzzahliger Genauigkeit standardmaessig gerundet
 	 */
-	public abstract void erhoeheVerbrauch(double verbrauch);
+	abstract void erhoeheVerbrauch(double verbrauch);
 	
 	/**
 	 * Liefert String-Repraesentation der Klasse
