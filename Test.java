@@ -142,6 +142,17 @@ public class Test {
 		System.out.println(b0.anzahlMinMaxSaeschare());
 		System.out.println(b0.avgFassungsVermoegen());
 		System.out.println("========================================================================================================");
+		
+		System.out.println("\nStatistik fuer leeren Bauernhof: \n");
+		
+		Bauernhof bLeer = new Bauernhof("Leer");
+		System.out.println("\nStatistiken ausgeben: \n");
+		System.out.println(bLeer.avgBetriebsstundenNachErweiterung());
+		System.out.println("Durchschnittliche Arbeitsstunden nach Motorart(Biogasmotor): "+bLeer.avgBetriebsstundenNachMotorart());
+		System.out.println(bLeer.avgDieselverbrauchNachErweiterung());
+		System.out.println(bLeer.avgBiogasverbrauchNachErweiterung());
+		System.out.println(bLeer.anzahlMinMaxSaeschare());
+		System.out.println(bLeer.avgFassungsVermoegen());
 		/*
 
 		System.out.println("\nVon Hof1 Traktor mit der Seriennummer 3 ausgeben: \n"+liste.getBauernhof("Hof1").getTraktor(3));
