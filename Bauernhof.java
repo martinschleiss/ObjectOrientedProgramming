@@ -3,7 +3,7 @@
  * Bietet Methoden zum Verwalten von Traktoren sowie zur Berechnung von statistischen Werten an
  */
 
-@Gruppenmitglied("Anil")
+@Gruppenmitglied("Anil, Rafael")
 public class Bauernhof {
 
 	private final String name;
