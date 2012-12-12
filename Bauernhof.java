@@ -53,24 +53,6 @@ public class Bauernhof {
 	}
 
 	/**
-	 * Getter-Methode fuer Betriebsstunden
-	 * @param t != null
-	 * @return betriebsstunden >= 0: wenn Traktor t enthalten, sonst: -1
-	 */
-	@Gruppenmitglied("Rafael")
-	private int getBetriebsstunden(Traktor t) {
-
-		if (liste.contains(t)) {
-
-			return t.betriebsstunden();
-
-		} else {
-
-			return -1;
-		}
-	}
-
-	/**
 	 * Setter-Methode fuer Betriebsstunden
 	 * @param t != null
 	 * @param stunden > 0
@@ -88,24 +70,6 @@ public class Bauernhof {
 		} else {
 
 			return false;
-		}
-	}
-
-	/**
-	 * Getter-Methode fuer Verbrauch
-	 * @param t != null
-	 * @return verbrauch >= 0: wenn Traktor t enthalten, sonst: -1
-	 */
-	@Gruppenmitglied("Rafael")
-	private int getVerbrauch(Traktor t) {
-
-		if (liste.contains(t)) {
-
-			return (int)t.bisherigerVerbrauch();
-
-		} else {
-
-			return -1;
 		}
 	}
 
@@ -131,24 +95,6 @@ public class Bauernhof {
 	}
 
 	/**
-	 * Getter-Methode fuer Verbrauch von Diesel-Traktoren
-	 * @param t != null
-	 * @return verbrauch >= 0: wenn Traktor t enthalten und t von Typ TraktorMitDieselMotor, sonst: -1
-	 */
-	@Gruppenmitglied("Rafael")
-	private int getDieselVerbrauch(Traktor t) {
-
-		if (t instanceof TraktorMitDieselMotor && liste.contains(t)) {
-
-			return (int)t.bisherigerVerbrauch();
-
-		} else {
-
-			return -1;
-		}
-	}
-
-	/**
 	 * Setter-Methode fuer Verbrauch von DieselTraktoren
 	 * @param t != null
 	 * @param verbrauch > 0 (steigt), < 0 (sinkt)
@@ -166,24 +112,6 @@ public class Bauernhof {
 		} else {
 
 			return false;
-		}
-	}
-
-	/**
-	 * Getter-Methode fuer Verbrauch von Biogas-Traktoren
-	 * @param t != null
-	 * @return verbrauch >= 0: wenn Traktor t enthalten und t von Typ TraktorMitBiogasMotor, sonst: -1
-	 */
-	@Gruppenmitglied("Rafael")
-	private double getBiogasVerbrauch(Traktor t) {
-
-		if (t instanceof TraktorMitBiogasMotor && liste.contains(t)) {
-
-			return t.bisherigerVerbrauch();
-
-		} else {
-
-			return -1;
 		}
 	}
 
