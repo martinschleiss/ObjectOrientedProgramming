@@ -167,7 +167,7 @@ public class Test {
 		 */
 
 		/**
-		 * Annotationen der Klassen: (Durch fehlende Generizitaet nur unelegant, um keine Warnungen zu bekommen):
+		 * Annotationen der Klassen & Methoden: (Durch fehlende Generizitaet nur unelegant, um keine Warnungen zu bekommen):
 		 */
 		
 		System.out.println("\n\n\n");
