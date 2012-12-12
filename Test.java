@@ -4,59 +4,77 @@ public class Test {
 
 	public static void main(String[] args) throws ClassNotFoundException {
 
+		int anzahlB = 20;
+		int anzahlT = 300;
+		
 		Bauernhof b = new Bauernhof("Hof");
 		Liste liste=new Liste();
 		liste.add(b);
-		System.out.println("Drei Bauernhoefe erstellen.....");
-		for(int i=1;i<4;i++){
+		System.out.println(anzahlB + " Bauernhoefe erstellen.....");
+		for(int i=0;i<anzahlB;i++){
 			liste.add(new Bauernhof("Hof"+i));
 		}
-		System.out.println("\n6 Traktoren mit Erweiterung erstellen.....");
-		Traktor t1 = new TraktorMitBiogasMotor();
-		Traktor t2 = new TraktorMitDieselMotor();
-		Traktor t3 = new TraktorMitDieselMotor();
-		Traktor t4 = new TraktorMitDieselMotor();
-		Traktor t5 = new TraktorMitBiogasMotor();
-		Traktor t6 = new TraktorMitBiogasMotor();
 
-		TraktorErweiterung tErDrill1=new TraktorErweiterungDrillmaschine(300);
-		TraktorErweiterung tErStreuer1=new TraktorErweiterungDuengestreuer(750.0);
-		TraktorErweiterung tErDrill2=new TraktorErweiterungDrillmaschine(400);
-		TraktorErweiterung tErStreuer2=new TraktorErweiterungDuengestreuer(500.5);
-
-		t1.setzeTraktorErweiterung(tErStreuer1);
-		t2.setzeTraktorErweiterung(tErStreuer1);
-		t3.setzeTraktorErweiterung(tErStreuer2);
-		t4.setzeTraktorErweiterung(tErDrill2);
-		t5.setzeTraktorErweiterung(tErDrill1);
-		t6.setzeTraktorErweiterung(tErDrill2);
-
-		Bauernhof b1=liste.getBauernhof("Hof1");
-		System.out.println(b1);
-
-		System.out.println("\nTraktoren in Hof1, Hof2 und Hof3 hinzufuegen.....");
-		b1.addTraktor(t1);
-		b1.addTraktor(t2);
-		b1.addTraktor(t3);
-		b1.addTraktor(t4);
-		b1.addTraktor(t5);
-		b1.addTraktor(t6);
-
-		Bauernhof b2=liste.getBauernhof("Hof2");
-		b2.addTraktor(t1);
-		b2.addTraktor(t2);
-		b2.addTraktor(t3);
-		b2.addTraktor(t4);
-		b2.addTraktor(t5);
-		b2.addTraktor(t6);
-
-		Bauernhof b3=liste.getBauernhof("Hof3");
-		b3.addTraktor(t1);
-		b3.addTraktor(t2);
-		b3.addTraktor(t3);
-		b3.addTraktor(t4);
-		b3.addTraktor(t5);
-		b3.addTraktor(t6);
+		System.out.println("\n" + anzahlT + " Traktoren zu den Bauernhoefen hinzufuegen");
+		
+		for(int i=0; i < anzahlT; i++) {
+			int j = ((int)(Math.random() * i)) % anzahlB;
+			double ausmass = Math.random() * i;
+			
+			Bauernhof bauern = liste.getBauernhof("Hof"+ j);
+			
+			if(bauern != null && i % 2 == 0) {
+				
+				bauern.addTraktor(new TraktorMitBiogasMotor());
+				bauern.getTraktor(i).setzeTraktorErweiterung(new TraktorErweiterungDrillmaschine((int) ausmass));
+			} else if(bauern != null){
+				bauern.addTraktor(new TraktorMitDieselMotor());
+				bauern.getTraktor(i).setzeTraktorErweiterung(new TraktorErweiterungDuengestreuer(ausmass));
+			}
+		}
+		
+		System.out.println("\nEntferne Traktor i von Bauernhof x falls vorhanden");
+		
+		for(int i = 0; i < anzahlT; i++) {
+			int x = ((int)(Math.random() * i)) % anzahlB;
+			
+			Bauernhof bauern = liste.getBauernhof("Hof"+x);
+			if(bauern.getTraktor(i) != null) {
+				bauern.removeTraktor(bauern.getTraktor(i));
+				System.out.println("Traktor " + i + " entfernt");
+			}
+		}
+		
+		System.out.println("\nWechsle Traktorerweiterung fuer Traktor i von Bauernhof x falls vorhanden");
+		
+		for(int i = 0; i < anzahlT; i++) {
+			int x = ((int)(Math.random() * i)) % anzahlB;
+			double ausmass = Math.random() * i;
+			
+			Bauernhof bauern = liste.getBauernhof("Hof"+x);
+			if(bauern.getTraktor(i) != null) {
+				if(bauern.getTraktor(i).getErweiterung() instanceof TraktorErweiterungDrillmaschine)  {
+					bauern.getTraktor(i).setzeTraktorErweiterung(new TraktorErweiterungDuengestreuer(ausmass));
+					System.out.println("Traktor " + i + " nun mit TraktorErweiterungDuengestreuer");
+				} else if(bauern.getTraktor(i).getErweiterung() instanceof TraktorErweiterungDuengestreuer) {
+					bauern.getTraktor(i).setzeTraktorErweiterung(new TraktorErweiterungDrillmaschine((int) ausmass));
+					System.out.println("Traktor " + i + " nun mit TraktorErweiterungDrillmaschine");
+				}
+			}
+		}
+		
+		System.out.println("\nJeden Bauernhof und seine Traktoren ausgeben:\n");
+		
+		for(int i = 0; i < anzahlB; i++) {
+			System.out.println("\nHof"+ i + " ausgeben: \n"+liste.getBauernhof("Hof"+i));
+			Bauernhof bauern = liste.getBauernhof("Hof"+i);
+			for(int j = 0; j < anzahlT; j++) {
+				if(bauern.getTraktor(j) != null) {
+					System.out.println("\tTraktor mit der Seriennummer " + j + " ausgeben: "+bauern.getTraktor(j));
+				}
+			}
+		}
+		/*
 
 		System.out.println("\nVon Hof1 Traktor mit der Seriennummer 3 ausgeben: \n"+liste.getBauernhof("Hof1").getTraktor(3));
 		System.out.println("\nVon Hof3 Traktor mit der Seriennummer 5 ausgeben: \n"+liste.getBauernhof("Hof3").getTraktor(5));
