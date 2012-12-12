@@ -1,7 +1,7 @@
 /**
  * Traktor mit Diesel-Motor
  */
-
+@Gruppenmitglied("Anil")
 public class TraktorMitDieselMotor extends Traktor {
 
 	private int dieselVerbrauch; // > 0

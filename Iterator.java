@@ -1,6 +1,7 @@
 /**
  * Interface fuer das Iterieren durch Listen
  */
+@Gruppenmitglied("Rafael")
 public interface Iterator {
 
 	/**

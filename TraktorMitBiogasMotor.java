@@ -1,7 +1,7 @@
 /**
  * Traktor mit Biogas-Motor
  */
-
+@Gruppenmitglied("Anil")
 public class TraktorMitBiogasMotor extends Traktor {
 
 	private double biogasVerbrauch; // > 0

@@ -2,7 +2,7 @@
  * Nicht-generische, einfach-verkettete Liste zum Speichern von Traktoren und Bauernhoefen
  * Mit entsprechenden Getter-Methoden ist diese Liste fuer beliebige Typen erweiterbar
  */
-
+@Gruppenmitglied("Rafael")
 public class Liste {
 
 	private Node head;

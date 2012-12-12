@@ -1,7 +1,7 @@
 /**
  * Basisklasse fuer Traktoren
  */
-
+@Gruppenmitglied("Martin")
 public abstract class Traktor {
 	
 	private static int serie = 0;

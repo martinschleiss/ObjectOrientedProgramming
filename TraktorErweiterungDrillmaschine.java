@@ -1,7 +1,7 @@
 /**
  * Drillmaschine als Erweiterung fuer Traktoren
  */
-
+@Gruppenmitglied("Martin")
 public class TraktorErweiterungDrillmaschine extends TraktorErweiterung {
 
 	private int saeschare; // > 0

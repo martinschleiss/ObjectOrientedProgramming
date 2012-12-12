@@ -1,6 +1,7 @@
 /**
  * Basisklasse fuer Traktorerweiterungen bietet Methode zum Abfragen des Ausmasses (z.B. Fassungsvermoegen)
  */
+@Gruppenmitglied("Martin")
 public abstract class TraktorErweiterung {
 
 	/**

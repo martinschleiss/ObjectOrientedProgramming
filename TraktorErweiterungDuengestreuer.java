@@ -1,7 +1,7 @@
 /**
  * Duengestreuer als Erweiterung fuer Traktoren
  */
-
+@Gruppenmitglied("Martin")
 public class TraktorErweiterungDuengestreuer extends TraktorErweiterung {
 	
 	private double fassungskapazitaet; // > 0

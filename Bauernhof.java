@@ -53,20 +53,11 @@ public class Bauernhof {
 	}
 
 	/**
-	 * Liefert Wahrheitswert zur Bestimmung, ob Traktor t in Liste enthalten
-	 * @param t != null
-	 * @return true: wenn enthalten, false: sonst
-	 */
-	private boolean containsTraktor(Traktor t) {
-
-		return liste.contains(t);
-	}
-
-	/**
 	 * Getter-Methode fuer Betriebsstunden
 	 * @param t != null
 	 * @return betriebsstunden >= 0: wenn Traktor t enthalten, sonst: -1
 	 */
+	@Gruppenmitglied("Rafael")
 	private int getBetriebsstunden(Traktor t) {
 
 		if (liste.contains(t)) {
@@ -86,6 +77,7 @@ public class Bauernhof {
 	 * 
 	 * @return true: wenn Traktor enthalten, false: sonst
 	 */
+	@Gruppenmitglied("Martin")
 	public boolean erhoeheBetriebsstunden(Traktor t, int stunden){
 
 		if (liste.contains(t)) {
@@ -104,6 +96,7 @@ public class Bauernhof {
 	 * @param t != null
 	 * @return verbrauch >= 0: wenn Traktor t enthalten, sonst: -1
 	 */
+	@Gruppenmitglied("Rafael")
 	private int getVerbrauch(Traktor t) {
 
 		if (liste.contains(t)) {
@@ -123,6 +116,7 @@ public class Bauernhof {
 	 * 
 	 * @return true: wenn Traktor enthalten, false: sonst
 	 */
+	@Gruppenmitglied("Rafael")
 	public boolean setVerbrauch(Traktor t, int verbrauch) {
 
 		if (liste.contains(t)) {
@@ -141,6 +135,7 @@ public class Bauernhof {
 	 * @param t != null
 	 * @return verbrauch >= 0: wenn Traktor t enthalten und t von Typ TraktorMitDieselMotor, sonst: -1
 	 */
+	@Gruppenmitglied("Rafael")
 	private int getDieselVerbrauch(Traktor t) {
 
 		if (t instanceof TraktorMitDieselMotor && liste.contains(t)) {
@@ -160,6 +155,7 @@ public class Bauernhof {
 	 * 
 	 * @return true: wenn Traktor enthalten und t von Typ TraktorMitDieselMotor, false: sonst
 	 */
+	@Gruppenmitglied("Rafael")
 	public boolean setDieselVerbrauch(Traktor t, int verbrauch) {
 
 		if (t instanceof TraktorMitDieselMotor && liste.contains(t)) {
@@ -178,6 +174,7 @@ public class Bauernhof {
 	 * @param t != null
 	 * @return verbrauch >= 0: wenn Traktor t enthalten und t von Typ TraktorMitBiogasMotor, sonst: -1
 	 */
+	@Gruppenmitglied("Rafael")
 	private double getBiogasVerbrauch(Traktor t) {
 
 		if (t instanceof TraktorMitBiogasMotor && liste.contains(t)) {
@@ -197,6 +194,7 @@ public class Bauernhof {
 	 * 
 	 * @return true: wenn Traktor enthalten und t von Typ TraktorMitBiogasMotor, false: sonst
 	 */
+	@Gruppenmitglied("Rafael")
 	public boolean setBiogasVerbrauch(Traktor t, double verbrauch) {
 
 		if (t instanceof TraktorMitBiogasMotor && liste.contains(t)) {
@@ -224,6 +222,7 @@ public class Bauernhof {
 	 * @param traktor  je nach Traktortyp entsprechende Ausgabe
 	 * @return Durchschnittlicher verbrauch nach Motorart 
 	 */
+	@Gruppenmitglied("Anil")
 	public String avgBetriebsstundenNachMotorart() {
 
 		Iterator it = liste.iterator();
@@ -278,6 +277,7 @@ public class Bauernhof {
 	 * @param erweiterung: je nach Erweiterungstyp entsprechende Ausgabe
 	 * @return durchschnitt der Betriebsstunden von Allen Traktoren und spezifisch nach Erweiterung
 	 */
+	@Gruppenmitglied("Anil")
 	public String avgBetriebsstundenNachErweiterung(){
 
 		Iterator it = liste.iterator();
@@ -342,6 +342,7 @@ public class Bauernhof {
 	 * @param erweiterung: je nach Erweiterungstyp entsprechende Ausgabe
 	 * @return durchschnittlicher Verbrauch von Allen Traktoren mit Dieselmotor und spezifisch nach Erweiterung
 	 */
+	@Gruppenmitglied("Anil")
 	public String avgDieselverbrauchNachErweiterung(){
 
 		Iterator it = liste.iterator();
@@ -408,6 +409,7 @@ public class Bauernhof {
 	 * @param erweiterung: je nach Erweiterungstyp entsprechende Ausgabe
 	 * @return durchschnittlicher Verbrauch von Allen Traktoren mit Biogasmotor und spezifisch nach Erweiterung
 	 */
+	@Gruppenmitglied("Anil")
 	public String avgBiogasverbrauchNachErweiterung(){
 
 		Iterator it = liste.iterator();
@@ -474,6 +476,7 @@ public class Bauernhof {
 	 * @param traktor je nach Traktortyp entsprechende Ausgabe
 	 * @return min/max der Saeschare aller Traktoren und spezifisch nach traktortyp
 	 */
+	@Gruppenmitglied("Anil")
 	public String anzahlMinMaxSaeschare(){
 		
 		Iterator it = liste.iterator();
@@ -508,6 +511,7 @@ public class Bauernhof {
 	 * @param traktor je nach Traktortyp entsprechende Ausgabe
 	 * @return durchschnitt des Fassungsvermoegens aller Traktoren und spezifisch nach Traktortyp
 	 */
+	@Gruppenmitglied("Anil")
 	public String avgFassungsVermoegen(){
 
 		Iterator it = liste.iterator();
