@@ -32,6 +32,8 @@ public class Test {
 		t6.setzeTraktorErweiterung(tErDrill2);
 
 		Bauernhof b1=liste.getBauernhof("Hof1");
+		System.out.println(b1);
+		
 		System.out.println("\nTraktoren in Hof1, Hof2 und Hof3 hinzufuegen.....");
 		b1.addTraktor(t1);
 		b1.addTraktor(t2);
