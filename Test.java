@@ -292,11 +292,11 @@ public class Test {
 
 		if (g != null) {
 
-			System.out.println("Klasse: " + s + ", Gruppenmitglied: " + g.value() + "\n\n");
+			System.out.println("Klasse: " + s + ", Gruppenmitglied: " + g.value() + "\n");
 
 		} else {
 
-			System.out.println("Klasse: " + s + ", Gruppenmitglied: Nicht angegeben\n\n");
+			System.out.println("Klasse: " + s + ", Gruppenmitglied: Nicht angegeben\n");
 		}
 	}
 
@@ -322,6 +322,6 @@ public class Test {
 				System.out.println("Methode: " + methods[i] + ",\tGruppenmitglied: Nicht angegeben");
 			}
 		}
-		System.out.println("\n\n\n");
+		System.out.println("\n========================================================================================================\n");
 	}
 }
