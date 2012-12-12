@@ -14,26 +14,26 @@ public class Bauernhof {
 		this.name = name;
 		liste = new Liste();
 	}
-	
+
 	/**
 	 * Getter-Methode fuer Namen des Bauernhofs
 	 * @return name: unveraenderlich
 	 */
 	public String name(){
-		
+
 		return name;
 	}
-	
+
 	/**
 	 * Liefert Traktor anhand der eindeutigen Seriennummer, falls gespeichert
 	 * @param seriennummer > 0
 	 * @return Traktor mit Seriennummer
 	 */
 	public Traktor getTraktor(int seriennummer){
-		
+
 		return liste.getTraktor(seriennummer);
 	}
-	
+
 	/**
 	 * Speichert Traktor t in Liste
 	 * @param t != null
@@ -232,41 +232,41 @@ public class Bauernhof {
 		int sumDiesel=0;
 		int counterBiogas=0;
 		int counterDiesel=0;
-		
+
 		while(it.hasNext()){
-			
+
 			Traktor t=(Traktor)it.next();
-			
+
 			if( t instanceof TraktorMitBiogasMotor){
-				
+
 				sumBiogas +=t.betriebsstunden();
 				counterBiogas++;
-				
+
 			} else if (t instanceof TraktorMitDieselMotor){
-				
+
 				sumDiesel +=t.betriebsstunden();
 				counterDiesel++;
 			}
 		}
-		
+
 		String biogas;
 		String diesel;
-		
+
 		if (counterBiogas > 0) {
-			
+
 			biogas = "Biogas: " + (sumBiogas/counterBiogas);
-			
+
 		} else {
-			
+
 			biogas = "Biogas: keine Traktoren verfuegbar";
 		}
-		
+
 		if (counterDiesel > 0) {
-			
+
 			diesel = "Diesel: " + (sumDiesel/counterDiesel);
-			
+
 		} else {
-			
+
 			diesel = "Diesel: keine Traktoren verfuegbar";
 		}
 
@@ -286,57 +286,57 @@ public class Bauernhof {
 		int sumDuenger=0;
 		int counterDrill=0;
 		int counterDuenger=0;
-		
+
 		while(it.hasNext()){
-			
+
 			Traktor t=(Traktor)it.next();
-			
+
 			if( t.getErweiterung() instanceof TraktorErweiterungDrillmaschine) {
-				
+
 				sumDrill +=t.betriebsstunden();
 				counterDrill++;
-				
+
 			} else if (t.getErweiterung() instanceof TraktorErweiterungDuengestreuer) {
-				
+
 				sumDuenger +=t.betriebsstunden();
 				counterDuenger++;
 			}
 		}
-		
+
 		String drill;
 		String duenger;
 		String avg;
-		
+
 		if (counterDrill > 0) {
-			
+
 			drill = "Drillmaschine: " + (sumDrill/counterDrill);
-			
+
 		} else {
-			
+
 			drill = "Drillmaschine: keine Traktoren verfuegbar";
 		}
-		
+
 		if (counterDuenger > 0) {
-			
+
 			duenger = "Duengerstreuer: " + (sumDuenger/counterDuenger);
-			
+
 		} else {
-			
+
 			duenger = "Duengerstreuer: keine Traktoren verfuegbar";
 		}
-		
+
 		if (counterDuenger+counterDrill > 0) {
-			
+
 			avg = "Beide Erweiterungen: " + (sumDrill+sumDuenger)/(counterDuenger+counterDrill);
-			
+
 		} else {
-			
+
 			avg = "Beide Erweiterungen: keine Traktoren verfuegbar";
 		}
-		
+
 		return "Durchschnitt Betriebsstunden nach Erweiterungen:\n\t" + drill + "\n\t" + duenger + "\n\t" + avg;
 	}
-	
+
 	/**
 	 * 
 	 * @param erweiterung: je nach Erweiterungstyp entsprechende Ausgabe
@@ -350,117 +350,157 @@ public class Bauernhof {
 		double sumDuenger=0.0;
 		int counterDrill=0;
 		int counterDuenger=0;
-		
+
 		while(it.hasNext()){
-		
+
 			Traktor t=(Traktor)it.next();
-			
+
 			if(t instanceof TraktorMitDieselMotor) {
-				
+
 				if (t.getErweiterung() instanceof TraktorErweiterungDrillmaschine){
-					
+
 					sumDrill += t.bisherigerVerbrauch();
 					counterDrill++;
-				
-				} else if (t.getErweiterung() instanceof TraktorErweiterungDuengerstreuer) {
-				
-				sumDuenger +=t.bisherigerVerbrauch();
-				counterDuenger++;
+
+				} else if (t.getErweiterung() instanceof TraktorErweiterungDuengestreuer) {
+
+					sumDuenger +=t.bisherigerVerbrauch();
+					counterDuenger++;
+				}
 			}
 		}
-		
-		String out="Durchschnittlicher Verbrauch aller DieselTraktoren: "+(sumDrill+sumDuenger)/(counterDrill+counterDuenger);
+		String drill;
+		String duenger;
+		String avg;
 
-		if(erweiterung instanceof TraktorErweiterungDrillmaschine){
-		
-			return out+" Traktoren die saeen: "+sumDrill/counterDrill;
-		
-		}else{
-			
-			return out+" Traktoren die duengern: "+sumDuenger/counterDuenger;
+		if (counterDrill > 0) {
+
+			drill = "Drillmaschine: " + (sumDrill/counterDrill);
+
+		} else {
+
+			drill = "Drillmaschine: keine Traktoren verfuegbar";
 		}
+
+		if (counterDuenger > 0) {
+
+			duenger = "Duengerstreuer: " + (sumDuenger/counterDuenger);
+
+		} else {
+
+			duenger = "Duengerstreuer: keine Traktoren verfuegbar";
+		}
+
+		if (counterDuenger+counterDrill > 0) {
+
+			avg = "Beide Erweiterungen: " + (sumDrill+sumDuenger)/(counterDuenger+counterDrill);
+
+		} else {
+
+			avg = "Beide Erweiterungen: keine Traktoren verfuegbar";
+		}
+
+		return "Durchschnitt Diesel-Motor Betriebsstunden nach Erweiterungen:\n\t" + drill + "\n\t" + duenger + "\n\t" + avg;
 	}
+	
 	/**
 	 * 
 	 * @param erweiterung: je nach Erweiterungstyp entsprechende Ausgabe
 	 * @return durchschnittlicher Verbrauch von Allen Traktoren mit Biogasmotor und spezifisch nach Erweiterung
 	 */
-	public String durchschnittGasverbrauchNachErweiterung(TraktorErweiterung erweiterung){
+	public String avgBiogasverbrauchNachErweiterung(){
 
 		Iterator it = liste.iterator();
-
 
 		double sumDrill=0.0;
 		double sumDuenger=0.0;
 		int counterDrill=0;
 		int counterDuenger=0;
+
 		while(it.hasNext()){
+
 			Traktor t=(Traktor)it.next();
-			if(t instanceof TraktorMitBiogasMotor && t.getErweiterung() instanceof TraktorErweiterungDrillmaschine){
-				sumDrill += t.bisherigerVerbrauch();
-				counterDrill++;
-			}else if(t instanceof TraktorMitBiogasMotor) {
-				sumDuenger +=t.bisherigerVerbrauch();
-				counterDuenger++;
+
+			if(t instanceof TraktorMitBiogasMotor) {
+
+				if (t.getErweiterung() instanceof TraktorErweiterungDrillmaschine){
+
+					sumDrill += t.bisherigerVerbrauch();
+					counterDrill++;
+
+				} else if (t.getErweiterung() instanceof TraktorErweiterungDuengestreuer) {
+
+					sumDuenger +=t.bisherigerVerbrauch();
+					counterDuenger++;
+				}
 			}
 		}
-		String out="Durchschnittlicher Verbrauch aller BiogasTraktoren: "+(sumDrill+sumDuenger)/(counterDrill+counterDuenger);
+		String drill;
+		String duenger;
+		String avg;
 
-		if(erweiterung instanceof TraktorErweiterungDrillmaschine){
-			return out+" Traktoren die saeen: "+sumDrill/counterDrill;
-		}else{
-			return out+" Traktoren die duengern: "+sumDuenger/counterDuenger;
+		if (counterDrill > 0) {
+
+			drill = "Drillmaschine: " + (sumDrill/counterDrill);
+
+		} else {
+
+			drill = "Drillmaschine: keine Traktoren verfuegbar";
 		}
+
+		if (counterDuenger > 0) {
+
+			duenger = "Duengerstreuer: " + (sumDuenger/counterDuenger);
+
+		} else {
+
+			duenger = "Duengerstreuer: keine Traktoren verfuegbar";
+		}
+
+		if (counterDuenger+counterDrill > 0) {
+
+			avg = "Beide Erweiterungen: " + (sumDrill+sumDuenger)/(counterDuenger+counterDrill);
+
+		} else {
+
+			avg = "Beide Erweiterungen: keine Traktoren verfuegbar";
+		}
+
+		return "Durchschnitt Biogas-Motor Betriebsstunden nach Erweiterungen:\n\t" + drill + "\n\t" + duenger + "\n\t" + avg;
 	}
+	
 	/**
 	 * 
 	 * @param traktor je nach Traktortyp entsprechende Ausgabe
 	 * @return min/max der Saeschare aller Traktoren und spezifisch nach traktortyp
 	 */
-	public String anzahlMinMaxSaeschare(Traktor traktor){
+	public String anzahlMinMaxSaeschare(){
+		
 		Iterator it = liste.iterator();
 
-		double minSaeschareBiogas=Double.MAX_VALUE;
-		double maxSaeschareBiogas=0;
-		double minSaeschareDiesel=Double.MAX_VALUE;
-		double maxSaeschareDiesel=0;
+		int minSaeschareBiogas=Integer.MAX_VALUE;
+		int maxSaeschareBiogas=0;
+		int minSaeschareDiesel=Integer.MAX_VALUE;
+		int maxSaeschareDiesel=0;
 
 		while(it.hasNext()){
+			
 			Traktor t=(Traktor)it.next();
-			if(t instanceof TraktorMitBiogasMotor&& t.getErweiterung() instanceof TraktorErweiterungDrillmaschine){
-				minSaeschareBiogas=min(t.erweiterungsAusmass(),minSaeschareBiogas);
-				maxSaeschareBiogas=max(t.erweiterungsAusmass(),maxSaeschareBiogas);
+			
+			if(t instanceof TraktorMitBiogasMotor && t.getErweiterung() instanceof TraktorErweiterungDrillmaschine) {
+				
+				minSaeschareBiogas=(int)Math.min(t.erweiterungsAusmass(),minSaeschareBiogas);
+				maxSaeschareBiogas=(int)Math.max(t.erweiterungsAusmass(),maxSaeschareBiogas);
+			
 			}else if(t instanceof TraktorMitDieselMotor&& t.getErweiterung() instanceof TraktorErweiterungDrillmaschine){
-				minSaeschareDiesel=min(t.erweiterungsAusmass(),minSaeschareDiesel);
-				maxSaeschareDiesel=max(t.erweiterungsAusmass(),maxSaeschareDiesel);
+				minSaeschareDiesel=(int)Math.min(t.erweiterungsAusmass(),minSaeschareDiesel);
+				maxSaeschareDiesel=(int)Math.max(t.erweiterungsAusmass(),maxSaeschareDiesel);
 			}
 		}
-
-		String out="Saescharen aller Traktoren zusammen: min: "+min(minSaeschareBiogas,minSaeschareDiesel)+" max: "+max(maxSaeschareBiogas,maxSaeschareDiesel);
-		if(traktor instanceof TraktorMitBiogasMotor ){
-			return out+" mit Biogas min: "+minSaeschareBiogas+" max: "+maxSaeschareBiogas;
-		}else{
-			return out+" mit Diesel min: "+minSaeschareDiesel+" max: "+maxSaeschareDiesel;
-		}
-
-	}
-
-	private double min(double a, double b){
-		if(a<b){
-			return a;
-		}else {
-			return b;
-		}
-
-	}
-
-	private double max(double a, double b){
-		if(a>b){
-			return a;
-		}else {
-			return b;
-		}
-
+		
+		return "Saescharen-Daten aller Traktoren zusammen:\n\tMinimum: "+ Math.min(minSaeschareBiogas,minSaeschareDiesel) + "\n\tMaximum: "
+				+ Math.max(maxSaeschareBiogas,maxSaeschareDiesel) + "\n\tDiesel-Motoren: Minimum: " + minSaeschareDiesel + "\n\tMaximum: " + maxSaeschareDiesel + 
+				"\n\tBiogas-Motoren: Minimum: " + minSaeschareBiogas + "\n\tMaximum: " + maxSaeschareBiogas;
 	}
 
 	/**
@@ -468,30 +508,62 @@ public class Bauernhof {
 	 * @param traktor je nach Traktortyp entsprechende Ausgabe
 	 * @return durchschnitt des Fassungsvermoegens aller Traktoren und spezifisch nach Traktortyp
 	 */
-	public String durchschnittFassungsVermoegen(Traktor traktor){
+	public String avgFassungsVermoegen(){
 
 		Iterator it = liste.iterator();
 
-		double sumFassungsvermoegenBiogas=0;
-		double sumFassungsvermoegenDiesel=0;
+		double sumBiogas=0;
+		double sumDiesel=0;
 		int counterBiogas=0;
 		int counterDiesel=0;
+		
 		while(it.hasNext()){
+		
 			Traktor t=(Traktor)it.next();
+			
 			if(t instanceof TraktorMitBiogasMotor && t.getErweiterung() instanceof TraktorErweiterungDuengestreuer){
-				sumFassungsvermoegenBiogas +=t.erweiterungsAusmass();
+			
+				sumBiogas +=t.erweiterungsAusmass();
 				counterBiogas++;
+			
 			}else if(t instanceof TraktorMitDieselMotor && t.getErweiterung() instanceof TraktorErweiterungDuengestreuer){
-				sumFassungsvermoegenDiesel  +=t.erweiterungsAusmass();
+				
+				sumDiesel  +=t.erweiterungsAusmass();
 				counterDiesel++;
 			}
 		}
-		String out="Durchschnittliches Fassungsvermoegen aller Traktoren: "+(sumFassungsvermoegenBiogas+sumFassungsvermoegenDiesel)/(counterDiesel+counterBiogas);
+		
+		String diesel;
+		String biogas;
+		String avg;
+		
+		if (counterBiogas > 0) {
 
-		if(traktor instanceof TraktorMitBiogasMotor ){
-			return out+" Mit Biogas: "+(sumFassungsvermoegenBiogas/counterBiogas);
-		}else{
-			return out+" Mit Diesel: "+(sumFassungsvermoegenDiesel/counterDiesel);
+			biogas = "Biogas: " + (sumBiogas/counterBiogas);
+
+		} else {
+
+			biogas = "Biogas: keine Traktoren verfuegbar";
 		}
+
+		if (counterDiesel > 0) {
+
+			diesel = "Diesel: " + (sumDiesel/counterDiesel);
+
+		} else {
+
+			diesel = "Diesel: keine Traktoren verfuegbar";
+		}
+		
+		if (counterDiesel+counterBiogas > 0) {
+
+			avg = "Beide: " + (sumDiesel+sumBiogas)/(counterDiesel+counterBiogas);
+
+		} else {
+
+			diesel = "Diesel: keine Traktoren verfuegbar";
+		}
+		
+		return "Durchschnitt Fassungsvermoegen der Duengestreuer nach Motorart:\n\t: " + avg + "\n\t" + diesel + "\n\t" + biogas;
 	}
 }
