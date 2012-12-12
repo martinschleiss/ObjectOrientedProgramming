@@ -2,7 +2,7 @@ import java.lang.reflect.Method;
 @Gruppenmitglied("Martin")
 public class Test {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ClassNotFoundException {
 
 		Bauernhof b = new Bauernhof("Hof");
 		Liste liste=new Liste();
@@ -33,7 +33,7 @@ public class Test {
 
 		Bauernhof b1=liste.getBauernhof("Hof1");
 		System.out.println(b1);
-		
+
 		System.out.println("\nTraktoren in Hof1, Hof2 und Hof3 hinzufuegen.....");
 		b1.addTraktor(t1);
 		b1.addTraktor(t2);
@@ -90,7 +90,7 @@ public class Test {
 			System.out.println(t);
 		}
 		System.out.println("\nBetriebsstunden und Verbrauch der Traktoren von Hof1 geaendert... ");
-		
+
 		Bauernhof b11=liste.getBauernhof("Hof1");
 		b11.erhoeheBetriebsstunden(b11.getTraktor(0), 4);
 		b11.erhoeheBetriebsstunden(b11.getTraktor(1), 6);
@@ -98,15 +98,15 @@ public class Test {
 		b11.erhoeheBetriebsstunden(b11.getTraktor(3), 12);
 		b11.erhoeheBetriebsstunden(b11.getTraktor(4), 3);
 		b11.erhoeheBetriebsstunden(b11.getTraktor(5), 7);
-		
+
 		b11.setBiogasVerbrauch(b11.getTraktor(0), 89);
 		b11.setBiogasVerbrauch(b11.getTraktor(4), 70);
 		b11.setBiogasVerbrauch(b11.getTraktor(5), 139);
-		
+
 		b11.setDieselVerbrauch(b11.getTraktor(1), 200);
 		b11.setDieselVerbrauch(b11.getTraktor(2), 220);
 		b11.setDieselVerbrauch(b11.getTraktor(3), 180);
-		
+
 		Iterator lis3=b11.iterator();
 
 		while(lis3.hasNext()){
@@ -122,35 +122,35 @@ public class Test {
 		System.out.println(b11.anzahlMinMaxSaeschare(new TraktorMitBiogasMotor()));
 		System.out.println(b11.durchschnittFassungsVermoegen(new TraktorMitDieselMotor()));
 
-		
-		
-		
+
+
+
 		System.out.println("\nBetriebsstunden und Verbrauch der Traktoren von Hof3 geaendert... ");
-		
+
 		Bauernhof b33=liste.getBauernhof("Hof3");
-		
+
 		b33.erhoeheBetriebsstunden(b33.getTraktor(0), 23);
 		b33.erhoeheBetriebsstunden(b33.getTraktor(1), 5);
 		b33.erhoeheBetriebsstunden(b33.getTraktor(2), 1);
 		b33.erhoeheBetriebsstunden(b33.getTraktor(3), 13);
 		b33.erhoeheBetriebsstunden(b33.getTraktor(4), 5);
 		b33.erhoeheBetriebsstunden(b33.getTraktor(5), 9);
-		
+
 		b33.setBiogasVerbrauch(b33.getTraktor(0), 44);
 		b33.setBiogasVerbrauch(b33.getTraktor(4), 76);
 		b33.setBiogasVerbrauch(b33.getTraktor(5), 12);
-		
+
 		b33.setDieselVerbrauch(b33.getTraktor(1), 100);
 		b33.setDieselVerbrauch(b33.getTraktor(2), 120);
 		b33.setDieselVerbrauch(b33.getTraktor(3), 150);
-		
+
 		Iterator lis4=b33.iterator();
 
 		while(lis4.hasNext()){
 			Traktor t=(Traktor)lis4.next();
 			System.out.println(t);
 		}
-		
+
 		System.out.println("\nStatistiken ausgeben: ");
 		System.out.println(b33.durchschnittArbeitstundenNachErweiterung(new TraktorErweiterungDrillmaschine(10)));
 		System.out.println("Durchschnittliche Arbeitsstunden nach Motorart(Biogasmotor): "+b33.durchschnittArbeitstundenNachMotorart(new TraktorMitBiogasMotor()));
@@ -159,49 +159,108 @@ public class Test {
 		System.out.println(b33.anzahlMinMaxSaeschare(new TraktorMitBiogasMotor()));
 		System.out.println(b33.durchschnittFassungsVermoegen(new TraktorMitDieselMotor()));
 		System.out.println("\n");
-		
-		*/
-		
+
+		 */
+
 		/**
 		 * ++++++++++++++++++++ Ausgabe der Annotationen ++++++++++++++++++++
 		 */
 
 		/**
-		 * Annotationen der Klassen:
+		 * Annotationen der Klassen: (Durch fehlende Generizitaet nur unelegant, um keine Warnungen zu bekommen):
 		 */
-
-		//TODO: Mit allen Klassen - erst am Ende
-
+		
+		System.out.println("\n\n\n");
+			
 		Gruppenmitglied g = Bauernhof.class.getAnnotation(Gruppenmitglied.class);
+		Method[] methods = Bauernhof.class.getMethods();
+		
+		
+		
 		if (g != null) {
 
-			System.out.println("Klasse: " + Bauernhof.class + ", Annotation: " + g.value());
+			System.out.println("Klasse: " + Bauernhof.class + ", Gruppenmitglied: " + g.value());
 		} else {
 
-			System.out.println("Klasse: " + Bauernhof.class + ", Annotation: null");
+			System.out.println("Klasse: " + Bauernhof.class + ", Gruppenmitglied: Nicht angegeben");
 		}
+		print(methods);
+		
+		
+		
+		g = Iterator.class.getAnnotation(Gruppenmitglied.class);
+		if (g != null) {
 
-		/**
-		 * Annotationen der Methoden:
-		 */
+			System.out.println("Klasse: " + Iterator.class + ", Gruppenmitglied: " + g.value());
+		} else {
 
-		//TODO: Mit den Methoden aller Klassen - erst am Ende
+			System.out.println("Klasse: " + Iterator.class + ", Gruppenmitglied: Nicht angegeben");
+		}
+		methods = Iterator.class.getMethods();
+		print(methods);
+		
+		
+		
+		g = Liste.class.getAnnotation(Gruppenmitglied.class);
+		if (g != null) {
 
-		Method[] methods = Bauernhof.class.getMethods();
+			System.out.println("Klasse: " + Liste.class + ", Gruppenmitglied: " + g.value());
+		} else {
 
+			System.out.println("Klasse: " + Liste.class + ", Gruppenmitglied: Nicht angegeben");
+		}
+		methods = Liste.class.getMethods();
+		print(methods);
+		
+		
+		
+		
+		g = Test.class.getAnnotation(Gruppenmitglied.class);
+		if (g != null) {
+
+			System.out.println("Klasse: " + Test.class + ", Gruppenmitglied: " + g.value());
+		} else {
+
+			System.out.println("Klasse: " + Test.class + ", Gruppenmitglied: Nicht angegeben");
+		}
+		methods = Test.class.getMethods();
+		print(methods);
+		
+		
+		
+		g = Traktor.class.getAnnotation(Gruppenmitglied.class);
+		if (g != null) {
+
+			System.out.println("Klasse: " + Traktor.class + ", Gruppenmitglied: " + g.value());
+		} else {
+
+			System.out.println("Klasse: " + Traktor.class + ", Gruppenmitglied: Nicht angegeben");
+		}
+		methods = Traktor.class.getMethods();
+		print(methods);
+	}
+
+	/**
+	 * Ausgabe von Methoden-Annotationen
+	 */
+	private static void print(Method[] methods) {
+
+		Gruppenmitglied g;
+
+		System.out.println("\nMethoden der Klasse:\n");
 		for (int i = 0; i < methods.length; i++) {
 
 			g = methods[i].getAnnotation(Gruppenmitglied.class);
 
 			if (g != null) {
 
-				System.out.println("Methode: " + methods[i] + ",\tAnnotation: " + g.value());
+				System.out.println("Methode: " + methods[i] + ",\tGruppenmitglied: " + g.value());
 
 			} else {
 
-				System.out.println("Methode: " + methods[i] + ",\tAnnotation: null");
+				System.out.println("Methode: " + methods[i] + ",\tGruppenmitglied: Nicht angegeben");
 			}
 		}
+		System.out.println("\n\n\n");
 	}
-
 }
