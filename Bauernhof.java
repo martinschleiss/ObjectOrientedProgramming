@@ -341,7 +341,7 @@ public class Bauernhof {
 	 * 
 	 * @param erweiterung: je nach Erweiterungstyp entsprechende Ausgabe
 	 * @return durchschnittlicher Verbrauch von Allen Traktoren mit Dieselmotor und spezifisch nach Erweiterung
-	 
+	 */
 	public String avgDieselverbrauchNachErweiterung(){
 
 		Iterator it = liste.iterator();

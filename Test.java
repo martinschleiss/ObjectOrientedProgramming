@@ -56,7 +56,7 @@ public class Test {
 		b3.addTraktor(t5);
 		b3.addTraktor(t6);
 
-
+/*
 		System.out.println("\nVon Hof1 Traktor mit der Seriennummer 3 ausgeben: \n"+liste.getBauernhof("Hof1").getTraktor(3));
 		System.out.println("\nVon Hof3 Traktor mit der Seriennummer 5 ausgeben: \n"+liste.getBauernhof("Hof3").getTraktor(5));
 		System.out.println("\nAlle Traktoren von Hof 2 ausgeben:");
@@ -157,7 +157,7 @@ public class Test {
 		System.out.println(b33.durchschnittGasverbrauchNachErweiterung(new TraktorErweiterungDuengestreuer(500)));
 		System.out.println(b33.anzahlMinMaxSaeschare(new TraktorMitBiogasMotor()));
 		System.out.println(b33.durchschnittFassungsVermoegen(new TraktorMitDieselMotor()));
-		System.out.println("\n");
+		System.out.println("\n");*\
 		/**
 		 * ++++++++++++++++++++ Ausgabe der Annotationen ++++++++++++++++++++
 		 */
