@@ -1,8 +1,12 @@
 
 public class Keks <F extends Form, T extends Teig> {
 	
-	public Keks(F f, T t) {
-		
+	private F form;
+	private T teig;
+	
+	public Keks(F form, T teig) {
+		this.form =form;
+		this.teig=teig;
 	}
 
 }

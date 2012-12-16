@@ -1,4 +1,4 @@
 
-public class Teig {
+public abstract class Teig {
 
 }
