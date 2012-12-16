@@ -17,10 +17,10 @@ public class Baeckerei {
 	
 	public Keksdose setBestellung(Bestellung b){
 		
-		Iterator liste=b.iterator();
+		ArrayList<Bestellung> listen=b.getBestellListe();
 		
-		while(liste.hasNext()){
-			Bestellung bestellung=(Bestellung)liste.next();
+		for(Bestellung liste : listen){
+			Bestellung bestellung=(Bestellung)liste;
 			
 			if(bestellung.getFuellung()==null){// einfache Kekse
 				Keksbackmaschine kMaschine=new KeksbackmaschineEinfach();
