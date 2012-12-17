@@ -1,8 +1,13 @@
 
-public class Schokoladenteig implements Teig{
+public class Schokoladenteig implements Teig {
 
-	public String toString(){
+	public Teig clone() {
+		
+		return new Schokoladenteig();
+	}
+	
+	public String toString() {
+		
 		return "Schokoladenteig";
-
 	}
 }

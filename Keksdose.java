@@ -4,26 +4,26 @@ import java.util.Collection;
 
 public class Keksdose {
 
-	private ArrayList<Keks<? extends Form, ? extends Teig>> kekse;
+	private ArrayList<Keks> kekse;
 
 	public Keksdose() {
 
-		kekse = new ArrayList<Keks<? extends Form, ? extends Teig>>();
+		kekse = new ArrayList<Keks>();
 	}
 
-	public void befuelle(Keks<? extends Form, ? extends Teig> k) {
+	public void befuelle(Keks k) {
 
 		kekse.add(k);
 	}
 	
-	public void befuelle(Collection<Keks<? extends Form, ? extends Teig>> c) {
+	public void befuelle(Collection<Keks> c) {
 
 		kekse.addAll(c);
 	}
 
 	public void inhalt() {
 
-		for (Keks<? extends Form, ? extends Teig> k : kekse) {
+		for (Keks k : kekse) {
 
 			System.out.println(k);
 		}

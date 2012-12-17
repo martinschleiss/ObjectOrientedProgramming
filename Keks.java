@@ -1,4 +1,8 @@
 
-public abstract class Keks<F extends Form, T extends Teig> {
+/**
+ * Interface repraesentiert Kekse und Doppelkekse in verschiedenen Formen und Teigarten
+ */
+public interface Keks {
 
+	public Keks clone();
 }

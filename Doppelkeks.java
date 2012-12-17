@@ -1,14 +1,19 @@
 
-public class Doppelkeks <F extends Form, T extends Teig> extends Keks<F, T> {
+public class Doppelkeks implements Keks {
 	
-	private Einfachkeks<F,T> boden;
-	private Einfachkeks<F,T> deckel;
+	private Keks boden;
+	private Keks deckel;
 	private Fuellung fuellung;
 	
-	public Doppelkeks(Einfachkeks<F,T> boden, Einfachkeks<F,T> deckel, Fuellung fuellung) {
+	public Doppelkeks(Keks boden, Keks deckel, Fuellung fuellung) {
 		
 		this.boden = boden;
 		this.deckel = deckel;
 		this.fuellung = fuellung;
+	}
+	
+	public Keks clone() {
+		
+		return null;
 	}
 }

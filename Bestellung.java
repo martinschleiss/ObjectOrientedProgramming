@@ -3,9 +3,9 @@ import java.util.ArrayList;
 
 public class Bestellung {
 	
-	public enum teig { muerb, schokolade, zimt }
-	public enum form { rund, mond, weihnachtsmann }
-	public enum fuellung { marmelade, schokolade }
+	public enum Teig { MUERB, SCHOKOLADE, ZIMT }
+	public enum Form { RUND, MOND, WEIHNACHTSMANN }
+	public enum Fuellung { MARMELADE, SCHOKOLADE }
 	private ArrayList<Position> positionen;
 
 	public Bestellung() {
@@ -13,12 +13,12 @@ public class Bestellung {
 		positionen = new ArrayList<Position>();
 	}
 
-	public void addPositionEinfachkeks(int anzahl, teig teig, form form) {
+	public void addPositionKeks(int anzahl, Teig teig, Form form) {
 		
 		positionen.add(new Position(anzahl, teig, form));
 	}
 	
-	public void addPositionDoppelkeks(int anzahl, teig teig, form form, fuellung fuellung) {
+	public void addPositionDoppelkeks(int anzahl, Teig teig, Form form, Fuellung fuellung) {
 		
 		positionen.add(new PositionDoppelkeks(anzahl, teig, form, fuellung));
 	}
@@ -38,10 +38,10 @@ public class Bestellung {
 	private class Position {
 		
 		private int anzahl;
-		private teig teig;
-		private form form;
+		private Teig teig;
+		private Form form;
 		
-		public Position(int anzahl, teig teig, form form) {
+		public Position(int anzahl, Teig teig, Form form) {
 			
 			this.anzahl = anzahl;
 			this.teig = teig;
@@ -50,7 +50,7 @@ public class Bestellung {
 		
 		public String toString() {
 			
-			return "Anzahl: " + anzahl + ", " + teig + "-" + keks() + "in \"" + form + "\"-Form";
+			return "Anzahl: "+ anzahl + "\t" + teig + "-" + keks() + " in \"" + form + "\"-Form";
 		}
 		
 		protected String keks() {
@@ -65,9 +65,9 @@ public class Bestellung {
 	
 	private class PositionDoppelkeks extends Position {
 	
-		private fuellung fuellung;
+		private Fuellung fuellung;
 		
-		public PositionDoppelkeks(int anzahl, teig teig, form form, fuellung fuellung) {
+		public PositionDoppelkeks(int anzahl, Teig teig, Form form, Fuellung fuellung) {
 			
 			super(anzahl, teig, form);
 			this.fuellung = fuellung;

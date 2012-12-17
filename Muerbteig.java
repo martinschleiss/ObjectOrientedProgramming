@@ -1,8 +1,13 @@
 
-public class Muerbteig implements Teig{
+public class Muerbteig implements Teig {
 
-	public String toString(){
+	public Teig clone() {
+		
+		return new Muerbteig();
+	}
+	
+	public String toString() {
+		
 		return "Muerbteig";
-
 	}
 }

@@ -1,8 +1,13 @@
 
-public class Zimtsternteig implements Teig{
+public class Zimtsternteig implements Teig {
 
-	public String toString(){
+	public Teig clone() {
+		
+		return new Zimtsternteig();
+	}
+	
+	public String toString() {
+		
 		return "Zimtsternteig";
-
 	}
 }
