@@ -1,5 +1,5 @@
 
-public class Muerbteig extends Teig{
+public class Muerbteig implements Teig{
 
 	public String toString(){
 		return "Muerbteig";

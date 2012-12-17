@@ -1,5 +1,5 @@
 
-public class Schokoladenteig extends Teig{
+public class Schokoladenteig implements Teig{
 
 	public String toString(){
 		return "Schokoladenteig";

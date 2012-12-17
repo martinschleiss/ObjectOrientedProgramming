@@ -11,6 +11,11 @@ public class Keksdose {
 		kekse = new ArrayList<Keks<? extends Form, ? extends Teig>>();
 	}
 
+	public void befuelle(Keks<? extends Form, ? extends Teig> k) {
+
+		kekse.add(k);
+	}
+	
 	public void befuelle(Collection<Keks<? extends Form, ? extends Teig>> c) {
 
 		kekse.addAll(c);

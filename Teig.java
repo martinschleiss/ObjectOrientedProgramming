@@ -1,4 +1,5 @@
-
-public abstract class Teig {
-
+public interface Teig {
+	
+	public String toString();
+	
 }

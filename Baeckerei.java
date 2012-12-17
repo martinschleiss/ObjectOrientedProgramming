@@ -3,19 +3,25 @@ import java.util.ArrayList;
 
 public class Baeckerei {
 	
-	private ArrayList<Keks<? extends Form, ? extends Teig>> keksListe;
+	private ArrayList<Bestellung> bestellungen;
 
 	public Baeckerei() {
 
-		keksListe = new ArrayList<Keks<? extends Form, ? extends Teig>>();
+		bestellungen = new ArrayList<Bestellung>();
 	}
-	/**
-	 * 
-	 * @param b Bestellung darf nicht null sein
-	 * @return Keksdose mit den Keksen von der Bestellung
-	 */
+
+	public void addBestellung(Bestellung b) {
+		
+		bestellungen.add(b);
+	}
 	
-	public Keksdose setBestellung(Bestellung b){
+	
+	
+	
+	
+	
+	/*
+	public Keksdose naechsteBestellung(){
 		
 		ArrayList<Bestellung> listen=b.getBestellListe();
 		
@@ -35,4 +41,5 @@ public class Baeckerei {
 		kd.befuelle(keksListe);
 		return kd;
 	}
+	*/
 }

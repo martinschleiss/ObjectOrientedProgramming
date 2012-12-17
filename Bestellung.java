@@ -2,105 +2,85 @@ import java.util.ArrayList;
 
 
 public class Bestellung {
+	
+	public enum teig { muerb, schokolade, zimt }
+	public enum form { rund, mond, weihnachtsmann }
+	public enum fuellung { marmelade, schokolade }
+	private ArrayList<Position> positionen;
 
-	private int anzahl;
-	private Form form;
-	private Teig teig;
-	private Fuellung fuelle;
-	private ArrayList<Bestellung> listeBestellungen;
-
-	public Bestellung(){
-		listeBestellungen=new ArrayList<Bestellung>();
-	}
-	// Konstruktor wenn einfache Kekse gefordert sind
-	public Bestellung(int anzahl, Form form, Teig teig){
-		this.anzahl=anzahl;
-		this.form=form;
-		this.teig=teig;
-		this.fuelle=null;
-	}
-	// Konstruktor wenn doppelte Kekse gefordert sind
-	public Bestellung(int anzahl, Form form, Teig teig, Fuellung fuelle){
-		this.anzahl=anzahl;
-		this.form=form;
-		this.teig=teig;
-		this.fuelle=fuelle;
-	}
-	public ArrayList<Bestellung> getBestellListe(){
-		return listeBestellungen;
-	}
-	/**
-	 * Getter-Methode fuer Fuellung
-	 * @return Fuellung des Keks
-	 */
-	public Fuellung getFuellung(){
-		return fuelle;
+	public Bestellung() {
+		
+		positionen = new ArrayList<Position>();
 	}
 
-	/**
-	 * Getter-Methode fuer Form
-	 * @return Form des Keks
-	 */
-	public Form getForm(){
-		return form;
+	public void addPositionEinfachkeks(int anzahl, teig teig, form form) {
+		
+		positionen.add(new Position(anzahl, teig, form));
 	}
-
-	/**
-	 * Getter-Methode fuer Anzahl
-	 * @return Anzahl der Kekse
-	 */
-	public int getAnzahl(){
-		return anzahl;
+	
+	public void addPositionDoppelkeks(int anzahl, teig teig, form form, fuellung fuellung) {
+		
+		positionen.add(new PositionDoppelkeks(anzahl, teig, form, fuellung));
 	}
-
-	/**
-	 * Getter-Methode fuer Teig
-	 * @return Teig des Keks
-	 */
-	public Teig getTeig(){
-		return teig;
-	}
-
-
-	/**
-	 * fuegt neuen Wunsch zu der Bestellung (einfache Kekse)
-	 * @param a anzahl der kekse
-	 * @param f Form der Kekse
-	 * @param t Teigart der kekse
-	 */
-	public void addKeks(int a, Form f, Teig t){
-		listeBestellungen.add(new Bestellung(a,f,t));
-	}
-
-	/**
-	 * fuegt neuen Wunsch zu der Bestellung (doppelte Kekse) 
-	 * @param a anzahl der kekse
-	 * @param f Form der Kekse
-	 * @param t Teigart der kekse
-	 * @param fu Fuellung der kekse
-	 */
-	public void addKeks(int a, Form f, Teig t, Fuellung fu){
-		listeBestellungen.add(new Bestellung(a,f,t,fu));
-
-	}
-
-
-	/**
-	 * 
-	 * @return gibt alle Bestellungen zurueck
-	 */
-	public String drucke(){
-		String out="";
-
-		for(Bestellung liste:listeBestellungen){
-			Bestellung bestellung=(Bestellung)liste;
-			if(bestellung.getFuellung()==null){
-				out +=bestellung.getAnzahl()+" "+bestellung.getForm()+" "+bestellung.getTeig()+"\n";
-			}else{
-				out +=bestellung.getAnzahl()+" "+bestellung.getForm()+" "+bestellung.getTeig()+" "+bestellung.getFuellung()+"\n";
-			}
+	
+	public void drucke() {
+		
+		for (Position p : positionen) {
+			
+			System.out.println(p);
 		}
-		return out;
 	}
-
+	
+	/**
+	 * ++++++++++++++++++++ INNER CLASS ++++++++++++++++++++
+	 */
+	
+	private class Position {
+		
+		private int anzahl;
+		private teig teig;
+		private form form;
+		
+		public Position(int anzahl, teig teig, form form) {
+			
+			this.anzahl = anzahl;
+			this.teig = teig;
+			this.form = form;
+		}
+		
+		public String toString() {
+			
+			return "Anzahl: " + anzahl + ", " + teig + "-" + keks() + "in \"" + form + "\"-Form";
+		}
+		
+		protected String keks() {
+			
+			return "Keks(e)";
+		}
+	}
+	
+	/**
+	 * ++++++++++++++++++++ INNER CLASS ++++++++++++++++++++
+	 */
+	
+	private class PositionDoppelkeks extends Position {
+	
+		private fuellung fuellung;
+		
+		public PositionDoppelkeks(int anzahl, teig teig, form form, fuellung fuellung) {
+			
+			super(anzahl, teig, form);
+			this.fuellung = fuellung;
+		}
+		
+		public String toString() {
+			
+			return super.toString() + " mit \"" + fuellung + "\"-Fuellung";
+		}
+		
+		protected String keks() {
+			
+			return "Doppelkeks(e)";
+		}
+	}
 }
