@@ -3,12 +3,23 @@ public class Test {
 	public static void main(String[] args) {
 		
 		Bestellung b = new Bestellung();
+		Baeckerei backstube = new Baeckerei();
 		
-		b.addPositionKeks(10, Bestellung.Teig.MUERB, Bestellung.Form.RUND);
-		b.addPositionKeks(10, Bestellung.Teig.SCHOKOLADE, Bestellung.Form.MOND);
-		b.addPositionDoppelkeks(5, Bestellung.Teig.ZIMT, Bestellung.Form.WEIHNACHTSMANN, Bestellung.Fuellung.MARMELADE);
+		WunschTeig t = new WunschTeigMuerb();
+		WunschForm f = new WunschFormRund();
+		
+		
+		
+		b.addPositionKeks(10, t, f);
+		b.addPositionKeks(10, t, f);
 		
 		b.drucke();
+		backstube.addBestellung(b);
+		Keksdose d = backstube.nextBestellung();
+		d.inhalt();
+		
+		
+		
 		
 		/*
 		Bestellung b=new Bestellung();
