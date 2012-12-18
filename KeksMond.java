@@ -12,4 +12,9 @@ public class KeksMond implements Keks {
 		
 		return new KeksMond(teig.clone());
 	}
+	
+	public String toString() {
+		
+		return "Keks in Mond-Form aus " + teig;
+	}
 }

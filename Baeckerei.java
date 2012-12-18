@@ -32,11 +32,10 @@ public class Baeckerei {
 			Keksdose k = new Keksdose();
 			Backmaschine b;
 
-			while (tmp.hasNext()) {
+			while (tmp.next()) {
 
 				b = tmp.getCurrentBackmaschine();
 				k.befuelle(b.backe(tmp.getCurrentTeig()));
-				tmp.next();
 			}
 
 			return k;

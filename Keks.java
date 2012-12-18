@@ -5,4 +5,6 @@
 public interface Keks {
 
 	public Keks clone();
+	
+	public String toString();
 }

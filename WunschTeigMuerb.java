@@ -6,4 +6,9 @@ public class WunschTeigMuerb implements WunschTeig {
 
 		return new Muerbteig();
 	}
+	
+	public String toString() {
+		
+		return "Muerb";
+	}
 }

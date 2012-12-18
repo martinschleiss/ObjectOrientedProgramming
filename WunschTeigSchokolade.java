@@ -6,4 +6,9 @@ public class WunschTeigSchokolade implements WunschTeig {
 
 		return new Schokoladenteig();
 	}
+	
+	public String toString() {
+		
+		return "Schokolade";
+	}
 }

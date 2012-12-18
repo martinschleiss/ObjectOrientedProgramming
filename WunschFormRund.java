@@ -6,4 +6,9 @@ public class WunschFormRund implements WunschForm {
 
 		return new BackmaschineRund();
 	}
+	
+	public String toString() {
+		
+		return "Rund";
+	}
 }

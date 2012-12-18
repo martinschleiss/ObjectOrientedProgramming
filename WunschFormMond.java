@@ -6,4 +6,9 @@ public class WunschFormMond implements WunschForm {
 
 		return new BackmaschineMond();
 	}
+	
+	public String toString() {
+		
+		return "Mond";
+	}
 }

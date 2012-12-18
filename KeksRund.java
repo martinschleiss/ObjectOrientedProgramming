@@ -12,4 +12,9 @@ public class KeksRund implements Keks {
 		
 		return new KeksRund(teig);
 	}
+	
+	public String toString() {
+		
+		return "Keks in Rund-Form aus " + teig;
+	}
 }

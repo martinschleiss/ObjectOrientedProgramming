@@ -33,16 +33,6 @@ public class Bestellung {
 		}
 	}
 	
-	public boolean hasNext() {
-		
-		if (it == null) {
-			
-			it = positionen.iterator();
-		}
-		
-		return it.hasNext();
-	}
-	
 	public boolean next() {
 		
 		if (it == null) {

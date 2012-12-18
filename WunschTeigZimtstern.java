@@ -6,4 +6,9 @@ public class WunschTeigZimtstern implements WunschTeig {
 
 		return new Zimtsternteig();
 	}
+	
+	public String toString() {
+		
+		return "Zimtstern";
+	}
 }

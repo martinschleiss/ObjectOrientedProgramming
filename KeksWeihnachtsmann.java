@@ -1,5 +1,4 @@
 
-
 public class KeksWeihnachtsmann implements Keks {
 	
 	private Teig teig;
@@ -12,5 +11,10 @@ public class KeksWeihnachtsmann implements Keks {
 	public Keks clone() {
 		
 		return new KeksWeihnachtsmann(teig);
+	}
+	
+	public String toString() {
+		
+		return "Keks in Weichnachtsmann-Form aus " + teig;
 	}
 }

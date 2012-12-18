@@ -6,4 +6,9 @@ public class WunschFormWeihnachtsmann implements WunschForm {
 
 		return new BackmaschineWeihnachtsmann();
 	}
+	
+	public String toString() {
+		
+		return "Weihnachtsmann";
+	}
 }
