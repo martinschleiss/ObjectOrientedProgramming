@@ -15,16 +15,32 @@ public class Bestellung {
 		current = null;
 	}
 
+	/**
+	 * neuer Kekswunsch fuer einfache Kekse mit den folgenden parameter wird zur Liste hinzugefuegt
+	 * @param anzahl Anzahl der gewuenschten Kekse
+	 * @param teig	Teigart der gewuenschten Kekse
+	 * @param form	die Form der gewuenschten Kekse
+	 */
 	public void addPositionKeks(int anzahl, WunschTeig teig, WunschForm form) {
 		
 		positionen.add(new Position(anzahl, teig, form));
 	}
 	
+	/**
+	 * neuer Kekswunsch fuer doppelte Kekse mit den folgenden parameter wird zur Liste hinzugefuegt
+	 * @param anzahl Anzahl der gewuenschten Doppelkekse
+	 * @param teig	Teigart der gewuenschten Doppelkekse
+	 * @param form	die Form der gewuenschten Doppelkekse
+	 *  @param fuellung	die Fuellung der gewuenschten Doppelkekse
+	 */
 	public void addPositionDoppelkeks(int anzahl, WunschTeig teig, WunschForm form, WunschFuellung fuellung) {
 		
 		positionen.add(new PositionDoppelkeks(anzahl, teig, form, fuellung));
 	}
 	
+	/**
+	 * gibt alle Positionen der Bestellung aus
+	 */
 	public void drucke() {
 		
 		for (Position p : positionen) {
@@ -33,6 +49,10 @@ public class Bestellung {
 		}
 	}
 	
+	/**
+	 * 
+	 * @return false wenn es keinen naechsten Wunsch gibt True wenn es einen Naechsten gibt
+	 */
 	public boolean next() {
 		
 		if (it == null) {
@@ -51,6 +71,10 @@ public class Bestellung {
 		}
 	}
 	
+	/**
+	 * 
+	 * @return gibt die richtige Backmaschine entsprechend der aktuellen Position zurueck 
+	 */
 	public Backmaschine getCurrentBackmaschine() {
 		
 		if (current != null) {
@@ -63,6 +87,10 @@ public class Bestellung {
 		}
 	}
 	
+	/**
+	 * 
+	 * @return gibt den richtigen teig entsprechend der aktuellen Position zurueck 
+	 */
 	public Teig getCurrentTeig() {
 		
 		if (current != null) {
