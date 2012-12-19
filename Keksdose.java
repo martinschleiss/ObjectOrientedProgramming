@@ -20,10 +20,16 @@ public class Keksdose {
 		kekse.add(k);
 	}
 	
+	public ArrayList<Keks> getKekse() {
+		return kekse;
+	}
+
+
 	/**
 	 * 
 	 * @param c die Collection aus Keksen wird zur Liste(Keksdose) hinzugefuegt
 	 */
+
 	public void befuelle(Collection<Keks> c) {
 
 		kekse.addAll(c);
@@ -35,8 +41,13 @@ public class Keksdose {
 	public void inhalt() {
 
 		for (Keks k : kekse) {
-
 			System.out.println(k);
 		}
+	}
+
+	public void befuelle(Keksdose backe) {
+		
+		kekse.addAll(backe.kekse);
+		
 	}
 }

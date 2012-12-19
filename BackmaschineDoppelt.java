@@ -1,16 +1,28 @@
 
-public class BackmaschineDoppelt {
+public class BackmaschineDoppelt implements Backmaschine{
 
-	/**
-	 * 
-	 * @param boden die Keksart aus dem der Doppelkeks hergestellt werden soll
-	 * @param fuelle die Fuellung des Doppelkeks
-	 * @return Doppelkeks mit Deckel=Boden und entsprechender Fuellung
-	 */
-	public Doppelkeks backe(Keks boden, Fuellung fuelle) {
+
+	public Keksdose backe(Position po) {
 		
-		Keks deckel = boden.clone();
+		PositionDoppelkeks p;
+		//falls keine Doppelkeksposition gib leere Dose zurueck
+		if(po instanceof PositionDoppelkeks) {
+			p = (PositionDoppelkeks) po;
+		} else {
+			return new Keksdose();
+		}
 		
-		return new Doppelkeks(boden, deckel, fuelle);
+		Keksdose k = new Keksdose();
+		Backmaschine keksbodenMaschine = p.getForm().getBackmaschine();
+		k.befuelle(keksbodenMaschine.backe(p));
+		
+		Keksdose doppelKeksDose = new Keksdose();
+		
+		for(Keks boden : k.getKekse()) {
+			Keks deckel = boden.clone();
+			doppelKeksDose.befuelle(new Doppelkeks(boden, deckel, p.getFuellung()));
+		}
+		
+		return doppelKeksDose;
 	}
 }

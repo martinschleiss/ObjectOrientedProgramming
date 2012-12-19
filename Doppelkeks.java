@@ -16,4 +16,8 @@ public class Doppelkeks implements Keks {
 		
 		return null;
 	}
+	
+	public String toString() {
+		return "Doppelkeks aus: " + boden + " - " + fuellung + " - " + deckel;
+	}
 }

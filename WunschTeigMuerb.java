@@ -11,4 +11,21 @@ public class WunschTeigMuerb implements WunschTeig {
 		
 		return "Muerb";
 	}
+	
+	/**
+	 * ++++++++++++++++++ INNER CLASS +++++++++++++++
+	 */
+	
+	private class Muerbteig implements Teig {
+
+		public Teig clone() {
+			
+			return new Muerbteig();
+		}
+		
+		public String toString() {
+			
+			return "Muerbteig";
+		}
+	}
 }

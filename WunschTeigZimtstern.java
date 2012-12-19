@@ -11,4 +11,21 @@ public class WunschTeigZimtstern implements WunschTeig {
 		
 		return "Zimtstern";
 	}
+	
+	/**
+	 * ++++++++++++++++++++++++ INNER CLASS ++++++++++++++++++++
+	 */
+	
+	private class Zimtsternteig implements Teig {
+
+		public Teig clone() {
+			
+			return new Zimtsternteig();
+		}
+		
+		public String toString() {
+			
+			return "Zimtsternteig";
+		}
+	}
 }

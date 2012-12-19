@@ -5,7 +5,7 @@ public class Test {
 		System.out.println("Bestellung 1: ");
 		Bestellung b1 = new Bestellung();
 		Baeckerei backstube = new Baeckerei();
-		
+
 		WunschTeig t1 = new WunschTeigMuerb();
 		WunschTeig t2 = new WunschTeigSchokolade();
 		WunschTeig t3 = new WunschTeigZimtstern();
@@ -14,9 +14,10 @@ public class Test {
 		WunschForm f1 = new WunschFormRund();
 		WunschForm f2 = new WunschFormWeihnachtsmann();
 		WunschForm f3 = new WunschFormMond();
-		
+
 		WunschFuellung fl1=new WunschFuellungMarmelade();
 		WunschFuellung fl2=new WunschFuellungMarmelade();
+
 		
 		
 		b1.addPositionKeks(10, t1, f1);
