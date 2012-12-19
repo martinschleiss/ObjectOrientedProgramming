@@ -1,101 +1,96 @@
 import java.util.ArrayList;
 import java.util.Iterator;
 
-
+/**
+ * Repraesentiert eine Keks-Bestellung fuer Baeckereien
+ */
 public class Bestellung {
 
 	private ArrayList<Position> positionen;
 	private Iterator<Position> it;
-	private Position current;
 
 	public Bestellung() {
-		
+
 		positionen = new ArrayList<Position>();
 		it = null;
-		current = null;
 	}
 
 	/**
-	 * neuer Kekswunsch fuer einfache Kekse mit den folgenden parameter wird zur Liste hinzugefuegt
-	 * @param anzahl Anzahl der gewuenschten Kekse
-	 * @param teig	Teigart der gewuenschten Kekse
-	 * @param form	die Form der gewuenschten Kekse
+	 * Fuegt neue Position fuer einfache Kekse zur Bestellung hinzu
+	 * @param anzahl	> 0
+	 * @param teig		!= null
+	 * @param form		!= null
 	 */
 	public void addPositionKeks(int anzahl, WunschTeig teig, WunschForm form) {
-		
-		positionen.add(new Position(anzahl, teig, form));
+
+		if (anzahl > 0) {
+
+			positionen.add(new Position(anzahl, teig, form));
+		}
 	}
-	
+
 	/**
-	 * neuer Kekswunsch fuer doppelte Kekse mit den folgenden parameter wird zur Liste hinzugefuegt
-	 * @param anzahl Anzahl der gewuenschten Doppelkekse
-	 * @param teig	Teigart der gewuenschten Doppelkekse
-	 * @param form	die Form der gewuenschten Doppelkekse
-	 *  @param fuellung	die Fuellung der gewuenschten Doppelkekse
+	 * Fuegt neue Position fuer doppelte Kekse zur Bestellung hinzu
+	 * @param anzahl	> 0
+	 * @param teig		!= null
+	 * @param form		!= null
+	 * @param fuellung	!= null
 	 */
 	public void addPositionDoppelkeks(int anzahl, WunschTeig teig, WunschForm form, WunschFuellung fuellung) {
-		
-		positionen.add(new PositionDoppelkeks(anzahl, teig, form, fuellung));
+
+		if (anzahl > 0) {
+
+			positionen.add(new PositionDoppelkeks(anzahl, teig, form, fuellung));
+		}
 	}
-	
+
 	/**
 	 * gibt alle Positionen der Bestellung aus
 	 */
 	public void drucke() {
-		
-		for (Position p : positionen) {
-			
-			System.out.println(p);
+
+		System.out.println("+++++++++++++++++++ Bestellung +++++++++++++++++++\n");
+
+		if (positionen.isEmpty()) {
+
+			System.out.println("leere Bestellung");
+
+		} else {
+
+			for (Position p : positionen) {
+
+				System.out.println(p);
+			}
 		}
-	}
-	
-	/**
-	 * 
-	 * @return false wenn es keinen naechsten Wunsch gibt True wenn es einen Naechsten gibt
-	 */
-	public boolean next() {
 		
+		System.out.println("\n++++++++++++++++++++++++++++++++++++++++++++++++++");
+	}
+
+	/**
+	 * Hilft beim Iterieren durch die Positionen mit next(), liefert Wahrheitswert, ob Ende der Liste erreicht
+	 * @return true: naechste Position vorhanden (mit next()), sonst false (next() liefert null)
+	 */
+	public boolean hasNext() {
+
 		if (it == null) {
-			
+
+			it = positionen.iterator();
+		}
+
+		return it.hasNext();
+	}
+
+	/**
+	 * Liefert naechstes Element der Positionsliste
+	 * @return naechstes Element, wenn vorhanden (hasNext() == true), null sonst (hasNext() == false)
+	 */
+	public Position next() {
+
+		if (it == null) {
+
 			it = positionen.iterator();
 		}
 		
-		if (it.hasNext()) {
-			
-			current = it.next();
-			return true;
-			
-		} else {
-			
-			return false;
-		}
-	}
-	
-	/**
-	 * 
-	 * @return gibt die richtige Backmaschine entsprechend der aktuellen Position zurueck 
-	 */
-	public Backmaschine getCurrentBackmaschine() {
-		
-		if (current != null) {
-			
-			return current.getBackmaschine();
-			
-		} else {
-			
-			return null;
-		}
-	}
-	
-	
-	public Position getCurrentPosition() {
-		if (current != null) {
-			
-			return current;
-			
-		} else {
-			
-			return null;
-		}
+		return it.next();
 	}
 }

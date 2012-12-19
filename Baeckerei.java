@@ -1,20 +1,22 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 
-
+/**
+ * Repraesentiert eine Baeckerei, die Bestellungen entgegennimmt und diese Eine nach der Anderen
+ * einzeln abarbeitet und dabei Keksdosen liefert.
+ */
 public class Baeckerei {
 
 	private ArrayList<Bestellung> bestellungen;
-	//private Iterator<Bestellung> it;
 
 	public Baeckerei() {
 
 		bestellungen = new ArrayList<Bestellung>();
-		//it = null;
 	}
 
 	/**
-	 * 
-	 * @param b neue bestellung die zur Liste hinzugefuegt werden soll
+	 * Fuegt Bestellung zur Liste hinzu
+	 * @param b != null
 	 */
 	public void addBestellung(Bestellung b) {
 
@@ -22,50 +24,53 @@ public class Baeckerei {
 	}
 
 	/**
-	 * 
-	 * @return liefert die naechste bestelllung aus der Liste
+	 * Liefert Keksdose der naechsten Bestellung in der Liste
+	 * @return Keksdose mit Keksen laut Bestellung, leere Keksdose bei leerer Bestellung
 	 */
 	public Keksdose nextBestellung() {
 
-		/*if (it == null) {
+		Iterator<Bestellung> it = bestellungen.iterator();
+		
+		Keksdose k = new Keksdose();
+		Bestellung tmp;
+		Backmaschine b;
+		Position p;
+		
+		if (it.hasNext()) {
+			
+			tmp = it.next();
+			
+			while (tmp.hasNext()) {
+				
+				p = tmp.next();
+				b = p.getBackmaschine();
+				k.befuelle(b.backe(p));
+			}
+			
+			it.remove();
+		}
+		
+		return k;
+		
+		/*
+		for(int i = 0; i < bestellungen.size(); i++) {
 
-			it = bestellungen.iterator();
-		}*/
-		
-		Keksdose k=null;
-		
-		for(int i=0; i<bestellungen.size();i++){
 			Bestellung tmp = bestellungen.get(i);
 
 			k = new Keksdose();
 			Backmaschine b;
+			Position p;
 
-			while (tmp.next()) {
-				b = tmp.getCurrentBackmaschine();
-				k.befuelle(b.backe(tmp.getCurrentPosition()));
+			while (tmp.hasNext()) {
+				
+				p = tmp.next();
+				b = p.getBackmaschine();
+				k.befuelle(b.backe(p));
 			}
+			
 			bestellungen.remove(tmp);
 		}
 		return k;
-		/*
-		if (it.hasNext()) {
-		
-			
-			Bestellung tmp = it.next();
-			Keksdose k = new Keksdose();
-
-			while (tmp.next()) {
-
-				Backmaschine b = tmp.getCurrentPosition().getBackmaschine();
-				k.befuelle(b.backe(tmp.getCurrentPosition()));
-			}
-
-			return k;
-
-		} else {
-
-			return null;
-		}*/
-		
+		*/
 	}
 }
