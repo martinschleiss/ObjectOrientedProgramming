@@ -51,26 +51,5 @@ public class Baeckerei {
 		}
 		
 		return k;
-		
-		/*
-		for(int i = 0; i < bestellungen.size(); i++) {
-
-			Bestellung tmp = bestellungen.get(i);
-
-			k = new Keksdose();
-			Backmaschine b;
-			Position p;
-
-			while (tmp.hasNext()) {
-				
-				p = tmp.next();
-				b = p.getBackmaschine();
-				k.befuelle(b.backe(p));
-			}
-			
-			bestellungen.remove(tmp);
-		}
-		return k;
-		*/
 	}
 }
