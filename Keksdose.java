@@ -46,7 +46,7 @@ public class Keksdose {
 	 */
 	public void inhalt() {
 
-		System.out.println("++++++++++++++++++++ Keksdose ++++++++++++++++++++\n");
+		System.out.println("\n++++++++++++++++++++ Keksdose ++++++++++++++++++++\n");
 		
 		if (kekse.isEmpty()) {
 			
@@ -58,6 +58,6 @@ public class Keksdose {
 			System.out.println(k);
 		}
 		
-		System.out.println("\n++++++++++++++++++++++++++++++++++++++++++++++++++");
+		System.out.println("\n++++++++++++++++++++++++++++++++++++++++++++++++++\n");
 	}
 }

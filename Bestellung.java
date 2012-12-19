@@ -16,31 +16,43 @@ public class Bestellung {
 	}
 
 	/**
-	 * Fuegt neue Position fuer einfache Kekse zur Bestellung hinzu
+	 * Fuegt neue Position fuer einfache Kekse zur Bestellung hinzu, wenn Anzahl > 0
 	 * @param anzahl	> 0
 	 * @param teig		!= null
 	 * @param form		!= null
+	 * @return true: wenn hinzugefuegt (anzahl > 0), sonst: false
 	 */
-	public void addPositionKeks(int anzahl, WunschTeig teig, WunschForm form) {
+	public boolean addPositionKeks(int anzahl, WunschTeig teig, WunschForm form) {
 
 		if (anzahl > 0) {
 
 			positionen.add(new Position(anzahl, teig, form));
+			return true;
+		
+		} else {
+			
+			return false;
 		}
 	}
 
 	/**
-	 * Fuegt neue Position fuer doppelte Kekse zur Bestellung hinzu
+	 * Fuegt neue Position fuer doppelte Kekse zur Bestellung hinzu, wenn Anzahl > 0
 	 * @param anzahl	> 0
 	 * @param teig		!= null
 	 * @param form		!= null
 	 * @param fuellung	!= null
+	 * @return true: wenn hinzugefuegt (anzahl > 0), sonst: false
 	 */
-	public void addPositionDoppelkeks(int anzahl, WunschTeig teig, WunschForm form, WunschFuellung fuellung) {
+	public boolean addPositionKeks(int anzahl, WunschTeig teig, WunschForm form, WunschFuellung fuellung) {
 
 		if (anzahl > 0) {
 
 			positionen.add(new PositionDoppelkeks(anzahl, teig, form, fuellung));
+			return true;
+		
+		} else {
+			
+			return false;
 		}
 	}
 
@@ -49,7 +61,7 @@ public class Bestellung {
 	 */
 	public void drucke() {
 
-		System.out.println("+++++++++++++++++++ Bestellung +++++++++++++++++++\n");
+		System.out.println("\n+++++++++++++++++++ Bestellung +++++++++++++++++++\n");
 
 		if (positionen.isEmpty()) {
 
@@ -63,7 +75,7 @@ public class Bestellung {
 			}
 		}
 		
-		System.out.println("\n++++++++++++++++++++++++++++++++++++++++++++++++++");
+		System.out.println("\n++++++++++++++++++++++++++++++++++++++++++++++++++\n");
 	}
 
 	/**
